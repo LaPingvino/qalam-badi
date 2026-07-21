@@ -75,27 +75,34 @@ Arabic advances now run **307–1228, stdev 228**. They were flat 1228.
 
 ## Next: free up the squished Arabic letters
 
-The plan, in order. Extension is the **inverse of the removal already built**,
-and runs on the same machinery — that is what keeps it out of the fat-seen
-failure mode.
+Steps 1–3 are **done**; extension runs on the same machinery as removal, which
+is what keeps it out of the fat-seen failure mode.
 
-**1. Classify, don't guess.** Extend `scripts/classify-flatness.py` into a
-two-sided report over every joining glyph: body width, left approach, right
-approach, in nuqta, flagged TIGHT / OK / LOOSE against the classical figures
-(tooth ≈1 dot, dāl 2, beh short form 4–5, seen kashida 7–11). This produces the
-list of letters needing extension, and tells us whether "squished" is one
-problem or several. Measure-first is what made the width and join-height work
-land; every time it was skipped, something shipped broken.
+**1. ✓ Classify, don't guess.** `classify-flatness.py --sides` is the
+two-sided report: left approach | body | right approach per joining glyph, in
+nuqta, flagged TIGHT / OK / LOOSE against the classical figures (tooth ≈1 dot
+as body width; dāl 2, beh short form 4–5, seen kashida 7–11 as whole-letter
+ink). Answer to the connector-or-body question: the tightness was in the
+finals, and it was the transform itself doing it — see step 2. Toothed
+init/medi forms were already about right. Caveat: a dotted variant's body
+reads wider than its skeleton's because a dot is an island too.
 
-**2. Make the transform symmetric.** `shorten-connectors.py` becomes
-`fit-connectors.py`: same body detector, same join-height whitespace test, same
-rigid-dot handling, but the target approach may be **larger** than current, not
-only smaller. Extension inserts x into the horizontal run at the join height;
-the overlap and the endpoint on the advance edge move rigidly. One code path,
-both directions, one set of guards.
+**2. ✓ The transform is symmetric.** `fit-connectors.py` replaced
+shorten-connectors, and the rewrite fixed a shipped breakage the report
+surfaced: the old code held only the longest body island rigid and scaled
+everything else, which crushed seen finals' teeth from ~290 units to 24. Now
+every island (tooth, bowl, hook, dot) translates rigidly; only bare
+join-height runs change length; target deltas go into one elongation run
+beside the largest island, never the teeth gaps. Islands under 100 units are
+dropped as fillet phantoms (nothing real is narrower than most of a pen).
 
-**3. Per-letter targets in `spacing.yaml`**, in nuqta, from the classical
-figures already recorded there.
+**3. ✓ Per-letter targets in `spacing.yaml`** (`connectors.widths`): beh
+finals/isolated 4.5 nuqta, seen family 7.5. Verified on the rebuilt Regular:
+both land exactly, report went 39 TIGHT / 21 OK → 2 TIGHT / 54 OK. The two
+remaining TIGHT are noon ghunna inits whose tooth is *drawn* narrow — body
+work. Seen init/medi have no classical figure recorded yet and now keep their
+teeth gaps as drawn (~0.45 nuqta each); add `seen.init`/`seen.medi` targets if
+they read airy in the specimen.
 
 **4. The undertail — hook to curve.** Same principle: stretch x only across the
 tail's horizontal run, rigidly translate the hook beyond it. Targets from his
@@ -103,10 +110,11 @@ Greatest Name: finals ~1.5–1.7 alef heights wide against ~0.9 deep, tail
 returning rightward *under* the preceding letters.
 `scripts/reshape-tails.py` holds the targets but is **disabled** — its
 mechanism was the anisotropic scale above. Keep the numbers, replace the method.
+This is also what should cure the yá cut-off below.
 
-Two things to check before committing to it: whether tight-looking letters are
-tight in the *connector* or in the *body* (different fixes), and whether
-extension interacts with the lám shadda/harakat stacking below.
+Still to check: how extension interacts with the lám shadda/harakat stacking
+below, and a human look at the new specimen — beh/seen finals and isolated
+forms changed width noticeably (beh isol 1228→1318, seen isol adv 2130).
 
 ---
 
