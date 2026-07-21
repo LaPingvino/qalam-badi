@@ -1,22 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>My Font development</title>
+		<title>Qalam Badi — testing pages</title>
+		<style>
+			:root {
+				--paper: #FBFAF7; --ink: #14161F; --muted: #676C7E;
+				--lapis: #2C4E9A; --rule: #DEDDD8;
+			}
+			@media (prefers-color-scheme: dark) {
+				:root {
+					--paper: #101219; --ink: #E9E7E1; --muted: #969BAC;
+					--lapis: #8AA6E8; --rule: #272B38;
+				}
+			}
+			body {
+				background: var(--paper); color: var(--ink);
+				font-family: ui-sans-serif, system-ui, sans-serif;
+				line-height: 1.6; margin: 0 auto; padding: 3rem 1.5rem 5rem;
+				max-width: 42rem;
+			}
+			h1 { font-size: 2rem; margin: 0 0 0.3rem; font-weight: 600; }
+			.sub { color: var(--muted); margin: 0 0 2.5rem; }
+			h2 {
+				font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.09em;
+				color: var(--muted); margin: 2.5rem 0 0.6rem; font-weight: 600;
+			}
+			ul { list-style: none; padding: 0; margin: 0; }
+			li { border-bottom: 1px solid var(--rule); }
+			li a {
+				display: block; padding: 0.75rem 0; color: var(--lapis);
+				text-decoration: none; font-weight: 500;
+			}
+			li a:hover, li a:focus { text-decoration: underline; }
+			li a .note {
+				display: block; color: var(--muted); font-weight: 400;
+				font-size: 0.87rem;
+			}
+			footer {
+				margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
+				color: var(--muted); font-size: 0.85rem;
+			}
+			footer a { color: var(--lapis); }
+		</style>
 	</head>
 	<body>
-		<h1>My Font testing pages</h1>
+		<h1>Qalam Badi</h1>
+		<p class="sub">Testing pages, rebuilt on every push to <code>main</code>.</p>
+
+		<h2>Read it</h2>
 		<ul>
 			<li>
-				<a href="fontbakery/fontbakery-report.html">FontBakery Report</a>
+				<a href="specimen.html">Specimen
+					<span class="note">The current family set as text, with the monospace seed alongside on the same lines. Start here — the machine reports say what changed, this says whether it looks right.</span>
+				</a>
 			</li>
 			<li>
-				<a href="proof/diffenator2-report.html">Diffenator2 Report</a>
-			</li>
-			<li>
-				<a href="contrast-specimen.html">Contrast axis specimen (bonus)</a>
+				<a href="contrast-specimen.html">Contrast axis specimen
+					<span class="note">The bonus XOPQ build. Not part of the shipping family.</span>
+				</a>
 			</li>
 		</ul>
+
+		<h2>Check it</h2>
+		<ul>
+			<li>
+				<a href="fontbakery/fontbakery-report.html">FontBakery report
+					<span class="note">Google Fonts correctness and packaging checks.</span>
+				</a>
+			</li>
+			<li>
+				<a href="proof/diffenator2-report.html">Diffenator2 report
+					<span class="note">What changed against the previous build.</span>
+				</a>
+			</li>
+		</ul>
+
+		<h2>Proof sheets</h2>
+		<ul>
+			<li><a href="proof/Regular-diffbrowsers_text.html">Regular — text</a></li>
+			<li><a href="proof/Regular-diffbrowsers_waterfall.html">Regular — waterfall</a></li>
+			<li><a href="proof/Regular-diffbrowsers_glyphs.html">Regular — glyphs</a></li>
+			<li><a href="proof/Italic-diffbrowsers_text.html">Italic — text</a></li>
+			<li><a href="proof/Bold-diffbrowsers_text.html">Bold — text</a></li>
+			<li><a href="proof/Bold Italic-diffbrowsers_text.html">Bold Italic — text</a></li>
+		</ul>
+
+		<footer>
+			Qalam Badi is proportional, and leans toward the hand of Mishkín-Qalam.
+			It derives from <a href="https://github.com/LaPingvino/courier-badi">Courier
+			Badi</a>, which derives from Courier Prime.
+			<a href="https://github.com/LaPingvino/qalam-badi">Source on GitHub</a>.
+		</footer>
 	</body>
 </html>
