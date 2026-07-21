@@ -338,13 +338,27 @@ bends:
 initials:
   elbow_radius: 0.9
 
-# Mark strokes (scripts/narrow-madda.py). The madda kept its 944-unit cell
-# width while the alef under it came down from 5.45 to 3.6 nuqta, so the
-# proportion drifted top-heavy without the mark ever moving. It is a
-# horizontal stroke, so narrowing it in x is free, per the connector
-# corollary. 2.75 nuqta lands it just over half the alef height — narrower
-# read as timid against the sweep of this hand, wider reads as the cell.
+# Mark placement nudge (scripts/mark-anchors.py). Thin, tall letters carry
+# their stem to one side of their advance, so a mark centred on the stem
+# overhangs the neighbour. For this short manual class, the mark is pulled from
+# the stem toward the letter's footprint (advance) centre — a static nudge that
+# needs no context. First rung of the fit ladder (nudge -> widen -> narrow).
 marks:
+  thin_pull: 0.7
+  thin_letters:               # lam and the alef family (by base codepoint)
+    - 0x0644                  # lam
+    - 0x0627                  # alef
+    - 0x0623                  # alef hamza above
+    - 0x0625                  # alef hamza below
+    - 0x0622                  # alef madda
+    - 0x0671                  # alef wasla
+
+  # Madda width (scripts/narrow-madda.py). The madda kept its 944-unit cell
+  # width while the alef under it came down from 5.45 to 3.6 nuqta, so the
+  # proportion drifted top-heavy without the mark ever moving. It is a
+  # horizontal stroke, so narrowing it in x is free, per the connector
+  # corollary. 2.75 nuqta lands it just over half the alef height — narrower
+  # read as timid against the sweep of this hand, wider reads as the cell.
   madda: 2.75
 
 # Dots below the letter (scripts/tuck-dots.py). The seed parks below-dots low

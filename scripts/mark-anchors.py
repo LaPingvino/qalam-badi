@@ -27,9 +27,18 @@ Usage:
 """
 
 import argparse
+import os
 import re
 
 import ufoLib2
+import yaml
+
+from importlib.machinery import SourceFileLoader
+
+_flatness = SourceFileLoader(
+    "classify_flatness",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "classify-flatness.py"),
+).load_module()
 
 ARABIC_BLOCKS = (
     (0x0600, 0x06FF), (0x0750, 0x077F), (0x08A0, 0x08FF),
@@ -81,8 +90,17 @@ def set_anchor(glyph, name, x, y):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--src", default="sources/QalamBadi-Regular.ufo")
+    parser.add_argument("--config", default="sources/spacing.yaml")
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args()
+
+    with open(args.config) as handle:
+        settings = (yaml.safe_load(handle).get("marks") or {})
+    # Thin, offset-stem letters whose marks overhang the neighbour: nudge their
+    # marks from the stem toward the letter's footprint (advance) centre. A
+    # short manual class; symmetric letters need no nudge and are left out.
+    thin_letters = set(settings.get("thin_letters") or [])
+    thin_pull = settings.get("thin_pull", 0.0)
 
     font = ufoLib2.Font.open(args.src)
 
@@ -107,10 +125,17 @@ def main():
                 set_anchor(glyph, "bottom", cx, bounds.yMin - STACK_GAP)
                 marks_below += 1
         else:
-            # A base letter.
-            set_anchor(glyph, "top", body_centre(glyph, font, above=True),
+            # A base letter. Centre the mark over the body (the stem/loop); for
+            # the thin-letter class, pull it toward the glyph's footprint
+            # (advance) centre so it stops overhanging the neighbour.
+            base, _ = _flatness.base_and_form(glyph)
+            pull = thin_pull if base in thin_letters else 0.0
+            advance_centre = glyph.width / 2
+            top_x = body_centre(glyph, font, above=True)
+            bot_x = body_centre(glyph, font, above=False)
+            set_anchor(glyph, "top", top_x + pull * (advance_centre - top_x),
                        bounds.yMax + BASE_GAP)
-            set_anchor(glyph, "bottom", body_centre(glyph, font, above=False),
+            set_anchor(glyph, "bottom", bot_x + pull * (advance_centre - bot_x),
                        bounds.yMin - BASE_GAP)
             bases += 1
 
