@@ -237,11 +237,45 @@ class Fitter:
     # -- fitting ---------------------------------------------------------
 
     def fit(self, glyph, bounds):
-        """Translate the glyph and set its advance. Never scales."""
+        """Translate the glyph and set its advance. Never scales.
+
+        A joining edge is handled by an entirely different rule to a free one,
+        and conflating them is what puts hairlines in the Arabic.
+
+        The seed overlaps its connectors PAST the advance edge — a medial beh's
+        ink runs from -35 to 1263 in a 1228 cell — so that adjacent letters
+        share ink and merge without a seam. That overlap is invisible in the
+        glyph on its own and is the whole reason joined text looks continuous.
+
+        So a joining edge is not re-derived from ink at all: its exact offset
+        from the advance edge is preserved, overlap and all. Fitting it to a
+        zero sidebearing looks correct in isolation, lands the connector exactly
+        on the edge, and leaves neighbouring letters touching at a single point
+        instead of overlapping — which rasterises as a hairline seam.
+        """
         lsb, rsb, joins = self.sidebearings(glyph, bounds)
-        shift = lsb - bounds[0]
-        ink = bounds[2] - bounds[0]
-        glyph.width = round(ink + lsb + rsb)
+        left_join, right_join = joins
+        original_width = glyph.width
+
+        if left_join:
+            # The left connector, and its overlap, stay exactly where they are.
+            shift = 0.0
+        elif right_join:
+            # The right connector must land on the new advance edge, so the
+            # glyph moves and the advance follows it by the same amount.
+            shift = lsb - bounds[0]
+        else:
+            shift = lsb - bounds[0]
+
+        if right_join:
+            # Whatever the right connector's offset from the advance was, keep
+            # it: the advance moves with the glyph.
+            glyph.width = round(original_width + shift)
+        elif left_join:
+            glyph.width = round(bounds[2] + rsb)
+        else:
+            ink = bounds[2] - bounds[0]
+            glyph.width = round(ink + lsb + rsb)
 
         if round(shift) != 0:
             glyph.move((shift, 0))
