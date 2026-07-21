@@ -143,3 +143,32 @@ overrides:
   # alone leaves them nearly as wide as m, which reads as a spacing bug rather
   # than a style. They are narrowed here at the SERIF, not the sidebearing —
   # see scripts/make-proportional.py --trim-serifs.
+
+# Arabic connector plateaus (scripts/shorten-connectors.py). NOT YET IN THE
+# BUILD — the detector works but the threshold is not honestly tuned, see below.
+#
+# The idea: the cell stretched the baseline connectors sideways exactly as it
+# stretched the Latin serifs, so the same transform should apply — pin the body
+# of the letter, compress the flat approach either side of it.
+#
+# What measurement actually showed, which is not what we first claimed:
+# scripts/classify-flatness.py reports 504 Arabic glyphs with a flat baseline
+# run of the full 1228-unit cell, and a mean sath (straight) share of 43%
+# against classical nastaliq's 17-33%. But most of that 1228-unit run is the
+# BOTTOM EDGE of the connector stroke, which legitimately spans the full width
+# of any joined letter in any hand. It is not by itself evidence of stretching.
+#
+# The genuine signal is narrower: x ranges where the glyph is connector and
+# nothing else. Finding those needs a threshold above the connector's own
+# thickness (141 units = 0.52 nuqta) but below the shortest tooth, and in this
+# seed those two bounds are close enough together that the window is tight —
+# 1.00 catches 25 glyphs, 1.35 catches 50, and going lower catches fewer
+# because the connector itself starts counting as the letter.
+#
+# Set too high, this transform compresses teeth instead of plateaus and destroys
+# letters, so it stays out of `make proportional` until the body detector
+# distinguishes tooth from connector by shape rather than by height alone.
+connectors:
+  approach:  0.42   # nuqta of flat lead-in kept either side of the letter body
+  body_rise: 1.35   # nuqta above baseline at which ink counts as "the letter"
+  keep_long: []     # glyphs whose plateau is a deliberate kashida, not a stretch
