@@ -144,8 +144,19 @@ forms changed width noticeably (beh isol 1228→1318, seen isol adv 2130).
   bend pass already finds), then give `yeh.fina` a width target like the
   others. The bowl is horizontal there, so x-compression is safe.
 
-- **Lám with doubled harakat** stacks wrongly. May or may not be related to
-  connector length.
+- ~~**Lám with doubled harakat** stacks wrongly.~~ **FIXED** by mark
+  anchoring. The harakat were fixed-position zero-width overlays, so a shadda
+  landed on the tall lam stem and a following vowel landed on the shadda.
+  `scripts/mark-anchors.py` now puts a `top`/`bottom` anchor on every Arabic
+  base (a gap above/below its own ink, centred over the body not the
+  connector) and `_top`/`top` (and mirrored) on every haraka, and ufo2ft
+  compiles them into `mark`/`mkmk` GPOS — so marks sit above/below their own
+  letter and stack without colliding. The one snag: the arabic-features tool's
+  explicit `table GDEF` (mark class only) made ufo2ft refuse the base→mark
+  feature; mark-anchors strips just that table (the @GDEF_Marks class stays)
+  so ufo2ft rebuilds GDEF and emits both features. Refinement still open: the
+  anchor y comes from the Regular ink, so Bold (a ~26u dilation) rides its
+  marks a touch low — run mark-anchors per master to tighten.
 - **`bá` has a sharp corner** where it wants a curve.
 - **Junction notches: lám→mím and ص read as connector gaps, but the joins
   are sound.** Measured: meem final and lam initial both carry the full

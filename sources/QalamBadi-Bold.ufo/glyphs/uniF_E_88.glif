@@ -2,6 +2,8 @@
 <glyph name="uniFE88" format="2">
   <advance width="749"/>
   <unicode hex="FE88"/>
+  <anchor x="270" y="1281" name="top"/>
+  <anchor x="272" y="-520" name="bottom"/>
   <outline>
     <contour>
       <point x="764.1691579204262" y="399.60053199749103" type="line"/>

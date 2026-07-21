@@ -2,6 +2,8 @@
 <glyph name="uniFEDA" format="2">
   <advance width="1209"/>
   <unicode hex="FEDA"/>
+  <anchor x="608" y="1349" name="top"/>
+  <anchor x="180" y="77" name="bottom"/>
   <outline>
     <contour>
       <point x="832.0" y="379.1292162065151" type="line" smooth="yes"/>

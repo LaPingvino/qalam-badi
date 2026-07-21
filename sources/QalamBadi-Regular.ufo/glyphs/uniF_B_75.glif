@@ -2,6 +2,8 @@
 <glyph name="uniFB75" format="2">
   <advance width="1228"/>
   <unicode hex="FB75"/>
+  <anchor x="258" y="881" name="top"/>
+  <anchor x="524" y="-692" name="bottom"/>
   <outline>
     <contour>
       <point x="115.0" y="672.3735805544025" type="curve" smooth="yes"/>

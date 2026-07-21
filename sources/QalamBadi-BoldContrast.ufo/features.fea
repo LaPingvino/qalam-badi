@@ -31,9 +31,6 @@ languagesystem arab URD;
     \uniFE0E \uniFE0F 
 ];
 
-table GDEF {
-    GlyphClassDef , , @GDEF_Marks, ;
-} GDEF;
 
 lookup arabicInit {
     sub \uni0620 by uni0620.init;

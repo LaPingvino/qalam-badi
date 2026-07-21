@@ -2,6 +2,8 @@
 <glyph name="uni06DE" format="2">
   <advance width="1047"/>
   <unicode hex="06DE"/>
+  <anchor x="523" y="913" name="top"/>
+  <anchor x="523" y="-49" name="bottom"/>
   <outline>
     <contour>
       <point x="462.62919173230375" y="835.1272347555703" type="line"/>

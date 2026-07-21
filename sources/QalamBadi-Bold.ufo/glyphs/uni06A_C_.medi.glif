@@ -1,6 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uni06AC.medi" format="2">
   <advance width="1156"/>
+  <anchor x="428" y="1461" name="top"/>
+  <anchor x="561" y="145" name="bottom"/>
   <outline>
     <contour>
       <point x="533.0" y="429.4937318389373" type="curve" smooth="yes"/>

@@ -2,6 +2,8 @@
 <glyph name="uniFEFA" format="2">
   <advance width="1205"/>
   <unicode hex="FEFA"/>
+  <anchor x="467" y="1367" name="top"/>
+  <anchor x="322" y="-520" name="bottom"/>
   <outline>
     <contour>
       <point x="12.0" y="1146.957824823578" type="curve" smooth="yes"/>

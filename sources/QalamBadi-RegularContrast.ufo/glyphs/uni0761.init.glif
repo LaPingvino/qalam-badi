@@ -1,6 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uni0761.init" format="2">
   <advance width="1031"/>
+  <anchor x="728" y="998" name="top"/>
+  <anchor x="533" y="-686" name="bottom"/>
   <outline>
     <contour>
       <point x="724.7939491941527" y="239.0" type="line" smooth="yes"/>

@@ -2,6 +2,8 @@
 <glyph name="uniFBBE" format="2">
   <advance width="408"/>
   <unicode hex="FBBE"/>
+  <anchor x="204" y="360" name="top"/>
+  <anchor x="204" y="-412" name="bottom"/>
   <outline>
     <contour>
       <point x="49.0" y="-189.0" type="curve" smooth="yes"/>

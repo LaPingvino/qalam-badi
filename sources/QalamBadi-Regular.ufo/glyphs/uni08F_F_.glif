@@ -1,6 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uni08FF" format="2">
   <unicode hex="08FF"/>
+  <anchor x="524" y="883" name="_top"/>
+  <anchor x="524" y="1442" name="top"/>
   <outline>
     <contour>
       <point x="217.0" y="1354.0762234214285" type="curve" smooth="yes"/>

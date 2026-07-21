@@ -2,6 +2,8 @@
 <glyph name="uniFEEC" format="2">
   <advance width="778"/>
   <unicode hex="FEEC"/>
+  <anchor x="568" y="869" name="top"/>
+  <anchor x="394" y="-371" name="bottom"/>
   <outline>
     <contour>
       <point x="798.9325391472489" y="395.7923273503609" type="line"/>

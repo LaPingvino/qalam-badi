@@ -2,6 +2,8 @@
 <glyph name="uniFBD4" format="2">
   <advance width="1209"/>
   <unicode hex="FBD4"/>
+  <anchor x="606" y="1503" name="top"/>
+  <anchor x="180" y="77" name="bottom"/>
   <outline>
     <contour>
       <point x="866.0" y="379.1292162065151" type="line" smooth="yes"/>
