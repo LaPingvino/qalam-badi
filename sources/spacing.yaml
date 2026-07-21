@@ -32,7 +32,10 @@ defaults:
 # every script at once, so Latin serifs and Arabic tooth junctions soften on the
 # same radius and stay siblings.
 softening:
-  radius: 26        # ~0.10 nuqta, ~18% of the 141-unit pen
+  radius: 48        # ~0.18 nuqta, ~34% of the 141-unit pen. Bolder than a
+                    # restrained text face would use, on purpose: the brief is a
+                    # written hand, not a tidied typewriter, and at 26 the
+                    # softening was legible only under magnification.
   min_turn: 22      # below this the junction is near-straight; rounding adds points and nothing else
   max_turn: 155     # above this it is a spike (the apex of A, W, v) — a pen keeps those sharp too
 
@@ -67,10 +70,21 @@ categories:
   # that contrast between tight word and open gap is a large part of why the
   # script looks the way it does, and it survives the loss of stroke contrast.
 
-  arabic_free:      { lsb: 0.18, rsb: 0.18 }
-  arabic_isolated:  { lsb: 0.22, rsb: 0.22 }
-  arabic_alef:      { lsb: 0.40, rsb: 0.40 }   # alef is a lone stroke; it needs air
-  arabic_dotgroup:  { lsb: 0.18, rsb: 0.18 }
+  arabic_free:      { lsb: 0.14, rsb: 0.14 }
+  arabic_isolated:  { lsb: 0.18, rsb: 0.18 }
+  arabic_alef:      { lsb: 0.34, rsb: 0.34 }   # alef is a lone stroke; it needs air
+  arabic_dotgroup:  { lsb: 0.14, rsb: 0.14 }
+
+  # Final forms sweep. In this hand a final tail runs 1.5-1.7 alef-heights wide
+  # and returns rightward UNDERNEATH the letters before it — the opposite of a
+  # naskh final's tight deep hook. A negative sidebearing is how that is spelled
+  # in a font: the ink is allowed past the advance so the tail tucks under its
+  # neighbour instead of shoving the line apart.
+  #
+  # This is the seen/sheen trick from Courier Badi, generalised. There it was a
+  # workaround for a cell that was too small; here there is no cell, so it stops
+  # being a hack and becomes the actual device the script is built on.
+  arabic_final:     { lsb: -0.55, rsb: 0.14 }
 
 # Word space and friends, in nuqta. The Arabic word gap is deliberately wider
 # than the Latin one, per the tight-word/open-gap rhythm noted above.
@@ -143,6 +157,26 @@ overrides:
   # alone leaves them nearly as wide as m, which reads as a spacing bug rather
   # than a style. They are narrowed here at the SERIF, not the sidebearing —
   # see scripts/make-proportional.py --trim-serifs.
+
+# Arabic vertical proportion (scripts/shorten-ascenders.py).
+#
+# The alef is 3 nuqta in nastaliq and 5-6 in naskh; Mishkin-Qalam's own Greatest
+# Name measures 3.5. The seed's alef is 1252 units — 4.6 nuqta — so the
+# inherited proportion is naskh, and relative to the hand we are after the
+# verticals are too tall and everything horizontal too small.
+#
+# Bringing the alef down resets the measure the whole script is read against:
+# teeth, dal and bowls are all expressed as fractions of it, so the bowls and
+# finals become large relative to the verticals. That low, wide, swinging
+# silhouette is most of what makes nastaliq recognisable.
+#
+# y is remapped piecewise — identity through the body, compressed only above it
+# — so horizontal strokes keep their thickness and the face stays monolinear.
+verticals:
+  alef:     3.6    # nuqta. Between nastaliq's 3 and the inherited 4.6, landing
+                   # just above Mishkin-Qalam's measured 3.5.
+  body_top: 1.45   # nuqta. Below this nothing moves: teeth, bowls, connectors
+                   # and every horizontal stroke keep their exact geometry.
 
 # Arabic connector plateaus (scripts/shorten-connectors.py). NOT YET IN THE
 # BUILD — the detector works but the threshold is not honestly tuned, see below.

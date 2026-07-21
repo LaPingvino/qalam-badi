@@ -51,8 +51,14 @@ JOIN_EDGE_TOLERANCE = 45
 
 # Vertical band, relative to the baseline, in which a connector can appear.
 # Arabic joins all happen on the baseline; ink touching the cell edge high up
-# (a Latin serif, an overhanging Arabic tail) is not a connector.
-CONNECTOR_BAND = (-120, 420)
+# (a Latin serif) or well below it is not a connector.
+#
+# The lower bound matters as much as the upper one. A final form's tail sweeps
+# left and down, and it frequently crosses the advance edge on its way — read
+# that as a join and the glyph gets its left sidebearing pinned to zero, which
+# is exactly the sweep we were trying to give it. The band is therefore kept
+# tight around the join height: a connector leaves at the baseline, not under it.
+CONNECTOR_BAND = (-40, 420)
 
 ARABIC_BLOCKS = (
     (0x0600, 0x06FF),  # Arabic
@@ -207,7 +213,14 @@ class Fitter:
         else:
             cat = self.category(glyph)
             if (left_join or right_join) and cat.startswith("arabic"):
-                cat = "arabic_free" if cat == "arabic_isolated" else cat
+                # A form that joins on its right and is free on its left is a
+                # FINAL: it attaches to the letter before it and its tail is
+                # loose. Those tails are the ones that sweep, so they get their
+                # own rule and a negative sidebearing to sweep into.
+                if right_join and not left_join:
+                    cat = "arabic_final"
+                elif cat == "arabic_isolated":
+                    cat = "arabic_free"
             rule = cats.get(cat, default)
 
         lsb = self.units(rule.get("lsb", default["lsb"]))

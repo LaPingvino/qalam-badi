@@ -71,7 +71,8 @@ italic:
 proportional:
 	. venv/bin/activate; python3 scripts/narrow-serifs.py --src sources/QalamBadi-Mono.ufo --out sources/QalamBadi-Narrowed.ufo
 	. venv/bin/activate; python3 scripts/soften-corners.py --src sources/QalamBadi-Narrowed.ufo --out sources/QalamBadi-Softened.ufo
-	. venv/bin/activate; python3 scripts/make-proportional.py --src sources/QalamBadi-Softened.ufo --out sources/QalamBadi-Regular.ufo
+	. venv/bin/activate; python3 scripts/shorten-ascenders.py --src sources/QalamBadi-Softened.ufo --out sources/QalamBadi-Short.ufo
+	. venv/bin/activate; python3 scripts/make-proportional.py --src sources/QalamBadi-Short.ufo --out sources/QalamBadi-Regular.ufo
 
 # Report which glyphs the monospace cell distorted, and how.
 widths:

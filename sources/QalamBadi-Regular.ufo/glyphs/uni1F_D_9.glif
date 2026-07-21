@@ -18,14 +18,14 @@
       <point x="905.0" y="124.0"/>
       <point x="887.0" y="144.0"/>
       <point x="842.0" y="144.0" type="curve" smooth="yes"/>
-      <point x="592.0" y="144.0" type="line" smooth="yes"/>
-      <point x="578.22" y="144.0"/>
-      <point x="566.0" y="156.22"/>
-      <point x="566.0" y="170.0" type="curve" smooth="yes"/>
-      <point x="566.0" y="1017.0" type="line" smooth="yes"/>
-      <point x="566.0" y="1030.78"/>
-      <point x="578.22" y="1043.0"/>
-      <point x="592.0" y="1043.0" type="curve" smooth="yes"/>
+      <point x="614.0" y="144.0" type="line" smooth="yes"/>
+      <point x="588.56" y="144.0"/>
+      <point x="566.0" y="166.56"/>
+      <point x="566.0" y="192.0" type="curve" smooth="yes"/>
+      <point x="566.0" y="995.0" type="line" smooth="yes"/>
+      <point x="566.0" y="1020.44"/>
+      <point x="588.56" y="1043.0"/>
+      <point x="614.0" y="1043.0" type="curve" smooth="yes"/>
       <point x="822.0" y="1043.0" type="line" smooth="yes"/>
       <point x="867.0" y="1043.0"/>
       <point x="885.0" y="1063.0"/>
@@ -40,14 +40,14 @@
       <point x="97.0" y="1063.0"/>
       <point x="115.0" y="1043.0"/>
       <point x="160.0" y="1043.0" type="curve" smooth="yes"/>
-      <point x="390.0" y="1043.0" type="line" smooth="yes"/>
-      <point x="403.78" y="1043.0"/>
-      <point x="416.0" y="1030.78"/>
-      <point x="416.0" y="1017.0" type="curve" smooth="yes"/>
-      <point x="416.0" y="170.0" type="line" smooth="yes"/>
-      <point x="416.0" y="156.22"/>
-      <point x="403.78" y="144.0"/>
-      <point x="390.0" y="144.0" type="curve" smooth="yes"/>
+      <point x="368.0" y="1043.0" type="line" smooth="yes"/>
+      <point x="393.44000000000005" y="1043.0"/>
+      <point x="416.0" y="1020.44"/>
+      <point x="416.0" y="995.0" type="curve" smooth="yes"/>
+      <point x="416.0" y="192.0" type="line" smooth="yes"/>
+      <point x="416.0" y="166.56"/>
+      <point x="393.44000000000005" y="144.0"/>
+      <point x="368.0" y="144.0" type="curve" smooth="yes"/>
     </contour>
     <contour>
       <point x="738.88" y="1471.86" type="curve" smooth="yes"/>

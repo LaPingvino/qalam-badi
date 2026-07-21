@@ -22,10 +22,10 @@
       <point x="422.0" y="776.0" type="curve" smooth="yes"/>
       <point x="575.0" y="776.0"/>
       <point x="729.0" y="674.0"/>
-      <point x="757.2084980886951" y="523.5546768602924" type="curve" smooth="yes"/>
-      <point x="759.7479941016867" y="510.0106981243374"/>
-      <point x="749.78" y="498.0"/>
-      <point x="736.0" y="498.0" type="curve" smooth="yes"/>
+      <point x="753.1541503175911" y="545.1778649728475" type="curve" smooth="yes"/>
+      <point x="757.8424506492678" y="520.1735965372383"/>
+      <point x="739.44" y="498.0"/>
+      <point x="714.0" y="498.0" type="curve" smooth="yes"/>
       <point x="152.0" y="498.0" type="line" smooth="yes"/>
       <point x="109.0" y="498.0"/>
       <point x="70.0" y="498.0"/>
@@ -37,19 +37,19 @@
       <point x="907.0" y="193.0"/>
     </contour>
     <contour>
-      <point x="734.0" y="375.0" type="line" smooth="yes"/>
-      <point x="747.78" y="375.0"/>
-      <point x="757.6804193644093" y="363.00216912625484"/>
-      <point x="755.0647220519346" y="349.4727002686273" type="curve" smooth="yes"/>
+      <point x="712.0" y="375.0" type="line" smooth="yes"/>
+      <point x="737.44" y="375.0"/>
+      <point x="755.7176972881402" y="352.85015838693204"/>
+      <point x="750.8887176343409" y="327.8726774190043" type="curve" smooth="yes"/>
       <point x="731.0" y="225.0"/>
       <point x="610.0" y="113.0"/>
       <point x="467.0" y="113.0" type="curve" smooth="yes"/>
       <point x="360.0" y="113.0"/>
       <point x="233.0" y="164.0"/>
-      <point x="217.20998252142647" y="349.09409377661166" type="curve" smooth="yes"/>
-      <point x="216.03869178507045" y="362.82422407500746"/>
-      <point x="227.22000000000003" y="375.0"/>
-      <point x="241.0" y="375.0" type="curve" smooth="yes"/>
+      <point x="219.07996773186431" y="327.1737115875908" type="curve" smooth="yes"/>
+      <point x="216.9175848339762" y="352.52164444616767"/>
+      <point x="237.56" y="375.0"/>
+      <point x="263.0" y="375.0" type="curve" smooth="yes"/>
     </contour>
   </outline>
 </glyph>
