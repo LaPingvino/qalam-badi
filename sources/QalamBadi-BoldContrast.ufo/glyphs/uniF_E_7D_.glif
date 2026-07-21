@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uniFE7D" format="2">
-  <advance width="1097"/>
+  <advance width="1132"/>
   <unicode hex="FE7D"/>
   <outline>
     <contour>
@@ -57,15 +57,15 @@
       <point x="626.6767162224477" y="1369.5653713859972"/>
     </contour>
     <contour>
-      <point x="1106.451889597981" y="388.96248798279197" type="line"/>
-      <point x="-0.2316369811333092" y="389.0005556172934" type="line" smooth="yes"/>
+      <point x="1141.4004781313445" y="388.965113408818" type="line"/>
+      <point x="-0.22522271144840086" y="389.000525271523" type="line" smooth="yes"/>
       <point x="-78.34543964254094" y="382.6077170208259"/>
       <point x="-94.87724033740854" y="330.6411517375099"/>
       <point x="-95.0" y="297.0" type="curve" smooth="yes"/>
       <point x="-94.87724033740854" y="263.3588482624901"/>
       <point x="-78.34543964254094" y="211.39228297917413"/>
-      <point x="-0.2316369811333092" y="204.99944438270657" type="curve" smooth="yes"/>
-      <point x="1106.451889597981" y="205.037512017208" type="line"/>
+      <point x="-0.22522271144840086" y="204.99947472847703" type="curve" smooth="yes"/>
+      <point x="1141.4004781313445" y="205.03488659118196" type="line"/>
     </contour>
   </outline>
 </glyph>

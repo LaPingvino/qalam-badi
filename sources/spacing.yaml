@@ -66,11 +66,17 @@ categories:
   # already doing most of the spacing work. Round letters tuck in slightly,
   # the way they do in any serif text face.
 
-  latin_round:      { lsb: 0.22, rsb: 0.22 }   # o c e d b p q g s O C G Q S
-  latin_straight:   { lsb: 0.28, rsb: 0.28 }   # i l m n h u r I H M N U
-  latin_diagonal:   { lsb: 0.20, rsb: 0.20 }   # v w x y A V W X Y K k z Z
-  latin_default:    { lsb: 0.26, rsb: 0.26 }
-  uppercase:        { lsb: 0.26, rsb: 0.26 }
+  # Raised a notch (round 0.22->0.25, straight 0.28->0.31, diagonal 0.20->0.23,
+  # default/UC 0.26->0.29) to give the text more air — it read a touch tight.
+  # The round/straight/diagonal RATIOS are kept (straight is the metronome, the
+  # others a fixed fraction of it), so the rhythm stays even, just more open.
+  # These now apply to Cyrillic and Greek too, by shape, not only Latin — see
+  # make-proportional.category().
+  latin_round:      { lsb: 0.25, rsb: 0.25 }   # o c e d b p q g s O C G Q S
+  latin_straight:   { lsb: 0.31, rsb: 0.31 }   # i l m n h u r I H M N U
+  latin_diagonal:   { lsb: 0.23, rsb: 0.23 }   # v w x y A V W X Y K k z Z
+  latin_default:    { lsb: 0.29, rsb: 0.29 }
+  uppercase:        { lsb: 0.29, rsb: 0.29 }
 
   punctuation:      { lsb: 0.34, rsb: 0.34 }
   quotes:           { lsb: 0.30, rsb: 0.30 }
@@ -90,7 +96,7 @@ categories:
   # script looks the way it does, and it survives the loss of stroke contrast.
 
   arabic_free:      { lsb: 0.14, rsb: 0.14 }
-  arabic_isolated:  { lsb: 0.18, rsb: 0.18 }
+  arabic_isolated:  { lsb: 0.20, rsb: 0.20 }
   arabic_alef:      { lsb: 0.34, rsb: 0.34 }   # alef is a lone stroke; it needs air
   arabic_dotgroup:  { lsb: 0.14, rsb: 0.14 }
 
@@ -104,6 +110,48 @@ categories:
   # workaround for a cell that was too small; here there is no cell, so it stops
   # being a hack and becomes the actual device the script is built on.
   arabic_final:     { lsb: -0.55, rsb: 0.14 }
+
+# Kerning (scripts/kern.py -> UFO group kerning, compiled to GPOS by the
+# builder). Sidebearings set the even rhythm; kerning corrects the optical
+# white a fixed rhythm cannot — the triangular holes at AV, To, Wa and the
+# gap at r-period. Values in nuqta, negative = tighten. Kept in the -0.3..-0.6
+# band so kerning trims white without overriding the sidebearing rhythm.
+#
+# Groups are lists of codepoints (ints, resolved through the font's cmap so
+# Cyrillic and Greek join their Latin shape-mates) and/or literal glyph names.
+# Pairs are [left_group_or_glyph, right_group_or_glyph, nuqta].
+kerning:
+  groups:
+    A_rise:   [0x41, 0x41B, 0x39B]                 # A, Cyrillic Л, Greek Λ
+    V_open:   [0x56, 0x57, 0x423]                  # V W, Cyrillic У
+    Y_open:   [0x59]
+    T_arm:    [0x54, 0x422, 0x3A4]                  # T, Cyrillic Т, Greek Τ
+    F_arm:    [0x46, 0x50]                          # F P
+    L_low:    [0x4C]
+    r_arm:    ["r"]
+    round_lc: [0x6F, 0x63, 0x65, 0x64, 0x71, 0x67, 0x61,   # o c e d q g a
+               0x43E, 0x441, 0x435,                        # Cyrillic о с е
+               0x3BF, 0x3C3, 0x3B1, 0x3B5]                 # Greek ο σ α ε
+    round_uc: [0x4F, 0x43, 0x47, 0x51, 0x41E, 0x421, 0x39F]  # O C G Q, Cyr О С, Gr Ο
+    dot:      ["period", "comma"]
+    quote:    ["quoteright", "quotedbl", "quotesingle"]
+  pairs:
+    - [A_rise, V_open, -0.60]
+    - [V_open, A_rise, -0.60]
+    - [A_rise, Y_open, -0.60]
+    - [Y_open, A_rise, -0.60]
+    - [A_rise, T_arm, -0.45]
+    - [T_arm, A_rise, -0.45]
+    - [T_arm, round_lc, -0.40]
+    - [F_arm, round_lc, -0.35]
+    - [F_arm, dot, -0.35]
+    - [L_low, V_open, -0.55]
+    - [L_low, Y_open, -0.55]
+    - [L_low, T_arm, -0.55]
+    - [r_arm, dot, -0.55]
+    - [V_open, round_lc, -0.35]
+    - [Y_open, round_lc, -0.35]
+    - [quote, round_lc, -0.35]
 
 # Word space and friends, in nuqta. The Arabic word gap is deliberately wider
 # than the Latin one, per the tight-word/open-gap rhythm noted above.
@@ -224,7 +272,7 @@ verticals:
 # largest island, which is where a kashida classically lives. It is never
 # spread across the teeth gaps.
 connectors:
-  approach:  0.72   # nuqta of flat lead-in kept between a join and the letter.
+  approach:  0.85   # nuqta of flat lead-in kept between a join and the letter.
                     # Raised from 0.42: at 0.42 the bowl transition of a final
                     # arrived right at the seam, so the connector necked to a
                     # near-point where two letters met (a tooth reading as

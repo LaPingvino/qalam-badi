@@ -124,6 +124,10 @@ proportional:
 	# 'Abdu'l-Baha and nastaliq. Position only — see the script for why not size.
 	. venv/bin/activate; python3 scripts/normalize-modifiers.py --src sources/QalamBadi-Meem.ufo --out sources/QalamBadi-Mods.ufo
 	. venv/bin/activate; python3 scripts/make-proportional.py --src sources/QalamBadi-Mods.ufo --out sources/QalamBadi-Regular.ufo
+	# Class kerning, written LAST — the chain regenerates the Regular every run,
+	# so kerning has to be the final thing added to the finished UFO. Pairs live
+	# in spacing.yaml (kerning:); the builder compiles the UFO groups to GPOS.
+	. venv/bin/activate; python3 scripts/kern.py --src sources/QalamBadi-Regular.ufo
 
 # Build the specimen: a single self-contained page with the webfonts inlined
 # and the monospace seed alongside for comparison. Published with the proofs so

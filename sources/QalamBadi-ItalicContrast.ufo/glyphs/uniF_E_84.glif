@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uniFE84" format="2">
-  <advance width="714"/>
+  <advance width="749"/>
   <unicode hex="FE84"/>
   <outline>
     <contour>
-      <point x="792.7804575843329" y="357.0666162100301" type="line"/>
+      <point x="826.6513996555382" y="356.64747516680916" type="line"/>
       <point x="519.0646558814236" y="355.0" type="line" smooth="yes"/>
       <point x="424.4934486041712" y="358.1490344241235"/>
       <point x="447.6205577367901" y="450.5505615958652"/>
@@ -20,7 +20,7 @@
       <point x="236.0526933606406" y="341.23596917663144"/>
       <point x="298.1153136263259" y="237.54056802114405"/>
       <point x="493.6735706594046" y="239.0" type="curve" smooth="yes"/>
-      <point x="765.5020017194945" y="237.5001111151144" type="line"/>
+      <point x="799.6725394598542" y="237.7718657408447" type="line"/>
     </contour>
     <contour>
       <point x="526.3636084239668" y="1439.9102716664358" type="curve" smooth="yes"/>

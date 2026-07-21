@@ -1,23 +1,23 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="caron.alt" format="2">
-  <advance width="411"/>
+  <advance width="429"/>
   <outline>
     <contour>
-      <point x="427.015014608338" y="1312.0" type="line" smooth="yes"/>
-      <point x="404.015014608338" y="1312.0"/>
-      <point x="388.0754178205449" y="1301.0"/>
-      <point x="379.3725512256671" y="1280.0" type="curve" smooth="yes"/>
-      <point x="233.5421842092028" y="918.0" type="line" smooth="yes"/>
-      <point x="219.54706686511497" y="884.0"/>
-      <point x="236.66787328952876" y="862.0"/>
-      <point x="279.66787328952876" y="862.0" type="curve" smooth="yes"/>
-      <point x="317.66787328952876" y="862.0"/>
-      <point x="346.60747007732186" y="873.0"/>
-      <point x="360.01564459503345" y="898.0" type="curve" smooth="yes"/>
-      <point x="558.0223385922063" y="1261.0" type="line" smooth="yes"/>
-      <point x="574.1358210327518" y="1290.0"/>
-      <point x="571.015014608338" y="1312.0"/>
-      <point x="545.015014608338" y="1312.0" type="curve" smooth="yes"/>
+      <point x="436.015014608338" y="1312.0" type="line" smooth="yes"/>
+      <point x="413.015014608338" y="1312.0"/>
+      <point x="397.0754178205449" y="1301.0"/>
+      <point x="388.3725512256671" y="1280.0" type="curve" smooth="yes"/>
+      <point x="242.5421842092028" y="918.0" type="line" smooth="yes"/>
+      <point x="228.54706686511497" y="884.0"/>
+      <point x="245.66787328952876" y="862.0"/>
+      <point x="288.66787328952876" y="862.0" type="curve" smooth="yes"/>
+      <point x="326.66787328952876" y="862.0"/>
+      <point x="355.60747007732186" y="873.0"/>
+      <point x="369.01564459503345" y="898.0" type="curve" smooth="yes"/>
+      <point x="567.0223385922063" y="1261.0" type="line" smooth="yes"/>
+      <point x="583.1358210327518" y="1290.0"/>
+      <point x="580.015014608338" y="1312.0"/>
+      <point x="554.015014608338" y="1312.0" type="curve" smooth="yes"/>
     </contour>
   </outline>
 </glyph>

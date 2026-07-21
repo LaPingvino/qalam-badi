@@ -1,24 +1,24 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="Oslash" format="2">
-  <advance width="1188"/>
+  <advance width="1206"/>
   <unicode hex="00D8"/>
   <outline>
     <contour>
-      <point x="1174.469129097788" y="1239.0" type="curve" smooth="yes"/>
-      <point x="122.28980942125395" y="30.0" type="line" smooth="yes"/>
-      <point x="89.58938415433228" y="-8.0"/>
-      <point x="90.82855567520373" y="-35.0"/>
-      <point x="126.8914002153667" y="-63.0" type="curve" smooth="yes"/>
-      <point x="161.9542447555297" y="-91.0"/>
-      <point x="190.4832256976551" y="-88.0"/>
-      <point x="223.18365096457674" y="-50.0" type="curve" smooth="yes"/>
-      <point x="1275.362970641111" y="1159.0" type="line" smooth="yes"/>
-      <point x="1306.8870689273242" y="1196.0"/>
-      <point x="1306.8242243871612" y="1224.0"/>
-      <point x="1271.7613798469981" y="1252.0" type="curve" smooth="yes"/>
-      <point x="1236.698535306835" y="1280.0"/>
-      <point x="1207.1695543647097" y="1277.0"/>
+      <point x="1183.469129097788" y="1239.0" type="curve" smooth="yes"/>
+      <point x="131.28980942125395" y="30.0" type="line" smooth="yes"/>
+      <point x="98.58938415433228" y="-8.0"/>
+      <point x="99.82855567520373" y="-35.0"/>
+      <point x="135.8914002153667" y="-63.0" type="curve" smooth="yes"/>
+      <point x="170.9542447555297" y="-91.0"/>
+      <point x="199.4832256976551" y="-88.0"/>
+      <point x="232.18365096457674" y="-50.0" type="curve" smooth="yes"/>
+      <point x="1284.362970641111" y="1159.0" type="line" smooth="yes"/>
+      <point x="1315.8870689273242" y="1196.0"/>
+      <point x="1315.8242243871612" y="1224.0"/>
+      <point x="1280.7613798469981" y="1252.0" type="curve" smooth="yes"/>
+      <point x="1245.698535306835" y="1280.0"/>
+      <point x="1216.1695543647097" y="1277.0"/>
     </contour>
-    <component base="O" xOffset="10.0"/>
+    <component base="O" xOffset="11.0"/>
   </outline>
 </glyph>

@@ -82,6 +82,30 @@ LATIN_ROUND = set("obcedpqgsOCGQS")
 LATIN_STRAIGHT = set("ilmnhurIHMNUJfjt")
 LATIN_DIAGONAL = set("vwxyzAVWXYZKk")
 
+# Cyrillic and Greek classified by the same three shape buckets, by codepoint,
+# so all four scripts share one spacing rhythm. Round = closed bowls (о с е э
+# ф / ο σ θ φ ω), straight = vertical-dominant (н п и м ц ш / η ν π μ ι),
+# diagonal = oblique strokes (у ж к л х / λ χ κ).
+CYRILLIC_GREEK_ROUND = {
+    0x043E, 0x0441, 0x0435, 0x044D, 0x0444, 0x044F, 0x0451,          # о с е э ф я ё
+    0x041E, 0x0421, 0x042D, 0x0424,                                  # О С Э Ф
+    0x03BF, 0x03C3, 0x03B8, 0x03C6, 0x03C9, 0x03B5, 0x03B1, 0x03C2,  # ο σ θ φ ω ε α ς
+    0x039F, 0x0398, 0x03A6, 0x03A9,                                  # Ο Θ Φ Ω
+}
+CYRILLIC_GREEK_STRAIGHT = {
+    0x043D, 0x043F, 0x0438, 0x0439, 0x043C, 0x0446, 0x0448, 0x0449,  # н п и й м ц ш щ
+    0x044A, 0x044B, 0x044C, 0x0442, 0x0433, 0x0440, 0x0431, 0x0432,  # ъ ы ь т г р б в
+    0x041D, 0x041F, 0x0418, 0x041C, 0x0426, 0x0428, 0x0422, 0x0413,  # Н П И М Ц Ш Т Г
+    0x03B7, 0x03BD, 0x03C0, 0x03BC, 0x03B9, 0x03BA,                  # η ν π μ ι κ
+    0x0397, 0x039D, 0x03A0, 0x039C, 0x0399,                          # Η Ν Π Μ Ι
+}
+CYRILLIC_GREEK_DIAGONAL = {
+    0x0443, 0x0436, 0x043A, 0x043B, 0x0445, 0x0434,                  # у ж к л х д
+    0x0423, 0x0416, 0x041A, 0x041B, 0x0425, 0x0414,                  # У Ж К Л Х Д
+    0x03BB, 0x03C7, 0x03BE, 0x03B6,                                  # λ χ ξ ζ
+    0x039B, 0x03A7, 0x039E,                                          # Λ Χ Ξ
+}
+
 # Glyphs whose advance must stay equal to each other so figures still line up
 # in tables and dates. Proportionalising the rest of the font does not make
 # tabular figures a bad idea.
@@ -336,6 +360,19 @@ class Fitter:
                 return "latin_diagonal"
             if base.isupper():
                 return "uppercase"
+
+        # Cyrillic and Greek by SHAPE, not by name. The single-char test above
+        # only catches ASCII, so these two scripts used to fall through to
+        # latin_default (0.29 flat) — their rounds too open, their straights too
+        # tight, and the "one shared rhythm" the design promises broken. Classed
+        # by codepoint they inherit the same round/straight/diagonal buckets.
+        if cp is not None:
+            if cp in CYRILLIC_GREEK_ROUND:
+                return "latin_round"
+            if cp in CYRILLIC_GREEK_STRAIGHT:
+                return "latin_straight"
+            if cp in CYRILLIC_GREEK_DIAGONAL:
+                return "latin_diagonal"
 
         if cp is not None:
             cat = unicodedata.category(chr(cp))

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uniFBA3" format="2">
-  <advance width="941"/>
+  <advance width="976"/>
   <unicode hex="FBA3"/>
   <outline>
     <contour>
@@ -21,10 +21,10 @@
       <point x="639.9947125802262" y="331.74" type="curve" smooth="yes"/>
       <point x="649.074421193248" y="301.0"/>
       <point x="686.6735706594046" y="225.0"/>
-      <point x="801.05647522372" y="225.0" type="curve" smooth="yes"/>
-      <point x="980.7935706594046" y="225.0" type="line"/>
-      <point x="1006.1846558814236" y="369.0" type="line"/>
-      <point x="826.447560445739" y="369.0" type="line" smooth="yes"/>
+      <point x="803.833944103388" y="225.0" type="curve" smooth="yes"/>
+      <point x="1016.0235706594046" y="225.0" type="line"/>
+      <point x="1041.4146558814236" y="369.0" type="line"/>
+      <point x="829.225029325407" y="369.0" type="line" smooth="yes"/>
       <point x="741.0646558814236" y="369.0"/>
       <point x="722.6429347105541" y="463.0200913242009"/>
       <point x="740.7718467199156" y="565.8342604123426" type="curve" smooth="yes"/>
