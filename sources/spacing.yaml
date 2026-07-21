@@ -215,6 +215,21 @@ connectors:
     beh.isol:  4.5
     seen.fina: 7.5
     seen.isol: 7.5
+    # Lam runs thin: it is a vertical stroke, and the word that shows it off
+    # is Allah — composed from lam.init + lam.medi, so these two widths ARE
+    # the ligature's rhythm. Shrinkage spreads over both approaches, keeping
+    # the stem centred between its joins.
+    lam.init:  1.15
+    lam.medi:  2.0
+
+# Mark strokes (scripts/narrow-madda.py). The madda kept its 944-unit cell
+# width while the alef under it came down from 5.45 to 3.6 nuqta, so the
+# proportion drifted top-heavy without the mark ever moving. It is a
+# horizontal stroke, so narrowing it in x is free, per the connector
+# corollary. 2.75 nuqta lands it just over half the alef height — narrower
+# read as timid against the sweep of this hand, wider reads as the cell.
+marks:
+  madda: 2.75
 
 # Dots below the letter (scripts/tuck-dots.py). The seed parks below-dots low
 # enough to clear the deepest tail that could occur anywhere in the monospace

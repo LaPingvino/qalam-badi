@@ -67,6 +67,7 @@ FAMILIES = {
     "noon": _flatness.NOON_SKELETON,
     "dal": _flatness.DAL_SKELETON,
     "seen": _flatness.SEEN_SKELETON,
+    "lam": _flatness.LAM_SKELETON,
 }
 
 
@@ -330,12 +331,20 @@ def main():
             capped_ink = (bounds.xMax - bounds.xMin) + sum(
                 new - (end - start) for (start, end, _), new in zip(runs, new_lengths))
             delta = target * nuqta - capped_ink
-            run = elongation_run(runs, islands)
-            index = runs.index(run)
-            wanted = new_lengths[index] + delta
-            # An elongation run may grow a long way — that is the kashida —
-            # but never vanish, and never explode past the classical ceiling.
-            new_lengths[index] = max(30.0, min(wanted, 12 * nuqta))
+            if delta >= 0:
+                # Growth is a kashida, and a kashida lives in ONE place. It
+                # may grow a long way, but never past the classical ceiling.
+                run = elongation_run(runs, islands)
+                index = runs.index(run)
+                new_lengths[index] = max(30.0, min(new_lengths[index] + delta, 12 * nuqta))
+            else:
+                # Shrinkage spreads over every movable run instead: taking it
+                # all from one side would leave a stem letter's body sitting
+                # lopsided between its two joins.
+                movable = sum(new_lengths)
+                if movable > 1:
+                    factor = max(0.0, (movable + delta) / movable)
+                    new_lengths = [max(30.0, length * factor) for length in new_lengths]
 
         delta_total = sum(new - (end - start)
                           for (start, end, _), new in zip(runs, new_lengths))

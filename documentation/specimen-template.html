@@ -115,6 +115,30 @@
   }
   .invocation + .label { text-align: right; }
 
+  /* The Short Obligatory Prayer, and the long-text passages: running text is
+     where spacing, joining and mark placement either hold together or don't,
+     and no glyph chart can stand in for it. */
+  .prayer {
+    margin: 2.5rem auto 0.5rem;
+    max-width: 34rem;
+    padding: 1.6rem 2rem;
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    background: var(--ground);
+    direction: rtl;
+    text-align: center;
+    font-size: 1.7rem;
+    line-height: 2.3;
+  }
+  .prayer + .label { text-align: center; }
+  .longtext {
+    margin: 1.4rem 0;
+    font-size: 1.25rem;
+    line-height: 1.9;
+  }
+  .longtext.ar { direction: rtl; text-align: right; font-size: 1.5rem; line-height: 2.1; }
+  .longtext + .label { margin-bottom: 1.6rem; }
+
   section { margin: 4.5rem 0 0; }
   h2 {
     font-size: 1.6rem;
@@ -201,6 +225,10 @@
 
     <div class="invocation">يا بهاء الأبهى</div>
     <div class="label">Yá Bahá'u'l-Abhá — the invocation Mishkín-Qalam calligraphed</div>
+
+    <div class="prayer" lang="ar">أَشْهَدُ يا إِلهِي بِأَنَّكَ خَلَقْتَنِي لِعِرْفانِكَ وَعِبادَتِكَ، أَشْهَدُ في هذَا الْحِينِ بِعَجْزِي وَقُوَّتِكَ وَضَعْفِي وَاقْتِدارِكَ وَفَقْرِي وَغَنائِكَ، لا إِلهَ إِلاّ أَنْتَ الْمُهَيْمِنُ الْقَيُّومُ</div>
+    <div class="label">The Short Obligatory Prayer — Bahá'u'lláh. Fully vocalized:
+    every harakat, shadda stack and joined form of a real text, at reading size.</div>
   </header>
 
   <section>
@@ -329,6 +357,41 @@
       <div style="font-size:1.05rem">So powerful is the light of unity that it can illuminate the whole earth.</div>
       <div style="font-size:0.85rem">Consort with the followers of all religions in a spirit of friendliness and fellowship.</div>
     </div>
+  </section>
+
+  <section>
+    <div class="label">Running text</div>
+    <h2>Longer passages</h2>
+    <p>Spacing, joining and mark placement either hold together over a
+    paragraph or they don't — a glyph chart cannot tell you which. One passage
+    per script, then all of them in one sentence.</p>
+
+    <div class="longtext" lang="grc">ἄνδρα μοι ἔννεπε, μοῦσα, πολύτροπον, ὃς μάλα πολλὰ
+    πλάγχθη, ἐπεὶ Τροίης ἱερὸν πτολίεθρον ἔπερσεν· πολλῶν δ' ἀνθρώπων ἴδεν
+    ἄστεα καὶ νόον ἔγνω, πολλὰ δ' ὅ γ' ἐν πόντῳ πάθεν ἄλγεα ὃν κατὰ θυμόν,
+    ἀρνύμενος ἥν τε ψυχὴν καὶ νόστον ἑταίρων.</div>
+    <div class="label">Homer, Odyssey I.1–5 — polytonic Greek: breathings,
+    accents and iota subscripts in running verse.</div>
+
+    <div class="longtext" lang="ru">Так говорила в июле 1805 года известная
+    Анна Павловна Шерер, фрейлина и приближенная императрицы Марии Феодоровны,
+    встречая важного и чиновного князя Василия, первого приехавшего на ее
+    вечер. Анна Павловна кашляла несколько дней, у нее был грипп, как она
+    говорила.</div>
+    <div class="label">Tolstoy, War and Peace I.1 — Cyrillic running text:
+    descenders, diacritics and mixed case at paragraph rhythm.</div>
+
+    <div class="longtext ar" lang="ar">قل يا أهل الأرض، إنّ القلم الأعلى قد
+    تحرّك على الألواح، والاسم الأعظم ظهر بالحقّ، والبهاء كلّ البهاء في
+    الصبر والإنصاف والمحبّة لأهل العالم أجمعين.</div>
+    <div class="label">Arabic running text in the manner of the Tablets —
+    joined words, sweeping finals and word-gap rhythm over full lines.</div>
+
+    <div class="longtext">One reed serves them all — ὁ κάλαμος for Ὅμηρος,
+    перо for Толстой, and <span lang="ar" dir="rtl">القلم الأعلى</span> for
+    Bahá'u'lláh — one pen, four scripts, a single line.</div>
+    <div class="label">The cross-script sentence: mixed directions and all four
+    scripts sharing one baseline and one rhythm.</div>
   </section>
 
   <section>

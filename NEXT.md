@@ -123,6 +123,16 @@ forms changed width noticeably (beh isol 1228→1318, seen isol adv 2130).
 - **Lám with doubled harakat** stacks wrongly. May or may not be related to
   connector length.
 - **`bá` has a sharp corner** where it wants a curve.
+- **Junction notches: lám→mím and ص read as connector gaps, but the joins
+  are sound.** Measured: meem final and lam initial both carry the full
+  225..369 signature exactly at their join edges, and the pre-session build
+  renders pixel-identically — nothing the fitter did. The white wedge sits
+  INSIDE the glyph, where the connector stroke meets the loop entry (meem's
+  loop, sad's loop-to-bowl joint) at an angle without enough overlap. Same
+  family as bá's sharp corner: seed junction quality. A candidate mechanical
+  fix is a "weld" pass — detect the acute white wedge where two stroke pieces
+  meet and fill it with a small triangle/fillet — which would treat every
+  joining seam at once instead of redrawing letter by letter.
 - **Yá cut-off: FIXED, and the diagnosis moved twice.** First blamed on bá,
   then on yeh's tail — measurement showed the body only reaches −481; it was
   the two DOTS below, parked at −1024 by the cell (placed to clear the
