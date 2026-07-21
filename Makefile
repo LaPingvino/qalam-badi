@@ -84,12 +84,11 @@ proportional:
 	# If the teeth should be wider than the seed draws them, the scale to change
 	# is the one in the SEED's own history, not a second pass here.
 	. venv/bin/activate; python3 scripts/soften-corners.py --src sources/QalamBadi-Narrowed.ufo --out sources/QalamBadi-Softened.ufo
-	# Compress the connector approach so a joined letter's advance follows its
-	# actual body. Without this every both-joined form keeps the seed's 1228
-	# advance — the two pinned connectors define it — so the Arabic stays as
-	# uniform in width as it was in the cell, which reads blocky next to the
-	# now-proportional Latin.
-	. venv/bin/activate; python3 scripts/shorten-connectors.py --src sources/QalamBadi-Softened.ufo --out sources/QalamBadi-Connected.ufo
+	# Fit the connector runs: compress the cell's stretched approaches so a
+	# joined letter's advance follows its actual body, and extend the letters
+	# whose flat run is part of the written form (beh finals, seen kashidas)
+	# to the classical widths recorded in spacing.yaml (connectors.widths).
+	. venv/bin/activate; python3 scripts/fit-connectors.py --src sources/QalamBadi-Softened.ufo --out sources/QalamBadi-Connected.ufo
 	# reshape-tails is DISABLED — it breaks monolinearity. See the script header
 	# and sources/spacing.yaml. It scaled the tail region anisotropically (y x
 	# 0.85, x x 2.6), which fattens every stroke that is not horizontal by up to

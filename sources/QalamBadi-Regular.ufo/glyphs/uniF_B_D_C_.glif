@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uniFBDC" format="2">
-  <advance width="1113"/>
+  <advance width="1137"/>
   <unicode hex="FBDC"/>
   <outline>
     <contour>
@@ -34,11 +34,11 @@
       <point x="965.6645092220567" y="177.5638263026337" type="curve" smooth="yes"/>
       <point x="969.5523193343666" y="202.70499836223783"/>
       <point x="995.56" y="225.0"/>
-      <point x="1009.9346724890829" y="225.0" type="curve" smooth="yes"/>
-      <point x="1112.82" y="225.0" type="line"/>
-      <point x="1112.82" y="369.0" type="line"/>
-      <point x="1015.89903930131" y="369.0" type="line" smooth="yes"/>
-      <point x="1003.2545816593886" y="369.0"/>
+      <point x="1021.0" y="225.0" type="curve" smooth="yes"/>
+      <point x="1136.82" y="225.0" type="line"/>
+      <point x="1136.82" y="369.0" type="line"/>
+      <point x="1028.5521951219512" y="369.0" type="line" smooth="yes"/>
+      <point x="1007.56" y="369.0"/>
       <point x="985.0" y="391.56"/>
       <point x="985.0" y="410.8679765693464" type="curve" smooth="yes"/>
     </contour>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uni08AB.fina" format="2">
-  <advance width="1116"/>
+  <advance width="1140"/>
   <outline>
     <contour>
       <point x="985.0" y="574.7746229417462" type="line" smooth="yes"/>
@@ -33,11 +33,11 @@
       <point x="965.6645092220567" y="177.5638263026337" type="curve" smooth="yes"/>
       <point x="969.5523193343666" y="202.70499836223783"/>
       <point x="995.56" y="225.0"/>
-      <point x="1011.5689380530973" y="225.0" type="curve" smooth="yes"/>
-      <point x="1115.82" y="225.0" type="line"/>
-      <point x="1115.82" y="369.0" type="line"/>
-      <point x="1017.6124778761061" y="369.0" type="line" smooth="yes"/>
-      <point x="1004.8001734513274" y="369.0"/>
+      <point x="1021.0" y="225.0" type="curve" smooth="yes"/>
+      <point x="1139.82" y="225.0" type="line"/>
+      <point x="1139.82" y="369.0" type="line"/>
+      <point x="1029.9442574257425" y="369.0" type="line" smooth="yes"/>
+      <point x="1007.56" y="369.0"/>
       <point x="985.0" y="391.56"/>
       <point x="985.0" y="410.8679765693464" type="curve" smooth="yes"/>
     </contour>

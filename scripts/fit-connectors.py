@@ -1,33 +1,38 @@
 #!/usr/bin/env python3
-"""Shorten the flat connector plateaus the monospace cell stretched into Arabic.
+"""Fit the Arabic connector runs: shorten the cell's plateaus, extend to targets.
 
-This is the same operation as scripts/narrow-serifs.py, pointed at a different
-script — which is the point. In the Latin, the cell stretched serifs sideways
-until they hit the walls; in the Arabic it stretched the baseline connectors the
-same way, for the same reason. Both are fixed by pinning the part of the glyph
-that carries the letter's identity and compressing the flat approach either side
-of it. One idea, both scripts, so they stay siblings.
+This is shorten-connectors.py made symmetric, as planned in NEXT.md. The cell
+stretched the baseline connectors sideways exactly as it stretched the Latin
+serifs; compressing them back is half the fix. The other half is the inverse:
+letters whose written form IS partly a flat run — a beh final's bowl, a seen's
+kashida — need that run restored to its classical length, and restoring it is
+the same operation with the sign flipped. One code path, both directions, one
+set of guards, which is what keeps extension out of the fat-seen failure mode:
+a connector is a horizontal stroke at the join height, so its thickness is a
+vertical measurement and changing its length in x costs nothing.
 
-Why it matters here specifically: nastaʿlīq is one-sixth to one-third straight
-(*saṭḥ*), the rest curve (*dowr*). Measured on the seed, 504 Arabic glyphs carry
-a flat baseline run of exactly 1228 units — the entire cell — and the mean saṭḥ
-share is 43%, which is naskh proportion, not nastaʿlīq. A medial letter in this
-hand is a small tooth, not a plateau with a bump on it.
+The unit of the whole transform is the ISLAND. At any x, either the only ink
+is the join-height stroke itself (the pen is travelling, nothing is being
+written) or something departs from that signature (the pen is writing). The
+contiguous written stretches are the islands — teeth, bowls, hooks, dots — and
+every one of them is a shape, so every one of them moves rigidly. Only the
+bare runs between and around them may change length.
 
-It is also why الله needs a hand-drawn ligature to look right: composed from
-these forms it joins along stretched plateaus and reads as a fence rather than a
-word. Shorten the connectors and the composed form comes out much closer to
-correct on its own.
+The previous version held ONE island rigid (the longest) and scaled everything
+outside it as approach. On a single-bodied letter that is the same thing; on a
+multi-island letter it violated the shape rule: a seen final is tail + teeth,
+the tail won, and the teeth were scaled from ~290 units wide down to 24. This
+version exists because of that measurement.
 
-The body is found by vertical scanning — the x range over which the glyph rises
-meaningfully above the connector band. Everything outside it is approach, and
-gets compressed to the target. Join edges stay exactly where they are: the
-compression happens between the edge and the body, so the connector still lands
-on the advance edge and letters still meet.
+Length targets are per letter and live in sources/spacing.yaml
+(connectors.widths), in nuqta, from the classical figures recorded there. The
+delta needed to hit a target goes into a single elongation run — the bare run
+beside the letter's largest island, which is where a kashida classically
+lives — never spread across the teeth gaps.
 
 Usage:
-    python3 scripts/shorten-connectors.py --src sources/QalamBadi-Softened.ufo \
-                                          --out sources/QalamBadi-Connected.ufo
+    python3 scripts/fit-connectors.py --src sources/QalamBadi-Softened.ufo \
+                                      --out sources/QalamBadi-Connected.ufo
 """
 
 import argparse
@@ -39,44 +44,30 @@ import yaml
 
 from importlib.machinery import SourceFileLoader
 
+_here = os.path.dirname(os.path.abspath(__file__))
 _classify = SourceFileLoader(
-    "classify_widths", os.path.join(os.path.dirname(__file__), "classify-widths.py")
-).load_module()
-_narrow = SourceFileLoader(
-    "narrow_serifs", os.path.join(os.path.dirname(__file__), "narrow-serifs.py")
-).load_module()
-_joins = SourceFileLoader(
-    "joins", os.path.join(os.path.dirname(os.path.abspath(__file__)), "joins.py")
-).load_module()
+    "classify_widths", os.path.join(_here, "classify-widths.py")).load_module()
+_flatness = SourceFileLoader(
+    "classify_flatness", os.path.join(_here, "classify-flatness.py")).load_module()
+_joins = SourceFileLoader("joins", os.path.join(_here, "joins.py")).load_module()
 
 PolygonPen = _classify.PolygonPen
-make_remap = _narrow.make_remap
-apply_remap = _narrow.apply_remap
 
 ARABIC_BLOCKS = (
     (0x0600, 0x06FF), (0x0750, 0x077F), (0x08A0, 0x08FF),
     (0xFB50, 0xFDFF), (0xFE70, 0xFEFF),
 )
 
-
-JOIN_EDGE_TOLERANCE = 45
-CONNECTOR_BAND = (-40, 420)
-
-
-def join_sides(glyph, bounds):
-    """Which edges carry a joining connector, by the same test the fitter uses."""
-    left = right = False
-    width = glyph.width
-    lo, hi = CONNECTOR_BAND
-    for contour in glyph.contours:
-        for point in contour.points:
-            if not (lo <= point.y <= hi):
-                continue
-            if point.x <= JOIN_EDGE_TOLERANCE:
-                left = True
-            if point.x >= width - JOIN_EDGE_TOLERANCE:
-                right = True
-    return left, right
+# The skeleton families the width targets are written against. A target for
+# "beh" covers teh, theh, peh and every other letter that is beh's skeleton
+# with different dots, because the skeleton is what has the width.
+FAMILIES = {
+    "beh": _flatness.BEH_SKELETON,
+    "yeh": _flatness.YEH_SKELETON,
+    "noon": _flatness.NOON_SKELETON,
+    "dal": _flatness.DAL_SKELETON,
+    "seen": _flatness.SEEN_SKELETON,
+}
 
 
 def is_arabic(glyph):
@@ -86,134 +77,16 @@ def is_arabic(glyph):
     return any(glyph.name.endswith(s) for s in (".init", ".medi", ".fina", ".isol"))
 
 
-def vertical_extent(polygons, x):
-    """Highest and lowest ink at this x."""
-    crossings = []
-    for poly in polygons:
-        n = len(poly)
-        for i in range(n):
-            x0, y0 = poly[i]
-            x1, y1 = poly[(i + 1) % n]
-            if x0 == x1:
-                continue
-            if (x0 <= x < x1) or (x1 <= x < x0):
-                t = (x - x0) / (x1 - x0)
-                crossings.append(y0 + t * (y1 - y0))
-    if not crossings:
-        return None
-    return min(crossings), max(crossings)
+def body_islands(font, glyph, join_height, step=12):
+    """Every contiguous x range where the glyph is letter, not bare connector.
 
-
-def baseline_thickness(polygons, x, probe):
-    """Thickness of the ink span that contains the baseline stroke at this x.
-
-    This is the shape test that height thresholds could not do. A connector is
-    a stroke exactly one pen thick lying on the baseline; a tooth, a bowl or a
-    loop is thicker, because the stroke goes up and comes back or dives below.
-    Measuring the span that actually contains the baseline also ignores dots
-    and marks floating above or below, which is what defeated the earlier
-    approach — those inflate a naive yMax-yMin and make bare connector look
-    like letter.
-    """
-    crossings = []
-    for poly in polygons:
-        n = len(poly)
-        for i in range(n):
-            x0, y0 = poly[i]
-            x1, y1 = poly[(i + 1) % n]
-            if x0 == x1:
-                continue
-            if (x0 <= x < x1) or (x1 <= x < x0):
-                t = (x - x0) / (x1 - x0)
-                crossings.append(y0 + t * (y1 - y0))
-    if len(crossings) < 2:
-        return 0.0
-    crossings.sort()
-    # Walk the spans in pairs and return the one straddling the probe height.
-    for lo, hi in zip(crossings[0::2], crossings[1::2]):
-        if lo <= probe <= hi:
-            return hi - lo
-    return 0.0
-
-
-def body_interval_by_join_height(font, glyph, join_height, step=12):
-    """The x range that is the LETTER, i.e. not bare connector.
-
-    Uses the font's single join height directly. At any x, if the only ink is a
-    span matching that height exactly, the pen is simply travelling along the
-    join line and nothing is being written — that stretch is whitespace as far
-    as the letter is concerned, and is free to be shortened. Anywhere the ink
-    departs from the join signature, the pen is drawing the letter.
-
-    This replaces a thickness heuristic that guessed at the same thing and got
-    it wrong on round forms: meem's loop never exceeded the thickness threshold,
-    so the detector found a "body" a few units wide and would have compressed
-    the letter away.
+    Each island is padded by one sample step on both sides, so sampling
+    granularity can never leave a sliver of true letter ink inside a run that
+    is about to be scaled.
     """
     bottom, top = join_height
     tolerance = _joins.JOIN_TOLERANCE
 
-    pen_pen = PolygonPen(font)
-    glyph.draw(pen_pen)
-    if not pen_pen.polygons:
-        return None
-    bounds = glyph.getBounds(font)
-    if bounds is None:
-        return None
-
-    # Sample the whole glyph first, then decide where the letter starts and
-    # ends — a single sample cannot be trusted on its own.
-    samples = []
-    x = bounds.xMin + 1
-    while x < bounds.xMax:
-        spans = _joins.spans_at(pen_pen.polygons, x)
-        is_body = False
-        if spans:
-            only_join_line = all(
-                abs(span_bottom - bottom) <= tolerance and abs(span_top - top) <= tolerance
-                for span_bottom, span_top in spans
-            )
-            is_body = not only_join_line
-        samples.append((x, is_body))
-        x += step
-
-    if not any(is_body for _, is_body in samples):
-        return None
-
-    # Take the LONGEST CONTIGUOUS RUN of body samples, not min..max of all of
-    # them. Taking the extremes lets one stray sample define the whole letter,
-    # and there is reliably a stray one: at the very edge of the overlap the
-    # fillet rounds the connector's corner just enough to push its span outside
-    # the join tolerance. That single false positive at x=-34 made medial lam
-    # report a 768-unit body — 2.83 nuqta for what is a 141-unit vertical
-    # stroke — so nothing was compressed and Allah stayed long.
-    best_start = best_end = None
-    best_length = 0
-    run_start = None
-    for index, (x, is_body) in enumerate(samples):
-        if is_body and run_start is None:
-            run_start = index
-        elif not is_body and run_start is not None:
-            if index - run_start > best_length:
-                best_length, best_start, best_end = index - run_start, run_start, index - 1
-            run_start = None
-    if run_start is not None and len(samples) - run_start > best_length:
-        best_length, best_start, best_end = len(samples) - run_start, run_start, len(samples) - 1
-
-    if best_start is None:
-        return None
-    return samples[best_start][0], samples[best_end][0]
-
-
-def body_interval(font, glyph, rise, step=16):
-    """The x range where the letter rises above its connector.
-
-    Superseded by body_interval_by_shape; kept because the flatness report
-    still refers to the height-based reading it produced.
-
-    Returns (left, right), or None if the glyph is connector all the way across
-    (which would mean there is no letter to pin).
-    """
     pen = PolygonPen(font)
     glyph.draw(pen)
     if not pen.polygons:
@@ -222,36 +95,113 @@ def body_interval(font, glyph, rise, step=16):
     if bounds is None:
         return None
 
-    xs = []
+    islands = []
+    run_start = None
     x = bounds.xMin + 1
     while x < bounds.xMax:
-        extent = vertical_extent(pen.polygons, x)
-        if extent is not None:
-            low, high = extent
-            # Rising above the connector band, or dipping below it — a descending
-            # bowl is as much "the letter" as an ascending tooth is.
-            if high >= rise or low <= -rise * 0.55:
-                xs.append(x)
+        spans = _joins.spans_at(pen.polygons, x)
+        is_body = False
+        if spans:
+            only_join_line = all(
+                abs(span_bottom - bottom) <= tolerance and abs(span_top - top) <= tolerance
+                for span_bottom, span_top in spans)
+            is_body = not only_join_line
+        if is_body and run_start is None:
+            run_start = x
+        elif not is_body and run_start is not None:
+            islands.append((run_start - step, x + step))
+            run_start = None
         x += step
+    if run_start is not None:
+        islands.append((run_start - step, x + step))
 
-    if not xs:
+    # Padding can make neighbours touch; merge them.
+    merged = []
+    for start, end in islands:
+        if merged and start <= merged[-1][1]:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], end))
+        else:
+            merged.append((start, end))
+
+    # Drop sliver islands. Everything in this face is drawn with a 141-unit
+    # pen, so no real feature is narrower than most of a pen — but the fillet
+    # rounding the connector's corner at the join overlap reliably pushes one
+    # or two samples outside the join tolerance, minting a ~36-unit phantom
+    # island at the edge. Under the old longest-run rule that phantom merely
+    # lost the vote; under the multi-island rule it would turn the entire real
+    # approach into a held inner run, so it must go.
+    merged = [(start, end) for start, end in merged if end - start >= 100]
+    return merged or None
+
+
+def body_interval_by_join_height(font, glyph, join_height, step=12):
+    """The longest island — the reading the two-sided report classifies with."""
+    islands = body_islands(font, glyph, join_height, step)
+    if not islands:
         return None
-    return min(xs), max(xs)
+    return max(islands, key=lambda i: i[1] - i[0])
+
+
+def movable_runs(glyph, islands, left_join, right_join):
+    """The bare connector runs that may change length, left to right.
+
+    Each is [start, end, kind]: 'outer' runs lead from a joining edge to the
+    outermost island and are subject to the approach cap; 'inner' runs lie
+    between islands and are held unless one is the elongation run. A bare
+    stretch on a NON-joining side is not a run at all — it is letter (a
+    final's tail exit) and stays rigid, which is the lesson the
+    negative-advance seen taught.
+    """
+    runs = []
+    advance = float(glyph.width)
+    if left_join and islands[0][0] > 0:
+        runs.append([0.0, islands[0][0], "outer"])
+    for (a_start, a_end), (b_start, b_end) in zip(islands, islands[1:]):
+        if b_start > a_end:
+            runs.append([a_end, b_start, "inner"])
+    if right_join and advance > islands[-1][1]:
+        runs.append([islands[-1][1], advance, "outer"])
+    return runs
+
+
+def elongation_run(runs, islands):
+    """Where kashida length is inserted or removed: the run beside the largest
+    island, preferring the inner side. In a beh final that is the bowl run
+    between hook and tooth; in a seen final the run between tail and teeth; in
+    an initial form with one island it degrades to the joining approach."""
+    largest = max(islands, key=lambda i: i[1] - i[0])
+    adjacent = [run for run in runs
+                if abs(run[0] - largest[1]) < 1 or abs(run[1] - largest[0]) < 1]
+    pool = adjacent or runs
+    inner = [run for run in pool if run[2] == "inner"]
+    pool = inner or pool
+    return max(pool, key=lambda run: run[1] - run[0])
+
+
+def width_targets(settings):
+    """(base codepoint, form) -> target ink width in nuqta."""
+    table = {}
+    for key, value in (settings.get("widths") or {}).items():
+        family, _, form = key.partition(".")
+        if family not in FAMILIES:
+            raise SystemExit(f"connectors.widths: unknown family {family!r} in {key!r}")
+        if form not in ("init", "medi", "fina", "isol"):
+            raise SystemExit(f"connectors.widths: unknown form in {key!r}")
+        for codepoint in FAMILIES[family]:
+            table[(codepoint, form)] = float(value)
+    return table
 
 
 def apply_remap_preserving_dots(glyph, remap, nuqta):
     """Apply the x remap, but move dots rigidly instead of squashing them.
 
-    The remap compresses the approach either side of the letter. Any contour
-    living inside that region gets compressed with it — which is correct for the
-    connector stroke and very wrong for a nuqta. A dot remapped point by point
-    comes out as a horizontally squashed ellipse, and once it is thin enough the
-    overlap removal in the build simply loses it. That is how the dot vanished
-    from ba.
-
-    A dot is a small closed contour that is not part of the writing stroke, so
-    it is detected by size and moved as a rigid body: its centre is remapped and
-    the contour follows, keeping its shape and its position under the letter.
+    The island detection already keeps dots rigid in principle — a dot departs
+    from the join signature, so it is an island — but its edges are only known
+    to one sample step. This is the belt to those braces: any contour small
+    enough to be a dot has its centre remapped and its shape carried along
+    unchanged. A dot remapped point by point comes out as a squashed ellipse,
+    and once it is thin enough the overlap removal in the build simply loses
+    it. That is how the dot vanished from ba.
     """
     dot_limit = nuqta * 1.35
 
@@ -264,7 +214,6 @@ def apply_remap_preserving_dots(glyph, remap, nuqta):
         height = max(ys) - min(ys)
 
         if width <= dot_limit and height <= dot_limit:
-            # Rigid: remap the centre, translate every point by the same amount.
             centre = (min(xs) + max(xs)) / 2
             shift = remap(centre) - centre
             for point in contour.points:
@@ -278,6 +227,28 @@ def apply_remap_preserving_dots(glyph, remap, nuqta):
         component.transformation = (xx, xy, yx, yy, remap(dx), dy)
     for anchor in glyph.anchors:
         anchor.x = remap(anchor.x)
+
+
+def make_piecewise_remap(runs, new_lengths):
+    """x remap that rescales each run to its new length and translates
+    everything else — islands, overlaps beyond the edges — rigidly."""
+    pieces = []
+    shift = 0.0
+    for (start, end, _), new_length in zip(runs, new_lengths):
+        scale = new_length / (end - start) if end > start else 1.0
+        pieces.append((start, end, shift, scale))
+        shift += new_length - (end - start)
+    total_shift = shift
+
+    def remap(x):
+        for start, end, shift_before, scale in pieces:
+            if x <= start:
+                return x + shift_before
+            if x < end:
+                return start + shift_before + (x - start) * scale
+        return x + total_shift
+
+    return remap
 
 
 def main():
@@ -295,10 +266,8 @@ def main():
     nuqta = config["module"]["nuqta"]
     settings = config.get("connectors") or {}
     approach = settings.get("approach", 0.42) * nuqta
-    rise = settings.get("body_rise", 1.35) * nuqta
-    pen = config["module"]["pen"]
-    thickness_factor = settings.get("thickness_factor", 1.55)
     skip = set(settings.get("keep_long") or [])
+    targets = width_targets(settings)
 
     font = ufoLib2.Font.open(args.src)
 
@@ -309,9 +278,11 @@ def main():
     print(f"join height: y={join_height[0]:.0f}..{join_height[1]:.0f}")
 
     shortened = 0
+    extended = 0
     skipped_small = 0
     skipped_extreme = 0
     total_removed = 0.0
+    total_added = 0.0
     for glyph in font:
         if not is_arabic(glyph) or not glyph.contours or glyph.name in skip:
             continue
@@ -320,133 +291,98 @@ def main():
         if bounds is None:
             continue
 
-        body = body_interval_by_join_height(font, glyph, join_height)
-        if body is None:
+        islands = body_islands(font, glyph, join_height)
+        if not islands:
             continue
 
-        # Guard against a failed detection destroying a letter: a body only a
-        # few units wide is not a letter, it is a detection failure.
-        #
-        # The threshold was 0.75 nuqta when the body was found by a thickness
-        # heuristic that regularly misfired. Now that it is found from the
-        # font's own join height and the longest contiguous run, it is reliable
-        # enough to trust smaller bodies — initial lam measures 0.66 nuqta and
-        # is perfectly real.
-        body_width = body[1] - body[0]
-        if body_width < nuqta * 0.45:
+        # A letter has to actually be there to pin. The widest island carries
+        # the identity; if even that is a few units wide, detection failed.
+        widest = max(end - start for start, end in islands)
+        if widest < nuqta * 0.45:
             skipped_small += 1
             continue
 
-        # Only a side that actually carries a connector may be compressed.
-        #
-        # An isolated seen has ink running far to the LEFT of its origin, but
-        # that is its tail, not an approach — it is the letter's most
-        # characteristic feature. Treating it as a plateau compressed the tail
-        # away and dragged the glyph so far left that the advance went negative,
-        # which fontmake rejects outright ("width should not be negative").
-        # A tail is a thing to keep; only the flat run leading into a join is
-        # surplus.
         pen_poly = PolygonPen(font)
         glyph.draw(pen_poly)
         left_join, right_join = _joins.join_sides(glyph, pen_poly.polygons, join_height)
 
-        # Measured from the JOIN POINTS, not from the ink bounds.
-        #
-        # The join happens at the origin and at the advance edge. The ink either
-        # side of those — the 35-unit overlap the seed draws so letters share
-        # ink rather than abut — is not approach and must not be compressed or
-        # even moved relative to its join point. Measuring from bounds.xMin
-        # instead dragged that overlap inward, which slid the join point off the
-        # origin and unlinked every connector.
-        origin = 0.0
-        advance_edge = float(glyph.width)
-        left_approach = max(0.0, body[0] - origin) if left_join else 0.0
-        right_approach = max(0.0, advance_edge - body[1]) if right_join else 0.0
-
-        keep_left = min(left_approach, approach)
-        keep_right = min(right_approach, approach)
-        removed_left = max(0.0, left_approach - keep_left)
-        removed_right = max(0.0, right_approach - keep_right)
-        if removed_left + removed_right < 2:
+        base, form = _flatness.base_and_form(glyph)
+        target = targets.get((base, form)) if base is not None else None
+        # A glyph with no join and no target has nothing to fit. With a
+        # target it may still have inner runs — an isolated seen's kashida is
+        # as real as a joined one's.
+        if not (left_join or right_join) and target is None:
             continue
 
-        # Second guard: do not take almost the whole glyph.
-        #
-        # This was 50% while the body detector was unreliable, and it then
-        # blocked precisely the glyphs that most needed shortening: in a medial
-        # form stretched to fill a 1228-unit cell the plateau genuinely IS more
-        # than half the glyph. Medial lam, beh and seen were all being skipped
-        # by it and stayed at exactly 1228, which is what kept Allah long.
-        #
-        # The body detector is now anchored on the font's measured join height
-        # and takes the longest contiguous run, so it can be trusted much
-        # further. This remains only as a backstop against a total misfire.
-        if (removed_left + removed_right) > (bounds.xMax - bounds.xMin) * 0.82:
+        runs = movable_runs(glyph, islands, left_join, right_join)
+        if not runs:
+            continue
+
+        # Default fit: outer approaches down to the cap, inner runs untouched.
+        new_lengths = []
+        for start, end, kind in runs:
+            length = end - start
+            new_lengths.append(min(length, approach) if kind == "outer" else length)
+
+        # Target fit: whatever the capped geometry still misses of the
+        # classical width goes into the elongation run, in either direction.
+        if target is not None:
+            capped_ink = (bounds.xMax - bounds.xMin) + sum(
+                new - (end - start) for (start, end, _), new in zip(runs, new_lengths))
+            delta = target * nuqta - capped_ink
+            run = elongation_run(runs, islands)
+            index = runs.index(run)
+            wanted = new_lengths[index] + delta
+            # An elongation run may grow a long way — that is the kashida —
+            # but never vanish, and never explode past the classical ceiling.
+            new_lengths[index] = max(30.0, min(wanted, 12 * nuqta))
+
+        delta_total = sum(new - (end - start)
+                          for (start, end, _), new in zip(runs, new_lengths))
+        if abs(delta_total) < 2:
+            continue
+
+        # An advance must stay positive and meaningful.
+        new_width = round(glyph.width + delta_total)
+        if new_width < nuqta:
             skipped_extreme += 1
             continue
-
-        # Anchored at the LEFT edge, not centred: the left connector and the
-        # overlap it carries past the origin must not move at all, or every
-        # join reopens the hairline seam we just closed. The body slides left
-        # by whatever the left approach gave up, the right edge slides left by
-        # the total, and the advance follows it so the right connector stays
-        # exactly on the edge.
-        body_left, body_right = body
-        left_scale = ((left_approach - removed_left) / left_approach) if left_approach > 1 else 1.0
-        right_scale = ((right_approach - removed_right) / right_approach) if right_approach > 1 else 1.0
-
-        def remap(x, body_left=body_left, body_right=body_right,
-                  left_scale=left_scale, right_scale=right_scale,
-                  removed_left=removed_left, removed_right=removed_right,
-                  advance_edge=advance_edge):
-            # Beyond the origin: the left overlap, carried rigidly. It keeps its
-            # exact offset from the join point, which is what makes letters
-            # share ink instead of merely touching.
-            if x <= 0.0:
-                return x
-            # Approach into the left join: compressed from the origin outwards.
-            if x < body_left:
-                return x * left_scale
-            # The letter itself: translated, never scaled.
-            if x <= body_right:
-                return x - removed_left
-            # Approach out to the right join.
-            if x <= advance_edge:
-                return (body_right - removed_left) + (x - body_right) * right_scale
-            # Beyond the advance edge: the right overlap, carried rigidly so it
-            # keeps its offset from the new advance edge.
-            return x - removed_left - removed_right
-
-        before = bounds.xMax - bounds.xMin
-        # Last line of defence: an advance must stay positive and meaningful.
-        new_width = round(glyph.width - removed_left - removed_right)
-        if new_width < nuqta:
+        # And a pure shortening must not take almost the whole glyph —
+        # backstop against a total detection misfire.
+        if -delta_total > (bounds.xMax - bounds.xMin) * 0.82:
             skipped_extreme += 1
             continue
 
         if not args.dry_run:
-            apply_remap(glyph, remap)
-            # The advance must shrink with the geometry, otherwise the letter
-            # gets narrower but still occupies its old monospace slot — which
-            # is the whole complaint this transform exists to answer.
+            remap = make_piecewise_remap(runs, new_lengths)
+            apply_remap_preserving_dots(glyph, remap, nuqta)
+            # The advance follows the geometry, otherwise the letter changes
+            # width but still occupies its old slot.
             glyph.width = new_width
-        shortened += 1
-        total_removed += removed_left + removed_right
-        if args.verbose and (removed_left + removed_right) > nuqta * 0.5:
-            print(f"  {glyph.name:20} ink {before:6.0f} -> {before - removed_left - removed_right:6.0f}"
-                  f"  adv -{removed_left + removed_right:5.0f}"
-                  f"  (body {body[0]:.0f}..{body[1]:.0f})")
+
+        if delta_total < 0:
+            shortened += 1
+            total_removed += -delta_total
+        else:
+            extended += 1
+            total_added += delta_total
+        if args.verbose and abs(delta_total) > nuqta * 0.5:
+            sign = "+" if delta_total > 0 else "-"
+            print(f"  {glyph.name:20} adv {new_width - delta_total:5.0f} -> {new_width:5.0f}"
+                  f"  ({sign}{abs(delta_total):4.0f})  islands {len(islands)}"
+                  + (f"  target {target:.1f}" if target is not None else ""))
 
     if not args.dry_run:
         if os.path.abspath(args.out) != os.path.abspath(args.src) and os.path.exists(args.out):
             shutil.rmtree(args.out)
         font.save(args.out, overwrite=True)
 
-    mean = (total_removed / shortened) if shortened else 0
-    print(f"skipped {skipped_small} (body too small to trust), "
-          f"{skipped_extreme} (would remove over half the glyph)")
-    print(f"shortened {shortened} Arabic glyphs, "
-          f"mean {mean:.0f} units ({mean / nuqta:.2f} nuqta) of plateau removed"
+    print(f"skipped {skipped_small} (widest island too small to trust), "
+          f"{skipped_extreme} (fit would be extreme)")
+    mean_removed = (total_removed / shortened) if shortened else 0
+    mean_added = (total_added / extended) if extended else 0
+    print(f"shortened {shortened} Arabic glyphs (mean {mean_removed:.0f} units), "
+          f"extended {extended} (mean {mean_added:.0f} units)"
           + ("" if args.dry_run else f" -> {args.out}"))
 
 

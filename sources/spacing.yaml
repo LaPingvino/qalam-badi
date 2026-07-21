@@ -178,35 +178,43 @@ verticals:
   body_top: 1.45   # nuqta. Below this nothing moves: teeth, bowls, connectors
                    # and every horizontal stroke keep their exact geometry.
 
-# Arabic connector plateaus (scripts/shorten-connectors.py). NOT YET IN THE
-# BUILD — the detector works but the threshold is not honestly tuned, see below.
+# Arabic connector runs (scripts/fit-connectors.py).
 #
-# The idea: the cell stretched the baseline connectors sideways exactly as it
-# stretched the Latin serifs, so the same transform should apply — pin the body
-# of the letter, compress the flat approach either side of it.
+# The cell stretched the baseline connectors sideways exactly as it stretched
+# the Latin serifs, and the fix is the same family of transform: hold every
+# part of the glyph that is LETTER rigid, and change the length only of the
+# bare connector runs between and around those parts. "Letter" is decided by
+# the font's own join signature: at any x where the only ink is the join-height
+# stroke, the pen is travelling, not writing. Each written stretch — tooth,
+# bowl, hook, dot — is an island, and islands only ever translate. The first
+# version of this transform held one island rigid and scaled the rest; on a
+# seen final that scaled the TEETH from ~290 units wide to 24, which is what
+# finally forced the multi-island model.
 #
-# What measurement actually showed, which is not what we first claimed:
-# scripts/classify-flatness.py reports 504 Arabic glyphs with a flat baseline
-# run of the full 1228-unit cell, and a mean sath (straight) share of 43%
-# against classical nastaliq's 17-33%. But most of that 1228-unit run is the
-# BOTTOM EDGE of the connector stroke, which legitimately spans the full width
-# of any joined letter in any hand. It is not by itself evidence of stretching.
-#
-# The genuine signal is narrower: x ranges where the glyph is connector and
-# nothing else. Finding those needs a threshold above the connector's own
-# thickness (141 units = 0.52 nuqta) but below the shortest tooth, and in this
-# seed those two bounds are close enough together that the window is tight —
-# 1.00 catches 25 glyphs, 1.35 catches 50, and going lower catches fewer
-# because the connector itself starts counting as the letter.
-#
-# Set too high, this transform compresses teeth instead of plateaus and destroys
-# letters, so it stays out of `make proportional` until the body detector
-# distinguishes tooth from connector by shape rather than by height alone.
+# The transform is symmetric. Without a width target a glyph only has its
+# outer approaches compressed to `approach`. With a target (below), whatever
+# the capped geometry still misses of the classical width is inserted into —
+# or removed from — a single elongation run, the bare run beside the letter's
+# largest island, which is where a kashida classically lives. It is never
+# spread across the teeth gaps.
 connectors:
-  thickness_factor: 1.55  # ink thicker than this many pens is letter, not connector
-  approach:  0.42   # nuqta of flat lead-in kept either side of the letter body
-  body_rise: 1.35   # nuqta above baseline at which ink counts as "the letter"
+  approach:  0.42   # nuqta of flat lead-in kept between a join and the letter
   keep_long: []     # glyphs whose plateau is a deliberate kashida, not a stretch
+
+  # Classical ink widths, in nuqta, per skeleton family and joining form.
+  # A family key covers every letter sharing that skeleton (teh and theh are
+  # beh with dots; sheen, sad and dad ride on seen). Only letters whose
+  # written form INCLUDES a flat run belong here — this is the beh short form
+  # at four to five dots and the seen carried on its kashida at seven to
+  # eleven; we enter near the low end of both ranges because this is a text
+  # face, not a display swash. Teeth, dal and the bowls have no flat run to
+  # fit and are deliberately absent: their width problems, where they exist,
+  # are body drawing problems, and this transform must not touch bodies.
+  widths:
+    beh.fina:  4.5
+    beh.isol:  4.5
+    seen.fina: 7.5
+    seen.isol: 7.5
 
 # Tails (scripts/reshape-tails.py). The seed's seen/sheen/sad tail plunges 555
 # units below the writing line and travels barely further than it falls — a
