@@ -216,6 +216,18 @@ connectors:
     seen.fina: 7.5
     seen.isol: 7.5
 
+# Dots below the letter (scripts/tuck-dots.py). The seed parks below-dots low
+# enough to clear the deepest tail that could occur anywhere in the monospace
+# cell, leaving ~250 units of dead air under the letter — and pushing final
+# yeh's dots to y=-1024, 190 units past the declared -838 descender, where
+# any renderer that clips to line metrics cuts them off. (Reported as "ya
+# gets cut off"; the body only reaches -481, it was always the dots.) A hand
+# tucks the dots in under the letter, so the fix and the style agree: each
+# below-dot group rises as one rigid shape until it clears the descender,
+# stopping min_gap short of the ink above it.
+dots:
+  min_gap: 0.09   # nuqta of air kept between the letter and a tucked dot group
+
 # Tails (scripts/reshape-tails.py). The seed's seen/sheen/sad tail plunges 555
 # units below the writing line and travels barely further than it falls — a
 # naskh gesture, and a cell-bound one, since a deep narrow hook was the only

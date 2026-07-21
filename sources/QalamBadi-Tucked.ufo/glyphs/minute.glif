@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="minute" format="2">
+  <advance width="1228"/>
+  <unicode hex="2032"/>
+  <outline>
+    <contour>
+      <point x="708.96" y="1187.0" type="line" smooth="yes"/>
+      <point x="689.3712" y="1187.0"/>
+      <point x="669.5828282822431" y="1169.79779460863"/>
+      <point x="666.857081451581" y="1150.3995629970852" type="curve" smooth="yes"/>
+      <point x="617.142918548419" y="796.6004370029148" type="line" smooth="yes"/>
+      <point x="614.4171717177569" y="777.20220539137"/>
+      <point x="629.3712" y="760.0"/>
+      <point x="648.96" y="760.0" type="curve" smooth="yes"/>
+      <point x="663.04" y="760.0" type="line" smooth="yes"/>
+      <point x="682.6288" y="760.0"/>
+      <point x="702.4171717177569" y="777.20220539137"/>
+      <point x="705.142918548419" y="796.6004370029148" type="curve" smooth="yes"/>
+      <point x="754.857081451581" y="1150.3995629970852" type="line" smooth="yes"/>
+      <point x="757.5828282822431" y="1169.79779460863"/>
+      <point x="742.6288" y="1187.0"/>
+      <point x="723.04" y="1187.0" type="curve" smooth="yes"/>
+    </contour>
+  </outline>
+</glyph>

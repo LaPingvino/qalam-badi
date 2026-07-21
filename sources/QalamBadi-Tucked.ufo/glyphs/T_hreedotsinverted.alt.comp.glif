@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="Threedotsinverted.alt.comp" format="2">
+  <advance width="1228"/>
+  <outline>
+    <contour>
+      <point x="553.0" y="-580.0" type="curve" smooth="yes"/>
+      <point x="553.0" y="-621.0"/>
+      <point x="652.0" y="-723.0"/>
+      <point x="689.0" y="-723.0" type="curve" smooth="yes"/>
+      <point x="721.0" y="-723.0"/>
+      <point x="824.0" y="-625.0"/>
+      <point x="824.0" y="-580.0" type="curve" smooth="yes"/>
+      <point x="824.0" y="-541.0"/>
+      <point x="723.0" y="-434.0"/>
+      <point x="689.0" y="-434.0" type="curve" smooth="yes"/>
+      <point x="654.0" y="-434.0"/>
+      <point x="553.0" y="-537.0"/>
+    </contour>
+    <contour>
+      <point x="249.0" y="-414.0" type="curve" smooth="yes"/>
+      <point x="249.0" y="-455.0"/>
+      <point x="348.0" y="-557.0"/>
+      <point x="385.0" y="-557.0" type="curve" smooth="yes"/>
+      <point x="417.0" y="-557.0"/>
+      <point x="520.0" y="-459.0"/>
+      <point x="520.0" y="-414.0" type="curve" smooth="yes"/>
+      <point x="520.0" y="-375.0"/>
+      <point x="419.0" y="-268.0"/>
+      <point x="385.0" y="-268.0" type="curve" smooth="yes"/>
+      <point x="350.0" y="-268.0"/>
+      <point x="249.0" y="-371.0"/>
+    </contour>
+    <contour>
+      <point x="299.0" y="-729.0" type="curve" smooth="yes"/>
+      <point x="299.0" y="-770.0"/>
+      <point x="398.0" y="-872.0"/>
+      <point x="435.0" y="-872.0" type="curve" smooth="yes"/>
+      <point x="467.0" y="-872.0"/>
+      <point x="570.0" y="-774.0"/>
+      <point x="570.0" y="-729.0" type="curve" smooth="yes"/>
+      <point x="570.0" y="-690.0"/>
+      <point x="469.0" y="-583.0"/>
+      <point x="435.0" y="-583.0" type="curve" smooth="yes"/>
+      <point x="400.0" y="-583.0"/>
+      <point x="299.0" y="-686.0"/>
+    </contour>
+  </outline>
+</glyph>

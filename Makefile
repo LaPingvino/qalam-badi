@@ -84,11 +84,16 @@ proportional:
 	# If the teeth should be wider than the seed draws them, the scale to change
 	# is the one in the SEED's own history, not a second pass here.
 	. venv/bin/activate; python3 scripts/soften-corners.py --src sources/QalamBadi-Narrowed.ufo --out sources/QalamBadi-Softened.ufo
+	# Tuck below-base dots inside the descender. The seed parks them low
+	# enough to clear the deepest tail the CELL could hold — final yeh's dots
+	# at y=-1024 against a -838 descender — so line-metric renderers clip
+	# them. That was the "ya gets cut off" report.
+	. venv/bin/activate; python3 scripts/tuck-dots.py --src sources/QalamBadi-Softened.ufo --out sources/QalamBadi-Tucked.ufo
 	# Fit the connector runs: compress the cell's stretched approaches so a
 	# joined letter's advance follows its actual body, and extend the letters
 	# whose flat run is part of the written form (beh finals, seen kashidas)
 	# to the classical widths recorded in spacing.yaml (connectors.widths).
-	. venv/bin/activate; python3 scripts/fit-connectors.py --src sources/QalamBadi-Softened.ufo --out sources/QalamBadi-Connected.ufo
+	. venv/bin/activate; python3 scripts/fit-connectors.py --src sources/QalamBadi-Tucked.ufo --out sources/QalamBadi-Connected.ufo
 	# reshape-tails is DISABLED — it breaks monolinearity. See the script header
 	# and sources/spacing.yaml. It scaled the tail region anisotropically (y x
 	# 0.85, x x 2.6), which fattens every stroke that is not horizontal by up to
@@ -200,8 +205,11 @@ venv-test/touchfile: requirements-test.txt
 test: venv-test build.stamp
 	TOCHECK=$$(find fonts/variable -type f 2>/dev/null); if [ -z "$$TOCHECK" ]; then TOCHECK=$$(find fonts/ttf -type f 2>/dev/null); fi ; . venv-test/bin/activate; mkdir -p out/ out/fontbakery; fontbakery check-googlefonts -j -l WARN --full-lists --succinct --badges out/badges --html out/fontbakery/fontbakery-report.html --ghmarkdown out/fontbakery/fontbakery-report.md $$TOCHECK  || echo '::warning file=sources/config.yaml,title=Fontbakery failures::The fontbakery QA check reported errors in your font. Please check the generated report.'
 
+# --user-wordlist feeds the script-pitfall words (dot minimal pairs, harakat
+# stacks, deep tails, confusables) into the machine proofs, so the generic
+# sheets exercise the same failure modes the pitfalls page documents.
 proof: venv build.stamp
-	TOCHECK=$$(find fonts/variable -type f 2>/dev/null); if [ -z "$$TOCHECK" ]; then TOCHECK=$$(find fonts/ttf -type f 2>/dev/null); fi ; . venv/bin/activate; mkdir -p out/ out/proof; diffenator2 proof $$TOCHECK -o out/proof
+	TOCHECK=$$(find fonts/variable -type f 2>/dev/null); if [ -z "$$TOCHECK" ]; then TOCHECK=$$(find fonts/ttf -type f 2>/dev/null); fi ; . venv/bin/activate; mkdir -p out/ out/proof; diffenator2 proof $$TOCHECK -o out/proof --user-wordlist documentation/pitfall-words.txt
 
 images: venv $(DRAWBOT_OUTPUT)
 
