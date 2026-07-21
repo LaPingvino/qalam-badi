@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="uni08AD" format="2">
+  <advance width="1228"/>
+  <unicode hex="08AD"/>
+  <outline>
+    <contour>
+      <point x="539.0" y="481.64584659379176" type="curve" smooth="yes"/>
+      <point x="481.0" y="481.64584659379176"/>
+      <point x="467.0" y="466.7452423781191"/>
+      <point x="467.0" y="419.0633088879664" type="curve" smooth="yes"/>
+      <point x="467.0" y="-172.0" type="line" smooth="yes"/>
+      <point x="467.0" y="-236.0"/>
+      <point x="479.0" y="-256.0"/>
+      <point x="537.0" y="-256.0" type="curve" smooth="yes"/>
+      <point x="594.0" y="-256.0"/>
+      <point x="608.0" y="-236.0"/>
+      <point x="608.0" y="-172.0" type="curve" smooth="yes"/>
+      <point x="608.0" y="419.0633088879664" type="line" smooth="yes"/>
+      <point x="608.0" y="466.7452423781191"/>
+      <point x="596.0" y="481.64584659379176"/>
+    </contour>
+  </outline>
+</glyph>

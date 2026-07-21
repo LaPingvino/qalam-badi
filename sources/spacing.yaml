@@ -373,6 +373,11 @@ tails:
   extend:   2.6
   min_drop: 0.85   # nuqta below the writing line before it counts as a tail
 
+  # Meem eye-neck sweep (scripts/curve-meem-neck.py). Eats the flat shoulder
+  # between the eye and the tail and turns it into a curve — the initial-form
+  # elbow rotated 90°. Radius in nuqta, clamped to the shelf actually present.
+  meem_neck: 0.55
+
   # Meem tail bow (scripts/curve-meem-tail.py). The seed hangs the final/
   # isolated meem on a dead-straight 754-unit rod; a reed pen curves it. This
   # bows the lower rod into a hook. Negative = leftward, the natural direction

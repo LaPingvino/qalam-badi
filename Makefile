@@ -119,7 +119,10 @@ proportional:
 	. venv/bin/activate; python3 scripts/curve-initials.py --src sources/QalamBadi-Short.ufo --out sources/QalamBadi-Curved.ufo
 	# Bow the final/isolated meem tail so it hooks instead of dropping like a
 	# plumb line (spacing.yaml tails.meem_bow).
-	. venv/bin/activate; python3 scripts/curve-meem-tail.py --src sources/QalamBadi-Curved.ufo --out sources/QalamBadi-Meem.ufo
+	# Sweep the meem eye-neck into its tail, eating the flat monospace shoulder,
+	# BEFORE bowing the tail (so the bow anchors on the already-swept rod).
+	. venv/bin/activate; python3 scripts/curve-meem-neck.py --src sources/QalamBadi-Curved.ufo --out sources/QalamBadi-MeemNeck.ufo
+	. venv/bin/activate; python3 scripts/curve-meem-tail.py --src sources/QalamBadi-MeemNeck.ufo --out sources/QalamBadi-Meem.ufo
 	# ayn and hamza sat 257 units below the apostrophe they stand beside in
 	# 'Abdu'l-Baha and nastaliq. Position only — see the script for why not size.
 	. venv/bin/activate; python3 scripts/normalize-modifiers.py --src sources/QalamBadi-Meem.ufo --out sources/QalamBadi-Mods.ufo
