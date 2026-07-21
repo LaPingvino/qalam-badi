@@ -93,7 +93,10 @@ proportional:
 	# uniform in width as it was in the cell, which reads blocky next to the
 	# now-proportional Latin.
 	. venv/bin/activate; python3 scripts/shorten-connectors.py --src sources/QalamBadi-Softened.ufo --out sources/QalamBadi-Connected.ufo
-	. venv/bin/activate; python3 scripts/shorten-ascenders.py --src sources/QalamBadi-Connected.ufo --out sources/QalamBadi-Short.ufo
+	# Deep naskh dip -> long shallow undertail, per the measured proportions of
+	# his finals (~1.5-1.7 alef heights wide against ~0.9 deep).
+	. venv/bin/activate; python3 scripts/reshape-tails.py --src sources/QalamBadi-Connected.ufo --out sources/QalamBadi-Tailed.ufo
+	. venv/bin/activate; python3 scripts/shorten-ascenders.py --src sources/QalamBadi-Tailed.ufo --out sources/QalamBadi-Short.ufo
 	. venv/bin/activate; python3 scripts/make-proportional.py --src sources/QalamBadi-Short.ufo --out sources/QalamBadi-Regular.ufo
 
 # Build the specimen: a single self-contained page with the webfonts inlined

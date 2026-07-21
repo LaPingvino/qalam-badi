@@ -207,3 +207,17 @@ connectors:
   approach:  0.42   # nuqta of flat lead-in kept either side of the letter body
   body_rise: 1.35   # nuqta above baseline at which ink counts as "the letter"
   keep_long: []     # glyphs whose plateau is a deliberate kashida, not a stretch
+
+# Tails (scripts/reshape-tails.py). The seed's seen/sheen/sad tail plunges 555
+# units below the writing line and travels barely further than it falls — a
+# naskh gesture, and a cell-bound one, since a deep narrow hook was the only
+# tail that fitted a 1228-unit box.
+#
+# Mishkin-Qalam's finals do the opposite: measured on his Greatest Name, a final
+# runs ~1.5-1.7 alef heights wide against only ~0.9 deep, and the tail returns
+# rightward UNDER the preceding letters. Both factors ramp with depth so the
+# tail leaves the bowl at its original angle and only diverges as it descends.
+tails:
+  depth:    0.85
+  extend:   2.6
+  min_drop: 0.85   # nuqta below the writing line before it counts as a tail

@@ -354,21 +354,29 @@ class Fitter:
         left_join, right_join = joins
         original_width = glyph.width
 
-        if left_join:
-            # The left connector, and its overlap, stay exactly where they are.
+        if left_join or right_join:
+            # A joining glyph is never repositioned, on either side.
+            #
+            # Finals used to be shifted so their left sidebearing hit a
+            # configured negative value, which was how the sweep was faked
+            # before the tails were real geometry. Now that reshape-tails draws
+            # an actual undertail reaching back under the preceding letters,
+            # forcing that sidebearing DRAGS THE WHOLE GLYPH RIGHT to meet it —
+            # final alef maksura moved 838 units and its advance grew from 1138
+            # to 1976, so instead of tucking under its neighbours it shoved them
+            # apart and read as cut off at the end of a word.
+            #
+            # The overhang is a consequence of the drawing, not a target to snap
+            # to. Let the tail hang wherever it was drawn.
             shift = 0.0
-        elif right_join:
-            # The right connector must land on the new advance edge, so the
-            # glyph moves and the advance follows it by the same amount.
-            shift = lsb - bounds[0]
         else:
             shift = lsb - bounds[0]
 
         if right_join:
-            # Whatever the right connector's offset from the advance was, keep
-            # it: the advance moves with the glyph.
-            glyph.width = round(original_width + shift)
+            # The right connector defines the advance edge; it must not move.
+            glyph.width = original_width
         elif left_join:
+            # Left connector pinned at the origin, right side free to be fitted.
             glyph.width = round(bounds[2] + rsb)
         else:
             ink = bounds[2] - bounds[0]
