@@ -41,7 +41,20 @@ _joins = SourceFileLoader("joins", os.path.join(_here, "joins.py")).load_module(
 
 KAPPA = 0.5523
 
-FAMILIES = _flatness.BEH_SKELETON | _flatness.YEH_SKELETON | _flatness.NOON_SKELETON
+# The elbow is detected by GEOMETRY — a vertical stem dropping into the
+# horizontal connector at the join height — but it is scoped to the families
+# that actually carry the cell's L: the tooth letters (beh, yeh, noon) and the
+# round-headed feh/qaf, whose initial stem is a cell artifact. It is NOT run
+# font-wide: the same geometry occurs incidentally in round letters (heh's
+# knot, the seen teeth) where it is not an L to be undone, and on the letters
+# whose vertical is deliberate (alef, lam, kaf/gaf, tah), where curving it
+# would be wrong. Add a family here when its initial shows the same L.
+FEH_SKELETON = {
+    0x0641, 0x0642, 0x066F, 0x06A1, 0x06A2, 0x06A3, 0x06A4, 0x06A5, 0x06A6,
+    0x06A7, 0x06A8, 0x0760, 0x0761, 0x08A4, 0x08BB, 0x08BC,
+}
+FAMILIES = (_flatness.BEH_SKELETON | _flatness.YEH_SKELETON
+            | _flatness.NOON_SKELETON | FEH_SKELETON)
 
 STEM_TOL = 10        # max x-wander for a segment to count as a vertical stem
 CONNECTOR_TOL = 30   # max distance from the join height for the elbow foot
@@ -49,9 +62,14 @@ FLAT_TOL = 10        # max y-wander for the connector to count as horizontal
 
 
 def _fit_fillet(A, off1, off2, B, p_start, p_end, c_start, c_end):
-    """Lay a cubic quarter-arc from p_start (tangent set by c_start) to p_end."""
+    """Lay a cubic quarter-arc from p_start (tangent set by c_start) to p_end.
+
+    A.type is left untouched: it describes the segment arriving AT A from the
+    stem, which this reshape does not change. Forcing it to "line" broke any
+    glyph whose stem arrived on a curve (an off-curve before a line point is
+    an invalid contour)."""
     A.x, A.y = p_start
-    A.type, A.smooth = "line", True
+    A.smooth = True
     off1.x, off1.y = c_start
     off2.x, off2.y = c_end
     B.x, B.y = p_end
