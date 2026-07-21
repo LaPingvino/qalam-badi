@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uni063B.fina" format="2">
-  <advance width="1080"/>
+  <advance width="890"/>
   <outline>
     <contour>
-      <point x="1145.0646558814235" y="369.0" type="line"/>
-      <point x="896.0646558814236" y="369.0" type="line" smooth="yes"/>
+      <point x="954.8846558814236" y="369.0" type="line"/>
+      <point x="861.65709009195" y="369.0" type="line" smooth="yes"/>
       <point x="828.0646558814236" y="369.0"/>
       <point x="741.2273425928482" y="443.64930584382637"/>
       <point x="704.4016821902395" y="478.6657257506572" type="curve" smooth="yes"/>
@@ -67,8 +67,8 @@
       <point x="623.0161625417406" y="369.05887450304573" type="curve" smooth="yes"/>
       <point x="667.5429989231665" y="315.0"/>
       <point x="755.6735706594046" y="225.0"/>
-      <point x="870.6735706594046" y="225.0" type="curve" smooth="yes"/>
-      <point x="1119.6735706594045" y="225.0" type="line"/>
+      <point x="836.266004869931" y="225.0" type="curve" smooth="yes"/>
+      <point x="929.4935706594046" y="225.0" type="line"/>
     </contour>
     <contour>
       <point x="85.95047322450333" y="1332.4703473087031" type="curve" smooth="yes"/>

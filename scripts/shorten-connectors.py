@@ -45,6 +45,9 @@ _classify = SourceFileLoader(
 _narrow = SourceFileLoader(
     "narrow_serifs", os.path.join(os.path.dirname(__file__), "narrow-serifs.py")
 ).load_module()
+_joins = SourceFileLoader(
+    "joins", os.path.join(os.path.dirname(os.path.abspath(__file__)), "joins.py")
+).load_module()
 
 PolygonPen = _classify.PolygonPen
 make_remap = _narrow.make_remap
@@ -133,10 +136,22 @@ def baseline_thickness(polygons, x, probe):
     return 0.0
 
 
-def body_interval_by_shape(font, glyph, pen, factor, step=12):
-    """The x range where the ink is thicker than a bare connector stroke."""
-    pen_thickness = pen * factor
-    probe = pen * 0.45  # inside the connector stroke, just above the baseline
+def body_interval_by_join_height(font, glyph, join_height, step=12):
+    """The x range that is the LETTER, i.e. not bare connector.
+
+    Uses the font's single join height directly. At any x, if the only ink is a
+    span matching that height exactly, the pen is simply travelling along the
+    join line and nothing is being written — that stretch is whitespace as far
+    as the letter is concerned, and is free to be shortened. Anywhere the ink
+    departs from the join signature, the pen is drawing the letter.
+
+    This replaces a thickness heuristic that guessed at the same thing and got
+    it wrong on round forms: meem's loop never exceeded the thickness threshold,
+    so the detector found a "body" a few units wide and would have compressed
+    the letter away.
+    """
+    bottom, top = join_height
+    tolerance = _joins.JOIN_TOLERANCE
 
     pen_pen = PolygonPen(font)
     glyph.draw(pen_pen)
@@ -149,8 +164,14 @@ def body_interval_by_shape(font, glyph, pen, factor, step=12):
     xs = []
     x = bounds.xMin + 1
     while x < bounds.xMax:
-        if baseline_thickness(pen_pen.polygons, x, probe) > pen_thickness:
-            xs.append(x)
+        spans = _joins.spans_at(pen_pen.polygons, x)
+        if spans:
+            only_join_line = all(
+                abs(span_bottom - bottom) <= tolerance and abs(span_top - top) <= tolerance
+                for span_bottom, span_top in spans
+            )
+            if not only_join_line:
+                xs.append(x)
         x += step
 
     if not xs:
@@ -214,6 +235,12 @@ def main():
 
     font = ufoLib2.Font.open(args.src)
 
+    join_height = _joins.measure_join_height(font, PolygonPen)
+    if join_height is None:
+        raise SystemExit(
+            "no single Arabic join height found; this transform depends on it")
+    print(f"join height: y={join_height[0]:.0f}..{join_height[1]:.0f}")
+
     shortened = 0
     skipped_small = 0
     skipped_extreme = 0
@@ -226,7 +253,7 @@ def main():
         if bounds is None:
             continue
 
-        body = body_interval_by_shape(font, glyph, pen, thickness_factor)
+        body = body_interval_by_join_height(font, glyph, join_height)
         if body is None:
             continue
 
@@ -249,7 +276,9 @@ def main():
         # which fontmake rejects outright ("width should not be negative").
         # A tail is a thing to keep; only the flat run leading into a join is
         # surplus.
-        left_join, right_join = join_sides(glyph, bounds)
+        pen_poly = PolygonPen(font)
+        glyph.draw(pen_poly)
+        left_join, right_join = _joins.join_sides(glyph, pen_poly.polygons, join_height)
 
         # Measured from the JOIN POINTS, not from the ink bounds.
         #

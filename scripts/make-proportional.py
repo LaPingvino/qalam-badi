@@ -42,6 +42,16 @@ import unicodedata
 import ufoLib2
 import yaml
 
+from importlib.machinery import SourceFileLoader
+
+_joins = SourceFileLoader(
+    "joins", os.path.join(os.path.dirname(os.path.abspath(__file__)), "joins.py")
+).load_module()
+_classify = SourceFileLoader(
+    "classify_widths",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "classify-widths.py")
+).load_module()
+
 # Ink closer than this to an advance edge, within the connector band around the
 # baseline, is treated as a joining connector rather than as a glyph that
 # happens to be wide. The seed master pins connectors to the edge, so real
@@ -93,6 +103,15 @@ class Fitter:
         self.nuqta = module["nuqta"]
         self.pen = module["pen"]
         self.verify_module()
+
+        self.join_height = _joins.measure_join_height(font, _classify.PolygonPen)
+        if self.join_height is None:
+            print("warning: no single Arabic join height found; joins will not "
+                  "be pinned. The font's connectors are no longer consistent.",
+                  file=sys.stderr)
+        else:
+            print(f"join height: y={self.join_height[0]:.0f}..{self.join_height[1]:.0f} "
+                  f"({self.join_height[1] - self.join_height[0]:.0f} units thick)")
 
         self.stats = {"fitted": 0, "joins": 0, "skipped": 0, "composites": 0}
         # How far each glyph was translated, so composites can undo their
@@ -215,26 +234,24 @@ class Fitter:
     def join_sides(self, glyph, bounds):
         """Which edges of this glyph carry an Arabic joining connector.
 
-        Returns a (left, right) pair of booleans. Detected from the outline so
-        that editing the Arabic glyphs upstream cannot desynchronise a table.
+        Delegates to scripts/joins.py, which identifies a connector by the
+        font's single measured join height rather than by a band around the
+        baseline. See that module for why the band was wrong.
         """
         if not in_arabic_block(glyph.unicode) and not any(
             glyph.name.endswith(s) for s in (".init", ".medi", ".fina", ".isol")
         ):
             return (False, False)
 
-        width = glyph.width
-        lo, hi = CONNECTOR_BAND
-        left = right = False
-        for contour in glyph.contours:
-            for point in contour.points:
-                if not (lo <= point.y <= hi):
-                    continue
-                if point.x <= JOIN_EDGE_TOLERANCE:
-                    left = True
-                if point.x >= width - JOIN_EDGE_TOLERANCE:
-                    right = True
-        return (left, right)
+        if self.join_height is None:
+            return (False, False)
+
+        pen = _classify.PolygonPen(self.font)
+        glyph.draw(pen)
+        if not pen.polygons:
+            return (False, False)
+
+        return _joins.join_sides(glyph, pen.polygons, self.join_height)
 
     def category(self, glyph):
         name = glyph.name

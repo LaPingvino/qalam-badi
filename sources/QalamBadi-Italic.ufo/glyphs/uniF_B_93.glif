@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uniFB93" format="2">
-  <advance width="1079"/>
+  <advance width="890"/>
   <unicode hex="FB93"/>
   <outline>
     <contour>
-      <point x="1144.0646558814235" y="369.0" type="line"/>
-      <point x="895.0646558814236" y="369.0" type="line" smooth="yes"/>
+      <point x="954.8846558814236" y="369.0" type="line"/>
+      <point x="861.3494083566711" y="369.0" type="line" smooth="yes"/>
       <point x="827.0646558814236" y="369.0"/>
       <point x="740.2273425928482" y="443.64930584382637"/>
       <point x="703.4016821902395" y="478.6657257506572" type="curve" smooth="yes"/>
@@ -68,8 +68,8 @@
       <point x="622.0161625417406" y="369.05887450304573" type="curve" smooth="yes"/>
       <point x="666.5429989231665" y="315.0"/>
       <point x="754.6735706594046" y="225.0"/>
-      <point x="869.6735706594046" y="225.0" type="curve" smooth="yes"/>
-      <point x="1118.6735706594045" y="225.0" type="line"/>
+      <point x="835.9583231346521" y="225.0" type="curve" smooth="yes"/>
+      <point x="929.4935706594046" y="225.0" type="line"/>
     </contour>
     <contour>
       <point x="66.35195076204292" y="1028.49802130898" type="line" smooth="yes"/>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uniFECA" format="2">
-  <advance width="1009"/>
+  <advance width="938"/>
   <unicode hex="FECA"/>
   <outline>
     <contour>
@@ -18,9 +18,9 @@
       <point x="41.0" y="-481.0"/>
       <point x="332.0" y="-481.0" type="curve" smooth="yes"/>
       <point x="653.0" y="-481.0"/>
-      <point x="832.0" y="-328.0"/>
-      <point x="832.0" y="-217.0" type="curve" smooth="yes"/>
-      <point x="832.0" y="-162.0"/>
+      <point x="828.9219459459459" y="-328.0"/>
+      <point x="828.9219459459459" y="-217.0" type="curve" smooth="yes"/>
+      <point x="828.9219459459459" y="-162.0"/>
       <point x="791.0" y="-129.0"/>
       <point x="746.0" y="-129.0" type="curve" smooth="yes"/>
       <point x="711.0" y="-129.0"/>
@@ -41,8 +41,8 @@
       <point x="287.0" y="285.0"/>
       <point x="424.0" y="225.0"/>
       <point x="594.0" y="225.0" type="curve" smooth="yes"/>
-      <point x="1009.0" y="225.0" type="line"/>
-      <point x="1009.0" y="369.0" type="line"/>
+      <point x="937.8199999999999" y="225.0" type="line"/>
+      <point x="937.8199999999999" y="369.0" type="line"/>
       <point x="594.0" y="369.0" type="line" smooth="yes"/>
       <point x="467.0" y="369.0"/>
       <point x="367.0" y="402.6726442507264"/>

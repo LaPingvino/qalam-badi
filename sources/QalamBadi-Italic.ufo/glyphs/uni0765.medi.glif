@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uni0765.medi" format="2">
-  <advance width="1228"/>
+  <advance width="1100"/>
   <outline>
     <contour>
-      <point x="1293.0646558814235" y="369.0" type="line"/>
-      <point x="1103.0646558814235" y="369.0" type="line" smooth="yes"/>
+      <point x="1164.8846558814234" y="369.0" type="line"/>
+      <point x="1075.5218459640682" y="369.0" type="line" smooth="yes"/>
       <point x="1011.0646558814236" y="369.0"/>
       <point x="947.3507307694069" y="472.70548406438814"/>
       <point x="906.6269732084634" y="519.6423873437572" type="curve" smooth="yes"/>
@@ -39,8 +39,8 @@
       <point x="932.1845267186097" y="263.4" type="curve" smooth="yes"/>
       <point x="956.3764372542823" y="246.0"/>
       <point x="993.6735706594046" y="225.0"/>
-      <point x="1077.6735706594045" y="225.0" type="curve" smooth="yes"/>
-      <point x="1267.6735706594045" y="225.0" type="line"/>
+      <point x="1050.1307607420492" y="225.0" type="curve" smooth="yes"/>
+      <point x="1139.4935706594047" y="225.0" type="line"/>
     </contour>
     <contour>
       <point x="569.9176248361882" y="164.0" type="curve" smooth="yes"/>
