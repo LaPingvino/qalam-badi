@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uniFEDE" format="2">
-  <advance width="1164"/>
+  <advance width="1188"/>
   <unicode hex="FEDE"/>
   <outline>
     <contour>
@@ -27,11 +27,11 @@
       <point x="1031.9748946508178" y="-28.3849157171964"/>
       <point x="1032.0" y="177.0" type="curve" smooth="yes"/>
       <point x="1029.5306162454956" y="208.39505595751388"/>
-      <point x="1039.8976356336864" y="237.5988265851775"/>
-      <point x="1052.5577528089887" y="239.0" type="curve" smooth="yes"/>
-      <point x="1184.3941344772493" y="233.5597601771591" type="line"/>
-      <point x="1181.96256044625" y="358.9717772456448" type="line"/>
-      <point x="1019.9069016084163" y="355.15896037370743"/>
+      <point x="1039.619389635383" y="237.67033182449765"/>
+      <point x="1054.0" y="239.0" type="curve" smooth="yes"/>
+      <point x="1206.8656574907002" y="234.53035747747788" type="line"/>
+      <point x="1204.5206261169676" y="358.270026145341" type="line"/>
+      <point x="1019.4006757021058" y="355.1202683138824"/>
       <point x="1031.7505445597894" y="391.05257374913407"/>
       <point x="1032.0" y="440.66918500069187" type="curve" smooth="yes"/>
       <point x="1032.0" y="1224.4409667450761" type="line" smooth="yes"/>

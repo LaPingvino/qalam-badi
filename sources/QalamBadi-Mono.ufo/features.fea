@@ -677,3 +677,15 @@ feature ss01 {
     sub uni0643 by kafDotless_ar;        # isolated
     sub uniFEDA by kafDotless_ar.fina;   # final
 } ss01;
+
+# BEGIN generated star variants (scripts/make-stars.py)
+feature ss02 {
+    featureNames { name "Nine-pointed star, solid"; };
+    sub u1F7D9 by u1F7D9.solid;
+} ss02;
+
+feature ss03 {
+    featureNames { name "Nine-pointed Rub el Hizb (with nuqta)"; };
+    sub uni06DE by uni06DE.rub9;
+} ss03;
+# END generated star variants
