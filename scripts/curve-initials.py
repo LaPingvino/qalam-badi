@@ -48,15 +48,34 @@ CONNECTOR_TOL = 30   # max distance from the join height for the elbow foot
 FLAT_TOL = 10        # max y-wander for the connector to count as horizontal
 
 
-def enlarge_elbow(glyph, radius, join_top):
-    """Grow the vertical-stem -> horizontal-connector fillet to `radius`.
+def _fit_fillet(A, off1, off2, B, p_start, p_end, c_start, c_end):
+    """Lay a cubic quarter-arc from p_start (tangent set by c_start) to p_end."""
+    A.x, A.y = p_start
+    A.type, A.smooth = "line", True
+    off1.x, off1.y = c_start
+    off2.x, off2.y = c_end
+    B.x, B.y = p_end
+    B.type, B.smooth = "curve", True
 
-    Walks each contour for the pattern: an on-curve A reached from a vertical
-    stem, two off-curve control points, an on-curve B that continues into a
-    horizontal run at the join-top height. Reconstructs the sharp corner C at
-    (stem x, connector y) and lays a quarter-circle of the given radius from up
-    the stem to along the connector.
+
+def enlarge_elbow(glyph, radius, join):
+    """Round the whole stem->connector bend, BOTH walls, to a big radius.
+
+    The elbow is a bend in a constant-width stroke, not one corner. Rounding
+    only the inner (concave) wall — which the first version did — leaves the
+    outer wall cornered, so the stroke fattens through the turn and reads as a
+    little ramp. Here both walls are rebuilt as CONCENTRIC arcs about one
+    centre: the inner wall at radius r, the outer at r + w where w is the pen
+    width (measured as the connector thickness), so the pen stays exactly one
+    width wide all the way round.
+
+    The inner fillet is found by its geometry (vertical stem above, fillet,
+    horizontal connector at the join top); the outer fillet is then found on
+    the same contour (horizontal connector bottom, fillet, vertical outer stem)
+    and rebuilt concentric with it.
     """
+    join_bottom, join_top = join
+    width = join_top - join_bottom
     changed = 0
     for contour in glyph.contours:
         pts = list(contour.points)
@@ -64,43 +83,72 @@ def enlarge_elbow(glyph, radius, join_top):
         for i, A in enumerate(pts):
             if A.type not in ("line", "curve"):
                 continue
-            # Two off-curves then an on-curve B: the existing fillet.
             if pts[(i + 1) % n].type is not None or pts[(i + 2) % n].type is not None:
                 continue
             off1, off2 = pts[(i + 1) % n], pts[(i + 2) % n]
             B = pts[(i + 3) % n]
             if B.type not in ("line", "curve"):
                 continue
-
-            before = pts[(i - 1) % n]                 # on-curve above A
-            after = pts[(i + 4) % n]                  # on-curve after B
+            before = pts[(i - 1) % n]                 # on-curve above A (stem)
+            after = pts[(i + 4) % n]                  # on-curve after B (connector)
             if after.type is None:
                 continue
-
-            # A sits on a vertical stem descending into the elbow.
             if abs(before.x - A.x) > STEM_TOL or before.y <= A.y:
                 continue
-            # B leads into a horizontal connector at the join top.
             if abs(B.y - join_top) > CONNECTOR_TOL or abs(after.y - B.y) > FLAT_TOL:
                 continue
 
             corner_x, corner_y = A.x, B.y
-            stem_room = before.y - corner_y
-            conn_room = abs(after.x - corner_x)
-            r = min(radius, stem_room * 0.9, conn_room * 0.9)
+            r = min(radius, (before.y - corner_y) * 0.9, abs(after.x - corner_x) * 0.9)
             if r < 60:
                 continue
             conn_sign = -1.0 if after.x < corner_x else 1.0
 
-            a_new = (corner_x, corner_y + r)
-            b_new = (corner_x + conn_sign * r, corner_y)
-            A.x, A.y = a_new
-            A.type, A.smooth = "line", True
-            off1.x, off1.y = corner_x, corner_y + r * (1 - KAPPA)
-            off2.x, off2.y = corner_x + conn_sign * r * (1 - KAPPA), corner_y
-            B.x, B.y = b_new
-            B.type, B.smooth = "curve", True
+            # Centre of both arcs.
+            ox = corner_x + conn_sign * r
+            oy = corner_y + r
+            outer_stem_x = corner_x - conn_sign * width
+            r_out = r + width
+
+            # Inner wall: from up the stem, down to along the connector top.
+            _fit_fillet(
+                A, off1, off2, B,
+                (corner_x, corner_y + r),
+                (ox, corner_y),
+                (corner_x, corner_y + r * (1 - KAPPA)),
+                (ox + conn_sign * r * KAPPA, corner_y))
             changed += 1
+
+            # Outer wall: the fillet joining the connector bottom to the outer
+            # stem. Find it on this contour and rebuild concentric.
+            for j, A2 in enumerate(pts):
+                if A2.type not in ("line", "curve"):
+                    continue
+                if pts[(j + 1) % n].type is not None or pts[(j + 2) % n].type is not None:
+                    continue
+                o1, o2 = pts[(j + 1) % n], pts[(j + 2) % n]
+                B2 = pts[(j + 3) % n]
+                if B2.type not in ("line", "curve"):
+                    continue
+                b2_before = pts[(j - 1) % n]          # connector bottom
+                b2_after = pts[(j + 4) % n]           # outer stem
+                if b2_after.type is None:
+                    continue
+                on_bottom = (abs(b2_before.y - join_bottom) <= CONNECTOR_TOL
+                             and abs(A2.y - b2_before.y) <= FLAT_TOL)
+                on_outer = (abs(b2_after.x - outer_stem_x) <= STEM_TOL + 8
+                            and abs(B2.x - b2_after.x) <= STEM_TOL + 8
+                            and b2_after.y > B2.y)
+                if not (on_bottom and on_outer):
+                    continue
+                _fit_fillet(
+                    A2, o1, o2, B2,
+                    (ox, join_bottom),
+                    (outer_stem_x, oy),
+                    (ox - conn_sign * r_out * KAPPA, join_bottom),
+                    (outer_stem_x, oy - r_out * KAPPA))
+                break
+
     return changed
 
 
@@ -124,8 +172,7 @@ def main():
     from importlib.machinery import SourceFileLoader as _S
     PolygonPen = _S("classify_widths",
                     os.path.join(_here, "classify-widths.py")).load_module().PolygonPen
-    join = _joins.measure_join_height(font, PolygonPen)
-    join_top = join[1] if join else 369.0
+    join = _joins.measure_join_height(font, PolygonPen) or (225.0, 369.0)
 
     curved = 0
     for glyph in font:
@@ -134,7 +181,7 @@ def main():
             continue
         if not glyph.contours:
             continue
-        n = enlarge_elbow(glyph, radius, join_top)
+        n = enlarge_elbow(glyph, radius, join)
         if n:
             curved += 1
             if args.verbose:

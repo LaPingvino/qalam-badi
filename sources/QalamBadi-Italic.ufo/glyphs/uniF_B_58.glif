@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uniFB58" format="2">
-  <advance width="838"/>
+  <advance width="840"/>
   <unicode hex="FB58"/>
   <outline>
     <contour>
@@ -10,7 +10,7 @@
       <point x="780.7500401230238" y="695.469517088695" type="curve" smooth="yes"/>
       <point x="766.1908064762182" y="612.9" type="line" smooth="yes"/>
       <point x="742.4385095027131" y="478.19403"/>
-      <point x="613.9906258814236" y="369.0"/>
+      <point x="344.5786858814236" y="369.0"/>
       <point x="479.2846558814236" y="369.0" type="curve" smooth="yes"/>
       <point x="65.06465588142358" y="369.0" type="line" smooth="yes"/>
       <point x="30.064655881423576" y="369.0"/>
@@ -19,10 +19,10 @@
       <point x="11.19766894561782" y="262.0"/>
       <point x="4.673570659404618" y="225.0"/>
       <point x="39.67357065940462" y="225.0" type="curve" smooth="yes"/>
-      <point x="767.7935706594046" y="225.0" type="line" smooth="yes"/>
-      <point x="824.7935706594046" y="225.0"/>
-      <point x="843.4964372542823" y="246.0"/>
-      <point x="854.6050370389157" y="309.0" type="curve" smooth="yes"/>
+      <point x="453.89357065940465" y="225.0" type="line" smooth="yes"/>
+      <point x="668.1307406594046" y="225.0"/>
+      <point x="872.4150131345921" y="398.66283"/>
+      <point x="910.1908064762182" y="612.9" type="curve" smooth="yes"/>
       <point x="922.7500401230238" y="695.469517088695" type="line" smooth="yes"/>
       <point x="931.0262825620802" y="742.4064203680641"/>
       <point x="920.7850300417656" y="758.0520547945205"/>
