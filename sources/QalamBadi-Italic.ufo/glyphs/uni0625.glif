@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uni0625" format="2">
-  <advance width="575"/>
+  <advance width="724"/>
   <unicode hex="0625"/>
   <unicode hex="FE87"/>
-  <anchor x="347" y="1281" name="top"/>
-  <anchor x="271" y="-528" name="bottom"/>
+  <anchor x="400" y="1281" name="top"/>
+  <anchor x="324" y="-528" name="bottom"/>
   <outline>
     <contour>
       <point x="499.698173038583" y="1200.5999999999997" type="curve" smooth="yes"/>

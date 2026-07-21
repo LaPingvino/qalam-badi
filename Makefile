@@ -131,6 +131,9 @@ proportional:
 	# so kerning has to be the final thing added to the finished UFO. Pairs live
 	# in spacing.yaml (kerning:); the builder compiles the UFO groups to GPOS.
 	. venv/bin/activate; python3 scripts/kern.py --src sources/QalamBadi-Regular.ufo
+	# Widen the word-end alif so its (symmetric, un-nudgeable) mark clears the
+	# next group. Before mark-anchors so anchors read the widened advance.
+	. venv/bin/activate; python3 scripts/widen-marked.py --src sources/QalamBadi-Regular.ufo
 	# Anchor the Arabic harakat to each letter's real top/bottom so marks sit
 	# above the letter and stack without colliding (ufo2ft compiles the anchors
 	# into mark/mkmk GPOS).

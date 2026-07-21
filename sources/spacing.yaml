@@ -345,6 +345,16 @@ initials:
 # needs no context. First rung of the fit ladder (nudge -> widen -> narrow).
 marks:
   thin_pull: 0.7
+  # Widen the word-end alif's advance (scripts/widen-marked.py): the alif is
+  # symmetric so the nudge cannot move its mark; instead give it room on its
+  # free side so a mark clears the next group. Second rung of the ladder.
+  widen: 0.55
+  widen_letters:              # the alef family (final/isolated only)
+    - 0x0627
+    - 0x0623
+    - 0x0625
+    - 0x0622
+    - 0x0671
   thin_letters:               # lam and the alef family (by base codepoint)
     - 0x0644                  # lam
     - 0x0627                  # alef
