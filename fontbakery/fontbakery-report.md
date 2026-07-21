@@ -12,8 +12,659 @@ fontbakery version: 1.1.0
 
 
 
-<details><summary>[14] QalamBadi-Italic[wght].ttf</summary>
+<details><summary>[13] QalamBadi-Italic[wght].ttf</summary>
 <div>
+<details>
+    <summary>🔥 <b>FAIL</b> Shapes languages in all GF glyphsets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-glyphsets-shape-languages">googlefonts/glyphsets/shape_languages</a></summary>
+    <div>
+
+
+
+
+
+
+
+* 🔥 **FAIL** <p>GF_Phonetics_SinoExt glyphset:</p>
+<table>
+<thead>
+<tr>
+<th align="left">FAIL messages</th>
+<th align="left">Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to J when shaping the text 'ÍJ́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to j when shaping the text 'íj́'</td>
+<td align="left">nl_Latn (Dutch)</td>
+</tr>
+</tbody>
+</table>
+ [code: failed-language-shaping]
+
+
+
+* ⚠️ **WARN** <p>GF_Phonetics_SinoExt glyphset:</p>
+<table>
+<thead>
+<tr>
+<th align="left">WARN messages</th>
+<th align="left">Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064E to uni25CC when shaping the text '◌َ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0650 to uni25CC when shaping the text '◌ِ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064F to uni25CC when shaping the text '◌ُ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0652 to uni25CC when shaping the text '◌ْ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0656 to the base glyph when shaping the text '◌ٖ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0670 to uni25CC when shaping the text '◌ٰ'</td>
+<td align="left">fa_Arab (Persian) and fa_Arab (Persian)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064B to uni25CC when shaping the text '◌ً'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064C to uni25CC when shaping the text '◌ٌ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064D to uni25CC when shaping the text '◌ٍ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064E to uni25CC when shaping the text '◌َ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064F to uni25CC when shaping the text '◌ُ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0650 to uni25CC when shaping the text '◌ِ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0651 to uni25CC when shaping the text '◌ّ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0652 to uni25CC when shaping the text '◌ْ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0654 to uni25CC when shaping the text '◌ٔ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0656 to the base glyph when shaping the text '◌ٖ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0657 to the base glyph when shaping the text '◌ٗ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0658 to the base glyph when shaping the text '◌٘'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0670 to uni25CC when shaping the text '◌ٰ'</td>
+<td align="left">ur_Arab (Urdu) and ur_Arab (Urdu)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0430 when shaping the text 'а́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0435 when shaping the text 'е́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0438 when shaping the text 'и́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni043E when shaping the text 'о́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0443 when shaping the text 'у́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044B when shaping the text 'ы́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044D when shaping the text 'э́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044E when shaping the text 'ю́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044F when shaping the text 'я́'</td>
+<td align="left">ru_Cyrl (Russian), ru_Cyrl (Russian) and ru_Cyrl (Russian)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0430 when shaping the text 'а́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0435 when shaping the text 'е́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0454 when shaping the text 'є́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0438 when shaping the text 'и́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0456 when shaping the text 'і́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0457 when shaping the text 'ї́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni043E when shaping the text 'о́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0443 when shaping the text 'у́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044E when shaping the text 'ю́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044F when shaping the text 'я́'</td>
+<td align="left">uk_Cyrl (Ukrainian), uk_Cyrl (Ukrainian) and uk_Cyrl (Ukrainian)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0430 when shaping the text 'а́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0435 when shaping the text 'е́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0451 when shaping the text 'ё́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0456 when shaping the text 'і́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni043E when shaping the text 'о́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0443 when shaping the text 'у́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044B when shaping the text 'ы́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044D when shaping the text 'э́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044E when shaping the text 'ю́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044F when shaping the text 'я́'</td>
+<td align="left">be_Cyrl (Belarusian), be_Cyrl (Belarusian) and be_Cyrl (Belarusian)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach gravecomb to uni0430 when shaping the text 'а̀'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach gravecomb to uni043E when shaping the text 'о̀'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach gravecomb to uni0443 when shaping the text 'у̀'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach gravecomb to uni044A when shaping the text 'ъ̀'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach gravecomb to uni044E when shaping the text 'ю̀'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach gravecomb to uni044F when shaping the text 'я̀'</td>
+<td align="left">bg_Cyrl (Bulgarian), bg_Cyrl (Bulgarian) and bg_Cyrl (Bulgarian)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0302 to uni0430 when shaping the text 'а̂'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0302 to uni0435 when shaping the text 'е̂'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0302 to uni0438 when shaping the text 'и̂'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0302 to uni043E when shaping the text 'о̂'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0302 to uni0443 when shaping the text 'у̂'</td>
+<td align="left">sr_Cyrl (Serbian), sr_Cyrl (Serbian) and sr_Cyrl (Serbian)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ʻ</td>
+<td align="left">en_Latn (English)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ǥ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ȟ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ǩ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ʒ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ǯ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ǥ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ȟ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ǩ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ʒ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ǯ</td>
+<td align="left">fi_Latn (Finnish)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to Aogonek when shaping the text 'Ą́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to Aogonek when shaping the text 'Ą̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to Eogonek when shaping the text 'Ę́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to Eogonek when shaping the text 'Ę̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to Edotaccent when shaping the text 'Ė́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to Edotaccent when shaping the text 'Ė̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to Idotaccent when shaping the text 'İ́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to Idotaccent when shaping the text 'İ́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach gravecomb to Idotaccent when shaping the text 'İ̀'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach gravecomb to Idotaccent when shaping the text 'İ̀'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to Idotaccent when shaping the text 'İ̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to Idotaccent when shaping the text 'İ̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to Iogonek when shaping the text 'Į́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0307 to Iogonek when shaping the text 'Į̇́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0307 when shaping the text 'Į̇́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to Iogonek when shaping the text 'Į̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0307 to Iogonek when shaping the text 'Į̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to uni0307 when shaping the text 'Į̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to J when shaping the text 'J̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0307 to J when shaping the text 'J̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to uni0307 when shaping the text 'J̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to L when shaping the text 'L̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to M when shaping the text 'M̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to R when shaping the text 'R̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to Uogonek when shaping the text 'Ų́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to Uogonek when shaping the text 'Ų̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to Umacron when shaping the text 'Ū́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to Umacron when shaping the text 'Ū̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to aogonek when shaping the text 'ą́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to aogonek when shaping the text 'ą̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to eogonek when shaping the text 'ę́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to eogonek when shaping the text 'ę̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to edotaccent when shaping the text 'ė́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to edotaccent when shaping the text 'ė̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0307 to i when shaping the text 'i̇́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0307 when shaping the text 'i̇́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0307 to i when shaping the text 'i̇̀'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach gravecomb to uni0307 when shaping the text 'i̇̀'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0307 to i when shaping the text 'i̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to uni0307 when shaping the text 'i̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to iogonek when shaping the text 'į́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0307 to iogonek when shaping the text 'į̇́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0307 when shaping the text 'į̇́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to iogonek when shaping the text 'į̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0307 to iogonek when shaping the text 'į̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to uni0307 when shaping the text 'į̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to j when shaping the text 'j̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0307 to j when shaping the text 'j̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to uni0307 when shaping the text 'j̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to l when shaping the text 'l̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to m when shaping the text 'm̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to r when shaping the text 'r̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uogonek when shaping the text 'ų́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to uogonek when shaping the text 'ų̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to umacron when shaping the text 'ū́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to umacron when shaping the text 'ū̃'</td>
+<td align="left">lt_Latn (Lithuanian)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064B to uni25CC when shaping the text '◌ً'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064C to uni25CC when shaping the text '◌ٌ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064D to uni25CC when shaping the text '◌ٍ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064E to uni25CC when shaping the text '◌َ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064F to uni25CC when shaping the text '◌ُ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0650 to uni25CC when shaping the text '◌ِ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0651 to uni25CC when shaping the text '◌ّ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0652 to uni25CC when shaping the text '◌ْ'</td>
+<td align="left">ckb_Arab (Central Kurdish)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064E to uni25CC when shaping the text '◌َ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064F to uni25CC when shaping the text '◌ُ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0650 to uni25CC when shaping the text '◌ِ'</td>
+<td align="left">sd_Arab (Sindhi)</td>
+</tr>
+</tbody>
+</table>
+ [code: warning-language-shaping]
+
+
+
+</div>
+</details>
+
 <details>
     <summary>⚠️ <b>WARN</b> Check accent of Lcaron, dcaron, lcaron, tcaron <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#alt-caron">alt_caron</a></summary>
     <div>
@@ -28,24 +679,6 @@ fontbakery version: 1.1.0
 
 * ⚠️ **WARN** <p>dcaron is decomposed and therefore could not be checked. Please check manually.</p>
  [code: decomposed-outline]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Does GPOS table have kerning information? This check skips monospaced fonts as defined by post.isFixedPitch value <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#gpos-kerning-info">gpos_kerning_info</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>GPOS table lacks kerning information.</p>
- [code: lacks-kern-info]
 
 
 
@@ -83,7 +716,7 @@ fontbakery version: 1.1.0
 * ⚠️ **WARN** <p>The most common width is 1132 among a set of 8 math glyphs.
 The following math glyphs have a different width, though:</p>
 <p>Width = 1172:
-less, approxequal, greater</p>
+less, greater, approxequal</p>
 <p>Width = 1182:
 logicalnot</p>
 <p>Width = 1010:
@@ -108,7 +741,7 @@ uni2222</p>
 
 
 * ⚠️ **WARN** <p>The following glyphs have overlapping path segments:</p>
-<pre><code>* sigma1 (U+03C2): B&lt;&lt;1108.0,851.0&gt;-&lt;1107.0,851.0&gt;-&lt;1107.0,852.0&gt;&gt; has the same coordinates as a previous segment.
+<pre><code>* sigma1 (U+03C2): B&lt;&lt;1106.0,851.0&gt;-&lt;1105.0,851.0&gt;-&lt;1105.0,852.0&gt;&gt; has the same coordinates as a previous segment.
 
 * uni0770.init: B&lt;&lt;252.0,728.0&gt;-&lt;252.0,728.0&gt;-&lt;252.0,727.5&gt;&gt; has the same coordinates as a previous segment.
 
@@ -134,7 +767,7 @@ uni2222</p>
 
 * uni0770.medi: B&lt;&lt;192.0,728.0&gt;-&lt;194.0,728.0&gt;-&lt;191.0,721.0&gt;&gt; has the same coordinates as a previous segment.
 
-* uni077D (U+077D): B&lt;&lt;1376.0,1236.0&gt;-&lt;1376.0,1236.0&gt;-&lt;1376.0,1236.0&gt;&gt; has the same coordinates as a previous segment.
+* uni077D (U+077D): B&lt;&lt;1381.0,1236.0&gt;-&lt;1381.0,1236.0&gt;-&lt;1381.0,1236.0&gt;&gt; has the same coordinates as a previous segment.
 
 * uni077D.fina: B&lt;&lt;763.0,1236.0&gt;-&lt;763.0,1236.0&gt;-&lt;763.0,1236.0&gt;&gt; has the same coordinates as a previous segment.
 
@@ -348,11 +981,9 @@ uni2222</p>
 
 
 * ⚠️ **WARN** <p>Interpolation issues were found in the font:</p>
-<pre><code>- Contour 2 in glyph 'uni2103': becomes underweight between wght=400 and wght=700.
+<pre><code>- Contour 15 in glyph 'u1F7D9': becomes underweight between wght=400 and wght=700.
 
-- Contour 3 start point differs in glyph 'uni20A6' between location wght=400 and location wght=700
-
-- Contour 4 start point differs in glyph 'uni20A6' between location wght=400 and location wght=700
+- Contour 19 in glyph 'u1F7D9': becomes underweight between wght=400 and wght=700.
 
 - Contour 8 start point differs in glyph 'uni06DE' between location wght=400 and location wght=700
 
@@ -360,31 +991,17 @@ uni2222</p>
 
 - Contour 15 start point differs in glyph 'uniFDFD' between location wght=400 and location wght=700
 
-- Contour 15 in glyph 'u1F7D9': becomes underweight between wght=400 and wght=700.
+- Contour 4 start point differs in glyph 'uni0620.medi' between location wght=400 and location wght=700
 
-- Contour 19 in glyph 'u1F7D9': becomes underweight between wght=400 and wght=700.
+- Contour 3 start point differs in glyph 'uni20A6' between location wght=400 and location wght=700
+
+- Contour 4 start point differs in glyph 'uni20A6' between location wght=400 and location wght=700
+
+- Contour 2 in glyph 'uni2103': becomes underweight between wght=400 and wght=700.
 
 - Contour 17 start point differs in glyph 'uniFDFA' between location wght=400 and location wght=700
 </code></pre>
  [code: interpolation-issues]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Validate size, and resolution of article images, and ensure article page has minimum length and includes visual assets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-article-images">googlefonts/article/images</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>Family metadata at fonts/variable does not have an article.</p>
- [code: lacks-article]
 
 
 
@@ -410,12 +1027,12 @@ definitions.</p>
 <li>U+02D8 BREVE: try adding one of: canadian-aboriginal, yi</li>
 <li>U+02D9 DOT ABOVE: try adding one of: canadian-aboriginal, yi</li>
 <li>U+02DB OGONEK: try adding one of: canadian-aboriginal, yi</li>
-<li>U+0302 COMBINING CIRCUMFLEX ACCENT: try adding one of: tifinagh, cherokee, coptic, math</li>
-<li>U+0306 COMBINING BREVE: try adding one of: tifinagh, old-permic</li>
-<li>U+0307 COMBINING DOT ABOVE: try adding one of: old-permic, todhri, math, tai-le, syriac, tifinagh, hebrew, duployan, canadian-aboriginal, coptic, malayalam</li>
+<li>U+0302 COMBINING CIRCUMFLEX ACCENT: try adding one of: cherokee, coptic, math, tifinagh</li>
+<li>U+0306 COMBINING BREVE: try adding one of: old-permic, tifinagh</li>
+<li>U+0307 COMBINING DOT ABOVE: try adding one of: tifinagh, syriac, tai-le, math, old-permic, hebrew, malayalam, duployan, coptic, canadian-aboriginal, todhri</li>
 <li>U+030A COMBINING RING ABOVE: try adding one of: duployan, syriac</li>
 <li>U+030B COMBINING DOUBLE ACUTE ACCENT: try adding one of: cherokee, osage</li>
-<li>U+030C COMBINING CARON: try adding one of: tai-le, cherokee</li>
+<li>U+030C COMBINING CARON: try adding one of: cherokee, tai-le</li>
 <li>U+030F COMBINING DOUBLE GRAVE ACCENT: not included in any glyphset definition</li>
 <li>U+0311 COMBINING INVERTED BREVE: try adding one of: todhri, coptic</li>
 <li>U+0312 COMBINING TURNED COMMA ABOVE: try adding math</li>
@@ -425,8 +1042,8 @@ definitions.</p>
 <li>U+0328 COMBINING OGONEK: not included in any glyphset definition</li>
 <li>U+032E COMBINING BREVE BELOW: try adding syriac</li>
 <li>U+032F COMBINING INVERTED BREVE BELOW: try adding math</li>
-<li>U+0330 COMBINING TILDE BELOW: try adding one of: syriac, cherokee, math</li>
-<li>U+0331 COMBINING MACRON BELOW: try adding one of: gothic, syriac, sunuwar, tifinagh, cherokee, caucasian-albanian, thai</li>
+<li>U+0330 COMBINING TILDE BELOW: try adding one of: cherokee, math, syriac</li>
+<li>U+0331 COMBINING MACRON BELOW: try adding one of: thai, tifinagh, syriac, gothic, caucasian-albanian, cherokee, sunuwar</li>
 <li>U+0332 COMBINING LOW LINE: try adding math</li>
 <li>U+034F COMBINING GRAPHEME JOINER: not included in any glyphset definition</li>
 <li>U+0600 ARABIC NUMBER SIGN: try adding arabic</li>
@@ -441,7 +1058,7 @@ definitions.</p>
 <li>U+0609 ARABIC-INDIC PER MILLE SIGN: try adding arabic</li>
 <li>U+060A ARABIC-INDIC PER TEN THOUSAND SIGN: try adding arabic</li>
 <li>U+060B AFGHANI SIGN: try adding arabic</li>
-<li>U+060C ARABIC COMMA: try adding one of: thaana, syriac, nko, yezidi, hanifi-rohingya, arabic, garay</li>
+<li>U+060C ARABIC COMMA: try adding one of: thaana, syriac, arabic, nko, garay, hanifi-rohingya, yezidi</li>
 <li>U+060D ARABIC DATE SEPARATOR: try adding arabic</li>
 <li>U+060E ARABIC POETIC VERSE SIGN: try adding arabic</li>
 <li>U+060F ARABIC SIGN MISRA: try adding arabic</li>
@@ -456,10 +1073,10 @@ definitions.</p>
 <li>U+0618 ARABIC SMALL FATHA: try adding arabic</li>
 <li>U+0619 ARABIC SMALL DAMMA: try adding arabic</li>
 <li>U+061A ARABIC SMALL KASRA: try adding arabic</li>
-<li>U+061B ARABIC SEMICOLON: try adding one of: thaana, syriac, nko, yezidi, hanifi-rohingya, arabic, garay</li>
-<li>U+061C ARABIC LETTER MARK: try adding one of: arabic, thaana, syriac</li>
+<li>U+061B ARABIC SEMICOLON: try adding one of: thaana, syriac, arabic, nko, garay, hanifi-rohingya, yezidi</li>
+<li>U+061C ARABIC LETTER MARK: try adding one of: thaana, arabic, syriac</li>
 <li>U+061E ARABIC TRIPLE DOT PUNCTUATION MARK: try adding arabic</li>
-<li>U+061F ARABIC QUESTION MARK: try adding one of: adlam, thaana, syriac, nko, arabic, hanifi-rohingya, yezidi, garay</li>
+<li>U+061F ARABIC QUESTION MARK: try adding one of: thaana, syriac, adlam, arabic, nko, garay, hanifi-rohingya, yezidi</li>
 <li>U+0620 ARABIC LETTER KASHMIRI YEH: try adding arabic</li>
 <li>U+0621 ARABIC LETTER HAMZA: try adding one of: arabic, syriac</li>
 <li>U+0622 ARABIC LETTER ALEF WITH MADDA ABOVE: try adding arabic</li>
@@ -492,7 +1109,7 @@ definitions.</p>
 <li>U+063D ARABIC LETTER FARSI YEH WITH INVERTED V: try adding arabic</li>
 <li>U+063E ARABIC LETTER FARSI YEH WITH TWO DOTS ABOVE: try adding arabic</li>
 <li>U+063F ARABIC LETTER FARSI YEH WITH THREE DOTS ABOVE: try adding arabic</li>
-<li>U+0640 ARABIC TATWEEL: try adding one of: adlam, sogdian, mandaic, syriac, old-uyghur, hanifi-rohingya, arabic, manichaean, psalter-pahlavi</li>
+<li>U+0640 ARABIC TATWEEL: try adding one of: sogdian, mandaic, psalter-pahlavi, syriac, manichaean, old-uyghur, adlam, arabic, hanifi-rohingya</li>
 <li>U+0641 ARABIC LETTER FEH: try adding arabic</li>
 <li>U+0642 ARABIC LETTER QAF: try adding arabic</li>
 <li>U+0643 ARABIC LETTER KAF: try adding arabic</li>
@@ -524,19 +1141,19 @@ definitions.</p>
 <li>U+065D ARABIC REVERSED DAMMA: try adding arabic</li>
 <li>U+065E ARABIC FATHA WITH TWO DOTS: try adding arabic</li>
 <li>U+065F ARABIC WAVY HAMZA BELOW: try adding arabic</li>
-<li>U+0660 ARABIC-INDIC DIGIT ZERO: try adding one of: thaana, syriac, yezidi, hanifi-rohingya, indic-siyaq-numbers, arabic</li>
-<li>U+0661 ARABIC-INDIC DIGIT ONE: try adding one of: thaana, syriac, yezidi, indic-siyaq-numbers, arabic</li>
-<li>U+0662 ARABIC-INDIC DIGIT TWO: try adding one of: thaana, syriac, yezidi, indic-siyaq-numbers, arabic</li>
-<li>U+0663 ARABIC-INDIC DIGIT THREE: try adding one of: thaana, syriac, yezidi, indic-siyaq-numbers, arabic</li>
-<li>U+0664 ARABIC-INDIC DIGIT FOUR: try adding one of: thaana, syriac, yezidi, indic-siyaq-numbers, arabic</li>
-<li>U+0665 ARABIC-INDIC DIGIT FIVE: try adding one of: thaana, syriac, yezidi, indic-siyaq-numbers, arabic</li>
-<li>U+0666 ARABIC-INDIC DIGIT SIX: try adding one of: thaana, syriac, yezidi, indic-siyaq-numbers, arabic</li>
-<li>U+0667 ARABIC-INDIC DIGIT SEVEN: try adding one of: thaana, syriac, yezidi, indic-siyaq-numbers, arabic</li>
-<li>U+0668 ARABIC-INDIC DIGIT EIGHT: try adding one of: thaana, syriac, yezidi, indic-siyaq-numbers, arabic</li>
-<li>U+0669 ARABIC-INDIC DIGIT NINE: try adding one of: thaana, syriac, yezidi, indic-siyaq-numbers, arabic</li>
-<li>U+066A ARABIC PERCENT SIGN: try adding one of: arabic, nko, thaana, syriac</li>
-<li>U+066B ARABIC DECIMAL SEPARATOR: try adding one of: arabic, thaana, syriac</li>
-<li>U+066C ARABIC THOUSANDS SEPARATOR: try adding one of: arabic, thaana, syriac</li>
+<li>U+0660 ARABIC-INDIC DIGIT ZERO: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, hanifi-rohingya, yezidi</li>
+<li>U+0661 ARABIC-INDIC DIGIT ONE: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, yezidi</li>
+<li>U+0662 ARABIC-INDIC DIGIT TWO: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, yezidi</li>
+<li>U+0663 ARABIC-INDIC DIGIT THREE: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, yezidi</li>
+<li>U+0664 ARABIC-INDIC DIGIT FOUR: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, yezidi</li>
+<li>U+0665 ARABIC-INDIC DIGIT FIVE: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, yezidi</li>
+<li>U+0666 ARABIC-INDIC DIGIT SIX: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, yezidi</li>
+<li>U+0667 ARABIC-INDIC DIGIT SEVEN: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, yezidi</li>
+<li>U+0668 ARABIC-INDIC DIGIT EIGHT: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, yezidi</li>
+<li>U+0669 ARABIC-INDIC DIGIT NINE: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, yezidi</li>
+<li>U+066A ARABIC PERCENT SIGN: try adding one of: thaana, arabic, nko, syriac</li>
+<li>U+066B ARABIC DECIMAL SEPARATOR: try adding one of: thaana, arabic, syriac</li>
+<li>U+066C ARABIC THOUSANDS SEPARATOR: try adding one of: thaana, arabic, syriac</li>
 <li>U+066D ARABIC FIVE POINTED STAR: try adding arabic</li>
 <li>U+066E ARABIC LETTER DOTLESS BEH: try adding arabic</li>
 <li>U+066F ARABIC LETTER DOTLESS QAF: try adding arabic</li>
@@ -640,7 +1257,7 @@ definitions.</p>
 <li>U+06D1 ARABIC LETTER YEH WITH THREE DOTS BELOW: try adding arabic</li>
 <li>U+06D2 ARABIC LETTER YEH BARREE: try adding arabic</li>
 <li>U+06D3 ARABIC LETTER YEH BARREE WITH HAMZA ABOVE: try adding arabic</li>
-<li>U+06D4 ARABIC FULL STOP: try adding one of: arabic, yezidi, hanifi-rohingya</li>
+<li>U+06D4 ARABIC FULL STOP: try adding one of: arabic, hanifi-rohingya, yezidi</li>
 <li>U+06D5 ARABIC LETTER AE: try adding arabic</li>
 <li>U+06D6 ARABIC SMALL HIGH LIGATURE SAD WITH LAM WITH ALEF MAKSURA: try adding arabic</li>
 <li>U+06D7 ARABIC SMALL HIGH LIGATURE QAF WITH LAM WITH ALEF MAKSURA: try adding arabic</li>
@@ -819,12 +1436,12 @@ definitions.</p>
 <li>U+08FE ARABIC DAMMA WITH DOT: try adding arabic</li>
 <li>U+08FF ARABIC MARK SIDEWAYS NOON GHUNNA: try adding arabic</li>
 <li>U+0E3F THAI CURRENCY SYMBOL BAHT: try adding thai</li>
-<li>U+200C ZERO WIDTH NON-JOINER: try adding one of: hanunoo, tagbanwa, hatran, batak, dogra, sogdian, sinhala, masaram-gondi, sundanese, avestan, tai-viet, buhid, khojki, yi, hebrew, tai-tham, modi, manichaean, cham, rejang, malayalam, myanmar, gujarati, lao, tagalog, tai-le, tirhuta, sharada, phags-pa, balinese, bengali, arabic, duployan, chakma, takri, meetei-mayek, kannada, thaana, khudawadi, bhaiksuki, pahawh-hmong, devanagari, lepcha, warang-citi, kayah-li, hanifi-rohingya, javanese, telugu, newa, kaithi, mahajani, syloti-nagri, psalter-pahlavi, thai, zanabazar-square, brahmi, buginese, mongolian, kharoshthi, saurashtra, khmer, gurmukhi, gunjala-gondi, mandaic, new-tai-lue, syriac, siddham, nko, oriya, tibetan, tifinagh, limbu, grantha, tamil</li>
-<li>U+200D ZERO WIDTH JOINER: try adding one of: hanunoo, tagbanwa, batak, dogra, sogdian, sinhala, masaram-gondi, sundanese, avestan, tai-viet, buhid, khojki, yi, hebrew, tai-tham, modi, manichaean, cham, rejang, malayalam, myanmar, gujarati, lao, tagalog, tai-le, tirhuta, sharada, phags-pa, balinese, bengali, arabic, duployan, chakma, takri, meetei-mayek, kannada, thaana, khudawadi, bhaiksuki, pahawh-hmong, devanagari, lepcha, warang-citi, kayah-li, hanifi-rohingya, javanese, telugu, newa, kaithi, mahajani, syloti-nagri, psalter-pahlavi, thai, zanabazar-square, brahmi, buginese, mongolian, kharoshthi, saurashtra, khmer, gurmukhi, gunjala-gondi, mandaic, new-tai-lue, syriac, siddham, nko, oriya, tibetan, tifinagh, limbu, grantha, tamil, old-hungarian</li>
-<li>U+200E LEFT-TO-RIGHT MARK: try adding one of: thaana, phags-pa, syriac, nko, hebrew, arabic</li>
-<li>U+200F RIGHT-TO-LEFT MARK: try adding one of: thaana, phags-pa, syriac, nko, hebrew</li>
-<li>U+2010 HYPHEN: try adding one of: syloti-nagri, kharoshthi, coptic, armenian, sundanese, yi, lisu, kayah-li, hebrew, sora-sompeng, arabic, cham, kaithi</li>
-<li>U+2011 NON-BREAKING HYPHEN: try adding one of: arabic, syloti-nagri, yi</li>
+<li>U+200C ZERO WIDTH NON-JOINER: try adding one of: lepcha, buhid, balinese, brahmi, mandaic, lao, sharada, manichaean, oriya, hebrew, malayalam, syriac, tagalog, telugu, zanabazar-square, hatran, yi, tamil, warang-citi, limbu, sogdian, kannada, syloti-nagri, tai-le, khmer, avestan, bhaiksuki, duployan, meetei-mayek, newa, hanifi-rohingya, kaithi, takri, grantha, pahawh-hmong, cham, bengali, khudawadi, psalter-pahlavi, sinhala, tai-tham, tifinagh, tirhuta, gunjala-gondi, phags-pa, arabic, nko, siddham, masaram-gondi, chakma, rejang, batak, thaana, kayah-li, javanese, mahajani, saurashtra, gujarati, sundanese, thai, buginese, modi, mongolian, tagbanwa, dogra, new-tai-lue, hanunoo, khojki, tibetan, kharoshthi, devanagari, myanmar, gurmukhi, tai-viet</li>
+<li>U+200D ZERO WIDTH JOINER: try adding one of: lepcha, buhid, balinese, brahmi, mandaic, lao, sharada, manichaean, oriya, hebrew, malayalam, syriac, tagalog, telugu, zanabazar-square, yi, tamil, warang-citi, limbu, sogdian, kannada, syloti-nagri, tai-le, khmer, avestan, bhaiksuki, duployan, meetei-mayek, newa, hanifi-rohingya, kaithi, takri, grantha, pahawh-hmong, cham, bengali, khudawadi, psalter-pahlavi, sinhala, tai-tham, tifinagh, tirhuta, gunjala-gondi, phags-pa, arabic, nko, siddham, masaram-gondi, chakma, rejang, batak, thaana, kayah-li, javanese, mahajani, saurashtra, gujarati, old-hungarian, sundanese, buginese, modi, mongolian, thai, tagbanwa, dogra, new-tai-lue, hanunoo, khojki, tibetan, kharoshthi, devanagari, myanmar, gurmukhi, tai-viet</li>
+<li>U+200E LEFT-TO-RIGHT MARK: try adding one of: syriac, hebrew, phags-pa, arabic, nko, thaana</li>
+<li>U+200F RIGHT-TO-LEFT MARK: try adding one of: syriac, hebrew, phags-pa, nko, thaana</li>
+<li>U+2010 HYPHEN: try adding one of: syloti-nagri, sundanese, cham, armenian, hebrew, lisu, arabic, coptic, yi, kharoshthi, sora-sompeng, kaithi, kayah-li</li>
+<li>U+2011 NON-BREAKING HYPHEN: try adding one of: syloti-nagri, arabic, yi</li>
 <li>U+2016 DOUBLE VERTICAL LINE: try adding math</li>
 <li>U+2021 DOUBLE DAGGER: try adding adlam</li>
 <li>U+202A LEFT-TO-RIGHT EMBEDDING: not included in any glyphset definition</li>
@@ -832,7 +1449,7 @@ definitions.</p>
 <li>U+202C POP DIRECTIONAL FORMATTING: not included in any glyphset definition</li>
 <li>U+202D LEFT-TO-RIGHT OVERRIDE: not included in any glyphset definition</li>
 <li>U+202E RIGHT-TO-LEFT OVERRIDE: try adding tifinagh</li>
-<li>U+202F NARROW NO-BREAK SPACE: try adding one of: mongolian, phags-pa, yi</li>
+<li>U+202F NARROW NO-BREAK SPACE: try adding one of: yi, phags-pa, mongolian</li>
 <li>U+2030 PER MILLE SIGN: try adding adlam</li>
 <li>U+203B REFERENCE MARK: not included in any glyphset definition</li>
 <li>U+203D INTERROBANG: not included in any glyphset definition</li>
@@ -877,9 +1494,9 @@ definitions.</p>
 <li>U+2422 BLANK SYMBOL: try adding symbols</li>
 <li>U+2423 OPEN BOX: try adding symbols</li>
 <li>U+25CA LOZENGE: try adding one of: math, symbols</li>
-<li>U+25CC DOTTED CIRCLE: try adding one of: hanunoo, sinhala, yi, khojki, tai-tham, caucasian-albanian, manichaean, lao, tirhuta, duployan, canadian-aboriginal, kannada, thaana, khudawadi, armenian, symbols, telugu, hanifi-rohingya, zanabazar-square, brahmi, saurashtra, math, gunjala-gondi, mandaic, siddham, oriya, tamil, adlam, tagbanwa, hebrew, old-permic, myanmar, tagalog, osage, phags-pa, takri, bhaiksuki, pahawh-hmong, bassa-vah, kaithi, mahajani, psalter-pahlavi, coptic, buginese, kharoshthi, khmer, gurmukhi, new-tai-lue, tibetan, tifinagh, limbu, grantha, dogra, sogdian, miao, sundanese, masaram-gondi, tai-viet, buhid, wancho, music, cham, gujarati, soyombo, tai-le, balinese, chakma, warang-citi, devanagari, lepcha, elbasan, syloti-nagri, syriac, ahom, batak, marchen, modi, rejang, malayalam, sharada, bengali, meetei-mayek, kayah-li, javanese, newa, thai, mongolian, nko, mende-kikakui</li>
+<li>U+25CC DOTTED CIRCLE: try adding one of: lepcha, brahmi, lao, math, oriya, hebrew, marchen, tamil, warang-citi, syloti-nagri, kannada, bhaiksuki, kaithi, cham, bengali, khudawadi, sinhala, gunjala-gondi, chakma, canadian-aboriginal, kayah-li, thai, modi, new-tai-lue, tibetan, kharoshthi, myanmar, mandaic, sharada, malayalam, yi, sogdian, duployan, hanifi-rohingya, psalter-pahlavi, miao, nko, bassa-vah, symbols, mahajani, saurashtra, sundanese, buginese, tagbanwa, dogra, hanunoo, khojki, music, balinese, tagalog, manichaean, telugu, elbasan, adlam, zanabazar-square, wancho, coptic, caucasian-albanian, osage, takri, tifinagh, tirhuta, tai-tham, phags-pa, siddham, javanese, gujarati, ahom, mongolian, buhid, syriac, limbu, soyombo, tai-le, khmer, meetei-mayek, newa, grantha, armenian, old-permic, mende-kikakui, masaram-gondi, rejang, batak, thaana, devanagari, pahawh-hmong, gurmukhi, tai-viet</li>
 <li>U+25E6 WHITE BULLET: try adding symbols</li>
-<li>U+266A EIGHTH NOTE: try adding one of: symbols, music</li>
+<li>U+266A EIGHTH NOTE: try adding one of: music, symbols</li>
 <li>U+26AD MARRIAGE SYMBOL: try adding symbols</li>
 <li>U+26AE DIVORCE SYMBOL: try adding symbols</li>
 <li>U+27E6 MATHEMATICAL LEFT WHITE SQUARE BRACKET: try adding math</li>
@@ -1039,13 +1656,13 @@ definitions.</p>
 <li>U+FD3E ORNATE LEFT PARENTHESIS: try adding one of: arabic, nko</li>
 <li>U+FD3F ORNATE RIGHT PARENTHESIS: try adding one of: arabic, nko</li>
 <li>U+FD88 ARABIC LIGATURE LAM WITH MEEM WITH HAH INITIAL FORM: try adding arabic</li>
-<li>U+FDF2 ARABIC LIGATURE ALLAH ISOLATED FORM: try adding one of: arabic, thaana</li>
+<li>U+FDF2 ARABIC LIGATURE ALLAH ISOLATED FORM: try adding one of: thaana, arabic</li>
 <li>U+FDF4 ARABIC LIGATURE MOHAMMAD ISOLATED FORM: try adding arabic</li>
 <li>U+FDFA ARABIC LIGATURE SALLALLAHOU ALAYHE WASALLAM: try adding arabic</li>
 <li>U+FDFB ARABIC LIGATURE JALLAJALALOUHOU: try adding arabic</li>
 <li>U+FDFC RIAL SIGN: try adding arabic</li>
-<li>U+FDFD ARABIC LIGATURE BISMILLAH AR-RAHMAN AR-RAHEEM: try adding one of: arabic, thaana</li>
-<li>U+FE00 VARIATION SELECTOR-1: try adding one of: manichaean, phags-pa, yi</li>
+<li>U+FDFD ARABIC LIGATURE BISMILLAH AR-RAHMAN AR-RAHEEM: try adding one of: thaana, arabic</li>
+<li>U+FE00 VARIATION SELECTOR-1: try adding one of: manichaean, yi, phags-pa</li>
 <li>U+FE01 VARIATION SELECTOR-2: not included in any glyphset definition</li>
 <li>U+FE02 VARIATION SELECTOR-3: not included in any glyphset definition</li>
 <li>U+FE03 VARIATION SELECTOR-4: not included in any glyphset definition</li>
@@ -1204,7 +1821,7 @@ definitions.</p>
 </details>
 
 <details>
-    <summary>⚠️ <b>WARN</b> Shapes languages in all GF glyphsets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-glyphsets-shape-languages">googlefonts/glyphsets/shape_languages</a></summary>
+    <summary>⚠️ <b>WARN</b> Validate size, and resolution of article images, and ensure article page has minimum length and includes visual assets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-article-images">googlefonts/article/images</a></summary>
     <div>
 
 
@@ -1213,70 +1830,8 @@ definitions.</p>
 
 
 
-* ⚠️ **WARN** <p>GF_Phonetics_SinoExt glyphset:</p>
-<table>
-<thead>
-<tr>
-<th align="left">WARN messages</th>
-<th align="left">Languages</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">Auxiliary orthography codepoints:</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: ʻ</td>
-<td align="left">en_Latn (English)</td>
-</tr>
-<tr>
-<td align="left">Auxiliary orthography codepoints:</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: Ǥ</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: Ȟ</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: Ǩ</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: Ʒ</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: Ǯ</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: ǥ</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: ȟ</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: ǩ</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: ʒ</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: ǯ</td>
-<td align="left">fi_Latn (Finnish)</td>
-</tr>
-</tbody>
-</table>
- [code: warning-language-shaping]
+* ⚠️ **WARN** <p>Family metadata at fonts/variable does not have an article.</p>
+ [code: lacks-article]
 
 
 
@@ -1346,8 +1901,659 @@ definitions.</p>
 </div>
 </details>
 
-<details><summary>[14] QalamBadi[wght].ttf</summary>
+<details><summary>[13] QalamBadi[wght].ttf</summary>
 <div>
+<details>
+    <summary>🔥 <b>FAIL</b> Shapes languages in all GF glyphsets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-glyphsets-shape-languages">googlefonts/glyphsets/shape_languages</a></summary>
+    <div>
+
+
+
+
+
+
+
+* 🔥 **FAIL** <p>GF_Phonetics_SinoExt glyphset:</p>
+<table>
+<thead>
+<tr>
+<th align="left">FAIL messages</th>
+<th align="left">Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to J when shaping the text 'ÍJ́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to j when shaping the text 'íj́'</td>
+<td align="left">nl_Latn (Dutch)</td>
+</tr>
+</tbody>
+</table>
+ [code: failed-language-shaping]
+
+
+
+* ⚠️ **WARN** <p>GF_Phonetics_SinoExt glyphset:</p>
+<table>
+<thead>
+<tr>
+<th align="left">WARN messages</th>
+<th align="left">Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064E to uni25CC when shaping the text '◌َ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0650 to uni25CC when shaping the text '◌ِ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064F to uni25CC when shaping the text '◌ُ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0652 to uni25CC when shaping the text '◌ْ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0656 to the base glyph when shaping the text '◌ٖ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0670 to uni25CC when shaping the text '◌ٰ'</td>
+<td align="left">fa_Arab (Persian) and fa_Arab (Persian)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064B to uni25CC when shaping the text '◌ً'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064C to uni25CC when shaping the text '◌ٌ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064D to uni25CC when shaping the text '◌ٍ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064E to uni25CC when shaping the text '◌َ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064F to uni25CC when shaping the text '◌ُ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0650 to uni25CC when shaping the text '◌ِ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0651 to uni25CC when shaping the text '◌ّ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0652 to uni25CC when shaping the text '◌ْ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0654 to uni25CC when shaping the text '◌ٔ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0656 to the base glyph when shaping the text '◌ٖ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0657 to the base glyph when shaping the text '◌ٗ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0658 to the base glyph when shaping the text '◌٘'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0670 to uni25CC when shaping the text '◌ٰ'</td>
+<td align="left">ur_Arab (Urdu) and ur_Arab (Urdu)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0430 when shaping the text 'а́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0435 when shaping the text 'е́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0438 when shaping the text 'и́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni043E when shaping the text 'о́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0443 when shaping the text 'у́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044B when shaping the text 'ы́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044D when shaping the text 'э́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044E when shaping the text 'ю́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044F when shaping the text 'я́'</td>
+<td align="left">ru_Cyrl (Russian), ru_Cyrl (Russian) and ru_Cyrl (Russian)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0430 when shaping the text 'а́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0435 when shaping the text 'е́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0454 when shaping the text 'є́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0438 when shaping the text 'и́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0456 when shaping the text 'і́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0457 when shaping the text 'ї́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni043E when shaping the text 'о́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0443 when shaping the text 'у́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044E when shaping the text 'ю́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044F when shaping the text 'я́'</td>
+<td align="left">uk_Cyrl (Ukrainian), uk_Cyrl (Ukrainian) and uk_Cyrl (Ukrainian)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0430 when shaping the text 'а́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0435 when shaping the text 'е́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0451 when shaping the text 'ё́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0456 when shaping the text 'і́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni043E when shaping the text 'о́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0443 when shaping the text 'у́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044B when shaping the text 'ы́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044D when shaping the text 'э́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044E when shaping the text 'ю́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni044F when shaping the text 'я́'</td>
+<td align="left">be_Cyrl (Belarusian), be_Cyrl (Belarusian) and be_Cyrl (Belarusian)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach gravecomb to uni0430 when shaping the text 'а̀'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach gravecomb to uni043E when shaping the text 'о̀'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach gravecomb to uni0443 when shaping the text 'у̀'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach gravecomb to uni044A when shaping the text 'ъ̀'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach gravecomb to uni044E when shaping the text 'ю̀'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach gravecomb to uni044F when shaping the text 'я̀'</td>
+<td align="left">bg_Cyrl (Bulgarian), bg_Cyrl (Bulgarian) and bg_Cyrl (Bulgarian)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0302 to uni0430 when shaping the text 'а̂'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0302 to uni0435 when shaping the text 'е̂'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0302 to uni0438 when shaping the text 'и̂'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0302 to uni043E when shaping the text 'о̂'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0302 to uni0443 when shaping the text 'у̂'</td>
+<td align="left">sr_Cyrl (Serbian), sr_Cyrl (Serbian) and sr_Cyrl (Serbian)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ʻ</td>
+<td align="left">en_Latn (English)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ǥ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ȟ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ǩ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ʒ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ǯ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ǥ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ȟ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ǩ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ʒ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ǯ</td>
+<td align="left">fi_Latn (Finnish)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to Aogonek when shaping the text 'Ą́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to Aogonek when shaping the text 'Ą̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to Eogonek when shaping the text 'Ę́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to Eogonek when shaping the text 'Ę̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to Edotaccent when shaping the text 'Ė́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to Edotaccent when shaping the text 'Ė̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to Idotaccent when shaping the text 'İ́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to Idotaccent when shaping the text 'İ́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach gravecomb to Idotaccent when shaping the text 'İ̀'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach gravecomb to Idotaccent when shaping the text 'İ̀'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to Idotaccent when shaping the text 'İ̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to Idotaccent when shaping the text 'İ̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to Iogonek when shaping the text 'Į́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0307 to Iogonek when shaping the text 'Į̇́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0307 when shaping the text 'Į̇́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to Iogonek when shaping the text 'Į̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0307 to Iogonek when shaping the text 'Į̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to uni0307 when shaping the text 'Į̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to J when shaping the text 'J̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0307 to J when shaping the text 'J̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to uni0307 when shaping the text 'J̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to L when shaping the text 'L̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to M when shaping the text 'M̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to R when shaping the text 'R̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to Uogonek when shaping the text 'Ų́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to Uogonek when shaping the text 'Ų̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to Umacron when shaping the text 'Ū́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to Umacron when shaping the text 'Ū̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to aogonek when shaping the text 'ą́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to aogonek when shaping the text 'ą̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to eogonek when shaping the text 'ę́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to eogonek when shaping the text 'ę̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to edotaccent when shaping the text 'ė́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to edotaccent when shaping the text 'ė̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0307 to i when shaping the text 'i̇́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0307 when shaping the text 'i̇́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0307 to i when shaping the text 'i̇̀'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach gravecomb to uni0307 when shaping the text 'i̇̀'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0307 to i when shaping the text 'i̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to uni0307 when shaping the text 'i̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to iogonek when shaping the text 'į́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0307 to iogonek when shaping the text 'į̇́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uni0307 when shaping the text 'į̇́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to iogonek when shaping the text 'į̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0307 to iogonek when shaping the text 'į̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to uni0307 when shaping the text 'į̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to j when shaping the text 'j̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0307 to j when shaping the text 'j̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to uni0307 when shaping the text 'j̇̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to l when shaping the text 'l̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to m when shaping the text 'm̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to r when shaping the text 'r̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to uogonek when shaping the text 'ų́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to uogonek when shaping the text 'ų̃'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach acutecomb to umacron when shaping the text 'ū́'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach tildecomb to umacron when shaping the text 'ū̃'</td>
+<td align="left">lt_Latn (Lithuanian)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064B to uni25CC when shaping the text '◌ً'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064C to uni25CC when shaping the text '◌ٌ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064D to uni25CC when shaping the text '◌ٍ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064E to uni25CC when shaping the text '◌َ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064F to uni25CC when shaping the text '◌ُ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0650 to uni25CC when shaping the text '◌ِ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0651 to uni25CC when shaping the text '◌ّ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0652 to uni25CC when shaping the text '◌ْ'</td>
+<td align="left">ckb_Arab (Central Kurdish)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064E to uni25CC when shaping the text '◌َ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni064F to uni25CC when shaping the text '◌ُ'</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Shaper didn't attach uni0650 to uni25CC when shaping the text '◌ِ'</td>
+<td align="left">sd_Arab (Sindhi)</td>
+</tr>
+</tbody>
+</table>
+ [code: warning-language-shaping]
+
+
+
+</div>
+</details>
+
 <details>
     <summary>⚠️ <b>WARN</b> Check accent of Lcaron, dcaron, lcaron, tcaron <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#alt-caron">alt_caron</a></summary>
     <div>
@@ -1362,24 +2568,6 @@ definitions.</p>
 
 * ⚠️ **WARN** <p>dcaron is decomposed and therefore could not be checked. Please check manually.</p>
  [code: decomposed-outline]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Does GPOS table have kerning information? This check skips monospaced fonts as defined by post.isFixedPitch value <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#gpos-kerning-info">gpos_kerning_info</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>GPOS table lacks kerning information.</p>
- [code: lacks-kern-info]
 
 
 
@@ -1417,7 +2605,7 @@ definitions.</p>
 * ⚠️ **WARN** <p>The most common width is 1132 among a set of 8 math glyphs.
 The following math glyphs have a different width, though:</p>
 <p>Width = 1172:
-less, approxequal, greater</p>
+less, greater, approxequal</p>
 <p>Width = 1182:
 logicalnot</p>
 <p>Width = 1010:
@@ -1460,7 +2648,7 @@ uni2222</p>
 
 
 * ⚠️ **WARN** <p>The following glyphs have overlapping path segments:</p>
-<pre><code>* sigma1 (U+03C2): B&lt;&lt;958.0,851.0&gt;-&lt;957.0,851.0&gt;-&lt;957.0,852.0&gt;&gt; has the same coordinates as a previous segment.
+<pre><code>* sigma1 (U+03C2): B&lt;&lt;956.0,851.0&gt;-&lt;955.0,851.0&gt;-&lt;955.0,852.0&gt;&gt; has the same coordinates as a previous segment.
 
 * uni0770.init: B&lt;&lt;124.0,728.0&gt;-&lt;124.0,728.0&gt;-&lt;124.0,727.5&gt;&gt; has the same coordinates as a previous segment.
 
@@ -1486,9 +2674,9 @@ uni2222</p>
 
 * uni0770.medi: B&lt;&lt;64.0,728.0&gt;-&lt;66.0,728.0&gt;-&lt;64.0,721.0&gt;&gt; has the same coordinates as a previous segment.
 
-* uni077D (U+077D): B&lt;&lt;1158.0,1236.0&gt;-&lt;1158.0,1236.0&gt;-&lt;1158.0,1236.0&gt;&gt; has the same coordinates as a previous segment.
+* uni077D (U+077D): B&lt;&lt;1163.0,1236.0&gt;-&lt;1163.0,1236.0&gt;-&lt;1163.0,1236.0&gt;&gt; has the same coordinates as a previous segment.
 
-* uni077D (U+077D): B&lt;&lt;1157.0,1229.0&gt;-&lt;1158.0,1229.0&gt;-&lt;1160.0,1229.0&gt;&gt; has the same coordinates as a previous segment.
+* uni077D (U+077D): B&lt;&lt;1162.0,1229.0&gt;-&lt;1163.0,1229.0&gt;-&lt;1165.0,1229.0&gt;&gt; has the same coordinates as a previous segment.
 
 * uni077D.fina: B&lt;&lt;545.0,1236.0&gt;-&lt;545.0,1236.0&gt;-&lt;545.0,1236.0&gt;&gt; has the same coordinates as a previous segment.
 
@@ -1690,13 +2878,7 @@ uni2222</p>
 
 
 * ⚠️ **WARN** <p>Interpolation issues were found in the font:</p>
-<pre><code>- Contour 2 start point differs in glyph 'uni2103' between location wght=400 and location wght=700
-
-- Contour 2 in glyph 'uni2103': becomes underweight between wght=400 and wght=700.
-
-- Contour 3 start point differs in glyph 'uni20A6' between location wght=400 and location wght=700
-
-- Contour 4 start point differs in glyph 'uni20A6' between location wght=400 and location wght=700
+<pre><code>- Contour 16 in glyph 'u1F7D9': becomes underweight between wght=400 and wght=700.
 
 - Contour 5 start point differs in glyph 'uni06DE' between location wght=400 and location wght=700
 
@@ -1706,31 +2888,19 @@ uni2222</p>
 
 - Contour 15 start point differs in glyph 'uniFDFD' between location wght=400 and location wght=700
 
-- Contour 16 in glyph 'u1F7D9': becomes underweight between wght=400 and wght=700.
+- Contour 4 start point differs in glyph 'uni0620.medi' between location wght=400 and location wght=700
+
+- Contour 3 start point differs in glyph 'uni20A6' between location wght=400 and location wght=700
+
+- Contour 4 start point differs in glyph 'uni20A6' between location wght=400 and location wght=700
+
+- Contour 2 start point differs in glyph 'uni2103' between location wght=400 and location wght=700
+
+- Contour 2 in glyph 'uni2103': becomes underweight between wght=400 and wght=700.
 
 - Contour 17 start point differs in glyph 'uniFDFA' between location wght=400 and location wght=700
-
-- Contour 4 start point differs in glyph 'uni0620.medi' between location wght=400 and location wght=700
 </code></pre>
  [code: interpolation-issues]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Validate size, and resolution of article images, and ensure article page has minimum length and includes visual assets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-article-images">googlefonts/article/images</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>Family metadata at fonts/variable does not have an article.</p>
- [code: lacks-article]
 
 
 
@@ -1756,12 +2926,12 @@ definitions.</p>
 <li>U+02D8 BREVE: try adding one of: canadian-aboriginal, yi</li>
 <li>U+02D9 DOT ABOVE: try adding one of: canadian-aboriginal, yi</li>
 <li>U+02DB OGONEK: try adding one of: canadian-aboriginal, yi</li>
-<li>U+0302 COMBINING CIRCUMFLEX ACCENT: try adding one of: tifinagh, cherokee, coptic, math</li>
-<li>U+0306 COMBINING BREVE: try adding one of: tifinagh, old-permic</li>
-<li>U+0307 COMBINING DOT ABOVE: try adding one of: old-permic, todhri, math, tai-le, syriac, tifinagh, hebrew, duployan, canadian-aboriginal, coptic, malayalam</li>
+<li>U+0302 COMBINING CIRCUMFLEX ACCENT: try adding one of: cherokee, coptic, math, tifinagh</li>
+<li>U+0306 COMBINING BREVE: try adding one of: old-permic, tifinagh</li>
+<li>U+0307 COMBINING DOT ABOVE: try adding one of: tifinagh, syriac, tai-le, math, old-permic, hebrew, malayalam, duployan, coptic, canadian-aboriginal, todhri</li>
 <li>U+030A COMBINING RING ABOVE: try adding one of: duployan, syriac</li>
 <li>U+030B COMBINING DOUBLE ACUTE ACCENT: try adding one of: cherokee, osage</li>
-<li>U+030C COMBINING CARON: try adding one of: tai-le, cherokee</li>
+<li>U+030C COMBINING CARON: try adding one of: cherokee, tai-le</li>
 <li>U+030F COMBINING DOUBLE GRAVE ACCENT: not included in any glyphset definition</li>
 <li>U+0311 COMBINING INVERTED BREVE: try adding one of: todhri, coptic</li>
 <li>U+0312 COMBINING TURNED COMMA ABOVE: try adding math</li>
@@ -1771,8 +2941,8 @@ definitions.</p>
 <li>U+0328 COMBINING OGONEK: not included in any glyphset definition</li>
 <li>U+032E COMBINING BREVE BELOW: try adding syriac</li>
 <li>U+032F COMBINING INVERTED BREVE BELOW: try adding math</li>
-<li>U+0330 COMBINING TILDE BELOW: try adding one of: syriac, cherokee, math</li>
-<li>U+0331 COMBINING MACRON BELOW: try adding one of: gothic, syriac, sunuwar, tifinagh, cherokee, caucasian-albanian, thai</li>
+<li>U+0330 COMBINING TILDE BELOW: try adding one of: cherokee, math, syriac</li>
+<li>U+0331 COMBINING MACRON BELOW: try adding one of: thai, tifinagh, syriac, gothic, caucasian-albanian, cherokee, sunuwar</li>
 <li>U+0332 COMBINING LOW LINE: try adding math</li>
 <li>U+034F COMBINING GRAPHEME JOINER: not included in any glyphset definition</li>
 <li>U+0600 ARABIC NUMBER SIGN: try adding arabic</li>
@@ -1787,7 +2957,7 @@ definitions.</p>
 <li>U+0609 ARABIC-INDIC PER MILLE SIGN: try adding arabic</li>
 <li>U+060A ARABIC-INDIC PER TEN THOUSAND SIGN: try adding arabic</li>
 <li>U+060B AFGHANI SIGN: try adding arabic</li>
-<li>U+060C ARABIC COMMA: try adding one of: thaana, syriac, nko, yezidi, hanifi-rohingya, arabic, garay</li>
+<li>U+060C ARABIC COMMA: try adding one of: thaana, syriac, arabic, nko, garay, hanifi-rohingya, yezidi</li>
 <li>U+060D ARABIC DATE SEPARATOR: try adding arabic</li>
 <li>U+060E ARABIC POETIC VERSE SIGN: try adding arabic</li>
 <li>U+060F ARABIC SIGN MISRA: try adding arabic</li>
@@ -1802,10 +2972,10 @@ definitions.</p>
 <li>U+0618 ARABIC SMALL FATHA: try adding arabic</li>
 <li>U+0619 ARABIC SMALL DAMMA: try adding arabic</li>
 <li>U+061A ARABIC SMALL KASRA: try adding arabic</li>
-<li>U+061B ARABIC SEMICOLON: try adding one of: thaana, syriac, nko, yezidi, hanifi-rohingya, arabic, garay</li>
-<li>U+061C ARABIC LETTER MARK: try adding one of: arabic, thaana, syriac</li>
+<li>U+061B ARABIC SEMICOLON: try adding one of: thaana, syriac, arabic, nko, garay, hanifi-rohingya, yezidi</li>
+<li>U+061C ARABIC LETTER MARK: try adding one of: thaana, arabic, syriac</li>
 <li>U+061E ARABIC TRIPLE DOT PUNCTUATION MARK: try adding arabic</li>
-<li>U+061F ARABIC QUESTION MARK: try adding one of: adlam, thaana, syriac, nko, arabic, hanifi-rohingya, yezidi, garay</li>
+<li>U+061F ARABIC QUESTION MARK: try adding one of: thaana, syriac, adlam, arabic, nko, garay, hanifi-rohingya, yezidi</li>
 <li>U+0620 ARABIC LETTER KASHMIRI YEH: try adding arabic</li>
 <li>U+0621 ARABIC LETTER HAMZA: try adding one of: arabic, syriac</li>
 <li>U+0622 ARABIC LETTER ALEF WITH MADDA ABOVE: try adding arabic</li>
@@ -1838,7 +3008,7 @@ definitions.</p>
 <li>U+063D ARABIC LETTER FARSI YEH WITH INVERTED V: try adding arabic</li>
 <li>U+063E ARABIC LETTER FARSI YEH WITH TWO DOTS ABOVE: try adding arabic</li>
 <li>U+063F ARABIC LETTER FARSI YEH WITH THREE DOTS ABOVE: try adding arabic</li>
-<li>U+0640 ARABIC TATWEEL: try adding one of: adlam, sogdian, mandaic, syriac, old-uyghur, hanifi-rohingya, arabic, manichaean, psalter-pahlavi</li>
+<li>U+0640 ARABIC TATWEEL: try adding one of: sogdian, mandaic, psalter-pahlavi, syriac, manichaean, old-uyghur, adlam, arabic, hanifi-rohingya</li>
 <li>U+0641 ARABIC LETTER FEH: try adding arabic</li>
 <li>U+0642 ARABIC LETTER QAF: try adding arabic</li>
 <li>U+0643 ARABIC LETTER KAF: try adding arabic</li>
@@ -1870,19 +3040,19 @@ definitions.</p>
 <li>U+065D ARABIC REVERSED DAMMA: try adding arabic</li>
 <li>U+065E ARABIC FATHA WITH TWO DOTS: try adding arabic</li>
 <li>U+065F ARABIC WAVY HAMZA BELOW: try adding arabic</li>
-<li>U+0660 ARABIC-INDIC DIGIT ZERO: try adding one of: thaana, syriac, yezidi, hanifi-rohingya, indic-siyaq-numbers, arabic</li>
-<li>U+0661 ARABIC-INDIC DIGIT ONE: try adding one of: thaana, syriac, yezidi, indic-siyaq-numbers, arabic</li>
-<li>U+0662 ARABIC-INDIC DIGIT TWO: try adding one of: thaana, syriac, yezidi, indic-siyaq-numbers, arabic</li>
-<li>U+0663 ARABIC-INDIC DIGIT THREE: try adding one of: thaana, syriac, yezidi, indic-siyaq-numbers, arabic</li>
-<li>U+0664 ARABIC-INDIC DIGIT FOUR: try adding one of: thaana, syriac, yezidi, indic-siyaq-numbers, arabic</li>
-<li>U+0665 ARABIC-INDIC DIGIT FIVE: try adding one of: thaana, syriac, yezidi, indic-siyaq-numbers, arabic</li>
-<li>U+0666 ARABIC-INDIC DIGIT SIX: try adding one of: thaana, syriac, yezidi, indic-siyaq-numbers, arabic</li>
-<li>U+0667 ARABIC-INDIC DIGIT SEVEN: try adding one of: thaana, syriac, yezidi, indic-siyaq-numbers, arabic</li>
-<li>U+0668 ARABIC-INDIC DIGIT EIGHT: try adding one of: thaana, syriac, yezidi, indic-siyaq-numbers, arabic</li>
-<li>U+0669 ARABIC-INDIC DIGIT NINE: try adding one of: thaana, syriac, yezidi, indic-siyaq-numbers, arabic</li>
-<li>U+066A ARABIC PERCENT SIGN: try adding one of: arabic, nko, thaana, syriac</li>
-<li>U+066B ARABIC DECIMAL SEPARATOR: try adding one of: arabic, thaana, syriac</li>
-<li>U+066C ARABIC THOUSANDS SEPARATOR: try adding one of: arabic, thaana, syriac</li>
+<li>U+0660 ARABIC-INDIC DIGIT ZERO: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, hanifi-rohingya, yezidi</li>
+<li>U+0661 ARABIC-INDIC DIGIT ONE: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, yezidi</li>
+<li>U+0662 ARABIC-INDIC DIGIT TWO: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, yezidi</li>
+<li>U+0663 ARABIC-INDIC DIGIT THREE: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, yezidi</li>
+<li>U+0664 ARABIC-INDIC DIGIT FOUR: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, yezidi</li>
+<li>U+0665 ARABIC-INDIC DIGIT FIVE: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, yezidi</li>
+<li>U+0666 ARABIC-INDIC DIGIT SIX: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, yezidi</li>
+<li>U+0667 ARABIC-INDIC DIGIT SEVEN: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, yezidi</li>
+<li>U+0668 ARABIC-INDIC DIGIT EIGHT: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, yezidi</li>
+<li>U+0669 ARABIC-INDIC DIGIT NINE: try adding one of: syriac, indic-siyaq-numbers, arabic, thaana, yezidi</li>
+<li>U+066A ARABIC PERCENT SIGN: try adding one of: thaana, arabic, nko, syriac</li>
+<li>U+066B ARABIC DECIMAL SEPARATOR: try adding one of: thaana, arabic, syriac</li>
+<li>U+066C ARABIC THOUSANDS SEPARATOR: try adding one of: thaana, arabic, syriac</li>
 <li>U+066D ARABIC FIVE POINTED STAR: try adding arabic</li>
 <li>U+066E ARABIC LETTER DOTLESS BEH: try adding arabic</li>
 <li>U+066F ARABIC LETTER DOTLESS QAF: try adding arabic</li>
@@ -1986,7 +3156,7 @@ definitions.</p>
 <li>U+06D1 ARABIC LETTER YEH WITH THREE DOTS BELOW: try adding arabic</li>
 <li>U+06D2 ARABIC LETTER YEH BARREE: try adding arabic</li>
 <li>U+06D3 ARABIC LETTER YEH BARREE WITH HAMZA ABOVE: try adding arabic</li>
-<li>U+06D4 ARABIC FULL STOP: try adding one of: arabic, yezidi, hanifi-rohingya</li>
+<li>U+06D4 ARABIC FULL STOP: try adding one of: arabic, hanifi-rohingya, yezidi</li>
 <li>U+06D5 ARABIC LETTER AE: try adding arabic</li>
 <li>U+06D6 ARABIC SMALL HIGH LIGATURE SAD WITH LAM WITH ALEF MAKSURA: try adding arabic</li>
 <li>U+06D7 ARABIC SMALL HIGH LIGATURE QAF WITH LAM WITH ALEF MAKSURA: try adding arabic</li>
@@ -2165,12 +3335,12 @@ definitions.</p>
 <li>U+08FE ARABIC DAMMA WITH DOT: try adding arabic</li>
 <li>U+08FF ARABIC MARK SIDEWAYS NOON GHUNNA: try adding arabic</li>
 <li>U+0E3F THAI CURRENCY SYMBOL BAHT: try adding thai</li>
-<li>U+200C ZERO WIDTH NON-JOINER: try adding one of: hanunoo, tagbanwa, hatran, batak, dogra, sogdian, sinhala, masaram-gondi, sundanese, avestan, tai-viet, buhid, khojki, yi, hebrew, tai-tham, modi, manichaean, cham, rejang, malayalam, myanmar, gujarati, lao, tagalog, tai-le, tirhuta, sharada, phags-pa, balinese, bengali, arabic, duployan, chakma, takri, meetei-mayek, kannada, thaana, khudawadi, bhaiksuki, pahawh-hmong, devanagari, lepcha, warang-citi, kayah-li, hanifi-rohingya, javanese, telugu, newa, kaithi, mahajani, syloti-nagri, psalter-pahlavi, thai, zanabazar-square, brahmi, buginese, mongolian, kharoshthi, saurashtra, khmer, gurmukhi, gunjala-gondi, mandaic, new-tai-lue, syriac, siddham, nko, oriya, tibetan, tifinagh, limbu, grantha, tamil</li>
-<li>U+200D ZERO WIDTH JOINER: try adding one of: hanunoo, tagbanwa, batak, dogra, sogdian, sinhala, masaram-gondi, sundanese, avestan, tai-viet, buhid, khojki, yi, hebrew, tai-tham, modi, manichaean, cham, rejang, malayalam, myanmar, gujarati, lao, tagalog, tai-le, tirhuta, sharada, phags-pa, balinese, bengali, arabic, duployan, chakma, takri, meetei-mayek, kannada, thaana, khudawadi, bhaiksuki, pahawh-hmong, devanagari, lepcha, warang-citi, kayah-li, hanifi-rohingya, javanese, telugu, newa, kaithi, mahajani, syloti-nagri, psalter-pahlavi, thai, zanabazar-square, brahmi, buginese, mongolian, kharoshthi, saurashtra, khmer, gurmukhi, gunjala-gondi, mandaic, new-tai-lue, syriac, siddham, nko, oriya, tibetan, tifinagh, limbu, grantha, tamil, old-hungarian</li>
-<li>U+200E LEFT-TO-RIGHT MARK: try adding one of: thaana, phags-pa, syriac, nko, hebrew, arabic</li>
-<li>U+200F RIGHT-TO-LEFT MARK: try adding one of: thaana, phags-pa, syriac, nko, hebrew</li>
-<li>U+2010 HYPHEN: try adding one of: syloti-nagri, kharoshthi, coptic, armenian, sundanese, yi, lisu, kayah-li, hebrew, sora-sompeng, arabic, cham, kaithi</li>
-<li>U+2011 NON-BREAKING HYPHEN: try adding one of: arabic, syloti-nagri, yi</li>
+<li>U+200C ZERO WIDTH NON-JOINER: try adding one of: lepcha, buhid, balinese, brahmi, mandaic, lao, sharada, manichaean, oriya, hebrew, malayalam, syriac, tagalog, telugu, zanabazar-square, hatran, yi, tamil, warang-citi, limbu, sogdian, kannada, syloti-nagri, tai-le, khmer, avestan, bhaiksuki, duployan, meetei-mayek, newa, hanifi-rohingya, kaithi, takri, grantha, pahawh-hmong, cham, bengali, khudawadi, psalter-pahlavi, sinhala, tai-tham, tifinagh, tirhuta, gunjala-gondi, phags-pa, arabic, nko, siddham, masaram-gondi, chakma, rejang, batak, thaana, kayah-li, javanese, mahajani, saurashtra, gujarati, sundanese, thai, buginese, modi, mongolian, tagbanwa, dogra, new-tai-lue, hanunoo, khojki, tibetan, kharoshthi, devanagari, myanmar, gurmukhi, tai-viet</li>
+<li>U+200D ZERO WIDTH JOINER: try adding one of: lepcha, buhid, balinese, brahmi, mandaic, lao, sharada, manichaean, oriya, hebrew, malayalam, syriac, tagalog, telugu, zanabazar-square, yi, tamil, warang-citi, limbu, sogdian, kannada, syloti-nagri, tai-le, khmer, avestan, bhaiksuki, duployan, meetei-mayek, newa, hanifi-rohingya, kaithi, takri, grantha, pahawh-hmong, cham, bengali, khudawadi, psalter-pahlavi, sinhala, tai-tham, tifinagh, tirhuta, gunjala-gondi, phags-pa, arabic, nko, siddham, masaram-gondi, chakma, rejang, batak, thaana, kayah-li, javanese, mahajani, saurashtra, gujarati, old-hungarian, sundanese, buginese, modi, mongolian, thai, tagbanwa, dogra, new-tai-lue, hanunoo, khojki, tibetan, kharoshthi, devanagari, myanmar, gurmukhi, tai-viet</li>
+<li>U+200E LEFT-TO-RIGHT MARK: try adding one of: syriac, hebrew, phags-pa, arabic, nko, thaana</li>
+<li>U+200F RIGHT-TO-LEFT MARK: try adding one of: syriac, hebrew, phags-pa, nko, thaana</li>
+<li>U+2010 HYPHEN: try adding one of: syloti-nagri, sundanese, cham, armenian, hebrew, lisu, arabic, coptic, yi, kharoshthi, sora-sompeng, kaithi, kayah-li</li>
+<li>U+2011 NON-BREAKING HYPHEN: try adding one of: syloti-nagri, arabic, yi</li>
 <li>U+2016 DOUBLE VERTICAL LINE: try adding math</li>
 <li>U+2021 DOUBLE DAGGER: try adding adlam</li>
 <li>U+202A LEFT-TO-RIGHT EMBEDDING: not included in any glyphset definition</li>
@@ -2178,7 +3348,7 @@ definitions.</p>
 <li>U+202C POP DIRECTIONAL FORMATTING: not included in any glyphset definition</li>
 <li>U+202D LEFT-TO-RIGHT OVERRIDE: not included in any glyphset definition</li>
 <li>U+202E RIGHT-TO-LEFT OVERRIDE: try adding tifinagh</li>
-<li>U+202F NARROW NO-BREAK SPACE: try adding one of: mongolian, phags-pa, yi</li>
+<li>U+202F NARROW NO-BREAK SPACE: try adding one of: yi, phags-pa, mongolian</li>
 <li>U+2030 PER MILLE SIGN: try adding adlam</li>
 <li>U+203B REFERENCE MARK: not included in any glyphset definition</li>
 <li>U+203D INTERROBANG: not included in any glyphset definition</li>
@@ -2223,9 +3393,9 @@ definitions.</p>
 <li>U+2422 BLANK SYMBOL: try adding symbols</li>
 <li>U+2423 OPEN BOX: try adding symbols</li>
 <li>U+25CA LOZENGE: try adding one of: math, symbols</li>
-<li>U+25CC DOTTED CIRCLE: try adding one of: hanunoo, sinhala, yi, khojki, tai-tham, caucasian-albanian, manichaean, lao, tirhuta, duployan, canadian-aboriginal, kannada, thaana, khudawadi, armenian, symbols, telugu, hanifi-rohingya, zanabazar-square, brahmi, saurashtra, math, gunjala-gondi, mandaic, siddham, oriya, tamil, adlam, tagbanwa, hebrew, old-permic, myanmar, tagalog, osage, phags-pa, takri, bhaiksuki, pahawh-hmong, bassa-vah, kaithi, mahajani, psalter-pahlavi, coptic, buginese, kharoshthi, khmer, gurmukhi, new-tai-lue, tibetan, tifinagh, limbu, grantha, dogra, sogdian, miao, sundanese, masaram-gondi, tai-viet, buhid, wancho, music, cham, gujarati, soyombo, tai-le, balinese, chakma, warang-citi, devanagari, lepcha, elbasan, syloti-nagri, syriac, ahom, batak, marchen, modi, rejang, malayalam, sharada, bengali, meetei-mayek, kayah-li, javanese, newa, thai, mongolian, nko, mende-kikakui</li>
+<li>U+25CC DOTTED CIRCLE: try adding one of: lepcha, brahmi, lao, math, oriya, hebrew, marchen, tamil, warang-citi, syloti-nagri, kannada, bhaiksuki, kaithi, cham, bengali, khudawadi, sinhala, gunjala-gondi, chakma, canadian-aboriginal, kayah-li, thai, modi, new-tai-lue, tibetan, kharoshthi, myanmar, mandaic, sharada, malayalam, yi, sogdian, duployan, hanifi-rohingya, psalter-pahlavi, miao, nko, bassa-vah, symbols, mahajani, saurashtra, sundanese, buginese, tagbanwa, dogra, hanunoo, khojki, music, balinese, tagalog, manichaean, telugu, elbasan, adlam, zanabazar-square, wancho, coptic, caucasian-albanian, osage, takri, tifinagh, tirhuta, tai-tham, phags-pa, siddham, javanese, gujarati, ahom, mongolian, buhid, syriac, limbu, soyombo, tai-le, khmer, meetei-mayek, newa, grantha, armenian, old-permic, mende-kikakui, masaram-gondi, rejang, batak, thaana, devanagari, pahawh-hmong, gurmukhi, tai-viet</li>
 <li>U+25E6 WHITE BULLET: try adding symbols</li>
-<li>U+266A EIGHTH NOTE: try adding one of: symbols, music</li>
+<li>U+266A EIGHTH NOTE: try adding one of: music, symbols</li>
 <li>U+26AD MARRIAGE SYMBOL: try adding symbols</li>
 <li>U+26AE DIVORCE SYMBOL: try adding symbols</li>
 <li>U+27E6 MATHEMATICAL LEFT WHITE SQUARE BRACKET: try adding math</li>
@@ -2385,13 +3555,13 @@ definitions.</p>
 <li>U+FD3E ORNATE LEFT PARENTHESIS: try adding one of: arabic, nko</li>
 <li>U+FD3F ORNATE RIGHT PARENTHESIS: try adding one of: arabic, nko</li>
 <li>U+FD88 ARABIC LIGATURE LAM WITH MEEM WITH HAH INITIAL FORM: try adding arabic</li>
-<li>U+FDF2 ARABIC LIGATURE ALLAH ISOLATED FORM: try adding one of: arabic, thaana</li>
+<li>U+FDF2 ARABIC LIGATURE ALLAH ISOLATED FORM: try adding one of: thaana, arabic</li>
 <li>U+FDF4 ARABIC LIGATURE MOHAMMAD ISOLATED FORM: try adding arabic</li>
 <li>U+FDFA ARABIC LIGATURE SALLALLAHOU ALAYHE WASALLAM: try adding arabic</li>
 <li>U+FDFB ARABIC LIGATURE JALLAJALALOUHOU: try adding arabic</li>
 <li>U+FDFC RIAL SIGN: try adding arabic</li>
-<li>U+FDFD ARABIC LIGATURE BISMILLAH AR-RAHMAN AR-RAHEEM: try adding one of: arabic, thaana</li>
-<li>U+FE00 VARIATION SELECTOR-1: try adding one of: manichaean, phags-pa, yi</li>
+<li>U+FDFD ARABIC LIGATURE BISMILLAH AR-RAHMAN AR-RAHEEM: try adding one of: thaana, arabic</li>
+<li>U+FE00 VARIATION SELECTOR-1: try adding one of: manichaean, yi, phags-pa</li>
 <li>U+FE01 VARIATION SELECTOR-2: not included in any glyphset definition</li>
 <li>U+FE02 VARIATION SELECTOR-3: not included in any glyphset definition</li>
 <li>U+FE03 VARIATION SELECTOR-4: not included in any glyphset definition</li>
@@ -2550,7 +3720,7 @@ definitions.</p>
 </details>
 
 <details>
-    <summary>⚠️ <b>WARN</b> Shapes languages in all GF glyphsets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-glyphsets-shape-languages">googlefonts/glyphsets/shape_languages</a></summary>
+    <summary>⚠️ <b>WARN</b> Validate size, and resolution of article images, and ensure article page has minimum length and includes visual assets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-article-images">googlefonts/article/images</a></summary>
     <div>
 
 
@@ -2559,70 +3729,8 @@ definitions.</p>
 
 
 
-* ⚠️ **WARN** <p>GF_Phonetics_SinoExt glyphset:</p>
-<table>
-<thead>
-<tr>
-<th align="left">WARN messages</th>
-<th align="left">Languages</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">Auxiliary orthography codepoints:</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: ʻ</td>
-<td align="left">en_Latn (English)</td>
-</tr>
-<tr>
-<td align="left">Auxiliary orthography codepoints:</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: Ǥ</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: Ȟ</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: Ǩ</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: Ʒ</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: Ǯ</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: ǥ</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: ȟ</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: ǩ</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: ʒ</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">The following auxiliary characters are missing from the font: ǯ</td>
-<td align="left">fi_Latn (Finnish)</td>
-</tr>
-</tbody>
-</table>
- [code: warning-language-shaping]
+* ⚠️ **WARN** <p>Family metadata at fonts/variable does not have an article.</p>
+ [code: lacks-article]
 
 
 
@@ -2699,8 +3807,8 @@ definitions.</p>
 
 | 💥 ERROR | ☠ FATAL | 🔥 FAIL | ⚠️ WARN | ⏩ SKIP | ℹ️ INFO | ✅ PASS | 🔎 DEBUG | 
 | ---|---|---|---|---|---|---|---|
-| 0 | 0 | 0 | 28 | 171 | 15 | 241 | 0 | 
-| 0% | 0% | 0% | 6% | 38% | 3% | 53% | 0% | 
+| 0 | 0 | 2 | 24 | 171 | 15 | 243 | 0 | 
+| 0% | 0% | 0% | 5% | 38% | 3% | 53% | 0% | 
 
 
 
