@@ -298,3 +298,8 @@ modifiers:
   match:
     uni02BF: quoteright   # ayn
     uni02BE: quoteright   # hamza
+  # Trim the half rings to less than half a circle. Scaling thins the stroke
+  # and radial dilation cannot handle a crescent (see the script), but a TRIM
+  # keeps the 141-unit stroke exactly and loses the sprawling tips that made
+  # them read oversized and alien next to the apostrophe. Degrees of arc kept.
+  ring_arc: 100

@@ -127,6 +127,13 @@ forms changed width noticeably (beh isol 1228→1318, seen isol adv 2130).
 
 ## Known open issues
 
+- **Final yeh's bowl is drawn 4.14 nuqta wide** — still the cell's length,
+  and the fitter cannot shorten it because the bowl runs BELOW the join
+  height, where the bare-run detection doesn't look. The fix is to generalize
+  fit-connectors' run detection to a glyph's own flat line (the tail line the
+  bend pass already finds), then give `yeh.fina` a width target like the
+  others. The bowl is horizontal there, so x-compression is safe.
+
 - **Lám with doubled harakat** stacks wrongly. May or may not be related to
   connector length.
 - **`bá` has a sharp corner** where it wants a curve.

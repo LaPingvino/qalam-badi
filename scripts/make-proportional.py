@@ -428,12 +428,25 @@ class Fitter:
             # The overhang is a consequence of the drawing, not a target to snap
             # to. Let the tail hang wherever it was drawn.
             shift = 0.0
+            if right_join and not left_join:
+                # ...but the opposite failure is real too: a final whose free
+                # side is plain AIR is still wearing its monospace cell —
+                # final alef shipped 798 units of advance around 331 units of
+                # ink. So trim the free side LEFTWARD ONLY, never rightward
+                # (that was the alef-maksura dragging), down to the ordinary
+                # free-side sidebearing; a genuinely sweeping tail has a
+                # negative left bound and is left exactly where it was drawn.
+                free_lsb = self.units(
+                    self.config["categories"]["arabic_free"]["lsb"])
+                if bounds[0] > free_lsb:
+                    shift = free_lsb - bounds[0]
         else:
             shift = lsb - bounds[0]
 
         if right_join:
-            # The right connector defines the advance edge; it must not move.
-            glyph.width = original_width
+            # The right connector defines the advance edge; it moves only by
+            # exactly the free-side trim, so the connector still lands on it.
+            glyph.width = round(original_width + shift)
         elif left_join:
             # Left connector pinned at the origin, right side free to be fitted.
             glyph.width = round(bounds[2] + rsb)

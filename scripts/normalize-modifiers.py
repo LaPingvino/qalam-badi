@@ -95,6 +95,41 @@ def dilate(glyph, amount):
         point.y += dy / length * amount
 
 
+def trim_ring(font, glyph, keep_degrees):
+    """Cut the half ring down to less than half a circle.
+
+    This is the move that finally resolves the size impasse recorded below:
+    scaling thins the stroke and dilation cannot fix a crescent, but TRIMMING
+    changes neither — the surviving arc keeps its exact 140-unit stroke, and
+    the glyph loses the sprawling tips that made it read oversized next to
+    the apostrophe. The cut is symmetric about the ring's centre, keeping
+    `keep_degrees` of arc, and the clip leaves flat caps — a trimmed reed
+    stroke ends flat.
+    """
+    import pathops
+
+    bounds = glyph.getBounds(font)
+    if bounds is None:
+        return
+    centre_y = (bounds.yMin + bounds.yMax) / 2
+    radius = (bounds.yMax - bounds.yMin) / 2
+    half = radius * math.sin(math.radians(keep_degrees / 2))
+
+    path = pathops.Path()
+    glyph.draw(path.getPen())
+    clip = pathops.Path()
+    clip_pen = clip.getPen()
+    clip_pen.moveTo((bounds.xMin - 50, centre_y - half))
+    clip_pen.lineTo((bounds.xMax + 50, centre_y - half))
+    clip_pen.lineTo((bounds.xMax + 50, centre_y + half))
+    clip_pen.lineTo((bounds.xMin - 50, centre_y + half))
+    clip_pen.closePath()
+    result = pathops.op(path, clip, pathops.PathOp.INTERSECTION, fix_winding=True)
+
+    glyph.clearContours()
+    result.draw(glyph.getPen())
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--src", required=True)
@@ -106,7 +141,9 @@ def main():
     with open(args.config) as handle:
         config = yaml.safe_load(handle)
     pen_width = config["module"]["pen"]
-    targets = (config.get("modifiers") or {}).get("match", {})
+    settings = config.get("modifiers") or {}
+    targets = settings.get("match", {})
+    ring_arc = settings.get("ring_arc")
 
     font = ufoLib2.Font.open(args.src)
 
@@ -115,6 +152,8 @@ def main():
         reference = font.get(reference_name)
         if glyph is None or reference is None:
             continue
+        if ring_arc:
+            trim_ring(font, glyph, ring_arc)
         bounds = glyph.getBounds(font)
         ref_bounds = reference.getBounds(font)
         if bounds is None or ref_bounds is None:
