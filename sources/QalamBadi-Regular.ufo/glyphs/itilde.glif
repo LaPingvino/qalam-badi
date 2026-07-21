@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="itilde" format="2">
-  <advance width="1228"/>
+  <advance width="828"/>
   <unicode hex="0129"/>
   <outline>
-    <component base="dotlessi"/>
-    <component base="tilde" xOffset="-20"/>
+    <component base="dotlessi" xOffset="19.99999999999997"/>
+    <component base="tilde" xOffset="-2.842170943040401e-14"/>
   </outline>
 </glyph>

@@ -1,0 +1,133 @@
+# Qalam Badi — proportional spacing system
+#
+# Every measurement here is expressed in NUQTA, the calligrapher's dot. This is
+# not decoration: the inherited monospace master already draws the Arabic nuqta
+# at 271x289 units and the Latin period at 270x310 — one dot module, shared
+# across scripts. Grounding the spacing in it is what lets Latin, Cyrillic,
+# Greek and Arabic share a single rhythm rather than four unrelated ones.
+#
+# The classical Persian system measures letters in dots stacked along the pen's
+# edge; Mishkin-Qalam's hand is described the same way. We keep the stroke
+# monolinear (pen = 141 units, invariant — that is the Courier inheritance we
+# are deliberately preserving) and move only the WIDTHS. All the calligraphic
+# character therefore has to come from proportion and rhythm.
+#
+# Values are multiples of one nuqta. 0.25 nuqta ~= 68 units.
+
+module:
+  # Measured from the seed master; asserted at build time so a change upstream
+  # cannot silently shift the whole system.
+  nuqta: 271
+  pen: 141
+
+defaults:
+  lsb: 0.30
+  rsb: 0.30
+
+categories:
+
+  # --- Latin / Cyrillic / Greek ------------------------------------------
+  # Courier's serifs are wide because they had a cell to fill. We keep them —
+  # they are the seed style — so the sidebearings stay modest: the serif is
+  # already doing most of the spacing work. Round letters tuck in slightly,
+  # the way they do in any serif text face.
+
+  latin_round:      { lsb: 0.22, rsb: 0.22 }   # o c e d b p q g s O C G Q S
+  latin_straight:   { lsb: 0.28, rsb: 0.28 }   # i l m n h u r I H M N U
+  latin_diagonal:   { lsb: 0.20, rsb: 0.20 }   # v w x y A V W X Y K k z Z
+  latin_default:    { lsb: 0.26, rsb: 0.26 }
+  uppercase:        { lsb: 0.26, rsb: 0.26 }
+
+  punctuation:      { lsb: 0.34, rsb: 0.34 }
+  quotes:           { lsb: 0.30, rsb: 0.30 }
+  brackets:         { lsb: 0.30, rsb: 0.22 }
+  math:             { lsb: 0.45, rsb: 0.45 }
+  currency:         { lsb: 0.30, rsb: 0.30 }
+  digits:           { lsb: 0.30, rsb: 0.30 }   # kept equal to each other (tabular)
+
+  # --- Arabic -------------------------------------------------------------
+  # A joining edge is not a sidebearing: the connector must land exactly on the
+  # advance edge or the letters come apart. Those sides are pinned to 0 and the
+  # value below applies only to the FREE side of the letter.
+  #
+  # Arabic sits tighter than Latin. In a nastaliq hand the letters of a word are
+  # nearly touching and the space between words carries the rhythm instead —
+  # that contrast between tight word and open gap is a large part of why the
+  # script looks the way it does, and it survives the loss of stroke contrast.
+
+  arabic_free:      { lsb: 0.18, rsb: 0.18 }
+  arabic_isolated:  { lsb: 0.22, rsb: 0.22 }
+  arabic_alef:      { lsb: 0.40, rsb: 0.40 }   # alef is a lone stroke; it needs air
+  arabic_dotgroup:  { lsb: 0.18, rsb: 0.18 }
+
+# Word space and friends, in nuqta. The Arabic word gap is deliberately wider
+# than the Latin one, per the tight-word/open-gap rhythm noted above.
+spaces:
+  space:       1.90    # ~0.25 em, the usual word space for a serif text face
+  nbspace:     1.90
+  arabic_space: 2.25
+  thinspace:   0.65
+  hairspace:   0.35
+  emspace:     7.55   # = 1 em at upm 2048
+  enspace:     3.78
+  figurespace: null   # follows the digit advance, resolved at build time
+
+# Ink widths, in nuqta, for the glyphs the monospace cell distorted.
+#
+# scripts/classify-widths.py finds these: letters whose body is a single stem
+# but whose ink fills the cell, because their serifs were stretched to the
+# walls. In the seed master every letter from `J` to `w` lands between 770 and
+# 1112 units of ink — a range of 1.4x across the whole alphabet, where a serif
+# text face runs about 3x from `i` to `m`. That flatness IS the typewriter look,
+# and it is the one Courier inheritance we are giving up: everything else about
+# the letters stays.
+#
+# scripts/narrow-serifs.py compresses the flanks either side of the stem to hit
+# these, leaving stem width — and therefore monolinearity — untouched.
+#
+# Letters not listed keep the ink they inherited. Most of the alphabet was
+# always about the right width; only the single-stem letters were badly served.
+ink_targets:
+  # One stem, nothing else. Ink = stem + two serif arms.
+  dotlessi:   1.25
+  i:          1.25
+  l:          1.25
+  I:          1.30
+  uni0237:    1.25   # dotless j
+  j:          1.25
+  one:        1.45
+
+  # One stem plus a small reaching part.
+  f:          1.85
+  t:          1.85
+  r:          1.70
+  J:          1.90
+
+  # One stem plus arms. These stay noticeably narrow of the round letters,
+  # which is what makes a serif face read as proportional at all.
+  E:          2.55
+  L:          2.55
+  F:          2.55
+  P:          2.75
+  T:          2.90
+  Y:          2.90
+  seven:      2.70
+
+# Deliberately NOT narrowed: s, S, z, Z, B and the round letters. The flank
+# compression anchors on the stem, and these have no stem at mid-height — the
+# detector locks onto a curve instead and squeezes the letter lopsidedly. They
+# were only ~10% over anyway, which is inside the range a serif face tolerates.
+# If they ever need narrowing it should be a redraw, not a remap.
+
+# Per-glyph overrides. Use sparingly and always say why — this file is the
+# design record, not just configuration.
+overrides:
+  # The alef is the vertical the whole Arabic line is measured against. Its ink
+  # is only 141 units (one pen) wide, so pure ink-fitting would leave it almost
+  # touching its neighbours.
+  uni0627:  { lsb: 0.40, rsb: 0.40 }
+
+  # Latin i/j/l keep Courier's full-width serifs on purpose. Fitting them by ink
+  # alone leaves them nearly as wide as m, which reads as a spacing bug rather
+  # than a style. They are narrowed here at the SERIF, not the sidebearing —
+  # see scripts/make-proportional.py --trim-serifs.

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="uniFBA7" format="2">
+  <advance width="1194"/>
+  <unicode hex="FBA7"/>
+  <outline>
+    <contour>
+      <point x="43.64175317885157" y="127.0" type="curve" smooth="yes"/>
+      <point x="90.64175317885157" y="113.0"/>
+      <point x="127.64175317885157" y="127.0"/>
+      <point x="145.64175317885156" y="178.0" type="curve" smooth="yes"/>
+      <point x="217.64175317885156" y="377.0"/>
+      <point x="366.64175317885156" y="561.0"/>
+      <point x="540.6417531788516" y="674.0" type="curve"/>
+      <point x="661.6417531788516" y="362.0"/>
+      <point x="811.6417531788516" y="225.0"/>
+      <point x="1193.6417531788516" y="225.0" type="curve"/>
+      <point x="1193.6417531788516" y="369.0" type="line"/>
+      <point x="866.6417531788516" y="369.0"/>
+      <point x="747.6417531788516" y="498.0"/>
+      <point x="657.6417531788516" y="768.0" type="curve" smooth="yes"/>
+      <point x="641.6417531788516" y="815.0"/>
+      <point x="594.6417531788516" y="862.0"/>
+      <point x="500.64175317885156" y="815.0" type="curve" smooth="yes"/>
+      <point x="319.64175317885156" y="723.0"/>
+      <point x="123.64175317885157" y="504.0"/>
+      <point x="12.641753178851573" y="227.0" type="curve"/>
+      <point x="-14.358246821148427" y="172.0"/>
+      <point x="4.641753178851573" y="139.0"/>
+    </contour>
+  </outline>
+</glyph>

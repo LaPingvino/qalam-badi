@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="uni20A9" format="2">
+  <advance width="1450"/>
+  <unicode hex="20A9"/>
+  <outline>
+    <contour>
+      <point x="144.0" y="754.0" type="line" smooth="yes"/>
+      <point x="99.0" y="754.0"/>
+      <point x="81.0" y="734.0"/>
+      <point x="81.0" y="682.0" type="curve" smooth="yes"/>
+      <point x="81.0" y="630.0"/>
+      <point x="99.0" y="610.0"/>
+      <point x="144.0" y="610.0" type="curve" smooth="yes"/>
+      <point x="634.0" y="610.0" type="line"/>
+      <point x="720.0" y="691.0" type="line"/>
+      <point x="814.0" y="610.0" type="line"/>
+      <point x="1306.0" y="610.0" type="line" smooth="yes"/>
+      <point x="1351.0" y="610.0"/>
+      <point x="1369.0" y="630.0"/>
+      <point x="1369.0" y="682.0" type="curve" smooth="yes"/>
+      <point x="1369.0" y="734.0"/>
+      <point x="1351.0" y="754.0"/>
+      <point x="1306.0" y="754.0" type="curve" smooth="yes"/>
+    </contour>
+    <component base="W" xOffset="111.0"/>
+  </outline>
+</glyph>

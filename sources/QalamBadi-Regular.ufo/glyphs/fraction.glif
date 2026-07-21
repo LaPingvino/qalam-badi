@@ -1,23 +1,23 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="fraction" format="2">
-  <advance width="1228"/>
+  <advance width="1250"/>
   <unicode hex="2044"/>
   <outline>
     <contour>
-      <point x="125.0" y="289.0" type="line" smooth="yes"/>
-      <point x="106.0" y="277.0"/>
-      <point x="106.0" y="250.0"/>
-      <point x="125.0" y="224.0" type="curve" smooth="yes"/>
-      <point x="144.0" y="198.0"/>
-      <point x="168.0" y="190.0"/>
-      <point x="185.0" y="200.0" type="curve" smooth="yes"/>
-      <point x="1103.0" y="761.0" type="line" smooth="yes"/>
-      <point x="1122.0" y="773.0"/>
-      <point x="1122.0" y="800.0"/>
-      <point x="1103.0" y="826.0" type="curve" smooth="yes"/>
-      <point x="1084.0" y="852.0"/>
-      <point x="1060.0" y="860.0"/>
-      <point x="1043.0" y="850.0" type="curve" smooth="yes"/>
+      <point x="136.25" y="289.0" type="line" smooth="yes"/>
+      <point x="117.25" y="277.0"/>
+      <point x="117.25" y="250.0"/>
+      <point x="136.25" y="224.0" type="curve" smooth="yes"/>
+      <point x="155.25" y="198.0"/>
+      <point x="179.25" y="190.0"/>
+      <point x="196.25" y="200.0" type="curve" smooth="yes"/>
+      <point x="1114.25" y="761.0" type="line" smooth="yes"/>
+      <point x="1133.25" y="773.0"/>
+      <point x="1133.25" y="800.0"/>
+      <point x="1114.25" y="826.0" type="curve" smooth="yes"/>
+      <point x="1095.25" y="852.0"/>
+      <point x="1071.25" y="860.0"/>
+      <point x="1054.25" y="850.0" type="curve" smooth="yes"/>
     </contour>
   </outline>
 </glyph>

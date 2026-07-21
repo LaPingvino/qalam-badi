@@ -50,10 +50,31 @@ build.stamp: venv sources/config.yaml $(SOURCES)
 italic:
 	. venv/bin/activate; python3 scripts/make-italic.py
 
+# Regenerate the proportional Regular from the inherited monospace seed.
+#
+# This is the step that makes Qalam Badi a different typeface from Courier Badi,
+# and it is deliberately a script rather than a hand-edited master: the seed
+# stays mergeable with upstream, so Courier Badi's Arabic and Fontbakery fixes
+# keep flowing in, and every spacing decision stays legible in one reviewable
+# file (sources/spacing.yaml) instead of being buried in 2318 .glif files.
+#
+#   1. narrow-serifs   pulls in the serifs that were stretched to fill the cell
+#   2. make-proportional  fits advances to ink, in nuqta, pinning Arabic joins
+#
+# Run `make widths` for the classification the targets in spacing.yaml are
+# derived from.
+proportional:
+	. venv/bin/activate; python3 scripts/narrow-serifs.py --src sources/QalamBadi-Mono.ufo --out sources/QalamBadi-Narrowed.ufo
+	. venv/bin/activate; python3 scripts/make-proportional.py --src sources/QalamBadi-Narrowed.ufo --out sources/QalamBadi-Regular.ufo
+
+# Report which glyphs the monospace cell distorted, and how.
+widths:
+	. venv/bin/activate; python3 scripts/classify-widths.py --src sources/QalamBadi-Mono.ufo
+
 # Regenerate all derived masters (Italic, Bold, Bold Italic) from the Regular.
 # The Bold is an outward outline dilation (emboldening); Bold Italic is the
 # emboldened Italic. Run after changing the Regular.
-masters:
+masters: proportional
 	. venv/bin/activate; python3 scripts/make-italic.py
 	. venv/bin/activate; python3 scripts/make-bold.py --src sources/QalamBadi-Regular.ufo --out sources/QalamBadi-Bold.ufo
 	. venv/bin/activate; python3 scripts/make-bold.py --src sources/QalamBadi-Italic.ufo --out sources/QalamBadi-BoldItalic.ufo
