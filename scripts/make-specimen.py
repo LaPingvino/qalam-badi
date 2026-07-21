@@ -15,6 +15,7 @@ import argparse
 import base64
 import os
 import re
+import subprocess
 import sys
 
 FONTS = {
@@ -28,6 +29,23 @@ def data_uri(path):
     with open(path, "rb") as handle:
         encoded = base64.b64encode(handle.read()).decode("ascii")
     return f"data:font/woff2;base64,{encoded}"
+
+
+def build_stamp():
+    """Short commit and subject, so a stale page is obvious on sight."""
+    def git(*args):
+        try:
+            return subprocess.run(("git",) + args, capture_output=True,
+                                  text=True, timeout=10).stdout.strip()
+        except Exception:
+            return ""
+
+    sha = git("rev-parse", "--short", "HEAD")
+    subject = git("log", "-1", "--format=%s")
+    dirty = " + uncommitted changes" if git("status", "--porcelain") else ""
+    if not sha:
+        return "unknown build"
+    return f"{sha}{dirty} — {subject}"
 
 
 def main():
@@ -61,6 +79,14 @@ def main():
         html = re.sub(r"@font-face\s*\{[^}]*@@MONO@@[^}]*\}", "", html)
         print("no monospace seed given; comparison rows fall back to ui-monospace",
               file=sys.stderr)
+
+    # Stamp the build into the page.
+    #
+    # gh-pages is served with a 10-minute CDN cache and each page is fetched
+    # independently, so "is this the current build?" is a real question and has
+    # already cost us a round of debugging a fix that was in fact deployed.
+    # Now the page answers it itself.
+    html = html.replace("@@BUILD@@", build_stamp())
 
     with open(args.out, "w") as handle:
         handle.write(html)
