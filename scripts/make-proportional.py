@@ -198,6 +198,62 @@ class Fitter:
 
             component.transformation = (xx, xy, yx, yy, dx - offset, dy)
 
+    # Marks that ATTACH at a designed spot rather than centring on the letter.
+    ATTACHING_MARKS = ("cedilla", "ogonek", "horn")
+
+    def recentre_all_composites(self):
+        """Recentre comb-marks in precomposed letters from FINAL geometry.
+
+        recentre_marks runs while glyphs are still being fitted, and the
+        overlay restoration afterwards moves the combining marks' ink again —
+        so every composite referencing a restored mark was centred against
+        geometry that then changed underneath it. The dot under Ḥ drifted 255
+        units right of the H exactly this way, and the hook above Ử a full
+        504. This pass repeats the centring after everything has stopped
+        moving, which makes the earlier one a first approximation and this
+        one the truth.
+
+        Deciding what to centre goes by NAME here, not by offset size: after
+        drift, a large offset is precisely what a broken mark looks like, so
+        "large offset means deliberate" — the guard the in-flight pass rightly
+        uses — would preserve the worst breakage. A comb mark centres unless
+        it is an attaching kind; everything else keeps its designed position.
+        """
+        count = 0
+        for glyph in self.font:
+            if glyph.width == 0 or len(glyph.components) < 2:
+                continue
+            measured = []
+            for component in glyph.components:
+                base = self.font.get(component.baseGlyph)
+                bounds = base.getBounds(self.font) if base is not None else None
+                if bounds is None:
+                    measured = None
+                    break
+                measured.append((component, bounds, bounds.xMax - bounds.xMin))
+            if not measured:
+                continue
+
+            letter, letter_bounds, letter_width = max(measured, key=lambda m: m[2])
+            if letter_width <= 0:
+                continue
+            letter_centre = ((letter_bounds.xMin + letter_bounds.xMax) / 2
+                             + letter.transformation[4])
+
+            for component, bounds, width in measured:
+                if component is letter or width > letter_width * 0.75:
+                    continue
+                name = component.baseGlyph
+                if "comb" not in name or any(a in name for a in self.ATTACHING_MARKS):
+                    continue
+                xx, xy, yx, yy, dx, dy = component.transformation
+                offset = (bounds.xMin + bounds.xMax) / 2 + dx - letter_centre
+                if abs(offset) < 1:
+                    continue
+                component.transformation = (xx, xy, yx, yy, dx - offset, dy)
+                count += 1
+        return count
+
     # -- the module ------------------------------------------------------
 
     def verify_module(self):
@@ -517,6 +573,13 @@ def main():
             restored += 1
     if restored:
         print(f"restored {restored} combining marks to their overlay position")
+
+    # And only NOW, with every mark and base where it will actually ship,
+    # centre the marks inside the precomposed letters. See the method's
+    # docstring for why this must be last and why it decides by name.
+    recentred = fitter.recentre_all_composites()
+    if recentred:
+        print(f"recentred {recentred} marks over their precomposed bases")
 
     # Tabular figures: every digit takes the widest digit's advance, centred.
     if digit_width is not None:
