@@ -131,14 +131,17 @@ class Fitter:
         The composite is then fitted as one unit, so the accent stays put over
         the letter it belongs to.
         """
+        self.compensate_component_shifts(glyph)
+        self.recentre_marks(glyph)
+
+    def compensate_component_shifts(self, glyph):
+        """Undo the translation each component inherited from its own base."""
         for component in glyph.components:
             base_shift = self.shifts.get(component.baseGlyph)
             if not base_shift:
                 continue
             xx, xy, yx, yy, dx, dy = component.transformation
             component.transformation = (xx, xy, yx, yy, dx - base_shift, dy)
-
-        self.recentre_marks(glyph)
 
     def recentre_marks(self, glyph):
         """Centre diacritics over the letter they belong to.
@@ -442,6 +445,25 @@ def main():
         "arabic_space": None,
     }
 
+    # Where every zero-width mark's ink sits BEFORE anything is fitted.
+    #
+    # These are overlays positioned over the preceding base, and many are
+    # composites: gravecomb references the spacing grave, dotbelowcomb
+    # references period. When those bases are fitted and move, the mark's ink
+    # moves with them and no longer sits over the letter — U+0300 drifted and
+    # rendered beside its base instead of on top of it.
+    #
+    # Their position is restored by measurement rather than by undoing the
+    # base's shift arithmetically. The arithmetic has to agree with several
+    # transforms at once and got the sign wrong on four marks; where the ink
+    # started is a fact that cannot be got wrong.
+    mark_origins = {}
+    for glyph in font:
+        if glyph.width == 0 and glyph.components:
+            bounds = glyph.getBounds(font)
+            if bounds is not None:
+                mark_origins[glyph.name] = bounds.xMin
+
     digit_width = None
 
     for name in ordered_glyphs(font):
@@ -449,6 +471,13 @@ def main():
 
         # Zero-width combining marks are overlays: they carry no advance by
         # design and must not acquire one here.
+        #
+        # They must still have their components compensated, though. A mark like
+        # gravecomb is a COMPOSITE referencing the spacing grave, so when that
+        # base is fitted and shifts left, the mark's ink silently shifts with it
+        # and no longer sits over the letter — U+0300 drifted 243 units and
+        # rendered beside the base instead of on top of it. Skipping these
+        # before compensation is what let that through.
         if glyph.width == 0:
             fitter.stats["skipped"] += 1
             continue
@@ -469,6 +498,25 @@ def main():
 
         if name == "zero":
             digit_width = glyph.width
+
+    # Put the zero-width marks back exactly where they started.
+    restored = 0
+    for name, original_x in mark_origins.items():
+        glyph = font[name]
+        bounds = glyph.getBounds(font)
+        if bounds is None:
+            continue
+        drift = original_x - bounds.xMin
+        if abs(drift) > 0.5:
+            for component in glyph.components:
+                xx, xy, yx, yy, dx, dy = component.transformation
+                component.transformation = (xx, xy, yx, yy, dx + drift, dy)
+            for contour in glyph.contours:
+                for point in contour.points:
+                    point.x += drift
+            restored += 1
+    if restored:
+        print(f"restored {restored} combining marks to their overlay position")
 
     # Tabular figures: every digit takes the widest digit's advance, centred.
     if digit_width is not None:
