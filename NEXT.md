@@ -7,6 +7,50 @@ to be read as the design record.
 
 ---
 
+## State as of the latest session (handoff)
+
+Everything is on `main` and `make build` passes the invariant gate. The
+proportional chain has grown a lot; the current order (see the `proportional`
+and `masters` targets in the Makefile) is:
+
+    narrow-serifs → soften-corners → tuck-dots → narrow-madda → fit-connectors
+    → bend-strokes → shorten-ascenders → curve-initials → curve-meem-neck
+    → curve-meem-tail → normalize-modifiers → make-proportional
+    → kern → widen-marked → mark-anchors        (then masters re-anchor each)
+
+New this session, all with a knob in `sources/spacing.yaml`:
+
+- **`scripts/check-invariants.py` / `make check`** — gates the build on the
+  design rules (module, master interpolation, descender clearance, join
+  height, monolinearity). Run it before committing; it catches the
+  desynced-Bold interpolation break in a second.
+- **Curves**: `curve-initials.py` (the initial-form L-elbow → concentric-arc
+  sweep, beh/yeh/noon/feh/qaf), `curve-meem-neck.py` (eye→tail sweep, the
+  elbow rotated 90°), `curve-meem-tail.py` (rod → tidy cubics; `meem_bow` is
+  0 now — the neck sweep supplies the curve).
+- **Spacing + kerning**: base sidebearings opened a notch, Cyrillic/Greek now
+  classed by shape (see `make-proportional.category()`), `connectors.approach`
+  0.85, and real class kerning via `kern.py` + the `kerning:` block.
+- **Harakat**: `mark-anchors.py` gives every Arabic base/mark `top`/`bottom`
+  (+`_top`/`_bottom`) anchors so ufo2ft emits `mark`/`mkmk` — marks now sit on
+  their own letter and stack without colliding. It strips the arabic-features
+  `table GDEF` (mark class only) so ufo2ft rebuilds a full GDEF. Runs per
+  master. The **mark-fit ladder** for wide marks on thin letters:
+  `marks.thin_pull` nudges offset-stem letters (lam) onto their footprint;
+  `widen-marked.py` (`marks.widen`) widens the symmetric alif so its mark
+  clears; `narrow-marks.py` is written but **unused**, the last resort.
+
+Open / to check next:
+
+- **Fontbakery** (`make test`) shows FAIL on `base_has_width` and
+  `dotted_circle` — NOT the GDEF strip (0 marks misclassified, verified), so
+  likely pre-existing; investigate the specific glyphs.
+- The mark-fit ladder is tuned on a few words; sweep more vocalized text for
+  residual overlaps and tune `thin_pull` / `widen` / the thin-letter lists.
+- Non-joining Arabic kerning (alef/dal/reh gaps) via the same `kern.py`.
+
+---
+
 ## Getting running on a fresh machine
 
 ```sh
