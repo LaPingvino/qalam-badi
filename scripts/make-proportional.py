@@ -95,6 +95,86 @@ class Fitter:
         self.verify_module()
 
         self.stats = {"fitted": 0, "joins": 0, "skipped": 0, "composites": 0}
+        # How far each glyph was translated, so composites can undo their
+        # components' independent movement. See compensate_components().
+        self.shifts = {}
+
+    def compensate_components(self, glyph):
+        """Undo the movement each component inherited from its own base.
+
+        A composite is not a drawing, it is a set of references, so when `a` is
+        fitted and moves, every `aacute` silently moves with it — but `acute`
+        moved by its OWN fit, a different distance, so the accent slides off the
+        letter. This is why á rendered with its accent too far ahead.
+
+        Each component is pulled back by whatever its base was shifted, which
+        restores the composite to exactly the relative geometry the seed drew.
+        The composite is then fitted as one unit, so the accent stays put over
+        the letter it belongs to.
+        """
+        for component in glyph.components:
+            base_shift = self.shifts.get(component.baseGlyph)
+            if not base_shift:
+                continue
+            xx, xy, yx, yy, dx, dy = component.transformation
+            component.transformation = (xx, xy, yx, yy, dx - base_shift, dy)
+
+        self.recentre_marks(glyph)
+
+    def recentre_marks(self, glyph):
+        """Centre diacritics over the letter they belong to.
+
+        In the seed every mark was centred on the monospace CELL, because in a
+        monospace font the cell and the letter are the same thing. They are not
+        the same thing here: letters have moved, and single-stem letters like
+        `i` have had their serifs pulled in, so a mark left at the old cell
+        centre now sits off to one side of its base. This is what put the acute
+        too far ahead on á and the dot off-centre under Ḥ.
+
+        The largest component is taken as the letter and every substantially
+        smaller one as a mark, which is what a diacritic is geometrically. Marks
+        the seed placed deliberately off-centre — the cedilla, the ogonek — keep
+        their offset; only ones that were centred, and have since drifted, are
+        snapped back.
+        """
+        if len(glyph.components) < 2:
+            return
+
+        measured = []
+        for component in glyph.components:
+            base = self.font.get(component.baseGlyph)
+            if base is None:
+                return
+            bounds = base.getBounds(self.font)
+            if bounds is None:
+                return
+            measured.append((component, bounds, bounds.xMax - bounds.xMin))
+
+        letter, letter_bounds, letter_width = max(measured, key=lambda m: m[2])
+        if letter_width <= 0:
+            return
+
+        letter_centre = ((letter_bounds.xMin + letter_bounds.xMax) / 2
+                         + letter.transformation[4])
+
+        for component, bounds, width in measured:
+            # 0.75, not something tighter: Courier's accents are wide because
+            # they had a cell to fill too — its acute carries 498 units of ink
+            # against the `a`'s 855 — so a stricter ratio classifies real
+            # diacritics as letters and leaves them uncentred. Genuine
+            # two-letter composites (ij) sit at ~1.0 and stay excluded.
+            if component is letter or width > letter_width * 0.75:
+                continue  # not a mark, it is part of the letter
+
+            xx, xy, yx, yy, dx, dy = component.transformation
+            mark_centre = (bounds.xMin + bounds.xMax) / 2 + dx
+            offset = mark_centre - letter_centre
+
+            # Deliberately off-centre in the design: leave it alone.
+            if abs(offset) > letter_width * 0.30:
+                continue
+
+            component.transformation = (xx, xy, yx, yy, dx - offset, dy)
 
     # -- the module ------------------------------------------------------
 
@@ -348,15 +428,18 @@ def main():
             fitter.stats["skipped"] += 1
             continue
 
+        # Undo inherited component movement BEFORE measuring: bounds taken
+        # before this are the bounds of a composite that has come apart.
+        if glyph.components:
+            fitter.compensate_components(glyph)
+            fitter.stats["composites"] += 1
+
         bounds = glyph.getBounds(font)
         if bounds is None:  # whitespace — handled below from spacing.yaml
             fitter.stats["skipped"] += 1
             continue
 
-        if glyph.components:
-            fitter.stats["composites"] += 1
-
-        fitter.fit(glyph, bounds)
+        fitter.shifts[name] = fitter.fit(glyph, bounds)
         fitter.stats["fitted"] += 1
 
         if name == "zero":

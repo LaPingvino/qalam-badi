@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uhorn" format="2">
-  <advance width="1139"/>
+  <advance width="1312"/>
   <unicode hex="01B0"/>
   <outline>
-    <component base="comma" xScale="0.5" yScale="0.5" xOffset="834.894" yOffset="822"/>
+    <component base="comma" xScale="0.5" yScale="0.5" xOffset="1007.3033572636168" yOffset="822"/>
     <component base="u" xOffset="-6.0"/>
   </outline>
 </glyph>

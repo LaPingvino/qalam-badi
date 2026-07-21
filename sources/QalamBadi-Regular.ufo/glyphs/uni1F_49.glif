@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uni1F49" format="2">
-  <advance width="1223"/>
+  <advance width="983"/>
   <unicode hex="1F49"/>
   <outline>
-    <component base="uni1FFE" yOffset="-35"/>
-    <component base="Omicron" xOffset="240.0"/>
+    <component base="uni1FFE" xOffset="303.0" yOffset="-35"/>
+    <component base="Omicron"/>
   </outline>
 </glyph>

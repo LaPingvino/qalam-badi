@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="dcaron" format="2">
-  <advance width="1144"/>
+  <advance width="1324"/>
   <unicode hex="010F"/>
   <outline>
     <contour>
@@ -54,6 +54,6 @@
       <point x="617.0" y="798.0"/>
       <point x="717.0" y="674.0"/>
     </contour>
-    <component base="caron.alt" xOffset="733.0"/>
+    <component base="caron.alt" xOffset="913.325984081168"/>
   </outline>
 </glyph>
