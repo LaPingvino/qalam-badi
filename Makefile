@@ -70,6 +70,12 @@ italic:
 # derived from.
 proportional:
 	. venv/bin/activate; python3 scripts/narrow-serifs.py --src sources/QalamBadi-Mono.ufo --out sources/QalamBadi-Narrowed.ufo
+	# Courier Badi widened the cramped seen/sheen/sad teeth to 1.5x to fill the
+	# monospace cell. With no cell to fill, the constraint is gone and the teeth
+	# can run at the 2x the hand actually wants — classically the seen kashida
+	# is 7-11 nuqta long, far beyond anything a cell could have held. The script
+	# already covers sad and dad and every dotted variant, so they follow.
+	. venv/bin/activate; python3 scripts/widen-seen-family.py --ufo sources/QalamBadi-Narrowed.ufo --scale 2.0 --apply
 	. venv/bin/activate; python3 scripts/soften-corners.py --src sources/QalamBadi-Narrowed.ufo --out sources/QalamBadi-Softened.ufo
 	. venv/bin/activate; python3 scripts/shorten-ascenders.py --src sources/QalamBadi-Softened.ufo --out sources/QalamBadi-Short.ufo
 	. venv/bin/activate; python3 scripts/make-proportional.py --src sources/QalamBadi-Short.ufo --out sources/QalamBadi-Regular.ufo
