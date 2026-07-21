@@ -79,10 +79,14 @@ Arabic OpenType features are generated from the UFO by `scripts/arabic-features`
 Nothing in `sources/QalamBadi-Regular.ufo` is hand-edited. The chain is:
 
 ```
-QalamBadi-Mono.ufo          the Courier Badi master, tracked against upstream
+QalamBadi-Mono.ufo             the Courier Badi master, tracked against upstream
    │
-   ├─ narrow-serifs.py      pull in serifs that were stretched to fill the cell
-   ├─ make-proportional.py  fit advances to ink, in nuqta; pin Arabic joins
+   ├─ narrow-serifs.py         pull in serifs stretched to fill the cell
+   ├─ soften-corners.py        fillet the corners: a pen, not a machine
+   ├─ shorten-connectors.py    cut the stretched Arabic connector plateaus
+   ├─ shorten-ascenders.py     alef down to nastaʿlīq proportion
+   ├─ normalize-modifiers.py   ayn/hamza up to the apostrophe
+   ├─ make-proportional.py     fit advances to ink, in nuqta; pin Arabic joins
    │
    └─ QalamBadi-Regular.ufo ─┬─ make-italic.py  → Italic
                              ├─ make-bold.py    → Bold, Bold Italic
@@ -104,9 +108,15 @@ unit the classical Persian proportion system uses. That is not decoration. The
 inherited master already draws the Arabic nuqta at 271×289 units and the Latin
 period at 270×310 — one dot module, already shared across the scripts. Building
 on it is what lets Latin, Cyrillic, Greek and Arabic share a rhythm instead of
-having four unrelated ones. The monolinear pen measures 141 units and the alef
-stands 4.6 nuqta tall, which is squarely inside the classical range; a good deal
-of the proportion system was sitting in Courier Badi already.
+having four unrelated ones. The monolinear pen measures 141 units — and still
+does, everywhere, which is the invariant the whole design rests on.
+
+The inherited alef stood 4.6 nuqta, which is naskh proportion; it now stands
+**3.6**, between nastaʿlīq's 3 and where it started, and close to the 3.5
+measured in Mishkín-Qalam's own Greatest Name. Arabic joins were also found to
+sit at a single exact height (y=225–369, 144 units thick, across 604 glyphs),
+which turned join detection from a heuristic into a spec — see
+[`scripts/joins.py`](scripts/joins.py).
 
 ## Changelog
 
@@ -126,8 +136,14 @@ of the proportion system was sitting in Courier Badi already.
   so vertical stroke width is mathematically unchanged and the face stays
   monolinear.
 - **Arabic joins pinned to the advance** rather than given a sidebearing, and
-  detected from the outlines rather than a hand-kept table, so they survive
-  upstream edits. 643 glyphs carry a pinned join.
+  detected from the font's own measured join height rather than a hand-kept
+  table, so they survive upstream edits. 576 glyphs carry a pinned join.
+- **Arabic freed from the cell.** Medial forms all advanced exactly 1228 units
+  because two pinned connectors defined the width; the stretched connector
+  plateaus are now cut, so lam.medi runs 2.04 nuqta rather than 4.53 and Alláh
+  is about 39% narrower. Advances span 307–1228 where they were flat.
+- **Alef to 3.6 nuqta** from the inherited 5.45, bringing the bowls and finals
+  up relative to the verticals.
 
 ### Inherited from Courier Badi
 
