@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uniFBDA" format="2">
-  <advance width="1089"/>
+  <advance width="1170"/>
   <unicode hex="FBDA"/>
   <outline>
     <contour>
@@ -35,10 +35,10 @@
       <point x="943.5484605654663" y="210.1694382327624"/>
       <point x="957.8981863786167" y="237.8456870522394"/>
       <point x="973.0" y="239.0" type="curve" smooth="yes"/>
-      <point x="1109.0799679488352" y="233.7743410335677" type="line"/>
-      <point x="1109.6014340614256" y="360.5866871066563" type="line"/>
-      <point x="980.5521951219512" y="355.0" type="line" smooth="yes"/>
-      <point x="971.5187955113948" y="356.5687992063881"/>
+      <point x="1185.457013034564" y="236.30482054787007" type="line"/>
+      <point x="1186.0578200810398" y="357.9387641364392" type="line"/>
+      <point x="984.5180487804878" y="355.0" type="line" smooth="yes"/>
+      <point x="970.7110112770974" y="356.35297297900223"/>
       <point x="959.8886637029427" y="384.91901883060757"/>
       <point x="963.0" y="410.8679765693464" type="curve" smooth="yes"/>
     </contour>

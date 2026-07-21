@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uniFB9D" format="2">
-  <advance width="1208"/>
+  <advance width="1228"/>
   <unicode hex="FB9D"/>
   <outline>
     <contour>
@@ -24,10 +24,10 @@
       <point x="633.7977936436414" y="354.51502486633626" type="curve" smooth="yes"/>
       <point x="690.889997042965" y="300.2572045477963"/>
       <point x="813.2426802918444" y="206.51209986449544"/>
-      <point x="950.1142919991352" y="204.99986473510475" type="curve" smooth="yes"/>
-      <point x="1240.0902330756653" y="206.4792982155883" type="line"/>
-      <point x="1240.0902330756653" y="387.5207017844117" type="line"/>
-      <point x="950.0969719039307" y="389.0000973743787" type="line" smooth="yes"/>
+      <point x="950.0777559430923" y="204.999937393489" type="curve" smooth="yes"/>
+      <point x="1258.6760067941518" y="206.2305094755525" type="line"/>
+      <point x="1258.6760067941518" y="387.76949052444746" type="line"/>
+      <point x="950.0535832544855" y="389.00002973103176" type="line" smooth="yes"/>
       <point x="908.3465984789336" y="387.26252420555863"/>
       <point x="820.4505164691558" y="461.0910175971441"/>
       <point x="775.1645779230531" y="494.62443970776684" type="curve" smooth="yes"/>

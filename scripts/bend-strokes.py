@@ -166,56 +166,58 @@ def apply_field(glyph, region, ramp, amplitude, dot_limit):
         anchor.y -= field(anchor.x, left, right, ramp, amplitude)
 
 
-def round_finial(glyph, zone, radius, min_turn=22, max_turn=155):
-    """A larger fillet on corners inside the hook/tip zone only.
+def round_finial(glyph, zone, strength, floor=None):
+    """Inflate the tight terminal hook into a rounder curve.
 
-    Same construction as soften-corners — that pass already ran with its
-    modest global radius; this revisits just the finial with a radius that
-    turns a bracket into a curve.
+    The hook has no sharp CORNER to fillet — soften-corners already ran, so
+    every junction is smooth. It reads hard because it is drawn tight: a small,
+    nearly-square arc. Rounding it therefore means making the arc bulge, not
+    cutting a corner. For each cubic segment whose midpoint lands in the hook
+    zone, the two off-curve control points are pushed away from the segment's
+    chord — outward, on the side the curve already bulges — by `strength` times
+    the segment length. A tight arc becomes a generous one; a straight segment
+    (control points on the chord) is untouched, so this only ever rounds what
+    is already curved.
     """
+    if strength <= 0:
+        return 0
     rounded = 0
     for contour in glyph.contours:
-        points = list(contour.points)
-        count = len(points)
-        if count < 3:
+        pts = list(contour.points)
+        n = len(pts)
+        if n < 4:
             continue
-        is_open = points[0].type == "move"
-        new_points = []
-        changed = 0
-        for index, point in enumerate(points):
-            if (point.type not in ON_CURVE or point.smooth or point.type == "move"
-                    or (is_open and index in (0, count - 1))
-                    or not (zone[0] <= point.x <= zone[1])):
-                new_points.append(point)
+        # Walk on-curve -> off -> off -> on cubic groups.
+        for i, p in enumerate(pts):
+            if p.type not in ("curve", "qcurve"):
                 continue
-            prev_point = points[(index - 1) % count]
-            next_point = points[(index + 1) % count]
-            incoming, in_len = unit(point.x - prev_point.x, point.y - prev_point.y)
-            outgoing, out_len = unit(next_point.x - point.x, next_point.y - point.y)
-            if incoming is None or outgoing is None:
-                new_points.append(point)
+            a = pts[(i - 3) % n]        # previous on-curve
+            c1 = pts[(i - 2) % n]
+            c2 = pts[(i - 1) % n]
+            if a.type not in ON_CURVE or c1.type is not None or c2.type is not None:
                 continue
-            turn = corner_angle(incoming, outgoing)
-            if turn < min_turn or turn > max_turn:
-                new_points.append(point)
+            mx, my = (a.x + p.x) / 2, (a.y + p.y) / 2
+            if not (zone[0] <= mx <= zone[1] and my < zone[2]):
                 continue
-            effective = min(radius, 0.42 * min(in_len, out_len))
-            if effective < 4:
-                new_points.append(point)
+            chord, length = unit(p.x - a.x, p.y - a.y)
+            if chord is None or length < 20:
                 continue
-            p1 = (point.x - incoming[0] * effective, point.y - incoming[1] * effective)
-            p2 = (point.x + outgoing[0] * effective, point.y + outgoing[1] * effective)
-            c1 = (p1[0] + (point.x - p1[0]) * KAPPA, p1[1] + (point.y - p1[1]) * KAPPA)
-            c2 = (p2[0] + (point.x - p2[0]) * KAPPA, p2[1] + (point.y - p2[1]) * KAPPA)
-            Point = type(point)
-            new_points.append(Point(x=p1[0], y=p1[1], type=point.type, smooth=True))
-            new_points.append(Point(x=c1[0], y=c1[1], type=None))
-            new_points.append(Point(x=c2[0], y=c2[1], type=None))
-            new_points.append(Point(x=p2[0], y=p2[1], type="curve", smooth=True))
-            changed += 1
-        if changed:
-            contour.points = new_points
-            rounded += changed
+            # Normal to the chord; push each control point along the outward
+            # normal (the side it already sits on) by strength * length.
+            nx, ny = -chord[1], chord[0]
+            for cp in (c1, c2):
+                side = (cp.x - a.x) * nx + (cp.y - a.y) * ny
+                sign = 1.0 if side >= 0 else -1.0
+                cp.x += nx * sign * strength * length
+                cp.y += ny * sign * strength * length
+                # Inflation must not push a curve past the descender — that is
+                # the clip the guard catches. Clamp the control point; the arc
+                # stays below its on-curve neighbours, just not below the line.
+                if floor is not None and cp.y < floor + 20:
+                    cp.y = floor + 20
+            rounded += 1
+        if rounded:
+            contour.points = pts
     return rounded
 
 
@@ -235,8 +237,11 @@ def main():
     bowl_ramp = settings.get("bowl_ramp", 0.62)
     tail_dip = settings.get("tail_dip", 0.60) * nuqta
     tail_ramp = settings.get("tail_ramp", 0.60)
-    finial_radius = settings.get("finial_radius", 0.50) * nuqta
+    hook_round = settings.get("hook_round", 0.0)
     dot_limit = nuqta * 1.35
+    # The connector stroke sits at 225..369; the hook and bowl curves live
+    # below it. Rounding only sub-connector curves keeps the join edges sharp.
+    HOOK_CEIL = 210
 
     font = ufoLib2.Font.open(args.src)
     floor = font.info.openTypeOS2TypoDescender or -838
@@ -270,8 +275,7 @@ def main():
                 apply_field(glyph, region, tail_ramp, amplitude, dot_limit)
                 tails += 1
             finials += 1 if round_finial(
-                glyph, (region[0], region[0] + (region[1] - region[0]) * 0.35),
-                finial_radius) else 0
+                glyph, (bounds.xMin, bounds.xMax, HOOK_CEIL), hook_round, floor) else 0
             if args.verbose:
                 print(f"  tail {glyph.name:18} region {region[0]:5.0f}..{region[1]:5.0f}"
                       f" dip {amplitude:4.0f}")
@@ -289,8 +293,7 @@ def main():
             apply_field(glyph, region, bowl_ramp, amplitude, dot_limit)
             bowls += 1
         finials += 1 if round_finial(
-            glyph, (region[0] - nuqta, region[0] + (region[1] - region[0]) * 0.30),
-            finial_radius) else 0
+            glyph, (bounds.xMin, bounds.xMax, HOOK_CEIL), hook_round, floor) else 0
         if args.verbose:
             print(f"  bowl {glyph.name:18} run {region[0]:5.0f}..{region[1]:5.0f}"
                   f" dip {amplitude:4.0f}")

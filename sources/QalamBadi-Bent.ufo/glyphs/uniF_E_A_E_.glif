@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uniFEAE" format="2">
-  <advance width="1096"/>
+  <advance width="1177"/>
   <unicode hex="FEAE"/>
   <outline>
     <contour>
@@ -22,10 +22,10 @@
       <point x="928.1550244771726" y="178.02046768054277" type="curve" smooth="yes"/>
       <point x="933.3728615042711" y="202.9196198098551"/>
       <point x="960.56" y="225.0"/>
-      <point x="983.8507317073171" y="225.0" type="curve" smooth="yes"/>
-      <point x="1095.82" y="225.0" type="line"/>
-      <point x="1095.82" y="369.0" type="line"/>
-      <point x="990.3282926829269" y="369.0" type="line" smooth="yes"/>
+      <point x="985.1726829268292" y="225.0" type="curve" smooth="yes"/>
+      <point x="1177.12" y="225.0" type="line"/>
+      <point x="1177.12" y="369.0" type="line"/>
+      <point x="996.2770731707317" y="369.0" type="line" smooth="yes"/>
       <point x="974.56" y="369.0"/>
       <point x="952.0" y="391.56"/>
       <point x="952.0" y="417.0" type="curve" smooth="yes"/>

@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uniFE8E" format="2">
-  <advance width="798"/>
+  <advance width="879"/>
   <unicode hex="FE8E"/>
   <outline>
     <contour>
-      <point x="797.8199999999999" y="369.0" type="line"/>
-      <point x="691.3229779411764" y="369.0" type="line" smooth="yes"/>
+      <point x="879.12" y="369.0" type="line"/>
+      <point x="696.5536764705882" y="369.0" type="line" smooth="yes"/>
       <point x="608.0" y="369.0"/>
       <point x="608.0" y="467.0"/>
       <point x="608.0" y="512.0" type="curve" smooth="yes"/>
@@ -19,8 +19,8 @@
       <point x="467.0" y="512.0" type="line" smooth="yes"/>
       <point x="467.0" y="340.0"/>
       <point x="535.0" y="225.0"/>
-      <point x="691.3229779411764" y="225.0" type="curve" smooth="yes"/>
-      <point x="797.8199999999999" y="225.0" type="line"/>
+      <point x="696.5536764705882" y="225.0" type="curve" smooth="yes"/>
+      <point x="879.12" y="225.0" type="line"/>
     </contour>
   </outline>
 </glyph>

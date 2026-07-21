@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uni06AA.medi" format="2">
-  <advance width="1172"/>
+  <advance width="1228"/>
   <outline>
     <contour>
-      <point x="1237.5899638042574" y="373.0" type="line"/>
-      <point x="1182.829535710852" y="373.0"/>
-      <point x="1137.6156420580262" y="369.4551696777344"/>
+      <point x="1293.7699638042575" y="373.0" type="line"/>
+      <point x="1211.98053509332" y="373.0"/>
+      <point x="1144.7581958264086" y="369.4551696777344"/>
       <point x="1099.061570135439" y="366.32030384220207" type="curve" smooth="yes"/>
       <point x="1093.1605148463514" y="365.9154814655029"/>
       <point x="1090.4811292280083" y="370.4553972351074"/>
@@ -47,7 +47,7 @@
       <point x="11.19766894561782" y="262.0"/>
       <point x="4.673570659404618" y="225.0"/>
       <point x="39.67357065940462" y="225.0" type="curve" smooth="yes"/>
-      <point x="1211.4935706594047" y="225.0" type="line"/>
+      <point x="1267.6735706594045" y="225.0" type="line"/>
     </contour>
   </outline>
 </glyph>

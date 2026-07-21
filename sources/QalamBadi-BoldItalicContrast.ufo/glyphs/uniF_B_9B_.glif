@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uniFB9B" format="2">
-  <advance width="1183"/>
+  <advance width="1228"/>
   <unicode hex="FB9B"/>
   <outline>
     <contour>
-      <point x="1288.0847391834213" y="385.81419906388203" type="line"/>
-      <point x="1044.4538632625108" y="389.0015686924691" type="line" smooth="yes"/>
+      <point x="1328.5302821493528" y="387.0193172367536" type="line"/>
+      <point x="1044.2301541270667" y="389.000283623709" type="line" smooth="yes"/>
       <point x="1002.4503897442474" y="387.102534018944"/>
       <point x="929.1955749149952" y="458.6892439720026"/>
       <point x="893.8454019924197" y="493.1287735237696" type="curve" smooth="yes"/>
@@ -68,8 +68,8 @@
       <point x="723.7278878301719" y="355.6641190291794" type="curve" smooth="yes"/>
       <point x="771.6376283810474" y="301.585758530136"/>
       <point x="879.3783237478838" y="206.71676544997695"/>
-      <point x="1018.8437646183133" y="204.9997000531692" type="curve" smooth="yes"/>
-      <point x="1257.0183473769484" y="207.05711683829924" type="line"/>
+      <point x="1018.7382752693927" y="204.99995664666974" type="curve" smooth="yes"/>
+      <point x="1298.462248820691" y="206.33330181403971" type="line"/>
     </contour>
     <contour>
       <point x="182.2336027616676" y="1045.179166711186" type="line" smooth="yes"/>

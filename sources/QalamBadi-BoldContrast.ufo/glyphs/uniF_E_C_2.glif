@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uniFEC2" format="2">
-  <advance width="1149"/>
+  <advance width="1228"/>
   <unicode hex="FEC2"/>
   <outline>
     <contour>
-      <point x="271.9875305342358" y="204.99999838992144" type="curve" smooth="yes"/>
-      <point x="1160.1883308273455" y="205.08942932782378" type="line"/>
-      <point x="1183.9645407176179" y="387.4458175581205" type="line"/>
-      <point x="916.1693809877839" y="389.00029708811246" type="line" smooth="yes"/>
+      <point x="271.98676710460757" y="204.9999981867356" type="curve" smooth="yes"/>
+      <point x="1238.5360184596232" y="205.06571807510423" type="line"/>
+      <point x="1256.6817306319033" y="388.2260626052949" type="line"/>
+      <point x="915.9805649447871" y="389.0000039113165" type="line" smooth="yes"/>
       <point x="879.3414886920089" y="399.58578024867955"/>
       <point x="893.8431677755195" y="377.7885272520091"/>
       <point x="937.1539852293031" y="382.8301417831533" type="curve" smooth="yes"/>

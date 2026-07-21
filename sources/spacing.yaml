@@ -224,7 +224,13 @@ verticals:
 # largest island, which is where a kashida classically lives. It is never
 # spread across the teeth gaps.
 connectors:
-  approach:  0.42   # nuqta of flat lead-in kept between a join and the letter
+  approach:  0.72   # nuqta of flat lead-in kept between a join and the letter.
+                    # Raised from 0.42: at 0.42 the bowl transition of a final
+                    # arrived right at the seam, so the connector necked to a
+                    # near-point where two letters met (a tooth reading as
+                    # "connecting too high") and the line read cramped. A longer
+                    # lead-in keeps full-thickness connector on both sides of
+                    # every join and lets the word breathe.
   keep_long: []     # glyphs whose plateau is a deliberate kashida, not a stretch
 
   # Classical ink widths, in nuqta, per skeleton family and joining form.
@@ -262,11 +268,18 @@ connectors:
 # tail_dip is deliberately conservative for a first pass: deep enough to read
 # as a sweep, shallow enough that perpendicular thinning stays under ~12%.
 bends:
-  bowl_dip: 0.25       # beh/kaf-type finals: the boat under the letter
+  bowl_dip: 0.70       # beh/kaf-type finals: the boat under the letter
   bowl_ramp: 0.62
-  tail_dip: 0.60       # seen/yeh tails: toward the 0.9-alef classical depth
+  tail_dip: 1.45       # seen/yeh tails: toward the 0.9-alef classical depth
   tail_ramp: 0.60
-  finial_radius: 0.50  # the hook corner, bracket -> curve (global soften is 0.18)
+  # The terminal hook rounding. soften-corners already smoothed every corner
+  # at radius 48, so there is no sharp corner left to fillet — the hook reads
+  # hard because it is drawn TIGHT, a small squarish curve, not because it has
+  # an angle. So this does not fillet; it inflates. Every curve segment in the
+  # hook zone has its off-curve control points pushed away from their chord,
+  # which fattens a tight arc into a generous round one. Strength is a fraction
+  # of the segment: 0 leaves it, 0.5 is a pronounced round.
+  hook_round: 0.65
 
 # Mark strokes (scripts/narrow-madda.py). The madda kept its 944-unit cell
 # width while the alef under it came down from 5.45 to 3.6 nuqta, so the

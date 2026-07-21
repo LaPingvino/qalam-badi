@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uniFED6" format="2">
-  <advance width="1173"/>
+  <advance width="1217"/>
   <unicode hex="FED6"/>
   <outline>
     <contour>
@@ -30,9 +30,9 @@
       <point x="1015.0" y="209.208"/>
       <point x="1030.792" y="225.0"/>
       <point x="1048.6" y="225.0" type="curve" smooth="yes"/>
-      <point x="1172.82" y="225.0" type="line"/>
-      <point x="1172.82" y="369.0" type="line"/>
-      <point x="1061.8815189873417" y="369.0" type="line" smooth="yes"/>
+      <point x="1217.0" y="225.0" type="line"/>
+      <point x="1217.0" y="369.0" type="line"/>
+      <point x="1063.0" y="369.0" type="line" smooth="yes"/>
       <point x="1037.56" y="369.0"/>
       <point x="1015.0" y="391.56"/>
       <point x="1015.0" y="410.8679765693464" type="curve" smooth="yes"/>

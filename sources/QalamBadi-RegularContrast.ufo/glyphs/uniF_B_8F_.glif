@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uniFB8F" format="2">
-  <advance width="1041"/>
+  <advance width="1122"/>
   <unicode hex="FB8F"/>
   <outline>
     <contour>
-      <point x="1062.1408324665613" y="360.98755293615386" type="line"/>
-      <point x="940.3193617021277" y="355.0" type="line" smooth="yes"/>
-      <point x="903.6888467834108" y="356.4945758081587"/>
+      <point x="1138.7940011493788" y="358.25802718915355" type="line"/>
+      <point x="949.8331914893618" y="355.0" type="line" smooth="yes"/>
+      <point x="903.1164039290567" y="356.3441426380597"/>
       <point x="807.8221633693997" y="432.5400319927255"/>
       <point x="765.4558333238693" y="467.8266467893617" type="curve" smooth="yes"/>
       <point x="407.49208754806455" y="760.6395076239415" type="line" smooth="yes"/>
@@ -67,9 +67,9 @@
       <point x="660.6863524391568" y="400.321306396118"/>
       <point x="668.5563491861041" y="378.9583694396574" type="curve" smooth="yes"/>
       <point x="723.4859602528073" y="325.3471295436284"/>
-      <point x="834.3002457500702" y="237.75955325834144"/>
-      <point x="940.3193617021277" y="239.0" type="curve" smooth="yes"/>
-      <point x="1062.1408324665613" y="233.0124470638461" type="line"/>
+      <point x="834.7098164473196" y="237.85685735574626"/>
+      <point x="949.8331914893618" y="239.0" type="curve" smooth="yes"/>
+      <point x="1138.7940011493788" y="235.74197281084642" type="line"/>
     </contour>
   </outline>
 </glyph>
