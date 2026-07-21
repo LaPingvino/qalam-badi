@@ -239,6 +239,47 @@ def body_interval(font, glyph, rise, step=16):
     return min(xs), max(xs)
 
 
+def apply_remap_preserving_dots(glyph, remap, nuqta):
+    """Apply the x remap, but move dots rigidly instead of squashing them.
+
+    The remap compresses the approach either side of the letter. Any contour
+    living inside that region gets compressed with it — which is correct for the
+    connector stroke and very wrong for a nuqta. A dot remapped point by point
+    comes out as a horizontally squashed ellipse, and once it is thin enough the
+    overlap removal in the build simply loses it. That is how the dot vanished
+    from ba.
+
+    A dot is a small closed contour that is not part of the writing stroke, so
+    it is detected by size and moved as a rigid body: its centre is remapped and
+    the contour follows, keeping its shape and its position under the letter.
+    """
+    dot_limit = nuqta * 1.35
+
+    for contour in glyph.contours:
+        xs = [p.x for p in contour.points]
+        ys = [p.y for p in contour.points]
+        if not xs:
+            continue
+        width = max(xs) - min(xs)
+        height = max(ys) - min(ys)
+
+        if width <= dot_limit and height <= dot_limit:
+            # Rigid: remap the centre, translate every point by the same amount.
+            centre = (min(xs) + max(xs)) / 2
+            shift = remap(centre) - centre
+            for point in contour.points:
+                point.x += shift
+        else:
+            for point in contour.points:
+                point.x = remap(point.x)
+
+    for component in glyph.components:
+        xx, xy, yx, yy, dx, dy = component.transformation
+        component.transformation = (xx, xy, yx, yy, remap(dx), dy)
+    for anchor in glyph.anchors:
+        anchor.x = remap(anchor.x)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--src", default="sources/QalamBadi-Softened.ufo")
