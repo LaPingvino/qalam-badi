@@ -221,3 +221,18 @@ tails:
   depth:    0.85
   extend:   2.6
   min_drop: 0.85   # nuqta below the writing line before it counts as a tail
+
+# Transliteration modifier letters (scripts/normalize-modifiers.py).
+#
+# These are the ayn and hamza of 'Abdu'l-Baha, Huququ'llah and nastaliq — not
+# decoration in a Baha'i face. They sit directly beside an apostrophe in running
+# text, so a mismatch is conspicuous, and in the seed they mismatched three ways
+# at once: 604x680 against the quote's 366x555, sitting 257 units lower, and
+# drawn with a ~128 stroke against the 141 pen. Oversized and washed out
+# simultaneously.
+#
+# Each is matched to the glyph it stands next to.
+modifiers:
+  match:
+    uni02BF: quoteright   # ayn
+    uni02BE: quoteright   # hamza

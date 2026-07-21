@@ -98,7 +98,10 @@ proportional:
 	# 0.85, x x 2.6), which fattens every stroke that is not horizontal by up to
 	# 2.6x. The seen/sheen/sad tails came out visibly too fat.
 	. venv/bin/activate; python3 scripts/shorten-ascenders.py --src sources/QalamBadi-Connected.ufo --out sources/QalamBadi-Short.ufo
-	. venv/bin/activate; python3 scripts/make-proportional.py --src sources/QalamBadi-Short.ufo --out sources/QalamBadi-Regular.ufo
+	# ayn and hamza sat 257 units below the apostrophe they stand beside in
+	# 'Abdu'l-Baha and nastaliq. Position only — see the script for why not size.
+	. venv/bin/activate; python3 scripts/normalize-modifiers.py --src sources/QalamBadi-Short.ufo --out sources/QalamBadi-Mods.ufo
+	. venv/bin/activate; python3 scripts/make-proportional.py --src sources/QalamBadi-Mods.ufo --out sources/QalamBadi-Regular.ufo
 
 # Build the specimen: a single self-contained page with the webfonts inlined
 # and the monospace seed alongside for comparison. Published with the proofs so
