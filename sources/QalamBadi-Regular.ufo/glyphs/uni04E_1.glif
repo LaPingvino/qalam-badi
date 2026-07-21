@@ -13,7 +13,10 @@
       <point x="943.0" y="-20.0" type="curve" smooth="yes"/>
       <point x="943.0" y="199.0"/>
       <point x="785.0" y="381.0"/>
-      <point x="560.0" y="420.0" type="curve"/>
+      <point x="585.6180085303906" y="415.5595451880656" type="curve" smooth="yes"/>
+      <point x="572.0404640092836" y="417.91298623839083"/>
+      <point x="568.8388696217136" y="428.43817419886255"/>
+      <point x="578.8061055781139" y="437.95356212523944" type="curve" smooth="yes"/>
       <point x="935.0" y="778.0"/>
       <point x="937.0" y="764.0"/>
       <point x="937.0" y="815.0" type="curve" smooth="yes"/>
@@ -32,8 +35,14 @@
       <point x="199.0" y="559.0"/>
       <point x="214.0" y="594.0"/>
       <point x="214.0" y="633.0" type="curve" smooth="yes"/>
-      <point x="214.0" y="766.0" type="line"/>
-      <point x="738.0" y="766.0" type="line"/>
+      <point x="214.0" y="740.0" type="line" smooth="yes"/>
+      <point x="214.0" y="753.78"/>
+      <point x="226.22000000000003" y="766.0"/>
+      <point x="240.0" y="766.0" type="curve" smooth="yes"/>
+      <point x="712.0" y="766.0" type="line" smooth="yes"/>
+      <point x="725.78" y="766.0"/>
+      <point x="729.1605952505656" y="757.5623863755399"/>
+      <point x="719.1927558522672" y="748.047630586255" type="curve" smooth="yes"/>
       <point x="320.0" y="367.0" type="line" smooth="yes"/>
       <point x="298.0" y="344.0"/>
       <point x="289.0" y="330.0"/>
@@ -52,7 +61,10 @@
       <point x="482.0" y="-340.0" type="curve" smooth="yes"/>
       <point x="394.0" y="-340.0"/>
       <point x="263.0" y="-315.0"/>
-      <point x="222.0" y="-199.0" type="curve"/>
+      <point x="224.68860142657303" y="-206.60677476786512" type="curve" smooth="yes"/>
+      <point x="223.26364267048933" y="-202.5751841408966"/>
+      <point x="224.36880000000002" y="-196.039"/>
+      <point x="227.04000000000002" y="-192.7" type="curve" smooth="yes"/>
       <point x="234.0" y="-184.0"/>
       <point x="246.0" y="-168.0"/>
       <point x="246.0" y="-137.0" type="curve" smooth="yes"/>

@@ -58,14 +58,20 @@ italic:
 # keep flowing in, and every spacing decision stays legible in one reviewable
 # file (sources/spacing.yaml) instead of being buried in 2318 .glif files.
 #
-#   1. narrow-serifs   pulls in the serifs that were stretched to fill the cell
-#   2. make-proportional  fits advances to ink, in nuqta, pinning Arabic joins
+#   1. narrow-serifs      pulls in serifs that were stretched to fill the cell
+#   2. soften-corners     rounds the corners so strokes read as a pen, not a machine
+#   3. make-proportional  fits advances to ink, in nuqta, pinning Arabic joins
+#
+# Softening runs before fitting so advances are measured against the final
+# outlines. It changes no stroke width and no bounding box — a fillet is tangent
+# to the corner it replaces — so the two steps are independent in practice.
 #
 # Run `make widths` for the classification the targets in spacing.yaml are
 # derived from.
 proportional:
 	. venv/bin/activate; python3 scripts/narrow-serifs.py --src sources/QalamBadi-Mono.ufo --out sources/QalamBadi-Narrowed.ufo
-	. venv/bin/activate; python3 scripts/make-proportional.py --src sources/QalamBadi-Narrowed.ufo --out sources/QalamBadi-Regular.ufo
+	. venv/bin/activate; python3 scripts/soften-corners.py --src sources/QalamBadi-Narrowed.ufo --out sources/QalamBadi-Softened.ufo
+	. venv/bin/activate; python3 scripts/make-proportional.py --src sources/QalamBadi-Softened.ufo --out sources/QalamBadi-Regular.ufo
 
 # Report which glyphs the monospace cell distorted, and how.
 widths:

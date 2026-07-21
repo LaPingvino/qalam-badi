@@ -4,8 +4,14 @@
   <unicode hex="FEDA"/>
   <outline>
     <contour>
-      <point x="942.0646558814236" y="369.0" type="line"/>
-      <point x="276.06465588142356" y="369.0" type="line"/>
+      <point x="946.6491573798437" y="395.0" type="line" smooth="yes"/>
+      <point x="944.2193715856811" y="381.22"/>
+      <point x="929.8446558814236" y="369.0"/>
+      <point x="916.0646558814236" y="369.0" type="curve" smooth="yes"/>
+      <point x="283.5778442858229" y="369.0" type="line" smooth="yes"/>
+      <point x="279.59585443149126" y="369.0"/>
+      <point x="275.0423670172932" y="372.15840000000003"/>
+      <point x="273.88957319178445" y="375.72" type="curve" smooth="yes"/>
       <point x="270.88588757275903" y="385.0"/>
       <point x="269.70711926409444" y="401.0"/>
       <point x="271.9993700133045" y="414.0" type="curve" smooth="yes"/>
@@ -35,7 +41,10 @@
       <point x="1143.0774138890736" y="1509.0" type="curve" smooth="yes"/>
     </contour>
     <contour>
-      <point x="595.1262404481955" y="1169.0" type="curve"/>
+      <point x="621.1262404481955" y="1169.0" type="curve" smooth="yes"/>
+      <point x="607.3462404481955" y="1169.0"/>
+      <point x="597.280956152453" y="1181.22"/>
+      <point x="599.7107419466156" y="1195.0" type="curve" smooth="yes"/>
       <point x="610.2903607891235" y="1255.0"/>
       <point x="667.8144590753368" y="1292.0"/>
       <point x="776.8144590753368" y="1292.0" type="curve" smooth="yes"/>

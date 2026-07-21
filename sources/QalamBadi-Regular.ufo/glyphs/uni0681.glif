@@ -16,8 +16,14 @@
       <point x="201.0" y="537.0" type="curve" smooth="yes"/>
       <point x="201.0" y="565.0"/>
       <point x="208.0" y="592.0"/>
-      <point x="222.0" y="621.0" type="curve"/>
-      <point x="523.0" y="621.0" type="line"/>
+      <point x="216.12" y="608.82" type="curve" smooth="yes"/>
+      <point x="219.2364" y="615.2754"/>
+      <point x="228.3567704158637" y="621.0"/>
+      <point x="235.52504343800788" y="621.0" type="curve" smooth="yes"/>
+      <point x="497.0" y="621.0" type="line" smooth="yes"/>
+      <point x="510.78" y="621.0"/>
+      <point x="513.3834345606003" y="613.4601015159524"/>
+      <point x="502.53922246936236" y="604.9576627998987" type="curve" smooth="yes"/>
       <point x="222.0" y="385.0"/>
       <point x="68.0" y="201.0"/>
       <point x="68.0" y="-4.0" type="curve" smooth="yes"/>
@@ -41,7 +47,10 @@
       <point x="210.0" y="-4.0" type="curve" smooth="yes"/>
       <point x="210.0" y="285.0"/>
       <point x="617.0" y="514.0"/>
-      <point x="734.0" y="621.0" type="curve"/>
+      <point x="714.8135843465192" y="603.4534489322868" type="curve" smooth="yes"/>
+      <point x="724.982384642864" y="612.7531209981748"/>
+      <point x="746.22" y="621.0"/>
+      <point x="760.0" y="621.0" type="curve" smooth="yes"/>
       <point x="929.0" y="621.0" type="line" smooth="yes"/>
       <point x="992.0" y="621.0"/>
       <point x="1012.0" y="637.0"/>
@@ -57,7 +66,10 @@
       <point x="341.0" y="1353.0" type="curve" smooth="yes"/>
       <point x="341.0" y="1271.0"/>
       <point x="392.0" y="1204.0"/>
-      <point x="474.0" y="1179.0" type="curve"/>
+      <point x="449.13015510858344" y="1186.5822697839685" type="curve" smooth="yes"/>
+      <point x="462.31117290103424" y="1182.5636667984652"/>
+      <point x="463.1200018064347" y="1173.4363645601086"/>
+      <point x="450.8510676732653" y="1167.1624777874651" type="curve" smooth="yes"/>
       <point x="386.0" y="1134.0"/>
       <point x="314.0" y="1110.0"/>
       <point x="314.0" y="1056.0" type="curve" smooth="yes"/>

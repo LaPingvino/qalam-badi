@@ -9,15 +9,24 @@
       <point x="70.0" y="451.0"/>
       <point x="205.0" y="371.0"/>
       <point x="412.0" y="346.0" type="curve" smooth="yes"/>
-      <point x="449.0" y="342.0" type="line"/>
-      <point x="451.0" y="4.0" type="line"/>
+      <point x="433.46" y="343.68" type="line" smooth="yes"/>
+      <point x="441.6962" y="342.7896"/>
+      <point x="449.0434688076474" y="334.6537715075856"/>
+      <point x="449.09248682478176" y="326.3697266118842" type="curve" smooth="yes"/>
+      <point x="450.8874794325922" y="23.015975891915467" type="line" smooth="yes"/>
+      <point x="450.9471153333183" y="12.93750866920027"/>
+      <point x="455.5402" y="-3.6986000000000008"/>
+      <point x="460.66" y="-12.380000000000003" type="curve" smooth="yes"/>
       <point x="474.0" y="-35.0"/>
       <point x="508.0" y="-37.0"/>
       <point x="523.0" y="-37.0" type="curve" smooth="yes"/>
       <point x="551.0" y="-37.0"/>
       <point x="576.0" y="-10.0"/>
       <point x="582.0" y="18.0" type="curve"/>
-      <point x="582.0" y="336.0" type="line"/>
+      <point x="582.0" y="326.30354704028326" type="line" smooth="yes"/>
+      <point x="582.0" y="331.4426671089331"/>
+      <point x="586.5402" y="335.6052"/>
+      <point x="591.66" y="335.16" type="curve" smooth="yes"/>
       <point x="605.0" y="334.0" type="line"/>
       <point x="605.0" y="334.0"/>
       <point x="699.0" y="324.0"/>
@@ -48,7 +57,10 @@
       <point x="963.0321655273438" y="831.9529418945312" type="curve" smooth="yes"/>
       <point x="963.277587890625" y="847.2908325195312"/>
       <point x="963.6740112304688" y="872.0709228515625"/>
-      <point x="914.0" y="903.0" type="curve"/>
+      <point x="934.8630847167968" y="890.0097875976562" type="curve" smooth="yes"/>
+      <point x="923.8056498168945" y="896.8946001708985"/>
+      <point x="902.4539463813765" y="902.6604101876875"/>
+      <point x="889.4339284710137" y="902.2774684844416" type="curve" smooth="yes"/>
       <point x="846.0" y="901.0" type="line"/>
       <point x="801.0" y="901.0"/>
       <point x="527.0" y="903.0"/>

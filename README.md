@@ -4,14 +4,49 @@
 [![Latest Release](https://img.shields.io/github/v/release/LaPingvino/qalam-badi)](https://github.com/LaPingvino/qalam-badi/releases/latest)
 [![License: OFL-1.1](https://img.shields.io/badge/License-OFL%201.1-lightgreen.svg)](https://scripts.sil.org/OFL)
 
-Qalam Badi is an adapted version of the amazing Courier Prime font made by Quote-Unquote Apps. The purpose here is to add
-missing characters that can be relevant to Bahá'í usage in a very wide sense. This font has been adapted under the terms of
-the OFL and as it hasn't been made originally for Google Fonts, it might miss some of the requirements at least at first.
-I am correcting the Google Fonts and other Fontbakery requirements over time, probably fixing some bugs here and there.
+Qalam Badi is a **proportional** Bahá'í text family, leaning toward the hand of
+**Mishkín-Qalam** — the calligrapher and Apostle of Bahá'u'lláh whose
+*Yá Bahá'u'l-Abhá* is the best-known piece of Bahá'í lettering there is.
+
+It is a derivative of [Courier Badi](https://github.com/LaPingvino/courier-badi),
+which remains its own project and continues on its own path. Where Courier Badi
+is a monospace typewriter face built for screenplays, Qalam Badi takes the same
+outlines somewhere else entirely.
+
+**The stroke stays monolinear.** This is the point of the whole exercise, and it
+is worth being explicit about. A calligraphic face would normally reach for
+stroke contrast — thick verticals, thin horizontals, a visible pen angle. Qalam
+Badi deliberately does not. Courier's uniform stroke is inherited untouched, and
+every calligraphic quality has to be earned through **proportion and rhythm**
+instead: relative widths, the reach of a final's tail, how tightly letters join,
+how much air a word gets. The constraint is the design.
+
+## Heritage
+
+Qalam Badi sits at the end of a chain, and each link is worth naming:
+
+| | |
+|---|---|
+| **Courier Prime** | by [Quote-Unquote Apps](https://quoteunquoteapps.com), Reserved Font Name *Courier Prime Source*. The Courier model, redrawn for screenplays. |
+| **[Courier Badi](https://github.com/LaPingvino/courier-badi)** | adds the characters Bahá'í usage needs in the widest sense — the Bahá'í star, Arabic, Persian, Cyrillic, Greek, extended Latin, combining diacritics — plus Italic, Bold, a variable font, and a long campaign of Fontbakery correctness work. Still monospace, still maintained. |
+| **Qalam Badi** | this project. Proportional, and reaching toward Mishkín-Qalam. |
+
+Courier Badi is not a fossil in here. It is tracked as the `upstream` remote, its
+monospace master is kept in the sources as `QalamBadi-Mono.ufo`, and the
+proportional family is *generated from it by script*. That is a deliberate
+architectural choice: it means Courier Badi's ongoing Arabic shaping and
+Fontbakery fixes can be merged in and flow straight through to Qalam Badi,
+rather than the two projects drifting apart after the fork.
+
+```
+git fetch upstream
+git merge upstream/main        # Courier Badi fixes land in the mono seed
+make masters                   # and propagate through the whole family
+```
 
 ## About
 
-I am a Bahá'í, customer support agent by trade and programmer in my free time and former jobs. I am a long time big fan of the Fountain screenplay markup language and have written a command line tool for this that uses Courier Prime to generate screenplay PDFs.
+I am a Bahá'í, customer support agent by trade and programmer in my free time and former jobs. I am a long time big fan of the Fountain screenplay markup language and have written a command line tool for this that uses Courier Prime to generate screenplay PDFs — that tool is what Courier Badi serves. Qalam Badi is for everything that is *not* a screenplay: running text, prayer books, anywhere the Bahá'í writings want to look like they were written by a hand rather than a machine.
 
 ## Building
 
@@ -33,7 +68,66 @@ centering) are documented in [documentation/design-notes.md](documentation/desig
 Arabic OpenType features are generated from the UFO by `scripts/arabic-features`
 (Go) — run `make arabic-features` after changing Arabic glyphs.
 
+## How the proportional family is built
+
+Nothing in `sources/QalamBadi-Regular.ufo` is hand-edited. The chain is:
+
+```
+QalamBadi-Mono.ufo          the Courier Badi master, tracked against upstream
+   │
+   ├─ narrow-serifs.py      pull in serifs that were stretched to fill the cell
+   ├─ make-proportional.py  fit advances to ink, in nuqta; pin Arabic joins
+   │
+   └─ QalamBadi-Regular.ufo ─┬─ make-italic.py  → Italic
+                             ├─ make-bold.py    → Bold, Bold Italic
+                             └─ make-contrast-master.py → XOPQ siblings
+```
+
+* `make proportional` regenerates the Regular from the seed.
+* `make masters` regenerates the whole family.
+* `make widths` prints the classification the spacing targets come from.
+
+Every spacing decision lives in one reviewable file,
+[`sources/spacing.yaml`](sources/spacing.yaml), rather than being scattered
+across 2318 `.glif` files — it is meant to be read as the design record.
+
+### Measured in nuqta
+
+The spacing system is denominated in the **nuqta**, the calligrapher's dot, the
+unit the classical Persian proportion system uses. That is not decoration. The
+inherited master already draws the Arabic nuqta at 271×289 units and the Latin
+period at 270×310 — one dot module, already shared across the scripts. Building
+on it is what lets Latin, Cyrillic, Greek and Arabic share a rhythm instead of
+having four unrelated ones. The monolinear pen measures 141 units and the alef
+stands 4.6 nuqta tall, which is squarely inside the classical range; a good deal
+of the proportion system was sitting in Courier Badi already.
+
 ## Changelog
+
+### Qalam Badi
+
+**21 July 2026. Version 0.100**
+- **Forked from Courier Badi v1.010** and made proportional. The monospace
+  master is kept as the seed and the family is generated from it, so upstream
+  Courier Badi work stays mergeable.
+- **Two distortions, opposite fixes.** `scripts/classify-widths.py` separates
+  glyphs the cell made *too narrow* (alef, period — re-fitting the advance is
+  the whole fix; alef goes 1228 → 357) from those it made *too wide* (Courier's
+  `i` is a 141-unit stem carrying 910 units of serif — re-spacing cannot help,
+  so the outline is narrowed). `i:m` was 0.93 and is now 0.43.
+- **Serifs narrowed without touching the stroke.** `scripts/narrow-serifs.py`
+  compresses the flanks either side of the stem while pinning the stem itself,
+  so vertical stroke width is mathematically unchanged and the face stays
+  monolinear.
+- **Arabic joins pinned to the advance** rather than given a sidebearing, and
+  detected from the outlines rather than a hand-kept table, so they survive
+  upstream edits. 643 glyphs carry a pinned join.
+
+### Inherited from Courier Badi
+
+The history below belongs to [Courier
+Badi](https://github.com/LaPingvino/courier-badi) and is kept because Qalam Badi
+inherits every one of these fixes through its monospace seed.
 
 **20 July 2026. Version 1.010**
 - **Submission-ready split.** The shipping family is now a clean **wght + ital**

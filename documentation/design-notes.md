@@ -3,9 +3,85 @@
 This document records a few non-obvious design decisions, mainly so reviewers
 (including Google Fonts onboarding) don't have to reverse-engineer them.
 
-## Monospace model
+Qalam Badi is derived from [Courier
+Badi](https://github.com/LaPingvino/courier-badi), and most of what follows was
+inherited from it. The sections that are specific to Qalam Badi — the
+proportional model, and the spacing system — come first.
 
-Every glyph advances **1228 units** (UPM 2048). The font is strictly
+## Proportional model
+
+Qalam Badi is proportional. Its ancestor is not, and the difference is the
+reason this project exists.
+
+Advances are fitted to each glyph's ink, with sidebearings drawn from
+[`sources/spacing.yaml`](../sources/spacing.yaml). `post.isFixedPitch` is
+cleared and the PANOSE proportion byte is 3 (modern/proportional) rather than
+the inherited 9 (monospaced); `hhea.numberOfHMetrics` is now the full glyph
+count rather than 1. Those three declarations are corrected in
+`scripts/make-proportional.py` rather than left to a downstream fixup, because
+layout engines and PDF generators act on them and a font that claims fixed
+pitch while shipping thousands of distinct advances gets laid out wrong.
+
+**The stroke is never touched.** Glyphs are translated and their advances
+changed; nothing is scaled. Where an outline does change — the serif narrowing
+below — the transform is anchored on the stem so vertical stroke width is
+mathematically invariant. Monolinearity is the property the whole design rests
+on, since Qalam Badi's calligraphic character has to come from proportion
+rather than from stroke contrast.
+
+### Measured in nuqta
+
+Spacing is denominated in the **nuqta**, the calligrapher's dot — the unit of
+the classical Persian proportion system. This is not ornamental: the inherited
+master already draws the Arabic nuqta at 271×289 units and the Latin period at
+270×310, so a single dot module was already shared across the scripts. Using it
+is what allows Latin, Cyrillic, Greek and Arabic to share one rhythm.
+
+Two more inherited proportions are worth recording, because they mean rather
+more of the system was already in place than we expected: the monolinear pen
+measures **141 units**, and the alef stands **4.6 nuqta**. Classical sources put
+the nastaʿlīq alef at 3 dots and the naskh alef at 5–6, so the inherited alef
+sits between the two — which is roughly where this design wants to be anyway.
+
+### Two distortions, opposite fixes
+
+A monospace cell damages glyphs in both directions, and
+`scripts/classify-widths.py` separates them by comparing each glyph's ink at the
+serif band against its ink at mid x-height:
+
+* **Too narrow.** The alef is a single 141-unit stroke in a 1228-unit cell.
+  The outline is fine; re-fitting the advance is the entire fix (alef: 1228 →
+  357).
+* **Too wide.** Courier's `i` is a 141-unit stem carrying **910 units of
+  serif** — the serifs were stretched until they reached the cell walls. Its
+  ink really is that wide, so re-spacing achieves nothing and `i` would stay as
+  wide as `m`. `scripts/narrow-serifs.py` compresses the flanks either side of
+  the stem, pinning the stem, so the slab survives and the stroke does not
+  change.
+
+In the seed, every letter from `J` to `w` sat between 770 and 1112 units of ink
+— a range of 1.4× across the whole alphabet. That flatness *is* the typewriter.
+`i:m` was 0.93 and is now 0.43, against roughly 0.35–0.40 for a conventional
+serif text face.
+
+### Arabic joins are pinned, not spaced
+
+A joining edge is not a sidebearing. An `.init`/`.medi`/`.fina` form carries its
+connector exactly on the advance edge, and giving that edge any sidebearing
+visibly pulls the script apart. Those edges are pinned to zero.
+
+Join sides are **detected from the outlines** — ink reaching the advance edge
+within a band around the baseline — rather than from a hand-maintained table,
+so the detection stays correct when Courier Badi edits its Arabic upstream and
+those changes are merged in. 643 glyphs carry a pinned join.
+
+## Inherited: the monospace seed
+
+The monospace master is retained as `sources/QalamBadi-Mono.ufo` and tracked
+against the `upstream` remote. Everything below describes it, and applies to
+Qalam Badi except where the proportional model above overrides it.
+
+Every glyph in the seed advances **1228 units** (UPM 2048). It is strictly
 monospaced: `post.isFixedPitch` is set, the PANOSE proportion byte is 9
 (monospaced), and `hhea.numberOfHMetrics` is 1 (all glyphs share one width — a
 valid and compact choice for a monospaced font; see

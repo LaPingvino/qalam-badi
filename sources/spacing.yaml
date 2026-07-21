@@ -24,6 +24,18 @@ defaults:
   lsb: 0.30
   rsb: 0.30
 
+# Corner rounding (scripts/soften-corners.py). Courier's corners are perfectly
+# square because a typewriter face is drawn as engineering; a reed pen carries a
+# small radius into every junction it makes. This is the one move that pushes
+# the inherited outlines toward a written hand without costing us anything we
+# are keeping — a fillet changes no stroke width anywhere — and it applies to
+# every script at once, so Latin serifs and Arabic tooth junctions soften on the
+# same radius and stay siblings.
+softening:
+  radius: 26        # ~0.10 nuqta, ~18% of the 141-unit pen
+  min_turn: 22      # below this the junction is near-straight; rounding adds points and nothing else
+  max_turn: 155     # above this it is a spike (the apex of A, W, v) — a pen keeps those sharp too
+
 categories:
 
   # --- Latin / Cyrillic / Greek ------------------------------------------

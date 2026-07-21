@@ -331,9 +331,19 @@ def main():
 
     font.info.familyName = "Qalam Badi"
     font.info.styleName = "Regular"
-    font.info.postscriptIsFixedPitch = False
     if font.info.postscriptFontName:
         font.info.postscriptFontName = "QalamBadi-Regular"
+
+    # The seed declares itself monospaced in three separate places, and all
+    # three are now lies. Layout engines, PDF generators and terminal emulators
+    # act on them — a font that claims fixed pitch while shipping 2193 distinct
+    # advances gets laid out wrong — so they are corrected here rather than
+    # left for a downstream fixup to guess at.
+    font.info.postscriptIsFixedPitch = False
+    panose = list(font.info.openTypeOS2Panose or [])
+    if len(panose) == 10 and panose[3] == 9:  # bProportion: 9 = monospaced
+        panose[3] = 3  # 3 = modern/proportional for a Latin text family
+        font.info.openTypeOS2Panose = panose
 
     if os.path.exists(args.out):
         shutil.rmtree(args.out)

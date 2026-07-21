@@ -7,7 +7,10 @@
       <point x="70.0" y="440.0" type="curve" smooth="yes"/>
       <point x="70.0" y="213.0"/>
       <point x="232.0" y="31.0"/>
-      <point x="445.0" y="-4.0" type="curve"/>
+      <point x="419.3440586723717" y="0.21576500688727585" type="curve" smooth="yes"/>
+      <point x="432.9417075760147" y="-2.0185904467629805"/>
+      <point x="445.0" y="-16.22"/>
+      <point x="445.0" y="-30.0" type="curve" smooth="yes"/>
       <point x="445.0" y="-68.0" type="line" smooth="yes"/>
       <point x="445.0" y="-96.0"/>
       <point x="445.0" y="-137.0"/>
@@ -32,8 +35,14 @@
       <point x="769.0" y="-256.0" type="curve" smooth="yes"/>
       <point x="769.0" y="-170.0"/>
       <point x="714.0" y="-76.0"/>
-      <point x="589.0" y="-39.0" type="curve"/>
-      <point x="589.0" y="-6.0" type="line"/>
+      <point x="602.290013935332" y="-42.93384412485827" type="curve" smooth="yes"/>
+      <point x="595.2463065496061" y="-40.84890673868338"/>
+      <point x="589.0" y="-32.4858"/>
+      <point x="589.0" y="-25.14" type="curve" smooth="yes"/>
+      <point x="589.0" y="-19.86" type="line" smooth="yes"/>
+      <point x="589.0" y="-12.514199999999999"/>
+      <point x="595.4394230436492" y="-5.015808705119114"/>
+      <point x="602.7009000928707" y="-3.9059759683385398" type="curve" smooth="yes"/>
       <point x="818.0" y="29.0"/>
       <point x="875.0" y="180.0"/>
       <point x="875.0" y="225.0" type="curve" smooth="yes"/>
@@ -54,7 +63,10 @@
       <point x="533.0" y="772.0" type="curve" smooth="yes"/>
       <point x="617.0" y="772.0"/>
       <point x="644.0" y="768.0"/>
-      <point x="671.0" y="764.0" type="curve"/>
+      <point x="665.1834836413592" y="764.861706127206" type="curve" smooth="yes"/>
+      <point x="668.2662373114388" y="764.4050018797868"/>
+      <point x="671.0" y="761.2364"/>
+      <point x="671.0" y="758.12" type="curve" smooth="yes"/>
       <point x="671.0" y="750.0" type="line" smooth="yes"/>
       <point x="671.0" y="686.0"/>
       <point x="718.0" y="655.0"/>

@@ -26,8 +26,14 @@
       <point x="301.05607192416426" y="1248.0"/>
       <point x="315.529532309995" y="1228.0"/>
       <point x="360.529532309995" y="1228.0" type="curve" smooth="yes"/>
-      <point x="687.5295323099949" y="1228.0" type="line"/>
-      <point x="437.67420064610013" y="-189.0" type="line"/>
+      <point x="661.5295323099949" y="1228.0" type="line" smooth="yes"/>
+      <point x="675.3095323099949" y="1228.0"/>
+      <point x="685.3748166057376" y="1215.78"/>
+      <point x="682.945030811575" y="1202.0" type="curve" smooth="yes"/>
+      <point x="442.2587021445202" y="-163.0" type="line" smooth="yes"/>
+      <point x="439.8289163503576" y="-176.78"/>
+      <point x="425.4542006461001" y="-189.0"/>
+      <point x="411.67420064610013" y="-189.0" type="curve" smooth="yes"/>
     </contour>
   </outline>
 </glyph>

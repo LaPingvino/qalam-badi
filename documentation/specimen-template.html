@@ -1,0 +1,353 @@
+<title>Qalam Badi — first proportional proof</title>
+
+<style>
+  @font-face {
+    font-family: "Qalam Badi";
+    src: url("@@REGULAR@@") format("woff2");
+    font-weight: 400; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "Qalam Badi";
+    src: url("@@ITALIC@@") format("woff2");
+    font-weight: 400; font-style: italic; font-display: block;
+  }
+  @font-face {
+    font-family: "Qalam Badi";
+    src: url("@@BOLD@@") format("woff2");
+    font-weight: 700; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "Qalam Badi Mono";
+    src: url("@@MONO@@") format("woff2");
+    font-weight: 400; font-style: normal; font-display: block;
+  }
+
+  /* Lapis and gold on paper — the pigments of the manuscripts this hand comes
+     from. The neutrals carry a blue bias so they sit with the lapis rather
+     than under it. */
+  :root {
+    --paper:      #FBFAF7;
+    --ground:     #F2F1EE;
+    --ink:        #14161F;
+    --muted:      #676C7E;
+    --faint:      #C9CBD4;
+    --lapis:      #2C4E9A;
+    --gold:       #A8842C;
+    --rule:       #DEDDD8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:  #101219;
+      --ground: #171A24;
+      --ink:    #E9E7E1;
+      --muted:  #969BAC;
+      --faint:  #3A3F4E;
+      --lapis:  #8AA6E8;
+      --gold:   #D8B75E;
+      --rule:   #272B38;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:  #101219;
+    --ground: #171A24;
+    --ink:    #E9E7E1;
+    --muted:  #969BAC;
+    --faint:  #3A3F4E;
+    --lapis:  #8AA6E8;
+    --gold:   #D8B75E;
+    --rule:   #272B38;
+  }
+  :root[data-theme="light"] {
+    --paper:  #FBFAF7;
+    --ground: #F2F1EE;
+    --ink:    #14161F;
+    --muted:  #676C7E;
+    --faint:  #C9CBD4;
+    --lapis:  #2C4E9A;
+    --gold:   #A8842C;
+    --rule:   #DEDDD8;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Qalam Badi", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.65;
+    margin: 0;
+    padding: 0 1.5rem 6rem;
+  }
+
+  .wrap { max-width: 46rem; margin: 0 auto; }
+
+  .label {
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  header { padding: 5rem 0 3rem; }
+  header .eyebrow { color: var(--lapis); }
+  h1 {
+    font-size: clamp(3rem, 9vw, 5rem);
+    line-height: 1.05;
+    margin: 1rem 0 0.5rem;
+    font-weight: 400;
+    text-wrap: balance;
+  }
+  header .sub {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 32rem;
+    margin: 0.5rem 0 0;
+  }
+
+  .invocation {
+    font-size: clamp(2.5rem, 10vw, 4.5rem);
+    line-height: 1.5;
+    direction: rtl;
+    text-align: right;
+    margin: 3rem 0 0.5rem;
+    color: var(--lapis);
+  }
+  .invocation + .label { text-align: right; }
+
+  section { margin: 4.5rem 0 0; }
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0.6rem 0 1rem;
+    text-wrap: balance;
+  }
+  p { margin: 0 0 1.1rem; }
+  p.note { color: var(--muted); font-size: 0.95rem; }
+
+  /* Comparison: the same string set twice, so the difference is shown rather
+     than asserted. */
+  .compare {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    margin: 2rem 0;
+  }
+  .row {
+    padding: 1.4rem 0;
+    display: grid;
+    grid-template-columns: 5.5rem 1fr;
+    gap: 1rem;
+    align-items: baseline;
+  }
+  .row + .row { border-top: 1px solid var(--rule); }
+  .row .label { padding-top: 0.4rem; }
+  .row .line { font-size: 1.5rem; line-height: 1.4; overflow-x: auto; }
+  .row.seed .line { font-family: "Qalam Badi Mono", ui-monospace, monospace; color: var(--muted); }
+  .row .line.ar { direction: rtl; text-align: right; font-size: 2rem; }
+
+  .metrics {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+    margin: 1.5rem 0;
+  }
+  .metrics th, .metrics td { text-align: right; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--rule); }
+  .metrics th:first-child, .metrics td:first-child { text-align: left; }
+  .metrics th { color: var(--muted); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; }
+  .metrics td.g { font-family: "Qalam Badi", serif; font-size: 1.2rem; }
+  .metrics .gain { color: var(--lapis); font-weight: 600; }
+  .metrics-scroll { overflow-x: auto; }
+
+  .pull {
+    border-left: 2px solid var(--gold);
+    padding: 0.2rem 0 0.2rem 1.2rem;
+    margin: 2rem 0;
+    color: var(--ink);
+  }
+  .pull .label { display: block; margin-bottom: 0.4rem; }
+
+  .waterfall > div { margin: 0 0 0.7rem; line-height: 1.3; }
+
+  .charset {
+    font-size: 1.5rem;
+    line-height: 1.9;
+    word-spacing: 0.15em;
+    border-top: 1px solid var(--rule);
+    padding-top: 1.5rem;
+  }
+  .charset .ar { direction: rtl; text-align: right; font-size: 1.9rem; }
+
+  footer {
+    margin-top: 5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  a { color: var(--lapis); }
+</style>
+
+<div class="wrap">
+
+  <header>
+    <div class="label eyebrow">Proof sheet · first proportional run</div>
+    <h1>Qalam Badi</h1>
+    <p class="sub">A proportional Bahá'í text family, derived from Courier Badi
+    and leaning toward the hand of Mishkín-Qalam — while keeping the uniform
+    monolinear stroke the Courier model produced.</p>
+
+    <div class="invocation">يا بهاء الأبهى</div>
+    <div class="label">Yá Bahá'u'l-Abhá — the invocation Mishkín-Qalam calligraphed</div>
+  </header>
+
+  <section>
+    <div class="label">What changed</div>
+    <h2>The cell is gone</h2>
+    <p>Courier Badi is strictly monospace: every glyph, from the period to the
+    <i>m</i>, occupies the same 1228-unit cell. Qalam Badi keeps all of its
+    outlines and changes only how much room each one is given.</p>
+
+    <div class="compare">
+      <div class="row seed">
+        <div class="label">Seed</div>
+        <div class="line">Illumine my heart with the light of knowledge</div>
+      </div>
+      <div class="row">
+        <div class="label">Qalam</div>
+        <div class="line">Illumine my heart with the light of knowledge</div>
+      </div>
+    </div>
+
+    <p class="note">The seed line is the monospace master this project starts
+    from. Nothing about the letters differs between the two lines except their
+    widths and, for a handful of single-stem letters, the reach of their
+    serifs.</p>
+  </section>
+
+  <section>
+    <div class="label">The module</div>
+    <h2>Everything is measured in nuqta</h2>
+    <p>The seed master already draws the Arabic <i>nuqta</i> — the
+    calligrapher's dot — at 271&times;289 units, and the Latin period at
+    270&times;310. One dot module, shared across the scripts, sitting there
+    unused. Denominating the spacing in it is what lets Latin, Cyrillic, Greek
+    and Arabic share a single rhythm instead of four unrelated ones.</p>
+
+    <div class="pull">
+      <span class="label">Also inherited</span>
+      The monolinear pen measures 141 units, and the alef stands 1252 units —
+      <strong>4.6 nuqta</strong>, squarely inside the classical Persian range.
+      The proportions were already there.
+    </div>
+  </section>
+
+  <section>
+    <div class="label">Classification</div>
+    <h2>Two distortions, opposite fixes</h2>
+    <p>A monospace cell damages glyphs in two directions at once, and the two
+    need different treatment.</p>
+
+    <p><strong>Too narrow.</strong> The alef is a single 141-unit stroke parked
+    in a 1228-unit cell. Nothing is wrong with the outline — re-fitting the
+    advance is the whole fix.</p>
+
+    <p><strong>Too wide.</strong> Courier's <i>i</i> is one 141-unit stem
+    carrying serifs 910 units across. Its ink genuinely fills the cell, so
+    re-spacing achieves nothing and <i>i</i> stays as wide as <i>m</i>. These
+    need the outline narrowed — which is done by compressing the flanks either
+    side of the stem, so the stem width, and therefore monolinearity, is
+    mathematically untouched.</p>
+
+    <div class="metrics-scroll">
+      <table class="metrics">
+        <thead>
+          <tr><th>Glyph</th><th>Seed</th><th>Qalam</th><th>Change</th><th>Kind</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="g">ا</td><td>1228</td><td>357</td><td class="gain">−71%</td><td>too narrow</td></tr>
+          <tr><td class="g">.</td><td>1228</td><td>454</td><td class="gain">−63%</td><td>too narrow</td></tr>
+          <tr><td class="g">i</td><td>1228</td><td>491</td><td class="gain">−60%</td><td>too wide</td></tr>
+          <tr><td class="g">l</td><td>1228</td><td>491</td><td class="gain">−60%</td><td>too wide</td></tr>
+          <tr><td class="g">r</td><td>1228</td><td>613</td><td class="gain">−50%</td><td>too wide</td></tr>
+          <tr><td class="g">f</td><td>1228</td><td>653</td><td class="gain">−47%</td><td>too wide</td></tr>
+          <tr><td class="g">E</td><td>1228</td><td>831</td><td class="gain">−32%</td><td>too wide</td></tr>
+          <tr><td class="g">n</td><td>1228</td><td>994</td><td>−19%</td><td>fitted</td></tr>
+          <tr><td class="g">o</td><td>1228</td><td>1080</td><td>−12%</td><td>fitted</td></tr>
+          <tr><td class="g">m</td><td>1228</td><td>1140</td><td>−7%</td><td>fitted</td></tr>
+          <tr><td class="g">w</td><td>1228</td><td>1220</td><td>−1%</td><td>fitted</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note">In the seed, every letter from <i>J</i> to <i>w</i> sat
+    between 770 and 1112 units of ink — a range of 1.4&times; across the whole
+    alphabet. That flatness <em>is</em> the typewriter. The ratio of <i>i</i> to
+    <i>m</i> was 0.93; it is now 0.43, against roughly 0.35–0.40 for a
+    conventional serif text face.</p>
+  </section>
+
+  <section>
+    <div class="label">Arabic</div>
+    <h2>Joins are pinned, not spaced</h2>
+    <p>A joining edge is not a sidebearing. An initial, medial or final form
+    carries its connector exactly on the advance edge, and giving that edge any
+    sidebearing at all visibly pulls the script apart. Those edges are pinned to
+    zero — and detected from the outlines themselves rather than a hand-kept
+    table, so they stay correct when the Arabic is edited upstream. 643 glyphs
+    carry a pinned join.</p>
+
+    <div class="compare">
+      <div class="row seed">
+        <div class="label">Seed</div>
+        <div class="line ar">اللّه أبهى</div>
+      </div>
+      <div class="row">
+        <div class="label">Qalam</div>
+        <div class="line ar">اللّه أبهى</div>
+      </div>
+    </div>
+
+    <p class="note">Arabic sits tighter than Latin here on purpose: in a
+    nastaʿlīq hand the letters within a word nearly touch and the word gap
+    carries the rhythm instead. That contrast survives the loss of stroke
+    contrast, which is why it is doing the work in a monolinear face.</p>
+  </section>
+
+  <section>
+    <div class="label">Waterfall</div>
+    <h2>At size</h2>
+    <div class="waterfall">
+      <div style="font-size:2.6rem">Bahá'u'lláh · Mishkín-Qalam</div>
+      <div style="font-size:1.9rem">The earth is but one country</div>
+      <div style="font-size:1.4rem">and mankind its citizens.</div>
+      <div style="font-size:1.05rem">So powerful is the light of unity that it can illuminate the whole earth.</div>
+      <div style="font-size:0.85rem">Consort with the followers of all religions in a spirit of friendliness and fellowship.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="label">Character set</div>
+    <h2>Coverage</h2>
+    <div class="charset">
+      <div>ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+      <div>abcdefghijklmnopqrstuvwxyz</div>
+      <div>0123456789 &amp; ¶ § © ‡ † …</div>
+      <div>Á á Í í Ú ú ‘ ’ Bahá'í Ḥuqúqu'lláh</div>
+      <div>АБВГДЕЖЗИЙКЛМНОП абвгдежзийклмноп</div>
+      <div>ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠ αβγδεζηθικλμνξοπ</div>
+      <div class="ar">ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ی</div>
+      <div class="ar">پ چ ژ گ ک ی ۀ ء آ أ إ ؤ ئ</div>
+    </div>
+  </section>
+
+  <footer>
+    Qalam Badi is licensed under the SIL Open Font License 1.1. It derives from
+    Courier Badi, which derives from Courier Prime by Quote-Unquote Apps
+    (Reserved Font Name: Courier Prime Source).
+    <a href="https://github.com/LaPingvino/qalam-badi">github.com/LaPingvino/qalam-badi</a>
+  </footer>
+
+</div>
