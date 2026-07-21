@@ -325,6 +325,12 @@ tails:
   extend:   2.6
   min_drop: 0.85   # nuqta below the writing line before it counts as a tail
 
+  # Meem tail bow (scripts/curve-meem-tail.py). The seed hangs the final/
+  # isolated meem on a dead-straight 754-unit rod; a reed pen curves it. This
+  # bows the lower rod into a hook. Negative = leftward, the natural direction
+  # the pen exits the eye. In nuqta of horizontal throw at the foot.
+  meem_bow: -0.65
+
 # Transliteration modifier letters (scripts/normalize-modifiers.py).
 #
 # These are the ayn and hamza of 'Abdu'l-Baha, Huququ'llah and nastaliq — not
