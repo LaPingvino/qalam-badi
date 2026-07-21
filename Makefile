@@ -21,6 +21,12 @@ venv: venv/touchfile
 
 venv-test: venv-test/touchfile
 
+# Assert the design invariants (module, master interpolation, descender
+# clearance, join height, monolinearity) over the source masters in ~1s.
+# Gates `make build`; run it standalone before committing.
+check: venv
+	. venv/bin/activate; python3 scripts/check-invariants.py
+
 customize: venv
 	. venv/bin/activate; python3 scripts/customize.py
 
@@ -36,6 +42,11 @@ arabic-features-check:
 	cd scripts/arabic-features && go run . --ufo ../../sources/QalamBadi-Regular.ufo --check
 
 build.stamp: venv sources/config.yaml $(SOURCES)
+	# Gate the build on the design invariants. This is a one-second check that
+	# fails fast with a readable message where fontmake would fail three
+	# minutes in with a cryptic one — the desynced-Bold interpolation break is
+	# exactly what it catches. See scripts/check-invariants.py.
+	. venv/bin/activate; python3 scripts/check-invariants.py
 	rm -rf fonts
 	(for config in sources/config*.yaml; do . venv/bin/activate; gftools builder $$config; done)
 	# Post-build: add a 'meta' table (dlng/slng ScriptLangTags) and a STAT table

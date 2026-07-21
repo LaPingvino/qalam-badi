@@ -54,6 +54,16 @@ stroke at the join height, so its thickness is a vertical measurement, and
 stretching or compressing it in x costs nothing.** That is why shortening
 connectors worked cleanly, and why extending them will too.
 
+**The rule is now partly enforced, not just written down.** `make check`
+(scripts/check-invariants.py) gates `make build` on the invariants every past
+regression broke: the module (nuqta/pen unchanged), master interpolation
+(Regular/Italic/Bold/BoldItalic identical point structure — the desynced-Bold
+break that once cost three minutes of fontmake now fails in one second),
+descender clearance (no new glyph clips the line — the ya-class bug), a single
+join height, and the alef staying one pen wide. It reads the source masters,
+so it runs before every commit. Add a check here whenever a new failure mode
+is found the hard way.
+
 ---
 
 ## Measured facts the design rests on
@@ -156,7 +166,10 @@ forms changed width noticeably (beh isol 1228→1318, seen isol adv 2130).
   glyphs remain below the line (uni06D1/0777/076F/06BC finals, uniFBE5, two
   component sources): their tails sweep directly over the dots, leaving less
   vertical room than a dot is tall, so translation alone cannot save them —
-  they need the step-4 tail reshape or a dot rearrangement.
+  they need the step-4 tail reshape or a dot rearrangement. Those eight are
+  declared in spacing.yaml (`checks.descender_allow`) and gated by `make
+  check`, so a NEW clip fails the build while these known ones are tolerated;
+  clear an entry when its tail reshape lands.
 - **ghain** still reads as double-joined, so it does not sweep.
 - **The hamza `uni0621` is oversized** — 2.2 nuqta of ink where ~1.2 belongs,
   conspicuous at the end of بهاء. Same disease and same constraint as the ʿ

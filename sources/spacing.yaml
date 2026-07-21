@@ -20,6 +20,25 @@ module:
   nuqta: 271
   pen: 141
 
+# Invariant gate (scripts/check-invariants.py, `make check`). Every regression
+# this project shipped broke a rule written down but enforced by nobody; this
+# turns the prose into a one-second gate over the source masters.
+checks:
+  # Glyphs whose ink legitimately falls below the declared descender. The
+  # check FAILS on any new one — that is what would have caught the ya
+  # clipping — but tolerates these, which are rare extended-Arabic finals
+  # whose tail sweeps directly over their own below-dots, leaving less room
+  # than a dot is tall. They await the arc-length tail reshape (bends, step 4).
+  descender_allow:
+    - uni06D1.fina                  # Sindhi yeh, dots below
+    - uni0777.fina                  # Sindhi dad variant
+    - uniFBE5                       # Farsi yeh presentation form
+    - uni076F.init                  # Khowar variants
+    - uni076F.medi
+    - threedotshorizontalbelow_ar   # a below-mark, not a base
+    - Threedotsinverted.alt.comp    # component source
+    - uni06BC.fina                  # noon ghunna variant
+
 defaults:
   lsb: 0.30
   rsb: 0.30
