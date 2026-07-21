@@ -115,6 +115,14 @@ extension interacts with the lám shadda/harakat stacking below.
 - **Lám with doubled harakat** stacks wrongly. May or may not be related to
   connector length.
 - **`bá` has a sharp corner** where it wants a curve.
+- **Yá gets cut off** (it is yá, not bá, that clips). Final yeh `uniFEF2`
+  descends to y=−1024 while the hhea/typo descender is −838, so any renderer
+  that clips to line metrics cuts the bottom of the tail. Bá bottoms at −289,
+  well inside — the misattribution came from there. The tail is a deep narrow
+  naskh hook, the same disease as the seen tail; the step-4 undertail reshape
+  (wide and shallow, ~0.9 alef deep ≈ −650 from the writing line) should bring
+  it back inside the descender on its own. If not, raise the metric, don't
+  clip the letter.
 - **ghain** still reads as double-joined, so it does not sweep.
 - **`ʿ` U+02BF is oversized** next to the apostrophe (604×680 vs 366×555). Its
   position is fixed; the size is not. It is *not* thin — its stroke measures 140
