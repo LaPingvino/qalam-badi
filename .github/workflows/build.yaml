@@ -2,6 +2,15 @@ name: Build font and specimen
 
 on: push
 
+# Runs overlap when pushes come close together, and they deploy to gh-pages in
+# the order they FINISH, not the order they were pushed — so a slow older run
+# can land on top of a newer one and put an out-of-date font back on the site.
+# That is exactly the kind of thing that gets mistaken for "the fix did not
+# work". Only the newest push per branch is worth building; cancel the rest.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     name: Build and test
