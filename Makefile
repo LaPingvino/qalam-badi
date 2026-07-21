@@ -203,6 +203,13 @@ masters: proportional
 	. venv/bin/activate; python3 scripts/make-italic.py
 	. venv/bin/activate; python3 scripts/make-bold.py --src sources/QalamBadi-Regular.ufo --out sources/QalamBadi-Bold.ufo
 	. venv/bin/activate; python3 scripts/make-bold.py --src sources/QalamBadi-Italic.ufo --out sources/QalamBadi-BoldItalic.ufo
+	# Re-anchor each derived master from ITS OWN ink: make-bold dilates and
+	# make-italic shears, so the Regular's anchors would ride the marks low (and
+	# off in x on the Italic). The contrast masters then inherit good anchors
+	# from these re-anchored bases.
+	. venv/bin/activate; python3 scripts/mark-anchors.py --src sources/QalamBadi-Italic.ufo
+	. venv/bin/activate; python3 scripts/mark-anchors.py --src sources/QalamBadi-Bold.ufo
+	. venv/bin/activate; python3 scripts/mark-anchors.py --src sources/QalamBadi-BoldItalic.ufo
 	# Contrast siblings for the XOPQ axis: a weight-neutral modulation (thick
 	# verticals, thin horizontals) of EACH weight, so XOPQ reads at every weight,
 	# not just Bold. Same point structure -> interpolates with its base master.
