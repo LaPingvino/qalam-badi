@@ -71,21 +71,18 @@ italic:
 # derived from.
 proportional:
 	. venv/bin/activate; python3 scripts/narrow-serifs.py --src sources/QalamBadi-Mono.ufo --out sources/QalamBadi-Narrowed.ufo
-	# Seen/sheen/sad teeth. HELD AT 1.5 pending the advance fix, see below.
+	# NO seen/sheen/sad widening here. The seed ALREADY HAS IT.
 	#
-	# The teeth want to run at 2x — classically the seen kashida is 7-11 nuqta,
-	# far beyond anything the cell could hold — but this upstream script was
-	# written FOR the cell: it spreads the teeth and lets the free tail smuggle
-	# out past the box to compensate, because in a monospace font the advance
-	# could not grow. Nothing here grows it either, so at 2.0 the ink reaches
-	# 3613 units against a 1228 advance and the letter collides with whatever
-	# follows it. At 1.5 the overhang stays within what the seed already
-	# tolerated.
+	# Courier Badi widened these teeth 1.5x in its v0.750 and committed the
+	# widened outlines to the master, so running scripts/widen-seen-family.py
+	# again double-applies it: 1.5 x 1.5 = 2.25x, and briefly 1.5 x 2.0 = 3x.
+	# Measured on seen.medi at y=550 that took the ink from 173 units to 609.
+	# That was the "way too fat" seen/sheen/sad, and it is also why Allah still
+	# came out too wide after the tail transform was reverted — the fatness was
+	# never the tails.
 	#
-	# 2.0 lands once the advance grows with the teeth, which needs the join
-	# detector to stop reading a passing tail as a connector — the same fix ya,
-	# ghain and seen.fina are waiting on.
-	. venv/bin/activate; python3 scripts/widen-seen-family.py --ufo sources/QalamBadi-Narrowed.ufo --scale 1.5 --apply
+	# If the teeth should be wider than the seed draws them, the scale to change
+	# is the one in the SEED's own history, not a second pass here.
 	. venv/bin/activate; python3 scripts/soften-corners.py --src sources/QalamBadi-Narrowed.ufo --out sources/QalamBadi-Softened.ufo
 	# Compress the connector approach so a joined letter's advance follows its
 	# actual body. Without this every both-joined form keeps the seed's 1228
