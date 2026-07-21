@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Add a STAT table (wght + ital axes) to the static Courier Badi family.
+"""Add a STAT table (wght + ital axes) to the static Qalam Badi family.
 
 fontbakery requires a STAT table describing the family's axes. For the static
 Regular/Italic/Bold/Bold-Italic family each font declares its own position on

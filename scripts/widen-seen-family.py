@@ -260,7 +260,7 @@ def widen_inbox(text, scale, delta, hold_both):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--ufo", default="sources/CourierBadi-Regular.ufo")
+    ap.add_argument("--ufo", default="sources/QalamBadi-Regular.ufo")
     ap.add_argument("--scale", type=float, default=1.5)
     ap.add_argument("--delta", type=float, default=29.0)
     ap.add_argument("--apply", action="store_true")

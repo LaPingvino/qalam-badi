@@ -1,3 +1,3 @@
-module courier-badi/arabic-features
+module qalam-badi/arabic-features
 
 go 1.26.5

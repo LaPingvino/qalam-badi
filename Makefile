@@ -29,10 +29,10 @@ customize: venv
 # features outside the markers are preserved. Run this after adding or removing
 # Arabic glyphs. Use `arabic-features-check` in CI to verify it is up to date.
 arabic-features:
-	cd scripts/arabic-features && go run . --ufo ../../sources/CourierBadi-Regular.ufo
+	cd scripts/arabic-features && go run . --ufo ../../sources/QalamBadi-Regular.ufo
 
 arabic-features-check:
-	cd scripts/arabic-features && go run . --ufo ../../sources/CourierBadi-Regular.ufo --check
+	cd scripts/arabic-features && go run . --ufo ../../sources/QalamBadi-Regular.ufo --check
 
 build.stamp: venv sources/config.yaml $(SOURCES)
 	rm -rf fonts
@@ -55,15 +55,15 @@ italic:
 # emboldened Italic. Run after changing the Regular.
 masters:
 	. venv/bin/activate; python3 scripts/make-italic.py
-	. venv/bin/activate; python3 scripts/make-bold.py --src sources/CourierBadi-Regular.ufo --out sources/CourierBadi-Bold.ufo
-	. venv/bin/activate; python3 scripts/make-bold.py --src sources/CourierBadi-Italic.ufo --out sources/CourierBadi-BoldItalic.ufo
+	. venv/bin/activate; python3 scripts/make-bold.py --src sources/QalamBadi-Regular.ufo --out sources/QalamBadi-Bold.ufo
+	. venv/bin/activate; python3 scripts/make-bold.py --src sources/QalamBadi-Italic.ufo --out sources/QalamBadi-BoldItalic.ufo
 	# Contrast siblings for the XOPQ axis: a weight-neutral modulation (thick
 	# verticals, thin horizontals) of EACH weight, so XOPQ reads at every weight,
 	# not just Bold. Same point structure -> interpolates with its base master.
-	. venv/bin/activate; python3 scripts/make-contrast-master.py --src sources/CourierBadi-Regular.ufo    --out sources/CourierBadi-RegularContrast.ufo
-	. venv/bin/activate; python3 scripts/make-contrast-master.py --src sources/CourierBadi-Italic.ufo     --out sources/CourierBadi-ItalicContrast.ufo
-	. venv/bin/activate; python3 scripts/make-contrast-master.py --src sources/CourierBadi-Bold.ufo       --out sources/CourierBadi-BoldContrast.ufo
-	. venv/bin/activate; python3 scripts/make-contrast-master.py --src sources/CourierBadi-BoldItalic.ufo --out sources/CourierBadi-BoldItalicContrast.ufo
+	. venv/bin/activate; python3 scripts/make-contrast-master.py --src sources/QalamBadi-Regular.ufo    --out sources/QalamBadi-RegularContrast.ufo
+	. venv/bin/activate; python3 scripts/make-contrast-master.py --src sources/QalamBadi-Italic.ufo     --out sources/QalamBadi-ItalicContrast.ufo
+	. venv/bin/activate; python3 scripts/make-contrast-master.py --src sources/QalamBadi-Bold.ufo       --out sources/QalamBadi-BoldContrast.ufo
+	. venv/bin/activate; python3 scripts/make-contrast-master.py --src sources/QalamBadi-BoldItalic.ufo --out sources/QalamBadi-BoldItalicContrast.ufo
 
 # Bonus/experimental variable font: the contrast (XOPQ) axis, shipped as a
 # release-only extra separate from the GF-clean submission. Outputs to
@@ -76,7 +76,7 @@ contrast-vf: venv masters
 
 # Standalone "Contrast" sample preview (its own family name).
 contrast:
-	. venv/bin/activate; python3 scripts/make-bold.py --src sources/CourierBadi-Regular.ufo --out /tmp/CourierBadiContrast-Regular.ufo --weight 40 --contrast 4
+	. venv/bin/activate; python3 scripts/make-bold.py --src sources/QalamBadi-Regular.ufo --out /tmp/QalamBadiContrast-Regular.ufo --weight 40 --contrast 4
 
 venv/touchfile: requirements.txt
 	test -d venv || python3 -m venv venv

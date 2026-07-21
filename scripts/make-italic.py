@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate the Italic UFO from the (corrected) Regular UFO by shearing.
 
-Courier Badi's Italic is produced as an oblique: the Regular is sheared by the
+Qalam Badi's Italic is produced as an oblique: the Regular is sheared by the
 italic angle, so the Italic inherits every correction made to the Regular
 (fontbakery fixes, Arabic shaping, the seen/sheen widening, new coverage
 glyphs, ...) and the lowercase `a` is simply the roman `a` slanted -- which is
@@ -15,7 +15,7 @@ Shearing is linear, so:
 
 Run after regenerating the Regular. Usage:
   python3 scripts/make-italic.py [--angle 10] \
-      [--src sources/CourierBadi-Regular.ufo] [--out sources/CourierBadi-Italic.ufo]
+      [--src sources/QalamBadi-Regular.ufo] [--out sources/QalamBadi-Italic.ufo]
 """
 import argparse
 import glob
@@ -73,8 +73,8 @@ def make_italic(src, out, angle, overrides_dir=None):
     info.styleName = "Italic"
     info.styleMapStyleName = "italic"
     info.italicAngle = -float(angle)
-    info.postscriptFontName = "CourierBadi-Italic"
-    info.postscriptFullName = "Courier Badi Italic"
+    info.postscriptFontName = "QalamBadi-Italic"
+    info.postscriptFullName = "Qalam Badi Italic"
     info.openTypeNamePreferredSubfamilyName = "Italic"
     # postscriptSlantAngle mirrors the italic angle for some renderers
     info.postscriptSlantAngle = -float(angle)
@@ -85,8 +85,8 @@ def make_italic(src, out, angle, overrides_dir=None):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--src", default="sources/CourierBadi-Regular.ufo")
-    ap.add_argument("--out", default="sources/CourierBadi-Italic.ufo")
+    ap.add_argument("--src", default="sources/QalamBadi-Regular.ufo")
+    ap.add_argument("--out", default="sources/QalamBadi-Italic.ufo")
     ap.add_argument("--overrides", default="sources/italic-overrides")
     ap.add_argument("--angle", type=float, default=10.0)
     args = ap.parse_args()

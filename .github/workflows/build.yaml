@@ -57,7 +57,7 @@ jobs:
         make contrast-vf
         . venv/bin/activate
         python3 scripts/make-contrast-specimen.py \
-          "fonts-contrast/webfonts/CourierBadi-Contrast[XOPQ,ital,wght].woff2" \
+          "fonts-contrast/webfonts/QalamBadi-Contrast[XOPQ,ital,wght].woff2" \
           out/contrast-specimen.html
       continue-on-error: true
     - name: setup site

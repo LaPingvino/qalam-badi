@@ -1,4 +1,4 @@
-# Courier Badi — design & engineering notes
+# Qalam Badi — design & engineering notes
 
 This document records a few non-obvious design decisions, mainly so reviewers
 (including Google Fonts onboarding) don't have to reverse-engineer them.
@@ -54,7 +54,7 @@ make arabic-features-check   # verify it is up to date (CI-friendly)
 ```
 
 The generated block lives between markers in
-`sources/CourierBadi-Regular.ufo/features.fea`; hand-written features outside
+`sources/QalamBadi-Regular.ufo/features.fea`; hand-written features outside
 the markers (see below) are preserved.
 
 ## Stylistic sets
@@ -82,16 +82,16 @@ post-build) declares the `ital` axis linking Roman↔Italic.
 ## Variable font
 
 The **shipping** family is a clean **wght + ital** design
-(`sources/CourierBadi.designspace`, four masters). gftools splits italic into
-its own file (the GF convention), producing `CourierBadi[wght].ttf` and
-`CourierBadi-Italic[wght].ttf`. This is the Google-Fonts submission and passes
+(`sources/QalamBadi.designspace`, four masters). gftools splits italic into
+its own file (the GF convention), producing `QalamBadi[wght].ttf` and
+`QalamBadi-Italic[wght].ttf`. This is the Google-Fonts submission and passes
 the googlefonts Fontbakery profile with **0 errors / 0 failures** — no
 parametric-axis or family-packaging issues. `make build` builds it.
 
 ### Contrast (XOPQ) axis — bonus build
 
 The experimental contrast axis lives in a **separate** designspace
-(`sources/CourierBadi-Contrast.designspace`, config `sources/contrast.yaml`,
+(`sources/QalamBadi-Contrast.designspace`, config `sources/contrast.yaml`,
 built by `make contrast-vf` into `fonts-contrast/`). It adds the registered
 parametric **XOPQ** ("vertical stroke thickness") axis. It is shipped only as a
 release extra and previewed by `documentation/contrast-specimen.html`

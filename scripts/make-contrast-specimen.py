@@ -3,7 +3,7 @@
 font, with the font embedded as a base64 data URI and a live axis slider.
 
 Usage: python3 scripts/make-contrast-specimen.py \
-    fonts-contrast/webfonts/'CourierBadi-Contrast[XOPQ,ital,wght].woff2' \
+    fonts-contrast/webfonts/'QalamBadi-Contrast[XOPQ,ital,wght].woff2' \
     documentation/contrast-specimen.html
 """
 import base64
@@ -12,11 +12,11 @@ import sys
 woff2, out = sys.argv[1], sys.argv[2]
 b64 = base64.b64encode(open(woff2, "rb").read()).decode("ascii")
 
-HTML = """<title>Courier Badi — Contrast axis</title>
+HTML = """<title>Qalam Badi — Contrast axis</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 @font-face {
-  font-family: "Courier Badi Contrast";
+  font-family: "Qalam Badi Contrast";
   src: url("data:font/woff2;base64,__B64__") format("woff2");
   font-weight: 400 700;
   font-stretch: 100%;
@@ -69,7 +69,7 @@ body {
 }
 .eyebrow::before { content: ""; width: 1.6rem; height: 2px; background: var(--ribbon); display: inline-block; }
 h1 {
-  font-family: "Courier Badi Contrast", monospace;
+  font-family: "Qalam Badi Contrast", monospace;
   font-variation-settings: "wght" 700, "XOPQ" 130;
   font-weight: 700;
   font-size: clamp(2.3rem, 8vw, 4.6rem);
@@ -114,7 +114,7 @@ input[type=range]::-moz-range-thumb {
 
 /* live sample */
 .stage {
-  font-family: "Courier Badi Contrast", monospace;
+  font-family: "Qalam Badi Contrast", monospace;
   font-variation-settings: "wght" var(--wght), "XOPQ" var(--xopq);
   font-weight: 400;
   border-bottom: 1px solid var(--line);
@@ -144,7 +144,7 @@ input[type=range]::-moz-range-thumb {
 }
 .rung .tag b { display: block; color: var(--ink); font-size: 1.15rem; letter-spacing: 0; }
 .rung .demo {
-  font-family: "Courier Badi Contrast", monospace; font-weight: 400;
+  font-family: "Qalam Badi Contrast", monospace; font-weight: 400;
   font-size: clamp(1.8rem, 6vw, 3rem); line-height: 1; direction: rtl;
   overflow-x: auto;
 }
@@ -163,7 +163,7 @@ footer .meta span::before { content: "· "; color: var(--ribbon); }
 </style>
 
 <div class="wrap">
-  <p class="eyebrow">Courier Badi · bonus axis</p>
+  <p class="eyebrow">Qalam Badi · bonus axis</p>
   <h1>Contrast</h1>
   <p class="lede"><b>XOPQ</b> tunes the vertical-stroke thickness. It grew out of
   the Bold: emboldening offsets each stroke outward, and when the horizontal
@@ -228,7 +228,7 @@ footer .meta span::before { content: "· "; color: var(--ribbon); }
     It reuses the directional emboldening from <code>make-bold&nbsp;--contrast</code>,
     mapped onto the registered parametric <b>XOPQ</b> (vertical stroke thickness) axis.
     <div class="meta">
-      <span>Family: Courier Badi</span>
+      <span>Family: Qalam Badi</span>
       <span>Axes: wght 400–700 · XOPQ 88–130</span>
       <span>Monospace · UPM 2048</span>
     </div>

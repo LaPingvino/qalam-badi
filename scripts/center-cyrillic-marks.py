@@ -75,7 +75,7 @@ def shift_contour_x(ct_text, dx):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--ufo", default="sources/CourierBadi-Regular.ufo")
+    ap.add_argument("--ufo", default="sources/QalamBadi-Regular.ufo")
     ap.add_argument("--apply", action="store_true")
     args = ap.parse_args()
     gdir = os.path.join(args.ufo, "glyphs")

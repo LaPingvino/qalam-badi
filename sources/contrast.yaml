@@ -4,10 +4,10 @@
 # fonts. Built via `make contrast-vf` into fonts-contrast/. Its own family name
 # keeps it from colliding with the clean family during packaging/QA.
 sources:
-  - CourierBadi-Contrast.designspace
+  - QalamBadi-Contrast.designspace
 axisOrder:
   - wght
   - ital
   - XOPQ
-familyName: Courier Badi Contrast
+familyName: Qalam Badi Contrast
 outputDir: ../fonts-contrast

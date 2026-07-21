@@ -14,7 +14,7 @@ non-self-intersecting outline with consistent winding (outer CCW, holes CW).
 Overlaps are merged in the process, which the build does anyway. Components are
 left untouched (they inherit from their normalized base glyphs).
 
-Usage: python3 scripts/normalize-winding.py [--ufo sources/CourierBadi-Regular.ufo]
+Usage: python3 scripts/normalize-winding.py [--ufo sources/QalamBadi-Regular.ufo]
 """
 import argparse
 
@@ -54,7 +54,7 @@ def normalize(ufo, only=None):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--ufo", default="sources/CourierBadi-Regular.ufo")
+    ap.add_argument("--ufo", default="sources/QalamBadi-Regular.ufo")
     ap.add_argument("--glyphs", default=None,
                     help="comma-separated glyph names to normalize (default: all)")
     args = ap.parse_args()

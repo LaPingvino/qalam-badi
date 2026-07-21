@@ -1,10 +1,10 @@
-# Courier Badi
+# Qalam Badi
 
-[![Fontbakery](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FLaPingvino%2Fcourier-badi%2Fgh-pages%2Fbadges%2Foverall.json)](https://LaPingvino.github.io/courier-badi/fontbakery/fontbakery-report.html)
-[![Latest Release](https://img.shields.io/github/v/release/LaPingvino/courier-badi)](https://github.com/LaPingvino/courier-badi/releases/latest)
+[![Fontbakery](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FLaPingvino%2Fqalam-badi%2Fgh-pages%2Fbadges%2Foverall.json)](https://LaPingvino.github.io/qalam-badi/fontbakery/fontbakery-report.html)
+[![Latest Release](https://img.shields.io/github/v/release/LaPingvino/qalam-badi)](https://github.com/LaPingvino/qalam-badi/releases/latest)
 [![License: OFL-1.1](https://img.shields.io/badge/License-OFL%201.1-lightgreen.svg)](https://scripts.sil.org/OFL)
 
-Courier Badi is an adapted version of the amazing Courier Prime font made by Quote-Unquote Apps. The purpose here is to add
+Qalam Badi is an adapted version of the amazing Courier Prime font made by Quote-Unquote Apps. The purpose here is to add
 missing characters that can be relevant to Bahá'í usage in a very wide sense. This font has been adapted under the terms of
 the OFL and as it hasn't been made originally for Google Fonts, it might miss some of the requirements at least at first.
 I am correcting the Google Fonts and other Fontbakery requirements over time, probably fixing some bugs here and there.
@@ -23,7 +23,7 @@ If you want to build fonts manually on your own computer:
 * `make test` will run [FontBakery](https://github.com/googlefonts/fontbakery)'s quality assurance tests.
 * `make proof` will generate HTML proof files.
 
-The proof files and QA tests are also available automatically via GitHub Actions - look at https://LaPingvino.github.io/courier-badi.
+The proof files and QA tests are also available automatically via GitHub Actions - look at https://LaPingvino.github.io/qalam-badi.
 
 ## Design & engineering notes
 
@@ -37,7 +37,7 @@ Arabic OpenType features are generated from the UFO by `scripts/arabic-features`
 
 **20 July 2026. Version 1.010**
 - **Submission-ready split.** The shipping family is now a clean **wght + ital**
-  variable font (`CourierBadi[wght].ttf` + `CourierBadi-Italic[wght].ttf`) with
+  variable font (`QalamBadi[wght].ttf` + `QalamBadi-Italic[wght].ttf`) with
   four static instances — this passes the Google Fonts Fontbakery profile with
   **0 errors and 0 failures**. The experimental **contrast (XOPQ)** axis moved
   to a **bonus** build (`make contrast-vf`, its own family) shipped only in the

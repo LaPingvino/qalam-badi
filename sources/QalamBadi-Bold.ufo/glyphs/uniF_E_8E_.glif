@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="uniFE8E" format="2">
+  <advance width="1228"/>
+  <unicode hex="FE8E"/>
+  <outline>
+    <contour>
+      <point x="1237.2555953899755" y="401.71595870484407" type="line"/>
+      <point x="719.0" y="403.0" type="line" smooth="yes"/>
+      <point x="630.5027290882598" y="394.4877849877228"/>
+      <point x="642.0" y="467.0"/>
+      <point x="642.0" y="512.0" type="curve" smooth="yes"/>
+      <point x="642.0" y="1393.0" type="line" smooth="yes"/>
+      <point x="641.6582827844796" y="1460.8083261120685"/>
+      <point x="606.1689181603415" y="1509.4436912734707"/>
+      <point x="541.0" y="1511.0" type="curve" smooth="yes"/>
+      <point x="471.71787469046245" y="1509.7084415669417"/>
+      <point x="433.4626065897071" y="1461.589565568382"/>
+      <point x="433.0" y="1393.0" type="curve" smooth="yes"/>
+      <point x="433.0" y="512.0" type="line" smooth="yes"/>
+      <point x="433.91595066406524" y="332.16127054061474"/>
+      <point x="520.884476534296" y="194.06859205776172"/>
+      <point x="719.0" y="191.0" type="curve" smooth="yes"/>
+      <point x="1237.2555953899755" y="192.28404129515593" type="line"/>
+    </contour>
+  </outline>
+</glyph>

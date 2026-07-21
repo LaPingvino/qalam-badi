@@ -12,7 +12,7 @@ This becomes the second master of the weight axis: Regular (offset 0) and Bold
 
 Usage:
   python3 scripts/make-bold.py [--weight 34] \
-      [--src sources/CourierBadi-Regular.ufo] [--out sources/CourierBadi-Bold.ufo]
+      [--src sources/QalamBadi-Regular.ufo] [--out sources/QalamBadi-Bold.ufo]
 """
 import argparse
 import math
@@ -55,14 +55,14 @@ def make_bold(src, out, dx, dy):
     if italic:
         info.styleName = "Bold Italic"
         info.styleMapStyleName = "bold italic"
-        info.postscriptFontName = "CourierBadi-BoldItalic"
-        info.postscriptFullName = "Courier Badi Bold Italic"
+        info.postscriptFontName = "QalamBadi-BoldItalic"
+        info.postscriptFullName = "Qalam Badi Bold Italic"
         info.openTypeNamePreferredSubfamilyName = "Bold Italic"
     else:
         info.styleName = "Bold"
         info.styleMapStyleName = "bold"
-        info.postscriptFontName = "CourierBadi-Bold"
-        info.postscriptFullName = "Courier Badi Bold"
+        info.postscriptFontName = "QalamBadi-Bold"
+        info.postscriptFullName = "Qalam Badi Bold"
         info.openTypeNamePreferredSubfamilyName = "Bold"
     # heavier stems for the hinter
     if info.postscriptStemSnapV:
@@ -75,8 +75,8 @@ def make_bold(src, out, dx, dy):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--src", default="sources/CourierBadi-Regular.ufo")
-    ap.add_argument("--out", default="sources/CourierBadi-Bold.ufo")
+    ap.add_argument("--src", default="sources/QalamBadi-Regular.ufo")
+    ap.add_argument("--out", default="sources/QalamBadi-Bold.ufo")
     ap.add_argument("--weight", type=float, default=34.0,
                     help="outward offset in font units (stem grows by ~2x this)")
     ap.add_argument("--contrast", type=float, default=1.0,

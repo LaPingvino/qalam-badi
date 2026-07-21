@@ -22,7 +22,7 @@
 // The generated block is delimited by markers so hand-written features around
 // it are preserved. Run:
 //
-//	go run ./scripts/arabic-features --ufo sources/CourierBadi-Regular.ufo
+//	go run ./scripts/arabic-features --ufo sources/QalamBadi-Regular.ufo
 //
 // Use --check to fail (non-zero exit) if the file is not up to date, and
 // --stdout to print the generated block without touching the file.
@@ -391,7 +391,7 @@ func splice(existing, block string) string {
 }
 
 func main() {
-	ufo := flag.String("ufo", "sources/CourierBadi-Regular.ufo", "path to the UFO source")
+	ufo := flag.String("ufo", "sources/QalamBadi-Regular.ufo", "path to the UFO source")
 	toStdout := flag.Bool("stdout", false, "print generated block to stdout, do not modify the UFO")
 	check := flag.Bool("check", false, "exit non-zero if features.fea is not up to date")
 	flag.Parse()
