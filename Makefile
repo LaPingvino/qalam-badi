@@ -2,6 +2,7 @@ SOURCES=$(shell python3 scripts/read-config.py --sources )
 FAMILY=$(shell python3 scripts/read-config.py --family )
 DRAWBOT_SCRIPTS=$(shell ls documentation/*.py)
 DRAWBOT_OUTPUT=$(shell ls documentation/*.py | sed 's/\.py/.png/g')
+MONO_SOURCES=$(shell find sources/QalamBadi-Mono.ufo -type f 2>/dev/null)
 
 help:
 	@echo "###"
@@ -102,12 +103,17 @@ proportional:
 #
 # Add further sample or test pages to documentation/ and list them in
 # scripts/index.html so they show up on the site too.
-specimen: venv build.stamp
+# The monospace seed, compiled once and cached. It only changes when upstream
+# Courier Badi is merged, so rebuilding it on every specimen run cost more time
+# than the entire proportional transform chain (19s) for no benefit whatever.
+.mono-seed.woff2: $(MONO_SOURCES)
+	. venv/bin/activate; fontmake -u sources/QalamBadi-Mono.ufo -o ttf --output-path .mono-seed.ttf
+	. venv/bin/activate; fonttools ttLib.woff2 compress -o $@ .mono-seed.ttf
+	rm -f .mono-seed.ttf
+
+specimen: venv build.stamp .mono-seed.woff2
 	mkdir -p out
-	. venv/bin/activate; fontmake -u sources/QalamBadi-Mono.ufo -o ttf --output-path out/.mono.ttf
-	. venv/bin/activate; fonttools ttLib.woff2 compress -o out/.mono.woff2 out/.mono.ttf
-	. venv/bin/activate; python3 scripts/make-specimen.py --mono out/.mono.woff2 --out out/specimen.html
-	rm -f out/.mono.ttf out/.mono.woff2
+	. venv/bin/activate; python3 scripts/make-specimen.py --mono .mono-seed.woff2 --out out/specimen.html
 
 # Report which glyphs the monospace cell distorted, and how.
 widths:
