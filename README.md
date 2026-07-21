@@ -60,6 +60,12 @@ If you want to build fonts manually on your own computer:
 
 The proof files and QA tests are also available automatically via GitHub Actions - look at https://LaPingvino.github.io/qalam-badi.
 
+## Where things stand
+
+[`NEXT.md`](NEXT.md) carries the working state: how to get building on a fresh
+machine, the measured facts the design rests on, the open issues, and the plan
+for the Arabic. Start there when picking the project back up.
+
 ## Design & engineering notes
 
 Non-obvious design decisions (the monospace model, **zero-width combining
