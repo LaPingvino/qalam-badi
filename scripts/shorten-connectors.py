@@ -161,22 +161,48 @@ def body_interval_by_join_height(font, glyph, join_height, step=12):
     if bounds is None:
         return None
 
-    xs = []
+    # Sample the whole glyph first, then decide where the letter starts and
+    # ends — a single sample cannot be trusted on its own.
+    samples = []
     x = bounds.xMin + 1
     while x < bounds.xMax:
         spans = _joins.spans_at(pen_pen.polygons, x)
+        is_body = False
         if spans:
             only_join_line = all(
                 abs(span_bottom - bottom) <= tolerance and abs(span_top - top) <= tolerance
                 for span_bottom, span_top in spans
             )
-            if not only_join_line:
-                xs.append(x)
+            is_body = not only_join_line
+        samples.append((x, is_body))
         x += step
 
-    if not xs:
+    if not any(is_body for _, is_body in samples):
         return None
-    return min(xs), max(xs)
+
+    # Take the LONGEST CONTIGUOUS RUN of body samples, not min..max of all of
+    # them. Taking the extremes lets one stray sample define the whole letter,
+    # and there is reliably a stray one: at the very edge of the overlap the
+    # fillet rounds the connector's corner just enough to push its span outside
+    # the join tolerance. That single false positive at x=-34 made medial lam
+    # report a 768-unit body — 2.83 nuqta for what is a 141-unit vertical
+    # stroke — so nothing was compressed and Allah stayed long.
+    best_start = best_end = None
+    best_length = 0
+    run_start = None
+    for index, (x, is_body) in enumerate(samples):
+        if is_body and run_start is None:
+            run_start = index
+        elif not is_body and run_start is not None:
+            if index - run_start > best_length:
+                best_length, best_start, best_end = index - run_start, run_start, index - 1
+            run_start = None
+    if run_start is not None and len(samples) - run_start > best_length:
+        best_length, best_start, best_end = len(samples) - run_start, run_start, len(samples) - 1
+
+    if best_start is None:
+        return None
+    return samples[best_start][0], samples[best_end][0]
 
 
 def body_interval(font, glyph, rise, step=16):
@@ -257,13 +283,16 @@ def main():
         if body is None:
             continue
 
-        # Guards against a failed detection destroying a letter. On round forms
-        # — meem, the lam-alef ligatures — the baseline stroke never exceeds the
-        # thickness threshold, so the detector finds a "body" a few units wide
-        # and would then compress almost the entire glyph away. A body that
-        # small is not a letter, it is a failure, and the glyph is left alone.
+        # Guard against a failed detection destroying a letter: a body only a
+        # few units wide is not a letter, it is a detection failure.
+        #
+        # The threshold was 0.75 nuqta when the body was found by a thickness
+        # heuristic that regularly misfired. Now that it is found from the
+        # font's own join height and the longest contiguous run, it is reliable
+        # enough to trust smaller bodies — initial lam measures 0.66 nuqta and
+        # is perfectly real.
         body_width = body[1] - body[0]
-        if body_width < nuqta * 0.75:
+        if body_width < nuqta * 0.45:
             skipped_small += 1
             continue
 
@@ -300,10 +329,18 @@ def main():
         if removed_left + removed_right < 2:
             continue
 
-        # Second guard: never take more than half the glyph. A correct
-        # detection on a real connector removes a plateau; anything past this
-        # means the body was mis-found and the letter itself is being eaten.
-        if (removed_left + removed_right) > (bounds.xMax - bounds.xMin) * 0.5:
+        # Second guard: do not take almost the whole glyph.
+        #
+        # This was 50% while the body detector was unreliable, and it then
+        # blocked precisely the glyphs that most needed shortening: in a medial
+        # form stretched to fill a 1228-unit cell the plateau genuinely IS more
+        # than half the glyph. Medial lam, beh and seen were all being skipped
+        # by it and stayed at exactly 1228, which is what kept Allah long.
+        #
+        # The body detector is now anchored on the font's measured join height
+        # and takes the longest contiguous run, so it can be trusted much
+        # further. This remains only as a backstop against a total misfire.
+        if (removed_left + removed_right) > (bounds.xMax - bounds.xMin) * 0.82:
             skipped_extreme += 1
             continue
 

@@ -71,8 +71,8 @@ rule copy
       gftools.builder.jobrunner cp $in $out $stamp
   description = copy
 
-# Generating /tmp/tmps92jq3xm
-build /tmp/tmps92jq3xm: buildVariable QalamBadi.designspace
+# Generating /tmp/tmpfu0zg5z7
+build /tmp/tmpfu0zg5z7: buildVariable QalamBadi.designspace
   operation = buildVariable
   args = --filter ...  --filter FlattenComponentsFilter --filter $
       DecomposeTransformedComponentsFilter
@@ -111,12 +111,12 @@ build instance_ufos/QalamBadi-BoldItalic.ufo.json: instantiateUfo $
   fontmake_args =  --verbose WARNING 
   args =  --ufo-structure=json --output-dir instance_ufos
 # Postprocessing  with BuildSTAT
-build /tmp/tmpggjsw3z4.buildStatstamp: buildSTAT-postprocess $
-    ../fonts/variable/QalamBadi-Italic[wght].ttf $
-    ../fonts/variable/QalamBadi[wght].ttf | $
-    ../fonts/variable/QalamBadi-Italic[wght].ttf $
-    ../fonts/variable/QalamBadi[wght].ttf
-  stamp =  && touch /tmp/tmpggjsw3z4.buildStatstamp
+build /tmp/tmpje29ef1j.buildStatstamp: buildSTAT-postprocess $
+    ../fonts/variable/QalamBadi[wght].ttf $
+    ../fonts/variable/QalamBadi-Italic[wght].ttf | $
+    ../fonts/variable/QalamBadi[wght].ttf $
+    ../fonts/variable/QalamBadi-Italic[wght].ttf
+  stamp =  && touch /tmp/tmpje29ef1j.buildStatstamp
   postprocess = buildStat
 # Generating ../fonts/webfonts/QalamBadi-Regular.woff2
 build ../fonts/webfonts/QalamBadi-Regular.woff2: compress $
@@ -134,140 +134,140 @@ build ../fonts/webfonts/QalamBadi-Italic.woff2: compress $
 build ../fonts/webfonts/QalamBadi-BoldItalic.woff2: compress $
     ../fonts/ttf/QalamBadi-BoldItalic.ttf
   operation = compress
-# Generating /tmp/tmpcpyv_4tl
-build /tmp/tmpcpyv_4tl: subspace /tmp/tmps92jq3xm
+# Generating /tmp/tmpv9xluohs
+build /tmp/tmpv9xluohs: subspace /tmp/tmpfu0zg5z7
   operation = subspace
   axes = ital=0.0
-# Generating /tmp/tmpyhq8xite
-build /tmp/tmpyhq8xite: subspace /tmp/tmps92jq3xm
+# Generating /tmp/tmp1exgsqs_
+build /tmp/tmp1exgsqs_: subspace /tmp/tmpfu0zg5z7
   operation = subspace
   axes = ital=1.0
 # Generating ../fonts/variable/QalamBadi[wght].ttf
-build ../fonts/variable/QalamBadi[wght].ttf: fix /tmp/tmpcpyv_4tl
+build ../fonts/variable/QalamBadi[wght].ttf: fix /tmp/tmpv9xluohs
   operation = fix
   args = 
-# Generating /tmp/tmpdzisydh_
-build /tmp/tmpdzisydh_: exec /tmp/tmpyhq8xite
+# Generating /tmp/tmp32xf1oii
+build /tmp/tmp32xf1oii: exec /tmp/tmp1exgsqs_
   exe = gftools-fontsetter
-  args = -o /tmp/tmpdzisydh_ /tmp/tmpyhq8xite /tmp/tmpd094qc_g
-# Generating /tmp/tmpqq09qkw2
-build /tmp/tmpqq09qkw2: fix /tmp/tmpdzisydh_
+  args = -o /tmp/tmp32xf1oii /tmp/tmp1exgsqs_ /tmp/tmp5hj86vyt
+# Generating /tmp/tmplbdvk651
+build /tmp/tmplbdvk651: fix /tmp/tmp32xf1oii
   operation = fix
   args = --include-source-fixes
-# Generating /tmp/tmpkroixtm1
-build /tmp/tmpkroixtm1: fix /tmp/tmpqq09qkw2
+# Generating /tmp/tmpxmakjf_f
+build /tmp/tmpxmakjf_f: fix /tmp/tmplbdvk651
   operation = fix
   args = 
 # Generating ../fonts/webfonts/QalamBadi[ital,wght].woff2
-build ../fonts/webfonts/QalamBadi[ital,wght].woff2: compress /tmp/tmpkroixtm1
+build ../fonts/webfonts/QalamBadi[ital,wght].woff2: compress /tmp/tmpxmakjf_f
   operation = compress
 # Generating ../fonts/variable/QalamBadi-Italic[wght].ttf
-build ../fonts/variable/QalamBadi-Italic[wght].ttf: copy /tmp/tmpkroixtm1
-# Generating /tmp/tmpknehz464
-build /tmp/tmpknehz464: buildTTF instance_ufos/QalamBadi-Regular.ufo.json
+build ../fonts/variable/QalamBadi-Italic[wght].ttf: copy /tmp/tmpxmakjf_f
+# Generating /tmp/tmp_ag029cl
+build /tmp/tmp_ag029cl: buildTTF instance_ufos/QalamBadi-Regular.ufo.json
   operation = buildTTF
   args = --filter ...  --filter FlattenComponentsFilter --filter $
       DecomposeTransformedComponentsFilter
   fontmake_type = -u
   fontmake_args =  --verbose WARNING 
-# Generating /tmp/tmpo5d7zv_y
-build /tmp/tmpo5d7zv_y: buildOTF instance_ufos/QalamBadi-Regular.ufo.json
+# Generating /tmp/tmpg_7vws7h
+build /tmp/tmpg_7vws7h: buildOTF instance_ufos/QalamBadi-Regular.ufo.json
   operation = buildOTF
   args = --filter ...  --filter FlattenComponentsFilter --filter $
       DecomposeTransformedComponentsFilter
   fontmake_type = -u
   fontmake_args =  --verbose WARNING 
-# Generating /tmp/tmp4jlfm8dx
-build /tmp/tmp4jlfm8dx: autohint /tmp/tmpknehz464
+# Generating /tmp/tmp1relx1g_
+build /tmp/tmp1relx1g_: autohint /tmp/tmp_ag029cl
   operation = autohint
   args = --fail-ok 
 # Generating ../fonts/ttf/QalamBadi-Regular.ttf
-build ../fonts/ttf/QalamBadi-Regular.ttf: fix /tmp/tmp4jlfm8dx
+build ../fonts/ttf/QalamBadi-Regular.ttf: fix /tmp/tmp1relx1g_
   operation = fix
   args = 
 # Generating ../fonts/otf/QalamBadi-Regular.otf
-build ../fonts/otf/QalamBadi-Regular.otf: fix /tmp/tmpo5d7zv_y
+build ../fonts/otf/QalamBadi-Regular.otf: fix /tmp/tmpg_7vws7h
   operation = fix
   args = 
-# Generating /tmp/tmpn2zpta34
-build /tmp/tmpn2zpta34: buildTTF instance_ufos/QalamBadi-Bold.ufo.json
+# Generating /tmp/tmpwdyt8yox
+build /tmp/tmpwdyt8yox: buildTTF instance_ufos/QalamBadi-Bold.ufo.json
   operation = buildTTF
   args = --filter ...  --filter FlattenComponentsFilter --filter $
       DecomposeTransformedComponentsFilter
   fontmake_type = -u
   fontmake_args =  --verbose WARNING 
-# Generating /tmp/tmpdlqw5srw
-build /tmp/tmpdlqw5srw: buildOTF instance_ufos/QalamBadi-Bold.ufo.json
+# Generating /tmp/tmp67hc13ox
+build /tmp/tmp67hc13ox: buildOTF instance_ufos/QalamBadi-Bold.ufo.json
   operation = buildOTF
   args = --filter ...  --filter FlattenComponentsFilter --filter $
       DecomposeTransformedComponentsFilter
   fontmake_type = -u
   fontmake_args =  --verbose WARNING 
-# Generating /tmp/tmpu3z8qk09
-build /tmp/tmpu3z8qk09: autohint /tmp/tmpn2zpta34
+# Generating /tmp/tmp8lfx421r
+build /tmp/tmp8lfx421r: autohint /tmp/tmpwdyt8yox
   operation = autohint
   args = --fail-ok 
 # Generating ../fonts/ttf/QalamBadi-Bold.ttf
-build ../fonts/ttf/QalamBadi-Bold.ttf: fix /tmp/tmpu3z8qk09
+build ../fonts/ttf/QalamBadi-Bold.ttf: fix /tmp/tmp8lfx421r
   operation = fix
   args = 
 # Generating ../fonts/otf/QalamBadi-Bold.otf
-build ../fonts/otf/QalamBadi-Bold.otf: fix /tmp/tmpdlqw5srw
+build ../fonts/otf/QalamBadi-Bold.otf: fix /tmp/tmp67hc13ox
   operation = fix
   args = 
-# Generating /tmp/tmp045v6rqk
-build /tmp/tmp045v6rqk: buildTTF instance_ufos/QalamBadi-Italic.ufo.json
+# Generating /tmp/tmpj570kolj
+build /tmp/tmpj570kolj: buildTTF instance_ufos/QalamBadi-Italic.ufo.json
   operation = buildTTF
   args = --filter ...  --filter FlattenComponentsFilter --filter $
       DecomposeTransformedComponentsFilter
   fontmake_type = -u
   fontmake_args =  --verbose WARNING 
-# Generating /tmp/tmpbjlm2_0v
-build /tmp/tmpbjlm2_0v: buildOTF instance_ufos/QalamBadi-Italic.ufo.json
+# Generating /tmp/tmph_xghtb5
+build /tmp/tmph_xghtb5: buildOTF instance_ufos/QalamBadi-Italic.ufo.json
   operation = buildOTF
   args = --filter ...  --filter FlattenComponentsFilter --filter $
       DecomposeTransformedComponentsFilter
   fontmake_type = -u
   fontmake_args =  --verbose WARNING 
-# Generating /tmp/tmps7_smzc5
-build /tmp/tmps7_smzc5: autohint /tmp/tmp045v6rqk
+# Generating /tmp/tmpl4llz3v9
+build /tmp/tmpl4llz3v9: autohint /tmp/tmpj570kolj
   operation = autohint
   args = --fail-ok 
 # Generating ../fonts/ttf/QalamBadi-Italic.ttf
-build ../fonts/ttf/QalamBadi-Italic.ttf: fix /tmp/tmps7_smzc5
+build ../fonts/ttf/QalamBadi-Italic.ttf: fix /tmp/tmpl4llz3v9
   operation = fix
   args = 
 # Generating ../fonts/otf/QalamBadi-Italic.otf
-build ../fonts/otf/QalamBadi-Italic.otf: fix /tmp/tmpbjlm2_0v
+build ../fonts/otf/QalamBadi-Italic.otf: fix /tmp/tmph_xghtb5
   operation = fix
   args = 
-# Generating /tmp/tmpddnggnvh
-build /tmp/tmpddnggnvh: buildTTF instance_ufos/QalamBadi-BoldItalic.ufo.json
+# Generating /tmp/tmptw34xq94
+build /tmp/tmptw34xq94: buildTTF instance_ufos/QalamBadi-BoldItalic.ufo.json
   operation = buildTTF
   args = --filter ...  --filter FlattenComponentsFilter --filter $
       DecomposeTransformedComponentsFilter
   fontmake_type = -u
   fontmake_args =  --verbose WARNING 
-# Generating /tmp/tmpedi8roge
-build /tmp/tmpedi8roge: buildOTF instance_ufos/QalamBadi-BoldItalic.ufo.json
+# Generating /tmp/tmp32fuot02
+build /tmp/tmp32fuot02: buildOTF instance_ufos/QalamBadi-BoldItalic.ufo.json
   operation = buildOTF
   args = --filter ...  --filter FlattenComponentsFilter --filter $
       DecomposeTransformedComponentsFilter
   fontmake_type = -u
   fontmake_args =  --verbose WARNING 
-# Generating /tmp/tmpjiq2zwn5
-build /tmp/tmpjiq2zwn5: autohint /tmp/tmpddnggnvh
+# Generating /tmp/tmpeodrfdz_
+build /tmp/tmpeodrfdz_: autohint /tmp/tmptw34xq94
   operation = autohint
   args = --fail-ok 
 # Generating ../fonts/ttf/QalamBadi-BoldItalic.ttf
-build ../fonts/ttf/QalamBadi-BoldItalic.ttf: fix /tmp/tmpjiq2zwn5
+build ../fonts/ttf/QalamBadi-BoldItalic.ttf: fix /tmp/tmpeodrfdz_
   operation = fix
   args = 
 # Generating ../fonts/otf/QalamBadi-BoldItalic.otf
-build ../fonts/otf/QalamBadi-BoldItalic.otf: fix /tmp/tmpedi8roge
+build ../fonts/otf/QalamBadi-BoldItalic.otf: fix /tmp/tmp32fuot02
   operation = fix
   args = 
-default /tmp/tmpggjsw3z4.buildStatstamp $
+default /tmp/tmpje29ef1j.buildStatstamp $
     ../fonts/webfonts/QalamBadi-Regular.woff2 $
     ../fonts/webfonts/QalamBadi-Bold.woff2 $
     ../fonts/webfonts/QalamBadi-Italic.woff2 $
