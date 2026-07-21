@@ -111,12 +111,15 @@ def enlarge_elbow(glyph, radius, join):
             r_out = r + width
 
             # Inner wall: from up the stem, down to along the connector top.
+            # The second handle points back INTO the arc (opposite conn_sign),
+            # like the outer wall's; the earlier + here bent it the wrong way
+            # and lumped the concave wall.
             _fit_fillet(
                 A, off1, off2, B,
                 (corner_x, corner_y + r),
                 (ox, corner_y),
                 (corner_x, corner_y + r * (1 - KAPPA)),
-                (ox + conn_sign * r * KAPPA, corner_y))
+                (ox - conn_sign * r * KAPPA, corner_y))
             changed += 1
 
             # Outer wall: the fillet joining the connector bottom to the outer

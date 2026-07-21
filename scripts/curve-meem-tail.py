@@ -42,39 +42,77 @@ MEEM_SKELETON = {0x0645, 0x0765, 0x0766, 0x08A7, 0x06FE}
 
 # The tail rod: ink left of the eye and below the connector band. X_MAX is
 # tight so only the rod moves, not the eye's left edge (which would kink the
-# join). The bow stays flat down to a knee, then curves — the tail leaves the
-# eye vertically and hooks near the foot, which is what a hand draws.
+# join).
 TAIL_X_MAX = 245
-TAIL_Y_TOP = 190
-KNEE_FRACTION = 0.45   # top 45% of the drop stays straight; the rest curves
-
-
-def bow(y, y_top, y_foot, amount):
-    """Horizontal offset at height y: zero from the top down to the knee, then
-    a quadratic ease to `amount` at the foot, so the rod falls straight and
-    then curves into a hook."""
-    if y >= y_top:
-        return 0.0
-    knee = y_top - (y_top - y_foot) * KNEE_FRACTION
-    if y >= knee:
-        return 0.0
-    t = (knee - y) / (knee - y_foot)
-    t = max(0.0, min(1.0, t))
-    return amount * t * t
+TAIL_Y_TOP = 200
+FOOT_MARGIN = 100      # how far up from the deepest ink the rounded foot reaches
+TANGENT = 0.42         # cubic handle length as a fraction of the edge height
 
 
 def curve_tail(glyph, amount):
-    ys = [p.y for c in glyph.contours for p in c.points
-          if p.x < TAIL_X_MAX and p.y < TAIL_Y_TOP]
-    if not ys:
+    """Bow the meem tail into an even curve.
+
+    The rod is two long straight edges with no interior points, so shifting
+    their ends only tilts them into a slant with a knee — what read as uneven.
+    Instead: translate the already-rounded foot sideways as one rigid piece,
+    then rebuild each straight rod edge as a cubic with vertical tangents at
+    both ends, so the edge sweeps smoothly from the fixed top to the shifted
+    foot. Both edges get the same profile, so the pen stays one width wide.
+    """
+    tail = [p for c in glyph.contours for p in c.points
+            if p.x < TAIL_X_MAX and p.y < TAIL_Y_TOP]
+    if not tail:
         return False
-    y_foot = min(ys)
+    y_foot = min(p.y for p in tail)
     if TAIL_Y_TOP - y_foot < 200:
         return False
+    foot_top = y_foot + FOOT_MARGIN
+
+    # Find the rod edges first (before the foot moves): consecutive on-curve
+    # pairs forming a long, near-vertical line in the tail region.
+    edges = []
+    for contour in glyph.contours:
+        pts = list(contour.points)
+        n = len(pts)
+        for i, p in enumerate(pts):
+            nxt = pts[(i + 1) % n]
+            if p.type is None or nxt.type != "line":
+                continue
+            if abs(nxt.x - p.x) > 15 or abs(nxt.y - p.y) < 350:
+                continue
+            if max(p.x, nxt.x) > TAIL_X_MAX:
+                continue
+            edges.append((contour, id(p), id(nxt)))
+
+    if not edges:
+        return False
+
+    # Translate the foot (and each edge's bottom end) rigidly.
     for contour in glyph.contours:
         for point in contour.points:
-            if point.x < TAIL_X_MAX and point.y < TAIL_Y_TOP:
-                point.x += bow(point.y, TAIL_Y_TOP, y_foot, amount)
+            if point.x < TAIL_X_MAX and point.y <= foot_top:
+                point.x += amount
+
+    # Rebuild each edge as a smooth cubic between its (fixed) top and (moved)
+    # foot end.
+    Point = None
+    for contour, top_id, bot_id in edges:
+        pts = list(contour.points)
+        n = len(pts)
+        idx = next((i for i, p in enumerate(pts)
+                    if id(p) == top_id and id(pts[(i + 1) % n]) == bot_id), None)
+        if idx is None:
+            continue
+        A = pts[idx]                      # segment start
+        B = pts[(idx + 1) % n]            # segment end (its .type is "line")
+        if Point is None:
+            Point = type(A)
+        dy = B.y - A.y
+        c1 = Point(x=A.x, y=A.y + TANGENT * dy, type=None)
+        c2 = Point(x=B.x, y=B.y - TANGENT * dy, type=None)
+        B.type, B.smooth = "curve", True
+        A.smooth = True
+        contour.points[idx + 1:idx + 1] = [c1, c2]
     return True
 
 
