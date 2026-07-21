@@ -92,24 +92,6 @@ jobs:
       continue-on-error: true
     - name: proof
       run: make proof
-    - name: Build bonus contrast font + specimen
-      # The contrast (XOPQ) variable font is a release-only extra with its own
-      # family name, explicitly outside the shipping submission. Building it
-      # costs 4m10s — 38% of the whole run — because it regenerates eight
-      # masters and a second variable font.
-      #
-      # It is therefore built only for tags and releases, not on every push.
-      # On an ordinary push the thing that matters is how the family LOOKS, and
-      # the only check that catches a visual regression is a person looking at
-      # the specimen, so the push loop is kept as short as possible.
-      if: ${{ contains(github.ref, 'refs/tags/') || github.event_name == 'release' }}
-      run: |
-        make contrast-vf
-        . venv/bin/activate
-        python3 scripts/make-contrast-specimen.py \
-          "fonts-contrast/webfonts/QalamBadi-Contrast[XOPQ,ital,wght].woff2" \
-          out/contrast-specimen.html
-      continue-on-error: true
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v4
       if: ${{ github.ref == 'refs/heads/main' }}
@@ -118,6 +100,34 @@ jobs:
         publish_dir: ./out
         # Merge, so a failure in a later step cannot take the early-deployed
         # specimen back off the site.
+        keep_files: true
+    - name: Build bonus contrast font + specimen
+      # The contrast (XOPQ) variable font is a bonus extra with its own family
+      # name, outside the shipping submission. Building it costs ~4m10s — 38%
+      # of the whole run — which is why it was once built only for tags and
+      # releases. That kept the push loop short but left the LIVE contrast
+      # specimen stale between releases, which reads as corrections not having
+      # landed when in fact they had.
+      #
+      # So it runs on every push now, but as the SECOND HALF of the run:
+      # everything the push loop actually needs — specimen, reports — deployed
+      # in the step above, and this half spends its minutes after the site is
+      # already current. A newer push cancelling this run mid-build loses
+      # nothing but the contrast refresh it will redo itself.
+      run: |
+        make contrast-vf
+        . venv/bin/activate
+        python3 scripts/make-contrast-specimen.py \
+          "fonts-contrast/webfonts/QalamBadi-Contrast[XOPQ,ital,wght].woff2" \
+          out/contrast-specimen.html
+      continue-on-error: true
+    - name: Deploy contrast specimen
+      uses: peaceiris/actions-gh-pages@v4
+      if: ${{ github.ref == 'refs/heads/main' }}
+      continue-on-error: true
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./out
         keep_files: true
     - name: Archive artifacts
       uses: actions/upload-artifact@v4
