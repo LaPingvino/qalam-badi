@@ -114,9 +114,12 @@ proportional:
 	# strokes; this one only translates vertically, so it cannot.
 	. venv/bin/activate; python3 scripts/bend-strokes.py --src sources/QalamBadi-Connected.ufo --out sources/QalamBadi-Bent.ufo
 	. venv/bin/activate; python3 scripts/shorten-ascenders.py --src sources/QalamBadi-Bent.ufo --out sources/QalamBadi-Short.ufo
+	# Round the initial forms' hard L-elbow into a curve: initial ba, ya and
+	# kin sweep the stem into the connector instead of turning a right angle.
+	. venv/bin/activate; python3 scripts/curve-initials.py --src sources/QalamBadi-Short.ufo --out sources/QalamBadi-Curved.ufo
 	# ayn and hamza sat 257 units below the apostrophe they stand beside in
 	# 'Abdu'l-Baha and nastaliq. Position only — see the script for why not size.
-	. venv/bin/activate; python3 scripts/normalize-modifiers.py --src sources/QalamBadi-Short.ufo --out sources/QalamBadi-Mods.ufo
+	. venv/bin/activate; python3 scripts/normalize-modifiers.py --src sources/QalamBadi-Curved.ufo --out sources/QalamBadi-Mods.ufo
 	. venv/bin/activate; python3 scripts/make-proportional.py --src sources/QalamBadi-Mods.ufo --out sources/QalamBadi-Regular.ufo
 
 # Build the specimen: a single self-contained page with the webfonts inlined

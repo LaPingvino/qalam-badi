@@ -268,9 +268,9 @@ connectors:
 # tail_dip is deliberately conservative for a first pass: deep enough to read
 # as a sweep, shallow enough that perpendicular thinning stays under ~12%.
 bends:
-  bowl_dip: 0.70       # beh/kaf-type finals: the boat under the letter
+  bowl_dip: 0.25       # beh/kaf-type finals: the boat under the letter
   bowl_ramp: 0.62
-  tail_dip: 1.45       # seen/yeh tails: toward the 0.9-alef classical depth
+  tail_dip: 0.60       # seen/yeh tails: toward the 0.9-alef classical depth
   tail_ramp: 0.60
   # The terminal hook rounding. soften-corners already smoothed every corner
   # at radius 48, so there is no sharp corner left to fillet — the hook reads
@@ -279,7 +279,16 @@ bends:
   # hook zone has its off-curve control points pushed away from their chord,
   # which fattens a tight arc into a generous round one. Strength is a fraction
   # of the segment: 0 leaves it, 0.5 is a pronounced round.
-  hook_round: 0.65
+  hook_round: 0.0
+
+# Initial-form elbow (scripts/curve-initials.py). The seed draws initial ba,
+# ya and their tooth-family kin as an L — a tall vertical stem meeting the
+# baseline connector at a right angle. This rounds that one concave elbow into
+# a generous sweep so the stem curves into the connector as a written hand
+# does. Radius in nuqta; only fires where the vertical-stem-into-connector
+# elbow actually exists, so slanted teeth and round letters are untouched.
+initials:
+  elbow_radius: 0.9
 
 # Mark strokes (scripts/narrow-madda.py). The madda kept its 944-unit cell
 # width while the alef under it came down from 5.45 to 3.6 nuqta, so the

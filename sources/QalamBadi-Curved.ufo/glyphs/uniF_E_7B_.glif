@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="uniFE7B" format="2">
+  <advance width="990"/>
+  <unicode hex="FE7B"/>
+  <outline>
+    <contour>
+      <point x="990.24" y="369.0" type="line"/>
+      <point x="0.0" y="369.0" type="line" smooth="yes"/>
+      <point x="-35.0" y="369.0"/>
+      <point x="-35.0" y="332.0"/>
+      <point x="-35.0" y="297.0" type="curve" smooth="yes"/>
+      <point x="-35.0" y="262.0"/>
+      <point x="-35.0" y="225.0"/>
+      <point x="0.0" y="225.0" type="curve" smooth="yes"/>
+      <point x="990.24" y="225.0" type="line"/>
+    </contour>
+    <contour>
+      <point x="640.12" y="-120.0" type="curve"/>
+      <point x="243.12" y="-483.0" type="line" smooth="yes"/>
+      <point x="218.12" y="-505.0"/>
+      <point x="204.12" y="-520.0"/>
+      <point x="204.12" y="-536.0" type="curve" smooth="yes"/>
+      <point x="204.12" y="-569.0"/>
+      <point x="245.12" y="-618.0"/>
+      <point x="274.12" y="-618.0" type="curve" smooth="yes"/>
+      <point x="294.12" y="-618.0"/>
+      <point x="310.12" y="-606.0"/>
+      <point x="335.12" y="-585.0" type="curve" smooth="yes"/>
+      <point x="738.12" y="-225.0" type="line" smooth="yes"/>
+      <point x="761.12" y="-204.0"/>
+      <point x="775.12" y="-186.0"/>
+      <point x="775.12" y="-170.0" type="curve" smooth="yes"/>
+      <point x="775.12" y="-137.0"/>
+      <point x="730.12" y="-88.0"/>
+      <point x="702.12" y="-88.0" type="curve" smooth="yes"/>
+      <point x="681.12" y="-88.0"/>
+      <point x="667.12" y="-98.0"/>
+    </contour>
+  </outline>
+</glyph>
