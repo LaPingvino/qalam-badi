@@ -378,11 +378,12 @@ tails:
   # elbow rotated 90°. Radius in nuqta, clamped to the shelf actually present.
   meem_neck: 0.55
 
-  # Meem tail bow (scripts/curve-meem-tail.py). The seed hangs the final/
-  # isolated meem on a dead-straight 754-unit rod; a reed pen curves it. This
-  # bows the lower rod into a hook. Negative = leftward, the natural direction
-  # the pen exits the eye. In nuqta of horizontal throw at the foot.
-  meem_bow: -0.65
+  # Meem tail bow (scripts/curve-meem-tail.py). Was a leftward hook to cure the
+  # dead-straight rod — but the neck sweep now curves the tail out of the eye,
+  # so bowing the rod on top of that made an S-squiggle. Set to 0: a straight
+  # drop out of the swept neck reads cleaner. The pass still runs (it rebuilds
+  # the rod edges as tidy cubics), it just adds no throw.
+  meem_bow: 0.0
 
 # Transliteration modifier letters (scripts/normalize-modifiers.py).
 #
