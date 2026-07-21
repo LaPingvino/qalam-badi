@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uniFBAB" format="2">
-  <advance width="1188"/>
+  <advance width="1104"/>
   <unicode hex="FBAB"/>
   <outline>
     <contour>
-      <point x="1187.82" y="369.0" type="line"/>
-      <point x="1136.4414530806107" y="367.1977233886719"/>
-      <point x="1092.6079128196022" y="363.8708190917969"/>
+      <point x="1104.0" y="369.0" type="line"/>
+      <point x="1090.4579475700082" y="367.1977233886719"/>
+      <point x="1078.9045632102273" y="363.8708190917969"/>
       <point x="1057.5507029348112" y="360.88786726590246" type="curve" smooth="yes"/>
       <point x="1052.187988094205" y="360.5035714186851"/>
       <point x="1049.1813100585937" y="364.5982324951172"/>
@@ -63,7 +63,7 @@
       <point x="689.97216796875" y="225.0914764404297"/>
       <point x="707.0029296875" y="225.01956176757812" type="curve"/>
       <point x="707.0" y="225.0" type="line"/>
-      <point x="1187.82" y="225.0" type="line"/>
+      <point x="1104.0" y="225.0" type="line"/>
     </contour>
     <contour>
       <point x="406.0" y="484.6259674369263" type="curve" smooth="yes"/>

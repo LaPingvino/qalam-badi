@@ -68,6 +68,7 @@ FAMILIES = {
     "dal": _flatness.DAL_SKELETON,
     "seen": _flatness.SEEN_SKELETON,
     "lam": _flatness.LAM_SKELETON,
+    "heh": _flatness.HEH_SKELETON,
 }
 
 

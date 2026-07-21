@@ -97,11 +97,12 @@ proportional:
 	# whose flat run is part of the written form (beh finals, seen kashidas)
 	# to the classical widths recorded in spacing.yaml (connectors.widths).
 	. venv/bin/activate; python3 scripts/fit-connectors.py --src sources/QalamBadi-Madda.ufo --out sources/QalamBadi-Connected.ufo
-	# reshape-tails is DISABLED — it breaks monolinearity. See the script header
-	# and sources/spacing.yaml. It scaled the tail region anisotropically (y x
-	# 0.85, x x 2.6), which fattens every stroke that is not horizontal by up to
-	# 2.6x. The seen/sheen/sad tails came out visibly too fat.
-	. venv/bin/activate; python3 scripts/shorten-ascenders.py --src sources/QalamBadi-Connected.ufo --out sources/QalamBadi-Short.ufo
+	# Bend the flat bowls and shallow tails: round with a slight dip, per
+	# spacing.yaml (bends:). This is the safe successor to reshape-tails,
+	# which is still DISABLED — that one scaled anisotropically and fattened
+	# strokes; this one only translates vertically, so it cannot.
+	. venv/bin/activate; python3 scripts/bend-strokes.py --src sources/QalamBadi-Connected.ufo --out sources/QalamBadi-Bent.ufo
+	. venv/bin/activate; python3 scripts/shorten-ascenders.py --src sources/QalamBadi-Bent.ufo --out sources/QalamBadi-Short.ufo
 	# ayn and hamza sat 257 units below the apostrophe they stand beside in
 	# 'Abdu'l-Baha and nastaliq. Position only — see the script for why not size.
 	. venv/bin/activate; python3 scripts/normalize-modifiers.py --src sources/QalamBadi-Short.ufo --out sources/QalamBadi-Mods.ufo

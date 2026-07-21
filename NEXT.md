@@ -104,13 +104,20 @@ work. Seen init/medi have no classical figure recorded yet and now keep their
 teeth gaps as drawn (~0.45 nuqta each); add `seen.init`/`seen.medi` targets if
 they read airy in the specimen.
 
-**4. The undertail — hook to curve.** Same principle: stretch x only across the
-tail's horizontal run, rigidly translate the hook beyond it. Targets from his
-Greatest Name: finals ~1.5–1.7 alef heights wide against ~0.9 deep, tail
-returning rightward *under* the preceding letters.
-`scripts/reshape-tails.py` holds the targets but is **disabled** — its
-mechanism was the anisotropic scale above. Keep the numbers, replace the method.
-This is also what should cure the yá cut-off below.
+**4. ✓(first pass) The undertail — bent, not scaled.**
+`scripts/bend-strokes.py` applies a vertical translation field — the x-remap
+rotated ninety degrees, so nothing scales and nothing can fatten (the
+reshape-tails failure). Bowls of the beh/kaf/feh families get a 0.25-nuqta
+boat dip with the hook translating rigidly; seen/yeh tails get a 0.60-nuqta
+plunge, amplitude capped per glyph so tucked dots stay inside the descender
+(Arabic yeh final therefore gets 0 — its dots leave no room). Knobs in
+spacing.yaml (`bends:`). Remaining distance to the classical figures (~0.9
+alef deep): raise `tail_dip` by eye, and a true arc-length bend (rotation,
+not just translation) would convert the tail's excess length into depth.
+Note: the finial-corner rounding pass currently finds nothing to round —
+soften-corners already smoothed every corner at radius 48 upstream, so a
+BIGGER finial radius needs either a hook-zone radius override inside
+soften-corners or an arc refit of the existing small fillet.
 
 Still to check: how extension interacts with the lám shadda/harakat stacking
 below, and a human look at the new specimen — beh/seen finals and isolated
@@ -144,6 +151,11 @@ forms changed width noticeably (beh isol 1228→1318, seen isol adv 2130).
   vertical room than a dot is tall, so translation alone cannot save them —
   they need the step-4 tail reshape or a dot rearrangement.
 - **ghain** still reads as double-joined, so it does not sweep.
+- **The hamza `uni0621` is oversized** — 2.2 nuqta of ink where ~1.2 belongs,
+  conspicuous at the end of بهاء. Same disease and same constraint as the ʿ
+  below: its stroke is already exactly one pen, so scaling thins it; it needs
+  a redraw or a real offset-curve dilation. Sidebearings tightened in the
+  meantime (overrides in spacing.yaml).
 - **`ʿ` U+02BF is oversized** next to the apostrophe (604×680 vs 366×555). Its
   position is fixed; the size is not. It is *not* thin — its stroke measures 140
   against the 141 pen; it is a long open arc that reads light. Scaling it drops

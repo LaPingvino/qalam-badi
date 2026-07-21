@@ -153,6 +153,13 @@ overrides:
   # touching its neighbours.
   uni0627:  { lsb: 0.40, rsb: 0.40 }
 
+  # The hamza is drawn 2.2 nuqta wide — cell-sized, the ayn disease — and on
+  # top of that carried standard isolated sidebearings, so in بهاء it floated
+  # in a pool of air. The size needs a redraw or offset dilation (scaling
+  # would thin its 141-unit stroke, see the ayn note); until then the spacing
+  # at least stops advertising it.
+  uni0621:  { lsb: 0.06, rsb: 0.06 }
+
   # Latin i/j/l keep Courier's full-width serifs on purpose. Fitting them by ink
   # alone leaves them nearly as wide as m, which reads as a spacing bug rather
   # than a style. They are narrowed here at the SERIF, not the sidebearing —
@@ -221,6 +228,26 @@ connectors:
     # the stem centred between its joins.
     lam.init:  1.15
     lam.medi:  2.0
+    # Heh carried too much air at its entry (visible starting بهاء). Its
+    # loops are the body; the widths just trim the lead-in around them.
+    # heh.fina is the heh of Allah, so it tightens that word further.
+    heh.init:  3.2
+    heh.medi:  3.0
+    heh.fina:  3.0
+
+# Stroke bends (scripts/bend-strokes.py). The cell drew every final's bowl as
+# a flat bar with a bracket on the end, and the seen tail as a long shallow
+# shelf; a hand draws a boat and a plunge. The bend is a vertical translation
+# field — the x-remap rotated ninety degrees — so nothing scales and nothing
+# can fatten. Amplitudes in nuqta; ramps as a fraction of the bent region.
+# tail_dip is deliberately conservative for a first pass: deep enough to read
+# as a sweep, shallow enough that perpendicular thinning stays under ~12%.
+bends:
+  bowl_dip: 0.25       # beh/kaf-type finals: the boat under the letter
+  bowl_ramp: 0.62
+  tail_dip: 0.60       # seen/yeh tails: toward the 0.9-alef classical depth
+  tail_ramp: 0.60
+  finial_radius: 0.50  # the hook corner, bracket -> curve (global soften is 0.18)
 
 # Mark strokes (scripts/narrow-madda.py). The madda kept its 944-unit cell
 # width while the alef under it came down from 5.45 to 3.6 nuqta, so the
