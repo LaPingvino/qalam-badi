@@ -15,24 +15,24 @@
       <point x="627.0" y="225.0"/>
       <point x="777.0" y="225.0" type="curve" smooth="yes"/>
       <point x="802.44" y="225.0"/>
-      <point x="810.4398754181283" y="206.07390787414965"/>
-      <point x="793.3785598238073" y="184.73171888116946" type="curve" smooth="yes"/>
-      <point x="688.6062053581004" y="68.6"/>
-      <point x="336.8686092797195" y="-64.0"/>
-      <point x="-207.46265366023897" y="-64.0" type="curve" smooth="yes"/>
-      <point x="-605.079630885912" y="-64.0"/>
-      <point x="-243.29330753313036" y="35.45000000000002"/>
-      <point x="-417.1649431438965" y="35.45000000000002" type="curve" smooth="yes"/>
-      <point x="-495.4071791687412" y="35.45000000000002"/>
-      <point x="-663.2816356094339" y="7.400000000000006"/>
-      <point x="-824.2601120098981" y="-39.349999999999966" type="curve" smooth="yes"/>
-      <point x="-1075.9719114724426" y="-112.44999999999999"/>
-      <point x="-1002.6837109349866" y="-185.55"/>
-      <point x="-469.6837109349866" y="-185.55" type="curve" smooth="yes"/>
-      <point x="273.9162890650133" y="-185.55"/>
-      <point x="887.9445965174305" y="-22.349999999999994"/>
-      <point x="965.053584714264" y="184.67925235723862" type="curve" smooth="yes"/>
-      <point x="969.5523193343666" y="206.04924860790214"/>
+      <point x="821.3696754234303" y="202.73400926370547"/>
+      <point x="817.2759051562346" y="177.62555162490526" type="curve" smooth="yes"/>
+      <point x="795.0" y="41.0"/>
+      <point x="672.0" y="-115.0"/>
+      <point x="416.0" y="-115.0" type="curve" smooth="yes"/>
+      <point x="229.0" y="-115.0"/>
+      <point x="272.0" y="2.0"/>
+      <point x="172.0" y="2.0" type="curve" smooth="yes"/>
+      <point x="127.0" y="2.0"/>
+      <point x="86.0" y="-31.0"/>
+      <point x="86.0" y="-86.0" type="curve" smooth="yes"/>
+      <point x="86.0" y="-172.0"/>
+      <point x="211.0" y="-258.0"/>
+      <point x="416.0" y="-258.0" type="curve" smooth="yes"/>
+      <point x="702.0" y="-258.0"/>
+      <point x="928.0" y="-66.0"/>
+      <point x="965.6645092220567" y="177.5638263026337" type="curve" smooth="yes"/>
+      <point x="969.5523193343666" y="202.70499836223783"/>
       <point x="995.56" y="225.0"/>
       <point x="1008.2650862068965" y="225.0" type="curve" smooth="yes"/>
       <point x="1109.82" y="225.0" type="line"/>
@@ -43,20 +43,20 @@
       <point x="985.0" y="410.8679765693464" type="curve" smooth="yes"/>
     </contour>
     <contour>
-      <point x="41.550802358479245" y="196.95" type="line" smooth="yes"/>
-      <point x="-26.11752062288724" y="196.95"/>
-      <point x="-114.9719185912096" y="179.95"/>
-      <point x="-289.16813292515224" y="131.5" type="curve" smooth="yes"/>
-      <point x="-460.30827332341175" y="83.9"/>
-      <point x="-442.19413188962255" y="77.1"/>
-      <point x="-349.18667847347353" y="77.1" type="curve" smooth="yes"/>
-      <point x="232.50400475634024" y="77.1" type="line" smooth="yes"/>
-      <point x="334.969843265657" y="77.1"/>
-      <point x="396.89221758621545" y="92.4"/>
-      <point x="469.43229053493025" y="141.7" type="curve" smooth="yes"/>
-      <point x="543.2230543965538" y="191.85"/>
-      <point x="520.7756470789761" y="196.95"/>
-      <point x="450.88869055723694" y="196.95" type="curve" smooth="yes"/>
+      <point x="133.0" y="192.0" type="line" smooth="yes"/>
+      <point x="72.0" y="192.0"/>
+      <point x="47.0" y="172.0"/>
+      <point x="47.0" y="115.0" type="curve" smooth="yes"/>
+      <point x="47.0" y="59.0"/>
+      <point x="74.0" y="51.0"/>
+      <point x="133.0" y="51.0" type="curve" smooth="yes"/>
+      <point x="502.0" y="51.0" type="line" smooth="yes"/>
+      <point x="567.0" y="51.0"/>
+      <point x="592.0" y="69.0"/>
+      <point x="592.0" y="127.0" type="curve" smooth="yes"/>
+      <point x="592.0" y="186.0"/>
+      <point x="565.0" y="192.0"/>
+      <point x="502.0" y="192.0" type="curve" smooth="yes"/>
     </contour>
     <contour>
       <point x="606.0" y="449.6095475300955" type="curve" smooth="yes"/>

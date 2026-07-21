@@ -1,5 +1,28 @@
 #!/usr/bin/env python3
-"""Turn the deep dip into a long undertail.
+"""Turn the deep dip into a long undertail. DISABLED — DO NOT USE AS WRITTEN.
+
+    This script is out of the build because it breaks monolinearity, which is
+    the one property the whole design rests on.
+
+    It scales the tail region anisotropically: y by `depth` (0.85) and x by up
+    to `extend` (2.6). An anisotropic scale only preserves stroke width for
+    strokes that are exactly axis-aligned. Everywhere the tail runs vertically
+    the stroke gets up to 2.6x FATTER; where it runs horizontally it gets 15%
+    thinner; diagonals land in between. The seen/sheen/sad tails came out
+    visibly too fat.
+
+    The fix is the principle every other transform here already uses and this
+    one forgot: translate, do not scale. Lengthening a tail without fattening it
+    means stretching x ONLY across the stretch where the stroke is horizontal —
+    there thickness is a vertical measurement, so an x-stretch is free — and
+    rigidly translating everything beyond it. That is exactly how
+    narrow-serifs.py pins the stem and how widen-seen-family.py repositions
+    rather than scales.
+
+    The proportional targets below are sound and worth keeping; only the
+    mechanism is wrong.
+
+Original description follows.
 
 The seed's seen, sheen and sad end in a tail that plunges: it drops 555 units
 below the writing line and travels barely further than it falls. That is a
