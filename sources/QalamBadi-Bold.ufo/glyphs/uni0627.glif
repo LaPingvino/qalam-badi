@@ -3,24 +3,24 @@
   <advance width="506"/>
   <unicode hex="0627"/>
   <unicode hex="FE8D"/>
-  <anchor x="231" y="1315" name="top"/>
-  <anchor x="230" y="111" name="bottom"/>
+  <anchor x="275" y="1315" name="top"/>
+  <anchor x="275" y="111" name="bottom"/>
   <outline>
     <contour>
-      <point x="180.0" y="1234.5999999999997" type="curve" smooth="yes"/>
-      <point x="114.78027360994001" y="1233.8246226592967"/>
-      <point x="74.82008855336018" y="1192.3768635623028"/>
-      <point x="74.0" y="1138.0174622941743" type="curve" smooth="yes"/>
-      <point x="74.0" y="309.0" type="line" smooth="yes"/>
-      <point x="74.34171721552033" y="241.19167388793147"/>
-      <point x="110.23017189074426" y="192.43390630248086"/>
-      <point x="178.0" y="191.0" type="curve" smooth="yes"/>
-      <point x="244.64336702322854" y="192.39623530241778"/>
-      <point x="282.5373934102929" y="240.41043443161786"/>
-      <point x="283.0" y="309.0" type="curve" smooth="yes"/>
-      <point x="283.0" y="1138.0174622941743" type="line" smooth="yes"/>
-      <point x="282.39168775173545" y="1191.3571141310458"/>
-      <point x="244.51858235403188" y="1233.75827075385"/>
+      <point x="329.0" y="1234.5999999999997" type="curve" smooth="yes"/>
+      <point x="263.78027360994" y="1233.8246226592967"/>
+      <point x="223.82008855336016" y="1192.3768635623028"/>
+      <point x="223.0" y="1138.0174622941743" type="curve" smooth="yes"/>
+      <point x="223.0" y="309.0" type="line" smooth="yes"/>
+      <point x="223.34171721552033" y="241.19167388793147"/>
+      <point x="259.23017189074426" y="192.43390630248086"/>
+      <point x="327.0" y="191.0" type="curve" smooth="yes"/>
+      <point x="393.64336702322856" y="192.39623530241778"/>
+      <point x="431.5373934102929" y="240.41043443161786"/>
+      <point x="432.0" y="309.0" type="curve" smooth="yes"/>
+      <point x="432.0" y="1138.0174622941743" type="line" smooth="yes"/>
+      <point x="431.39168775173545" y="1191.3571141310458"/>
+      <point x="393.5185823540319" y="1233.75827075385"/>
     </contour>
   </outline>
 </glyph>

@@ -2,16 +2,25 @@
 
 The alif is a thin vertical whose stem sits at its free end, so a mark centred
 on it overhangs past the advance into the following group — and the alif is
-symmetric, so the footprint nudge cannot move it. The durable fix is to give
-the alif a little more room on its free side: keep the stem and the join where
-they are, just widen the advance, so the next group starts a touch further on
-and the mark no longer collides with it.
+symmetric, so the footprint nudge cannot move it. The room has to go on the
+FREE side (the x=0 end, where the mark hangs off and the following group
+abuts), never on the join side.
+
+The alif's connecting foot sits at the advance edge (high x): a final form
+joins the preceding letter there, and the shaper abuts that neighbour exactly
+at the alif's advance. So growing the advance alone opens a white gap at the
+join — the neighbour steps back by the widen but the connector ink does not
+follow it (measured at 114 units on بـا). The fix is a rigid translation:
+shift the whole outline right by the same amount the advance grows, so the
+connector foot stays glued to the advance edge while the free side — stem,
+mark and all — gains the clearance. Translating the shape whole (never
+remapping its points) is exactly what the one design rule demands.
 
 Only the alif family, and only the final/isolated forms (the ones that end a
-group); medial forms do not exist for the alif. In nuqta, added to the advance.
+group); medial forms do not exist for the alif. In nuqta.
 
 Runs once on the Regular before mark-anchors; the derived masters copy the
-widened advance.
+widened advance and shifted outline.
 
 Usage:
     python3 scripts/widen-marked.py --src sources/QalamBadi-Regular.ufo
@@ -56,10 +65,22 @@ def main():
             continue
         if glyph.width <= 0:
             continue
+        # Rigid translation right by `widen`, then grow the advance to match:
+        # the connector foot at the advance edge stays glued to the neighbour,
+        # and the free side gains the room. Move contours, components (they
+        # carry their own offset) and anchors together so the shape stays whole.
+        for contour in glyph.contours:
+            for point in contour.points:
+                point.x += widen
+        for component in glyph.components:
+            xx, xy, yx, yy, dx, dy = component.transformation
+            component.transformation = (xx, xy, yx, yy, dx + widen, dy)
+        for anchor in glyph.anchors:
+            anchor.x += widen
         glyph.width += widen
         widened += 1
         if args.verbose:
-            print(f"  {glyph.name}: +{widen} -> {glyph.width}")
+            print(f"  {glyph.name}: shift +{widen}, width -> {glyph.width}")
 
     font.save(args.src, overwrite=True)
     print(f"widened {widened} word-end alif forms by {widen} -> {args.src}")
