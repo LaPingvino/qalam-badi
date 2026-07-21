@@ -19,8 +19,15 @@ jobs:
         sudo snap install yq
     - uses: actions/cache@v4
       with:
-        path: ./venv/
-        key: ${{ runner.os }}-venv-${{ hashFiles('**/requirements*.txt') }}
+        # venv-test holds fontbakery and was NOT cached, so every run
+        # reinstalled it from scratch before the QA step could start.
+        # .mono-seed.woff2 is the compiled monospace seed used by the specimen;
+        # it only changes when upstream Courier Badi is merged.
+        path: |
+          ./venv/
+          ./venv-test/
+          ./.mono-seed.woff2
+        key: ${{ runner.os }}-venv-${{ hashFiles('**/requirements*.txt') }}-${{ hashFiles('sources/QalamBadi-Mono.ufo/fontinfo.plist') }}
         restore-keys: |
           ${{ runner.os }}-venv-
     - name: gen zip file name
@@ -45,6 +52,7 @@ jobs:
     - name: Build font
       run: make build
     - name: Check with fontbakery
+      # -j runs the checks across all available cores (see Makefile).
       run: make test
       continue-on-error: true
     - name: proof
