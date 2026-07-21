@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="tbar" format="2">
-  <advance width="1228"/>
+  <advance width="788"/>
   <unicode hex="0167"/>
   <outline>
-    <component base="t"/>
-    <component base="macron" xOffset="-90" yOffset="-700"/>
+    <component base="t" xOffset="64.31251833356265"/>
+    <component base="macron" yOffset="-700"/>
   </outline>
 </glyph>

@@ -60,6 +60,13 @@ jobs:
           "fonts-contrast/webfonts/QalamBadi-Contrast[XOPQ,ital,wght].woff2" \
           out/contrast-specimen.html
       continue-on-error: true
+    - name: Build specimen
+      # A readable sample published alongside the machine reports: diffenator2
+      # says what changed, the specimen says whether it looks right. It embeds
+      # the monospace seed too, so the seed-vs-proportional comparison that this
+      # whole project is about is always current on the site.
+      run: make specimen
+      continue-on-error: true
     - name: setup site
       run: cp scripts/index.html out/index.html
     - name: Deploy

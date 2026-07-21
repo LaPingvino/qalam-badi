@@ -70,15 +70,44 @@ italic:
 # derived from.
 proportional:
 	. venv/bin/activate; python3 scripts/narrow-serifs.py --src sources/QalamBadi-Mono.ufo --out sources/QalamBadi-Narrowed.ufo
-	# Courier Badi widened the cramped seen/sheen/sad teeth to 1.5x to fill the
-	# monospace cell. With no cell to fill, the constraint is gone and the teeth
-	# can run at the 2x the hand actually wants — classically the seen kashida
-	# is 7-11 nuqta long, far beyond anything a cell could have held. The script
-	# already covers sad and dad and every dotted variant, so they follow.
-	. venv/bin/activate; python3 scripts/widen-seen-family.py --ufo sources/QalamBadi-Narrowed.ufo --scale 2.0 --apply
+	# Seen/sheen/sad teeth. HELD AT 1.5 pending the advance fix, see below.
+	#
+	# The teeth want to run at 2x — classically the seen kashida is 7-11 nuqta,
+	# far beyond anything the cell could hold — but this upstream script was
+	# written FOR the cell: it spreads the teeth and lets the free tail smuggle
+	# out past the box to compensate, because in a monospace font the advance
+	# could not grow. Nothing here grows it either, so at 2.0 the ink reaches
+	# 3613 units against a 1228 advance and the letter collides with whatever
+	# follows it. At 1.5 the overhang stays within what the seed already
+	# tolerated.
+	#
+	# 2.0 lands once the advance grows with the teeth, which needs the join
+	# detector to stop reading a passing tail as a connector — the same fix ya,
+	# ghain and seen.fina are waiting on.
+	. venv/bin/activate; python3 scripts/widen-seen-family.py --ufo sources/QalamBadi-Narrowed.ufo --scale 1.5 --apply
 	. venv/bin/activate; python3 scripts/soften-corners.py --src sources/QalamBadi-Narrowed.ufo --out sources/QalamBadi-Softened.ufo
-	. venv/bin/activate; python3 scripts/shorten-ascenders.py --src sources/QalamBadi-Softened.ufo --out sources/QalamBadi-Short.ufo
+	# Compress the connector approach so a joined letter's advance follows its
+	# actual body. Without this every both-joined form keeps the seed's 1228
+	# advance — the two pinned connectors define it — so the Arabic stays as
+	# uniform in width as it was in the cell, which reads blocky next to the
+	# now-proportional Latin.
+	. venv/bin/activate; python3 scripts/shorten-connectors.py --src sources/QalamBadi-Softened.ufo --out sources/QalamBadi-Connected.ufo
+	. venv/bin/activate; python3 scripts/shorten-ascenders.py --src sources/QalamBadi-Connected.ufo --out sources/QalamBadi-Short.ufo
 	. venv/bin/activate; python3 scripts/make-proportional.py --src sources/QalamBadi-Short.ufo --out sources/QalamBadi-Regular.ufo
+
+# Build the specimen: a single self-contained page with the webfonts inlined
+# and the monospace seed alongside for comparison. Published with the proofs so
+# there is always a current, readable sample next to the machine reports —
+# diffenator2 tells you what changed, this tells you whether it looks right.
+#
+# Add further sample or test pages to documentation/ and list them in
+# scripts/index.html so they show up on the site too.
+specimen: venv build.stamp
+	mkdir -p out
+	. venv/bin/activate; fontmake -u sources/QalamBadi-Mono.ufo -o ttf --output-path out/.mono.ttf
+	. venv/bin/activate; fonttools ttLib.woff2 compress -o out/.mono.woff2 out/.mono.ttf
+	. venv/bin/activate; python3 scripts/make-specimen.py --mono out/.mono.woff2 --out out/specimen.html
+	rm -f out/.mono.ttf out/.mono.woff2
 
 # Report which glyphs the monospace cell distorted, and how.
 widths:

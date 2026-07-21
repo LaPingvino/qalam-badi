@@ -14,6 +14,7 @@ Usage:
 import argparse
 import base64
 import os
+import re
 import sys
 
 FONTS = {
@@ -51,6 +52,15 @@ def main():
             print(f"missing {path}; run `make build` first", file=sys.stderr)
             return 1
         html = html.replace(placeholder, data_uri(path))
+
+    # The monospace seed is optional: it only drives the comparison rows. If it
+    # was not built, drop its @font-face rather than emitting a dangling url()
+    # — the rows then fall back to the reader's mono face, which still makes the
+    # comparison, just less precisely.
+    if "@@MONO@@" in html:
+        html = re.sub(r"@font-face\s*\{[^}]*@@MONO@@[^}]*\}", "", html)
+        print("no monospace seed given; comparison rows fall back to ui-monospace",
+              file=sys.stderr)
 
     with open(args.out, "w") as handle:
         handle.write(html)

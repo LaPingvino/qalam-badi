@@ -203,6 +203,7 @@ verticals:
 # letters, so it stays out of `make proportional` until the body detector
 # distinguishes tooth from connector by shape rather than by height alone.
 connectors:
+  thickness_factor: 1.55  # ink thicker than this many pens is letter, not connector
   approach:  0.42   # nuqta of flat lead-in kept either side of the letter body
   body_rise: 1.35   # nuqta above baseline at which ink counts as "the letter"
   keep_long: []     # glyphs whose plateau is a deliberate kashida, not a stretch

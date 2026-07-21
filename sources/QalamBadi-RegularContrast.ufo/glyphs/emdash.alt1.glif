@@ -1,22 +1,22 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="emdash.alt1" format="2">
-  <advance width="1228"/>
+  <advance width="2228"/>
   <outline>
     <contour>
-      <point x="-367.0" y="640.0" type="line" smooth="yes"/>
-      <point x="-419.8670574430978" y="640.6562602599764"/>
-      <point x="-455.2237050037786" y="630.6045012494914"/>
-      <point x="-456.0" y="582.0" type="curve" smooth="yes"/>
-      <point x="-455.2237050037786" y="533.3954987505086"/>
-      <point x="-419.8670574430978" y="523.3437397400236"/>
-      <point x="-367.0" y="524.0" type="curve" smooth="yes"/>
-      <point x="1595.0" y="524.0" type="line" smooth="yes"/>
-      <point x="1647.8670574430978" y="523.3437397400236"/>
-      <point x="1683.2237050037786" y="533.3954987505086"/>
-      <point x="1684.0" y="582.0" type="curve" smooth="yes"/>
-      <point x="1683.2237050037786" y="630.6045012494914"/>
-      <point x="1647.8670574430978" y="640.6562602599764"/>
-      <point x="1595.0" y="640.0" type="curve" smooth="yes"/>
+      <point x="133.0" y="640.0" type="line" smooth="yes"/>
+      <point x="80.13294255690218" y="640.6562602599764"/>
+      <point x="44.77629499622137" y="630.6045012494914"/>
+      <point x="44.0" y="582.0" type="curve" smooth="yes"/>
+      <point x="44.77629499622137" y="533.3954987505086"/>
+      <point x="80.13294255690218" y="523.3437397400236"/>
+      <point x="133.0" y="524.0" type="curve" smooth="yes"/>
+      <point x="2095.0" y="524.0" type="line" smooth="yes"/>
+      <point x="2147.867057443098" y="523.3437397400236"/>
+      <point x="2183.223705003779" y="533.3954987505086"/>
+      <point x="2184.0" y="582.0" type="curve" smooth="yes"/>
+      <point x="2183.223705003779" y="630.6045012494914"/>
+      <point x="2147.867057443098" y="640.6562602599764"/>
+      <point x="2095.0" y="640.0" type="curve" smooth="yes"/>
     </contour>
   </outline>
 </glyph>

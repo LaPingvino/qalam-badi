@@ -56,6 +56,26 @@ ARABIC_BLOCKS = (
 )
 
 
+JOIN_EDGE_TOLERANCE = 45
+CONNECTOR_BAND = (-40, 420)
+
+
+def join_sides(glyph, bounds):
+    """Which edges carry a joining connector, by the same test the fitter uses."""
+    left = right = False
+    width = glyph.width
+    lo, hi = CONNECTOR_BAND
+    for contour in glyph.contours:
+        for point in contour.points:
+            if not (lo <= point.y <= hi):
+                continue
+            if point.x <= JOIN_EDGE_TOLERANCE:
+                left = True
+            if point.x >= width - JOIN_EDGE_TOLERANCE:
+                right = True
+    return left, right
+
+
 def is_arabic(glyph):
     cp = glyph.unicode
     if cp is not None and any(lo <= cp <= hi for lo, hi in ARABIC_BLOCKS):
@@ -81,8 +101,68 @@ def vertical_extent(polygons, x):
     return min(crossings), max(crossings)
 
 
+def baseline_thickness(polygons, x, probe):
+    """Thickness of the ink span that contains the baseline stroke at this x.
+
+    This is the shape test that height thresholds could not do. A connector is
+    a stroke exactly one pen thick lying on the baseline; a tooth, a bowl or a
+    loop is thicker, because the stroke goes up and comes back or dives below.
+    Measuring the span that actually contains the baseline also ignores dots
+    and marks floating above or below, which is what defeated the earlier
+    approach — those inflate a naive yMax-yMin and make bare connector look
+    like letter.
+    """
+    crossings = []
+    for poly in polygons:
+        n = len(poly)
+        for i in range(n):
+            x0, y0 = poly[i]
+            x1, y1 = poly[(i + 1) % n]
+            if x0 == x1:
+                continue
+            if (x0 <= x < x1) or (x1 <= x < x0):
+                t = (x - x0) / (x1 - x0)
+                crossings.append(y0 + t * (y1 - y0))
+    if len(crossings) < 2:
+        return 0.0
+    crossings.sort()
+    # Walk the spans in pairs and return the one straddling the probe height.
+    for lo, hi in zip(crossings[0::2], crossings[1::2]):
+        if lo <= probe <= hi:
+            return hi - lo
+    return 0.0
+
+
+def body_interval_by_shape(font, glyph, pen, factor, step=12):
+    """The x range where the ink is thicker than a bare connector stroke."""
+    pen_thickness = pen * factor
+    probe = pen * 0.45  # inside the connector stroke, just above the baseline
+
+    pen_pen = PolygonPen(font)
+    glyph.draw(pen_pen)
+    if not pen_pen.polygons:
+        return None
+    bounds = glyph.getBounds(font)
+    if bounds is None:
+        return None
+
+    xs = []
+    x = bounds.xMin + 1
+    while x < bounds.xMax:
+        if baseline_thickness(pen_pen.polygons, x, probe) > pen_thickness:
+            xs.append(x)
+        x += step
+
+    if not xs:
+        return None
+    return min(xs), max(xs)
+
+
 def body_interval(font, glyph, rise, step=16):
     """The x range where the letter rises above its connector.
+
+    Superseded by body_interval_by_shape; kept because the flatness report
+    still refers to the height-based reading it produced.
 
     Returns (left, right), or None if the glyph is connector all the way across
     (which would mean there is no letter to pin).
@@ -128,11 +208,15 @@ def main():
     settings = config.get("connectors") or {}
     approach = settings.get("approach", 0.42) * nuqta
     rise = settings.get("body_rise", 1.35) * nuqta
+    pen = config["module"]["pen"]
+    thickness_factor = settings.get("thickness_factor", 1.55)
     skip = set(settings.get("keep_long") or [])
 
     font = ufoLib2.Font.open(args.src)
 
     shortened = 0
+    skipped_small = 0
+    skipped_extreme = 0
     total_removed = 0.0
     for glyph in font:
         if not is_arabic(glyph) or not glyph.contours or glyph.name in skip:
@@ -142,33 +226,109 @@ def main():
         if bounds is None:
             continue
 
-        body = body_interval(font, glyph, rise)
+        body = body_interval_by_shape(font, glyph, pen, thickness_factor)
         if body is None:
             continue
 
-        left_approach = body[0] - bounds.xMin
-        right_approach = bounds.xMax - body[1]
-        if left_approach < 1 and right_approach < 1:
+        # Guards against a failed detection destroying a letter. On round forms
+        # — meem, the lam-alef ligatures — the baseline stroke never exceeds the
+        # thickness threshold, so the detector finds a "body" a few units wide
+        # and would then compress almost the entire glyph away. A body that
+        # small is not a letter, it is a failure, and the glyph is left alone.
+        body_width = body[1] - body[0]
+        if body_width < nuqta * 0.75:
+            skipped_small += 1
             continue
 
-        # Target ink: the body, plus a bounded approach on whichever sides
-        # currently have one. A side with no approach keeps none.
-        target = (body[1] - body[0])
-        target += min(left_approach, approach)
-        target += min(right_approach, approach)
+        # Only a side that actually carries a connector may be compressed.
+        #
+        # An isolated seen has ink running far to the LEFT of its origin, but
+        # that is its tail, not an approach — it is the letter's most
+        # characteristic feature. Treating it as a plateau compressed the tail
+        # away and dragged the glyph so far left that the advance went negative,
+        # which fontmake rejects outright ("width should not be negative").
+        # A tail is a thing to keep; only the flat run leading into a join is
+        # surplus.
+        left_join, right_join = join_sides(glyph, bounds)
 
-        remap = make_remap(bounds.xMin, bounds.xMax, body[0], body[1], target)
-        if remap is None:
+        # Measured from the JOIN POINTS, not from the ink bounds.
+        #
+        # The join happens at the origin and at the advance edge. The ink either
+        # side of those — the 35-unit overlap the seed draws so letters share
+        # ink rather than abut — is not approach and must not be compressed or
+        # even moved relative to its join point. Measuring from bounds.xMin
+        # instead dragged that overlap inward, which slid the join point off the
+        # origin and unlinked every connector.
+        origin = 0.0
+        advance_edge = float(glyph.width)
+        left_approach = max(0.0, body[0] - origin) if left_join else 0.0
+        right_approach = max(0.0, advance_edge - body[1]) if right_join else 0.0
+
+        keep_left = min(left_approach, approach)
+        keep_right = min(right_approach, approach)
+        removed_left = max(0.0, left_approach - keep_left)
+        removed_right = max(0.0, right_approach - keep_right)
+        if removed_left + removed_right < 2:
             continue
+
+        # Second guard: never take more than half the glyph. A correct
+        # detection on a real connector removes a plateau; anything past this
+        # means the body was mis-found and the letter itself is being eaten.
+        if (removed_left + removed_right) > (bounds.xMax - bounds.xMin) * 0.5:
+            skipped_extreme += 1
+            continue
+
+        # Anchored at the LEFT edge, not centred: the left connector and the
+        # overlap it carries past the origin must not move at all, or every
+        # join reopens the hairline seam we just closed. The body slides left
+        # by whatever the left approach gave up, the right edge slides left by
+        # the total, and the advance follows it so the right connector stays
+        # exactly on the edge.
+        body_left, body_right = body
+        left_scale = ((left_approach - removed_left) / left_approach) if left_approach > 1 else 1.0
+        right_scale = ((right_approach - removed_right) / right_approach) if right_approach > 1 else 1.0
+
+        def remap(x, body_left=body_left, body_right=body_right,
+                  left_scale=left_scale, right_scale=right_scale,
+                  removed_left=removed_left, removed_right=removed_right,
+                  advance_edge=advance_edge):
+            # Beyond the origin: the left overlap, carried rigidly. It keeps its
+            # exact offset from the join point, which is what makes letters
+            # share ink instead of merely touching.
+            if x <= 0.0:
+                return x
+            # Approach into the left join: compressed from the origin outwards.
+            if x < body_left:
+                return x * left_scale
+            # The letter itself: translated, never scaled.
+            if x <= body_right:
+                return x - removed_left
+            # Approach out to the right join.
+            if x <= advance_edge:
+                return (body_right - removed_left) + (x - body_right) * right_scale
+            # Beyond the advance edge: the right overlap, carried rigidly so it
+            # keeps its offset from the new advance edge.
+            return x - removed_left - removed_right
 
         before = bounds.xMax - bounds.xMin
+        # Last line of defence: an advance must stay positive and meaningful.
+        new_width = round(glyph.width - removed_left - removed_right)
+        if new_width < nuqta:
+            skipped_extreme += 1
+            continue
+
         if not args.dry_run:
             apply_remap(glyph, remap)
+            # The advance must shrink with the geometry, otherwise the letter
+            # gets narrower but still occupies its old monospace slot — which
+            # is the whole complaint this transform exists to answer.
+            glyph.width = new_width
         shortened += 1
-        total_removed += before - target
-        if args.verbose and (before - target) > nuqta:
-            print(f"  {glyph.name:20} {before:6.0f} -> {target:6.0f} "
-                  f"(body {body[0]:.0f}..{body[1]:.0f})")
+        total_removed += removed_left + removed_right
+        if args.verbose and (removed_left + removed_right) > nuqta * 0.5:
+            print(f"  {glyph.name:20} ink {before:6.0f} -> {before - removed_left - removed_right:6.0f}"
+                  f"  adv -{removed_left + removed_right:5.0f}"
+                  f"  (body {body[0]:.0f}..{body[1]:.0f})")
 
     if not args.dry_run:
         if os.path.abspath(args.out) != os.path.abspath(args.src) and os.path.exists(args.out):
@@ -176,6 +336,8 @@ def main():
         font.save(args.out, overwrite=True)
 
     mean = (total_removed / shortened) if shortened else 0
+    print(f"skipped {skipped_small} (body too small to trust), "
+          f"{skipped_extreme} (would remove over half the glyph)")
     print(f"shortened {shortened} Arabic glyphs, "
           f"mean {mean:.0f} units ({mean / nuqta:.2f} nuqta) of plateau removed"
           + ("" if args.dry_run else f" -> {args.out}"))

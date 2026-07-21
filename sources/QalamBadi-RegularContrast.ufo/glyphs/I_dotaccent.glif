@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="Idotaccent" format="2">
-  <advance width="1228"/>
+  <advance width="492"/>
   <unicode hex="0130"/>
   <outline>
-    <component base="I"/>
-    <component base="dotaccent" yOffset="270"/>
+    <component base="I" xOffset="-6.0"/>
+    <component base="dotaccent" xOffset="81.14999999999998" yOffset="270"/>
   </outline>
 </glyph>
