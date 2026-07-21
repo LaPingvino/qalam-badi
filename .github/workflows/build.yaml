@@ -51,6 +51,32 @@ jobs:
 
     - name: Build font
       run: make build
+
+    # Publish the specimen the moment the fonts exist, before the QA steps.
+    #
+    # The only check that catches a visual regression here is a person looking
+    # at the result, so how soon the specimen becomes visible is the real
+    # constraint on iterating. Waiting for fontbakery, diffenator2 and the bonus
+    # contrast build pushed that to the end of a ten-minute run; this puts it at
+    # roughly three.
+    #
+    # keep_files matters: out/ holds only the specimen at this point, and
+    # without it this deploy would replace the whole site and take the previous
+    # run's reports offline until the final deploy landed.
+    - name: Build specimen
+      run: make specimen
+      continue-on-error: true
+    - name: setup site
+      run: mkdir -p out && cp scripts/index.html out/index.html
+    - name: Deploy specimen early
+      uses: peaceiris/actions-gh-pages@v4
+      if: ${{ github.ref == 'refs/heads/main' }}
+      continue-on-error: true
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./out
+        keep_files: true
+
     - name: Check with fontbakery
       # -j runs the checks across all available cores (see Makefile).
       run: make test
@@ -58,9 +84,16 @@ jobs:
     - name: proof
       run: make proof
     - name: Build bonus contrast font + specimen
-      # The contrast (XOPQ) variable font ships as a release-only extra, separate
-      # from the GF-clean submission. Build it and render the interactive
-      # specimen into the site so it is viewable from the pages.
+      # The contrast (XOPQ) variable font is a release-only extra with its own
+      # family name, explicitly outside the shipping submission. Building it
+      # costs 4m10s — 38% of the whole run — because it regenerates eight
+      # masters and a second variable font.
+      #
+      # It is therefore built only for tags and releases, not on every push.
+      # On an ordinary push the thing that matters is how the family LOOKS, and
+      # the only check that catches a visual regression is a person looking at
+      # the specimen, so the push loop is kept as short as possible.
+      if: ${{ contains(github.ref, 'refs/tags/') || github.event_name == 'release' }}
       run: |
         make contrast-vf
         . venv/bin/activate
@@ -68,21 +101,15 @@ jobs:
           "fonts-contrast/webfonts/QalamBadi-Contrast[XOPQ,ital,wght].woff2" \
           out/contrast-specimen.html
       continue-on-error: true
-    - name: Build specimen
-      # A readable sample published alongside the machine reports: diffenator2
-      # says what changed, the specimen says whether it looks right. It embeds
-      # the monospace seed too, so the seed-vs-proportional comparison that this
-      # whole project is about is always current on the site.
-      run: make specimen
-      continue-on-error: true
-    - name: setup site
-      run: cp scripts/index.html out/index.html
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v4
       if: ${{ github.ref == 'refs/heads/main' }}
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./out
+        # Merge, so a failure in a later step cannot take the early-deployed
+        # specimen back off the site.
+        keep_files: true
     - name: Archive artifacts
       uses: actions/upload-artifact@v4
       with:

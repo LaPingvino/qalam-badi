@@ -122,6 +122,37 @@ specimen: venv build.stamp .mono-seed.woff2
 	mkdir -p out
 	. venv/bin/activate; python3 scripts/make-specimen.py --mono .mono-seed.woff2 --out out/specimen.html
 
+# Fast visual loop: regenerate the masters, compile ONLY the Regular, and
+# rebuild the specimen. Skips the OTF, the variable fonts, the other three
+# styles, the webfont set, fontbakery and diffenator2 — none of which you need
+# in order to look at the thing.
+#
+# This exists because the only check that catches a visual regression is a human
+# looking at the result, so the round trip from a changed number to a rendered
+# page is the real bottleneck in this project, not the release build.
+#
+#   make preview   ~20s     enough to see whether a change worked
+#   make build     ~2m40s   what CI ships
+preview: venv proportional
+	. venv/bin/activate; python3 scripts/make-italic.py
+	mkdir -p fonts/webfonts out
+	. venv/bin/activate; fontmake -u sources/QalamBadi-Regular.ufo -o ttf --output-path fonts/ttf/QalamBadi-Regular.ttf
+	. venv/bin/activate; fonttools ttLib.woff2 compress -o fonts/webfonts/QalamBadi-Regular.woff2 fonts/ttf/QalamBadi-Regular.ttf
+	. venv/bin/activate; fontmake -u sources/QalamBadi-Italic.ufo -o ttf --output-path fonts/ttf/QalamBadi-Italic.ttf
+	. venv/bin/activate; fonttools ttLib.woff2 compress -o fonts/webfonts/QalamBadi-Italic.woff2 fonts/ttf/QalamBadi-Italic.ttf
+	# Bold is NOT rebuilt here — that is the point of the target. If a stale one
+	# is lying around from an earlier full build the specimen will show it, so
+	# judge weight from `make build`, never from a preview.
+	. venv/bin/activate; test -f fonts/webfonts/QalamBadi-Bold.woff2 || cp fonts/webfonts/QalamBadi-Regular.woff2 fonts/webfonts/QalamBadi-Bold.woff2
+	$(MAKE) --no-print-directory specimen-only
+	@echo ""
+	@echo "  -> out/specimen.html   (Regular + Italic are fresh; BOLD IS NOT — use 'make build' to judge weight)"
+
+# The specimen without the build.stamp dependency, for the fast loop.
+specimen-only: .mono-seed.woff2
+	mkdir -p out
+	. venv/bin/activate; python3 scripts/make-specimen.py --mono .mono-seed.woff2 --out out/specimen.html
+
 # Report which glyphs the monospace cell distorted, and how.
 widths:
 	. venv/bin/activate; python3 scripts/classify-widths.py --src sources/QalamBadi-Mono.ufo
