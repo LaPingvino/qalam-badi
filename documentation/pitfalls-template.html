@@ -1,0 +1,293 @@
+<title>Qalam Badi — script pitfalls proof</title>
+
+<style>
+  @font-face {
+    font-family: "Qalam Badi";
+    src: url("@@REGULAR@@") format("woff2");
+    font-weight: 400; font-style: normal; font-display: block;
+  }
+
+  /* Same pigments as the specimen: lapis and gold on paper. */
+  :root {
+    --paper: #FBFAF7; --ground: #F2F1EE; --ink: #14161F; --muted: #676C7E;
+    --lapis: #2C4E9A; --gold: #A8842C; --rule: #DEDDD8; --bad: #A2402C;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #101219; --ground: #171A24; --ink: #E9E7E1; --muted: #969BAC;
+      --lapis: #8AA6E8; --gold: #D8B75E; --rule: #272B38; --bad: #E08A72;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #101219; --ground: #171A24; --ink: #E9E7E1; --muted: #969BAC;
+    --lapis: #8AA6E8; --gold: #D8B75E; --rule: #272B38; --bad: #E08A72;
+  }
+  :root[data-theme="light"] {
+    --paper: #FBFAF7; --ground: #F2F1EE; --ink: #14161F; --muted: #676C7E;
+    --lapis: #2C4E9A; --gold: #A8842C; --rule: #DEDDD8; --bad: #A2402C;
+  }
+
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    line-height: 1.6; margin: 0 auto; padding: 3rem 1.5rem 6rem;
+    max-width: 52rem;
+  }
+  h1 { font-size: 1.7rem; font-weight: 600; margin: 0 0 0.2rem; }
+  .sub { color: var(--muted); margin: 0 0 2.2rem; max-width: 40rem; }
+  h2 {
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.09em;
+    color: var(--gold); margin: 3rem 0 0.4rem; font-weight: 600;
+    border-top: 1px solid var(--rule); padding-top: 1.4rem;
+  }
+  .test { margin: 1.6rem 0; }
+  .what {
+    color: var(--muted); font-size: 0.85rem; max-width: 40rem;
+    margin: 0.25rem 0 0.55rem;
+  }
+  .what strong { color: var(--ink); font-weight: 600; }
+  .known { color: var(--bad); }
+  .sample {
+    font-family: "Qalam Badi", Georgia, serif;
+    font-size: 30px; line-height: 1.7;
+    background: var(--ground); border-radius: 6px; padding: 0.7rem 1.1rem;
+    overflow-x: auto;
+  }
+  .sample.tight { line-height: 1.15; }
+  .sample.small { font-size: 19px; }
+  [dir="rtl"] { text-align: right; }
+  table.forms {
+    font-family: "Qalam Badi", Georgia, serif; font-size: 30px;
+    background: var(--ground); border-radius: 6px;
+    border-collapse: collapse; width: 100%;
+  }
+  table.forms th {
+    font-family: ui-sans-serif, system-ui, sans-serif; font-size: 0.7rem;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted);
+    font-weight: 600; padding: 0.5rem 0.9rem; text-align: center;
+  }
+  table.forms td {
+    padding: 0.15rem 0.9rem; text-align: center;
+    border-top: 1px solid var(--rule);
+  }
+  table.forms td.none { color: var(--faint, var(--rule)); font-size: 18px; }
+  footer {
+    margin-top: 3.5rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
+    color: var(--muted); font-size: 0.82rem;
+  }
+</style>
+
+<h1>Script pitfalls</h1>
+<p class="sub">
+  The generic proof sheets exercise Latin well and everything else thinly.
+  This page is the opposite: one test per known failure mode of the other
+  scripts, each with a note saying what a failure looks like. Several are
+  regressions this project has actually shipped — those name the incident.
+  Items marked <span class="known">known</span> are open issues; they should
+  look wrong here until fixed, and this page is where to watch them get fixed.
+</p>
+
+<h2>Arabic — joining</h2>
+
+<div class="test">
+  <p class="what"><strong>Four forms of every joining letter.</strong> Each
+  form should be a letter, not a plateau: a medial tooth is a small thing on a
+  short connector, near one dot wide. Watch for cell-wide medials (the
+  monospace inheritance), hairline seams where connectors meet, and letters
+  that fail to join at all. Dal, reh, waw and alef rows join on one side only —
+  if their empty cells show a connected form, the joining logic is wrong.</p>
+  <table class="forms" dir="rtl" lang="ar">
+    <tr><th>isolated</th><th>initial</th><th>medial</th><th>final</th></tr>
+    <tr><td>ب</td><td>بـ</td><td>ـبـ</td><td>ـب</td></tr>
+    <tr><td>س</td><td>سـ</td><td>ـسـ</td><td>ـس</td></tr>
+    <tr><td>ص</td><td>صـ</td><td>ـصـ</td><td>ـص</td></tr>
+    <tr><td>ط</td><td>طـ</td><td>ـطـ</td><td>ـط</td></tr>
+    <tr><td>ع</td><td>عـ</td><td>ـعـ</td><td>ـع</td></tr>
+    <tr><td>غ</td><td>غـ</td><td>ـغـ</td><td>ـغ</td></tr>
+    <tr><td>ف</td><td>فـ</td><td>ـفـ</td><td>ـف</td></tr>
+    <tr><td>ق</td><td>قـ</td><td>ـقـ</td><td>ـق</td></tr>
+    <tr><td>ك</td><td>كـ</td><td>ـكـ</td><td>ـك</td></tr>
+    <tr><td>ل</td><td>لـ</td><td>ـلـ</td><td>ـل</td></tr>
+    <tr><td>م</td><td>مـ</td><td>ـمـ</td><td>ـم</td></tr>
+    <tr><td>ه</td><td>هـ</td><td>ـهـ</td><td>ـه</td></tr>
+    <tr><td>ح</td><td>حـ</td><td>ـحـ</td><td>ـح</td></tr>
+    <tr><td>ي</td><td>يـ</td><td>ـيـ</td><td>ـي</td></tr>
+    <tr><td>د</td><td class="none">—</td><td class="none">—</td><td>ـد</td></tr>
+    <tr><td>ر</td><td class="none">—</td><td class="none">—</td><td>ـر</td></tr>
+    <tr><td>و</td><td class="none">—</td><td class="none">—</td><td>ـو</td></tr>
+    <tr><td>ا</td><td class="none">—</td><td class="none">—</td><td>ـا</td></tr>
+    <tr><td>ة</td><td class="none">—</td><td class="none">—</td><td>ـة</td></tr>
+  </table>
+  <p class="what"><span class="known">Known:</span> ghain still reads as
+  double-joined, so it does not sweep — watch the غ row.</p>
+</div>
+
+<div class="test">
+  <p class="what"><strong>Seen and beh carried on their flat runs.</strong>
+  The final and isolated forms of these letters legitimately include a long
+  flat stroke — a beh short form is 4–5 dots wide, a seen with its kashida
+  7–11. The teeth riding on that run must keep their drawn width: the fitter
+  once scaled a seen final's teeth from ~290 units to 24, and this line is the
+  regression test for it.</p>
+  <div class="sample" dir="rtl" lang="ar">س ســلام ب باب ص صبر ش شمس تُرِكَتْ</div>
+</div>
+
+<div class="test">
+  <p class="what"><strong>Tatweel elongation.</strong> A deliberate kashida
+  must be indistinguishable from the letters' own connectors: same height,
+  same thickness, no step where they meet.</p>
+  <div class="sample" dir="rtl" lang="ar">بـــاب ســـــلام كتـــاب</div>
+</div>
+
+<h2>Arabic — dots and marks</h2>
+
+<div class="test">
+  <p class="what"><strong>Dot minimal pairs, joined.</strong> Rows differ only
+  by their dots: every dot must be present, round, and sitting over (or under)
+  its own letter through every joining form. A squashed or missing dot means a
+  transform scaled a shape — that is how bá lost its dot to the connector
+  compression.</p>
+  <div class="sample tight" dir="rtl" lang="ar">
+    ببب تتت ثثث ننن ييي<br>
+    ججج ححح خخخ<br>
+    ددد ذذذ &nbsp; ررر ززز<br>
+    سسس ششش &nbsp; صصص ضضض<br>
+    ططط ظظظ &nbsp; ععع غغغ &nbsp; ففف ققق
+  </div>
+</div>
+
+<div class="test">
+  <p class="what"><strong>Harakat, alone and stacked.</strong> Fatha, damma,
+  kasra, sukun and tanwin sit clear of the letter; shadda stacks with a
+  following fatha/damma <em>above</em> it, and a kasra conventionally moves
+  <em>below</em> the shadda. Nothing may render beside its base — that was the
+  combining-mark regression.
+  <span class="known">Known:</span> lám with doubled harakat stacks wrongly.</p>
+  <div class="sample" dir="rtl" lang="ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ — مُحَمَّدٌ — رَبِّ — شَدَّةٌ — سُكُونْ</div>
+</div>
+
+<div class="test">
+  <p class="what"><strong>Mandatory ligatures.</strong> Lam-alef must form its
+  ligature in all hamza variants, isolated and joined; the Allah ligature
+  should read as one written word, not a fence of connectors.</p>
+  <div class="sample" dir="rtl" lang="ar">لا لأ لإ لآ — بلا ملأ — الله والله لله ﷲ</div>
+</div>
+
+<h2>Arabic — tails, lines, direction</h2>
+
+<div class="test">
+  <p class="what"><strong>Deep tails at normal line spacing.</strong> Watch
+  the bottoms of ى ي س ع: they must neither clip nor collide with the next
+  line. <span class="known">Known:</span> final yeh descends to −1024 against
+  a declared descender of −838, so yá is cut off in any renderer that clips to
+  line metrics — this block is where that fix will show.</p>
+  <div class="sample tight" dir="rtl" lang="ar">
+    يحيى يسعى على مشى<br>
+    يحيى يسعى على مشى<br>
+    يحيى يسعى على مشى
+  </div>
+</div>
+
+<div class="test">
+  <p class="what"><strong>Final sweeps tucking under.</strong> A final tail is
+  allowed past its advance so it returns under the preceding letters —
+  neighbouring words and punctuation must still not collide with it.</p>
+  <div class="sample" dir="rtl" lang="ar">النفس عزيز، خبز جميل. قال: «انتهى».</div>
+</div>
+
+<div class="test">
+  <p class="what"><strong>Digits and punctuation.</strong> Arabic-Indic and
+  Extended (Persian) digits align as figures; the comma, semicolon and
+  question mark face the right way for RTL.</p>
+  <div class="sample" dir="rtl" lang="ar">٠١٢٣٤٥٦٧٨٩ — <span lang="fa">۰۱۲۳۴۵۶۷۸۹ — پ چ ژ گ ک ی</span> — ؟ ؛ ، ٪</div>
+</div>
+
+<div class="test">
+  <p class="what"><strong>Mixed direction.</strong> Arabic and Latin on one
+  line: spacing at every direction boundary stays even, and neither script
+  visually outweighs the other.</p>
+  <div class="sample small" dir="rtl" lang="ar">قلم بديع — Qalam Badi — خط مشكین قلم Mishkín-Qalam والاسم الأعظم.</div>
+</div>
+
+<h2>Transliteration Latin</h2>
+
+<div class="test">
+  <p class="what"><strong>Underdots and accented vowels.</strong> The Bahá'í
+  transliteration alphabet in running text. Underdots on ḥ ṣ ṭ ẓ ḍ must be
+  the same dot module as everything else, must not collide with descenders on
+  the line below, and must survive an underline.</p>
+  <div class="sample small">Bahá'u'lláh — Ḥuqúqu'lláh — Kitáb-i-Aqdas — Ṭihrán — <u>maẓharu'ẓ-ẓuhúr, aṣ-Ṣalát</u></div>
+</div>
+
+<div class="test">
+  <p class="what"><strong>Ayin, hamza and the apostrophes.</strong> ʿ (U+02BF)
+  and ʾ (U+02BE) stand directly beside ' and ' in this orthography and must
+  match them in size and position. <span class="known">Known:</span> ʿ is
+  oversized (604×680 against the quote's 366×555) — position is fixed, size
+  is not.</p>
+  <div class="sample">ʿAbduʾl-Bahá — 'Abdu'l-Bahá — maʿa — ma'a — ʾabhá — 'abhá</div>
+</div>
+
+<h2>Cyrillic</h2>
+
+<div class="test">
+  <p class="what"><strong>Descenders and diacritics.</strong> The tails of
+  д ц щ and both cases of Й/Ё must clear the line below; the breve and
+  diaeresis must sit centred, not beside (the same class of bug as the Arabic
+  combining marks).</p>
+  <div class="sample" lang="ru">дом царь щука руж — Дц Щц Уу Фф — Ёлка ёж Йод майка</div>
+</div>
+
+<div class="test">
+  <p class="what"><strong>Confusables hold their shape.</strong> б is not 6,
+  З is not 3, Ч is not 4; and the letters shared with Latin (а е о р с х)
+  should sit on the same rhythm as their Latin twins, since both scripts came
+  through the same proportional fit.</p>
+  <div class="sample" lang="ru">б6 З3 Ч4 — асеорх / aceopx — НАВСЕГДА навсегда</div>
+</div>
+
+<div class="test">
+  <p class="what"><strong>Beyond Russian.</strong> Serbian, Macedonian and
+  Ukrainian letters at the same color as the core set. (Serbian's localized
+  italic forms of б г д п т are <em>not</em> implemented — if a browser claims
+  them here in italic, it is synthesizing.)</p>
+  <div class="sample" lang="sr">Ђђ Љљ Њњ Ћћ Џџ — <span lang="uk">Ґґ Єє Іі Її</span></div>
+</div>
+
+<h2>Greek</h2>
+
+<div class="test">
+  <p class="what"><strong>Final sigma and tonos.</strong> ς only at word end;
+  every accented vowel keeps its tonos clear of the letter; dialytika and
+  tonos combine on ΐ ΰ without colliding.</p>
+  <div class="sample" lang="el">λόγος σοφός — ά έ ή ί ό ύ ώ — ϊ ϋ ΐ ΰ — προΐσταμαι</div>
+</div>
+
+<div class="test">
+  <p class="what"><strong>Capitals and punctuation.</strong> Accented
+  capitals carry the tonos at the upper left, not on top; the Greek question
+  mark is the semicolon shape, and the ano teleia sits at x-height.</p>
+  <div class="sample" lang="el">Άγιος Έρως Ήλιος Ίδη Όρος Ύδρα Ώρα — τί λέγεις; — ἓν οἶδα· οὐδὲν οἶδα</div>
+</div>
+
+<div class="test">
+  <p class="what"><strong>Polytonic.</strong> The font covers polytonic Greek;
+  breathings and accents must combine cleanly or the coverage is a false
+  promise.</p>
+  <div class="sample" lang="grc">Ἐν ἀρχῇ ἦν ὁ λόγος, καὶ ὁ λόγος ἦν πρὸς τὸν θεόν.</div>
+</div>
+
+<h2>Cross-script rhythm</h2>
+
+<div class="test">
+  <p class="what"><strong>One line, four scripts.</strong> Set at one size,
+  no script should read darker, larger or looser than the others — the shared
+  dot module is the claim; this line is the check.</p>
+  <div class="sample small">Qalam Badi — <span dir="rtl" lang="ar">قلم بديع</span> — Κάλαμος θαυμαστός — Дивное перо</div>
+</div>
+
+<footer>
+  Built from @@BUILD@@. Regular weight only — judge Bold from a full
+  <code>make build</code>. Add new pitfalls next to the regression that
+  taught them.
+</footer>

@@ -117,6 +117,11 @@ proportional:
 specimen: venv build.stamp .mono-seed.woff2
 	mkdir -p out
 	. venv/bin/activate; python3 scripts/make-specimen.py --mono .mono-seed.woff2 --out out/specimen.html
+	# The pitfalls proof rides along: the generic proof sheets exercise Latin
+	# well and everything else thinly, so this page carries one test per known
+	# failure mode of the Arabic, Cyrillic and Greek — including a regression
+	# test line for every visual bug this project has actually shipped.
+	. venv/bin/activate; python3 scripts/make-specimen.py --template documentation/pitfalls-template.html --out out/pitfalls.html
 
 # Fast visual loop: regenerate the masters, compile ONLY the Regular, and
 # rebuild the specimen. Skips the OTF, the variable fonts, the other three
@@ -148,6 +153,7 @@ preview: venv proportional
 specimen-only: .mono-seed.woff2
 	mkdir -p out
 	. venv/bin/activate; python3 scripts/make-specimen.py --mono .mono-seed.woff2 --out out/specimen.html
+	. venv/bin/activate; python3 scripts/make-specimen.py --template documentation/pitfalls-template.html --out out/pitfalls.html
 
 # Report which glyphs the monospace cell distorted, and how.
 widths:
