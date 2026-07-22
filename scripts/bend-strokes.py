@@ -143,8 +143,28 @@ def dot_room(glyph, region, floor, dot_limit):
     return room
 
 
-def apply_field(glyph, region, ramp, amplitude, dot_limit):
+def apply_field(glyph, region, ramp, amplitude, dot_limit, spread=0.0):
+    """Lower the tail by the dip field; optionally fan it out into a bowl.
+
+    `spread` (units) pushes each point OUT toward the tip in proportion to how
+    far the dip lowered it (its field value over the amplitude): the tail tip,
+    fully lowered, moves the whole `spread`; a point the ramp barely touched
+    barely moves. The push is toward the tip end of the region, so a tight
+    plunging hook opens into a low wide bowl. Because the amount is a function
+    of x (through the field), it is a translation field on both axes — no
+    scaling, so nothing can fatten.
+    """
     left, right = region
+    # The tip is the far end of the tail region from the letter body. The
+    # letter sits at region_right (the join side, field 0), so "out toward the
+    # tip" is toward region_left; push in that direction.
+    out = -1.0 if left <= right else 1.0
+
+    def push(point, drop):
+        point.y -= drop
+        if spread and amplitude > 0:
+            point.x += out * spread * (drop / amplitude)
+
     for contour in glyph.contours:
         xs = [p.x for p in contour.points]
         ys = [p.y for p in contour.points]
@@ -152,18 +172,22 @@ def apply_field(glyph, region, ramp, amplitude, dot_limit):
             continue
         if max(xs) - min(xs) <= dot_limit and max(ys) - min(ys) <= dot_limit:
             # A dot rides the field rigidly at its centre's offset.
-            shift = field((min(xs) + max(xs)) / 2, left, right, ramp, amplitude)
+            drop = field((min(xs) + max(xs)) / 2, left, right, ramp, amplitude)
             for point in contour.points:
-                point.y -= shift
+                push(point, drop)
         else:
             for point in contour.points:
-                point.y -= field(point.x, left, right, ramp, amplitude)
+                push(point, field(point.x, left, right, ramp, amplitude))
     for component in glyph.components:
         xx, xy, yx, yy, dx, dy = component.transformation
-        component.transformation = (
-            xx, xy, yx, yy, dx, dy - field(dx, left, right, ramp, amplitude))
+        drop = field(dx, left, right, ramp, amplitude)
+        ddx = out * spread * (drop / amplitude) if (spread and amplitude > 0) else 0.0
+        component.transformation = (xx, xy, yx, yy, dx + ddx, dy - drop)
     for anchor in glyph.anchors:
-        anchor.y -= field(anchor.x, left, right, ramp, amplitude)
+        drop = field(anchor.x, left, right, ramp, amplitude)
+        anchor.y -= drop
+        if spread and amplitude > 0:
+            anchor.x += out * spread * (drop / amplitude)
 
 
 def round_finial(glyph, zone, strength, floor=None):
@@ -237,6 +261,7 @@ def main():
     bowl_ramp = settings.get("bowl_ramp", 0.62)
     tail_dip = settings.get("tail_dip", 0.60) * nuqta
     tail_ramp = settings.get("tail_ramp", 0.60)
+    tail_spread = settings.get("tail_spread", 0.0) * nuqta
     hook_round = settings.get("hook_round", 0.0)
     dot_limit = nuqta * 1.35
     # The connector stroke sits at 225..369; the hook and bowl curves live
@@ -272,7 +297,8 @@ def main():
             # The whole region must stay inside the descender too.
             amplitude = max(0.0, min(amplitude, bounds.yMin - floor))
             if amplitude > 2:
-                apply_field(glyph, region, tail_ramp, amplitude, dot_limit)
+                apply_field(glyph, region, tail_ramp, amplitude, dot_limit,
+                            spread=tail_spread)
                 tails += 1
             finials += 1 if round_finial(
                 glyph, (bounds.xMin, bounds.xMax, HOOK_CEIL), hook_round, floor) else 0

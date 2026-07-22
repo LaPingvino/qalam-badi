@@ -318,8 +318,14 @@ connectors:
 bends:
   bowl_dip: 0.25       # beh/kaf-type finals: the boat under the letter
   bowl_ramp: 0.62
-  tail_dip: 0.60       # seen/yeh tails: toward the 0.9-alef classical depth
+  tail_dip: 1.10       # seen/yeh tails: toward the 0.9-alef classical depth
   tail_ramp: 0.60
+  # Horizontal fan for the seen/yeh tails only (not the beh boat): each point
+  # is pushed OUT toward the tip in proportion to how far the dip lowered it,
+  # so the tail stops being a tight plunging hook and opens into a low wide
+  # bowl. Keyed on x like the dip, so it is a translation field too and cannot
+  # fatten. In nuqta. 0 restores the pure-vertical bend.
+  tail_spread: 0.90
   # The terminal hook rounding. soften-corners already smoothed every corner
   # at radius 48, so there is no sharp corner left to fillet — the hook reads
   # hard because it is drawn TIGHT, a small squarish curve, not because it has
