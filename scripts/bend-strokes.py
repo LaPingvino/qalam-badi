@@ -74,6 +74,11 @@ TAIL_BELOW = 100
 TAH_FAMILY = {0x0637, 0x0638, 0x069F, 0x08A2}
 EXCLUDED_NAMES = {"uni0640"}  # the tatweel is a kashida; a kashida is flat
 
+# The qaf family also ends in a deep round bowl (like the noon), so it takes
+# the same fan: qaf and its dotless/dotted variants. feh (0x641) is left out —
+# its final has no descender bowl to open.
+QAF_BOWL = {0x0642, 0x066F, 0x06A7, 0x06A8, 0x08B5}
+
 
 def field(x, region_left, region_right, ramp_fraction, amplitude):
     """Downward offset at x: plateau at the left, half-cosine ramp to zero."""
@@ -373,7 +378,7 @@ def main():
         # bowl. Not the beh boat (that gets the vertical dip below) — the noon
         # bowl has no flat bottom run to dip, it is a curve, so it wants the
         # symmetric fan instead.
-        if base in _flatness.NOON_SKELETON and noon_fan > 0:
+        if (base in _flatness.NOON_SKELETON or base in QAF_BOWL) and noon_fan > 0:
             if bowl_fan(glyph, font, noon_fan, dot_limit):
                 fans += 1
             if args.verbose:

@@ -5,9 +5,9 @@
   <unicode hex="FED5"/>
   <outline>
     <contour>
-      <point x="530.0" y="12.0" type="curve" smooth="yes"/>
-      <point x="270.0" y="12.0"/>
-      <point x="190.0" y="166.0"/>
+      <point x="432.7140449438202" y="12.0" type="curve" smooth="yes"/>
+      <point x="172.71404494382023" y="12.0"/>
+      <point x="163.05224719101125" y="166.0"/>
       <point x="190.0" y="336.0" type="curve" smooth="yes"/>
       <point x="190.0" y="410.0"/>
       <point x="203.0" y="504.0"/>
@@ -21,11 +21,11 @@
       <point x="100.0" y="788.0"/>
       <point x="49.0" y="475.0"/>
       <point x="49.0" y="336.0" type="curve" smooth="yes"/>
-      <point x="49.0" y="23.0"/>
-      <point x="240.0" y="-131.0"/>
-      <point x="530.0" y="-131.0" type="curve" smooth="yes"/>
-      <point x="1001.0" y="-131.0"/>
-      <point x="1026.0" y="184.0"/>
+      <point x="-43.26179775280899" y="23.0"/>
+      <point x="77.4" y="-131.0"/>
+      <point x="367.4" y="-131.0" type="curve" smooth="yes"/>
+      <point x="1163.6" y="-131.0"/>
+      <point x="1044.726404494382" y="184.0"/>
       <point x="1026.0" y="436.0" type="curve" smooth="yes"/>
       <point x="1026.0" y="911.0" type="line" smooth="yes"/>
       <point x="1026.0" y="1032.0"/>
@@ -44,8 +44,8 @@
       <point x="885.0" y="494.15415972506946"/>
       <point x="885.0" y="487.5620419682329" type="curve" smooth="yes"/>
       <point x="885.0" y="436.0" type="line" smooth="yes"/>
-      <point x="885.0" y="199.0"/>
-      <point x="872.0" y="12.0"/>
+      <point x="896.8752808988764" y="199.0"/>
+      <point x="969.2859550561798" y="12.0"/>
     </contour>
     <contour>
       <point x="885.0" y="911.0" type="curve" smooth="yes"/>
