@@ -136,6 +136,11 @@ proportional:
 	# halfway between the outer two. Late, in-place on the Regular; only the
 	# middle tooth translates, so joins and advances are untouched.
 	. venv/bin/activate; python3 scripts/center-seen-teeth.py --src sources/QalamBadi-Regular.ufo
+	# Reshape the ya/maksura FINAL loop into a small, even, round crossing:
+	# contract the middle, collapse the eye to a crossing at midpoint(top,
+	# bottom), set the loop-left equidistant, lay circular-arc handles. Final
+	# forms only; the differently-drawn isolated ya is left alone.
+	. venv/bin/activate; python3 scripts/reshape-ya-loop.py --src sources/QalamBadi-Regular.ufo
 	# Class kerning, written LAST — the chain regenerates the Regular every run,
 	# so kerning has to be the final thing added to the finished UFO. Pairs live
 	# in spacing.yaml (kerning:); the builder compiles the UFO groups to GPOS.
