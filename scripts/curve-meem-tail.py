@@ -49,6 +49,43 @@ FOOT_MARGIN = 100      # how far up from the deepest ink the rounded foot reache
 TANGENT = 0.42         # cubic handle length as a fraction of the edge height
 
 
+def weld_seam(glyph):
+    """Remove the redundant join-band spike points at the meem's tail-loop seam.
+
+    The seed bolts the tail rod onto the loop, leaving a short backtracking
+    LINE segment on each join-band edge (a two-dot spike where one dot would
+    do). Unioned at build time those spikes read as an acute white wedge biting
+    into the loop — visible on the final meem in لم. A spike is a LINE-type
+    on-curve point whose segment from its (on-curve) predecessor is short
+    (<160u) and runs flat along a join-band edge (y~225 or y~369); the real
+    connector edges are longer (~190u) and are not touched. Deleting the spike
+    point lets the surrounding curve flow straight, so the loop meets the tail
+    cleanly. The predecessor keeps its own controls, so the path stays valid.
+    """
+    removed = 0
+    for contour in glyph.contours:
+        pts = list(contour.points)
+        n = len(pts)
+        kill = set()
+        for i, p in enumerate(pts):
+            if p.type != "line":
+                continue
+            prev = pts[(i - 1) % n]
+            if prev.type is None:            # predecessor must be on-curve
+                continue
+            if not (abs(p.y - 369) < 12 or abs(p.y - 225) < 12):
+                continue
+            if abs(prev.y - p.y) > 10:       # both ends on the same band edge
+                continue
+            if not (5 < abs(p.x - prev.x) < 160):   # short spike, not a connector edge
+                continue
+            kill.add(i)
+        if kill:
+            contour.points = [p for i, p in enumerate(pts) if i not in kill]
+            removed += len(kill)
+    return removed
+
+
 def curve_tail(glyph, amount):
     """Bow the meem tail into an even curve.
 
@@ -138,10 +175,11 @@ def main():
             continue
         if not glyph.contours:
             continue
+        welded = weld_seam(glyph)
         if curve_tail(glyph, amount):
             curved += 1
             if args.verbose:
-                print(f"  {glyph.name:16} tail bowed {amount:+.0f}")
+                print(f"  {glyph.name:16} tail bowed {amount:+.0f}, welded {welded} seam(s)")
 
     if os.path.abspath(args.out) != os.path.abspath(args.src) and os.path.exists(args.out):
         shutil.rmtree(args.out)
