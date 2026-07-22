@@ -146,13 +146,20 @@ def dot_room(glyph, region, floor, dot_limit):
 def apply_field(glyph, region, ramp, amplitude, dot_limit, spread=0.0):
     """Lower the tail by the dip field; optionally fan it out into a bowl.
 
-    `spread` (units) pushes each point OUT toward the tip in proportion to how
-    far the dip lowered it (its field value over the amplitude): the tail tip,
-    fully lowered, moves the whole `spread`; a point the ramp barely touched
-    barely moves. The push is toward the tip end of the region, so a tight
-    plunging hook opens into a low wide bowl. Because the amount is a function
-    of x (through the field), it is a translation field on both axes — no
-    scaling, so nothing can fatten.
+    `spread` (units) pushes each point OUT toward the tip along the same ramp
+    profile: the tip end moves the whole `spread`, a point the ramp barely
+    touched barely moves. The push is toward the tip end of the region, so a
+    tight plunging hook opens into a low wide bowl. Because the amount is a
+    function of x (through the profile), it is a translation field on both
+    axes — no scaling, so nothing can fatten.
+
+    The spread is deliberately DECOUPLED from the vertical dip: it keys on the
+    unit profile, not on how far the dip lowered the point, so a letter whose
+    dip is capped to nothing by its below-dots (the dotted ya against its dots)
+    still fans out to the full width its dotless twin (the alef maksura) does.
+    Widening a tail leftward costs no vertical room, so the dot cap has no say
+    over it — which is what un-folds the monospace-cramped ya and keeps it
+    consistent with the maksura.
     """
     left, right = region
     # The tip is the far end of the tail region from the letter body. The
@@ -160,10 +167,14 @@ def apply_field(glyph, region, ramp, amplitude, dot_limit, spread=0.0):
     # tip" is toward region_left; push in that direction.
     out = -1.0 if left <= right else 1.0
 
-    def push(point, drop):
-        point.y -= drop
-        if spread and amplitude > 0:
-            point.x += out * spread * (drop / amplitude)
+    def profile(x):
+        # The ramp shape normalised to 0..1 (field is linear in amplitude, so
+        # this is the amplitude=1 field), valid even when amplitude is 0.
+        return field(x, left, right, ramp, 1.0)
+
+    def push(point, x_ref):
+        point.y -= amplitude * profile(x_ref)
+        point.x += out * spread * profile(x_ref)
 
     for contour in glyph.contours:
         xs = [p.x for p in contour.points]
@@ -172,22 +183,21 @@ def apply_field(glyph, region, ramp, amplitude, dot_limit, spread=0.0):
             continue
         if max(xs) - min(xs) <= dot_limit and max(ys) - min(ys) <= dot_limit:
             # A dot rides the field rigidly at its centre's offset.
-            drop = field((min(xs) + max(xs)) / 2, left, right, ramp, amplitude)
+            centre = (min(xs) + max(xs)) / 2
             for point in contour.points:
-                push(point, drop)
+                push(point, centre)
         else:
             for point in contour.points:
-                push(point, field(point.x, left, right, ramp, amplitude))
+                push(point, point.x)
     for component in glyph.components:
         xx, xy, yx, yy, dx, dy = component.transformation
-        drop = field(dx, left, right, ramp, amplitude)
-        ddx = out * spread * (drop / amplitude) if (spread and amplitude > 0) else 0.0
-        component.transformation = (xx, xy, yx, yy, dx + ddx, dy - drop)
+        p = profile(dx)
+        component.transformation = (
+            xx, xy, yx, yy, dx + out * spread * p, dy - amplitude * p)
     for anchor in glyph.anchors:
-        drop = field(anchor.x, left, right, ramp, amplitude)
-        anchor.y -= drop
-        if spread and amplitude > 0:
-            anchor.x += out * spread * (drop / amplitude)
+        p = profile(anchor.x)
+        anchor.x += out * spread * p
+        anchor.y -= amplitude * p
 
 
 def round_finial(glyph, zone, strength, floor=None):
@@ -296,7 +306,10 @@ def main():
             amplitude = tail_dip if room is None else max(0.0, min(tail_dip, room))
             # The whole region must stay inside the descender too.
             amplitude = max(0.0, min(amplitude, bounds.yMin - floor))
-            if amplitude > 2:
+            # The dip may be capped to nothing by below-dots, but the spread
+            # still un-folds the tail sideways (no vertical room needed), so
+            # run the field whenever EITHER axis has work to do.
+            if amplitude > 2 or tail_spread > 0:
                 apply_field(glyph, region, tail_ramp, amplitude, dot_limit,
                             spread=tail_spread)
                 tails += 1
