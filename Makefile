@@ -132,6 +132,10 @@ proportional:
 	# finished Regular because the terminal top only settles flat after the
 	# proportional chain — scaling it earlier, while it is still a point, spikes.
 	. venv/bin/activate; python3 scripts/lower-tail-terminal.py --src sources/QalamBadi-Regular.ufo
+	# Even out the seen/sheen teeth: slide the bunched middle tooth to sit
+	# halfway between the outer two. Late, in-place on the Regular; only the
+	# middle tooth translates, so joins and advances are untouched.
+	. venv/bin/activate; python3 scripts/center-seen-teeth.py --src sources/QalamBadi-Regular.ufo
 	# Class kerning, written LAST — the chain regenerates the Regular every run,
 	# so kerning has to be the final thing added to the finished UFO. Pairs live
 	# in spacing.yaml (kerning:); the builder compiles the UFO groups to GPOS.
