@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uniFBD6" format="2">
-  <advance width="1228"/>
+  <advance width="1156"/>
   <unicode hex="FBD6"/>
   <anchor x="610" y="1367" name="top"/>
-  <anchor x="596" y="145" name="bottom"/>
+  <anchor x="561" y="145" name="bottom"/>
   <outline>
     <contour>
       <point x="567.0" y="429.4937318389373" type="curve" smooth="yes"/>
@@ -26,10 +26,10 @@
       <point x="676.9411254969543" y="369.05887450304573" type="curve" smooth="yes"/>
       <point x="731.0" y="315.0"/>
       <point x="836.0" y="225.0"/>
-      <point x="950.0" y="225.0" type="curve" smooth="yes"/>
-      <point x="1228.0" y="225.0" type="line"/>
-      <point x="1228.0" y="369.0" type="line"/>
-      <point x="950.0" y="369.0" type="line" smooth="yes"/>
+      <point x="944.3059602649007" y="225.0" type="curve" smooth="yes"/>
+      <point x="1156.35" y="225.0" type="line"/>
+      <point x="1156.35" y="369.0" type="line"/>
+      <point x="944.3059602649007" y="369.0" type="line" smooth="yes"/>
       <point x="883.0" y="369.0"/>
       <point x="784.0" y="445.1393662653936"/>
       <point x="739.0" y="478.6657257506572" type="curve" smooth="yes"/>

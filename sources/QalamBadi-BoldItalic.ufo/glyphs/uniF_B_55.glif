@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uniFB55" format="2">
-  <advance width="809"/>
+  <advance width="797"/>
   <unicode hex="FB55"/>
   <anchor x="506" y="872" name="top"/>
-  <anchor x="453" y="-644" name="bottom"/>
+  <anchor x="447" y="-644" name="bottom"/>
   <outline>
     <contour>
       <point x="141.5146558814236" y="403.0" type="curve" smooth="yes"/>
@@ -22,12 +22,12 @@
       <point x="434.40518671544544" y="318.0077760609811"/>
       <point x="427.73737151984096" y="322.1087327432101" type="curve" smooth="yes"/>
       <point x="438.27294038796094" y="287.3770324951635"/>
-      <point x="492.53486145045554" y="194.24163031858623"/>
-      <point x="630.7663366168515" y="191.0" type="curve" smooth="yes"/>
-      <point x="865.7069406589515" y="195.75014043693866" type="line"/>
-      <point x="894.1499653719496" y="396.2110116859971" type="line"/>
-      <point x="656.1574218388705" y="403.0" type="line" smooth="yes"/>
-      <point x="583.1422165954591" y="395.1517323597864"/>
+      <point x="492.0363691164079" y="194.4814189401015"/>
+      <point x="624.1839441033881" y="191.0" type="curve" smooth="yes"/>
+      <point x="853.9968753194166" y="195.92390788189718" type="line"/>
+      <point x="882.5227783342333" y="395.9276874653982" type="line"/>
+      <point x="649.5750293254071" y="403.0" type="line" smooth="yes"/>
+      <point x="583.9067066961064" y="394.49720867369064"/>
       <point x="576.992897090784" y="463.0706694118519"/>
       <point x="594.6053103223308" y="559.9302223716669" type="curve" smooth="yes"/>
       <point x="617.463503725439" y="689.5654790480194" type="line" smooth="yes"/>

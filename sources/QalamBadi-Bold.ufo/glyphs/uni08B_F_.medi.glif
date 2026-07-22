@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <glyph name="uni08BF.medi" format="2">
-  <advance width="1108"/>
+  <advance width="1084"/>
   <anchor x="548" y="1572" name="top"/>
-  <anchor x="561" y="111" name="bottom"/>
+  <anchor x="550" y="111" name="bottom"/>
   <outline>
     <contour>
       <point x="356.0" y="403.0" type="curve" smooth="yes"/>
@@ -23,8 +23,8 @@
       <point x="567.0210822373336" y="283.21735887713464"/>
       <point x="634.2571680330876" y="193.47825776605876"/>
       <point x="784.0" y="191.0" type="curve" smooth="yes"/>
-      <point x="1122.1462616566614" y="193.92487869209626" type="line"/>
-      <point x="1122.1462616566614" y="400.0751213079037" type="line"/>
+      <point x="1099.0489172469902" y="194.34152920046182" type="line"/>
+      <point x="1099.0489172469902" y="399.6584707995382" type="line"/>
       <point x="784.0" y="403.0" type="line" smooth="yes"/>
       <point x="694.6787996042489" y="397.4095484889202"/>
       <point x="674.4749129791425" y="468.9724186874129"/>

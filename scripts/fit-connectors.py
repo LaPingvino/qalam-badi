@@ -79,18 +79,38 @@ def is_arabic(glyph):
     return any(glyph.name.endswith(s) for s in (".init", ".medi", ".fina", ".isol"))
 
 
-def body_islands(font, glyph, join_height, step=12):
+def body_islands(font, glyph, join_height, step=12, dots_nuqta=None):
     """Every contiguous x range where the glyph is letter, not bare connector.
 
     Each island is padded by one sample step on both sides, so sampling
     granularity can never leave a sliver of true letter ink inside a run that
     is about to be scaled.
+
+    When `dots_nuqta` is given, dot-sized contours are left out of the island
+    scan: a connector's length is a join-height property, but a dot departs
+    from the join signature at whatever x it hangs at, so a letter's below-dots
+    would otherwise pad the island out to their full span and hold the whole
+    cell open. The dot itself is not lost — apply_remap_preserving_dots carries
+    it rigidly with the skeleton — so ignoring it here just lets the connector
+    fit the tooth, not the dots. That is what un-folds the ya medial (island
+    624 wide from its dots, against beh's 336) back to its skeleton's width.
     """
     bottom, top = join_height
     tolerance = _joins.JOIN_TOLERANCE
 
     pen = PolygonPen(font)
-    glyph.draw(pen)
+    if dots_nuqta is not None:
+        dot_limit = dots_nuqta * 1.35
+        for contour in glyph.contours:
+            xs = [p.x for p in contour.points]
+            ys = [p.y for p in contour.points]
+            if not xs:
+                continue
+            if max(xs) - min(xs) <= dot_limit and max(ys) - min(ys) <= dot_limit:
+                continue  # a dot: does not set the connector length
+            contour.draw(pen)
+    else:
+        glyph.draw(pen)
     if not pen.polygons:
         return None
     bounds = glyph.getBounds(font)
@@ -194,18 +214,32 @@ def width_targets(settings):
     return table
 
 
-def apply_remap_preserving_dots(glyph, remap, nuqta):
+def apply_remap_preserving_dots(glyph, remap, nuqta, islands=None):
     """Apply the x remap, but move dots rigidly instead of squashing them.
 
-    The island detection already keeps dots rigid in principle — a dot departs
-    from the join signature, so it is an island — but its edges are only known
-    to one sample step. This is the belt to those braces: any contour small
-    enough to be a dot has its centre remapped and its shape carried along
-    unchanged. A dot remapped point by point comes out as a squashed ellipse,
-    and once it is thin enough the overlap removal in the build simply loses
-    it. That is how the dot vanished from ba.
+    A dot remapped point by point comes out as a squashed ellipse, and once it
+    is thin enough the overlap removal in the build simply loses it — that is
+    how the dot vanished from ba. So any contour small enough to be a dot is
+    translated whole.
+
+    But by how much? Not by remap(centre): now that dots are held OUT of the
+    island scan, a below-dot sits in a bare connector RUN, and evaluating the
+    remap there returns the run's SCALED position — so when the run shortens,
+    the dots of a two- or three-dot cluster each land on a different scaled x
+    and bunch into a blob. A dot belongs to the skeleton, so it must ride the
+    rigid shift of the island it hangs under, not the run it happens to sit in.
+    Every dot in a cluster shares one island, so they share one shift and their
+    mutual spacing is preserved. Falls back to remap(centre) when no islands
+    are supplied (the single-island callers that never compress a run).
     """
     dot_limit = nuqta * 1.35
+
+    def dot_shift(centre):
+        if not islands:
+            return remap(centre) - centre
+        start, end = min(islands, key=lambda i: abs((i[0] + i[1]) / 2 - centre))
+        mid = (start + end) / 2
+        return remap(mid) - mid
 
     for contour in glyph.contours:
         xs = [p.x for p in contour.points]
@@ -217,7 +251,7 @@ def apply_remap_preserving_dots(glyph, remap, nuqta):
 
         if width <= dot_limit and height <= dot_limit:
             centre = (min(xs) + max(xs)) / 2
-            shift = remap(centre) - centre
+            shift = dot_shift(centre)
             for point in contour.points:
                 point.x += shift
         else:
@@ -293,7 +327,16 @@ def main():
         if bounds is None:
             continue
 
-        islands = body_islands(font, glyph, join_height)
+        base, form = _flatness.base_and_form(glyph)
+
+        # Hold dots out of the island scan only for MEDIAL forms. A medial
+        # shortens both approaches symmetrically, so its tooth stays put and
+        # its dots ride straight down with it — the ya medial un-folds cleanly.
+        # An initial/final shortens one side, so its tooth travels; letting the
+        # dots follow that travel drags a cluster off the glyph. Those forms
+        # keep the old dots-are-islands behaviour until they get their own fix.
+        exclude_dots = nuqta if form == "medi" else None
+        islands = body_islands(font, glyph, join_height, dots_nuqta=exclude_dots)
         if not islands:
             continue
 
@@ -308,7 +351,6 @@ def main():
         glyph.draw(pen_poly)
         left_join, right_join = _joins.join_sides(glyph, pen_poly.polygons, join_height)
 
-        base, form = _flatness.base_and_form(glyph)
         target = targets.get((base, form)) if base is not None else None
         # A glyph with no join and no target has nothing to fit. With a
         # target it may still have inner runs — an isolated seen's kashida is
@@ -365,7 +407,7 @@ def main():
 
         if not args.dry_run:
             remap = make_piecewise_remap(runs, new_lengths)
-            apply_remap_preserving_dots(glyph, remap, nuqta)
+            apply_remap_preserving_dots(glyph, remap, nuqta, islands=islands)
             # The advance follows the geometry, otherwise the letter changes
             # width but still occupies its old slot.
             glyph.width = new_width
