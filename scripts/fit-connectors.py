@@ -214,47 +214,58 @@ def width_targets(settings):
     return table
 
 
-def apply_remap_preserving_dots(glyph, remap, nuqta, islands=None):
+def apply_remap_preserving_dots(glyph, remap, nuqta, islands=None,
+                                regroup=False, new_width=None):
     """Apply the x remap, but move dots rigidly instead of squashing them.
 
     A dot remapped point by point comes out as a squashed ellipse, and once it
     is thin enough the overlap removal in the build simply loses it — that is
     how the dot vanished from ba. So any contour small enough to be a dot is
-    translated whole.
+    translated whole. By how much depends on how far the tooth travelled:
 
-    But by how much? Not by remap(centre): now that dots are held OUT of the
-    island scan, a below-dot sits in a bare connector RUN, and evaluating the
-    remap there returns the run's SCALED position — so when the run shortens,
-    the dots of a two- or three-dot cluster each land on a different scaled x
-    and bunch into a blob. A dot belongs to the skeleton, so it must ride the
-    rigid shift of the island it hangs under, not the run it happens to sit in.
-    Every dot in a cluster shares one island, so they share one shift and their
-    mutual spacing is preserved. Falls back to remap(centre) when no islands
-    are supplied (the single-island callers that never compress a run).
+    - Per-dot island shift (regroup=False): each dot rides the rigid shift of
+      the island it hangs under (evaluating the remap in the run it sits in
+      would return a scaled position and bunch a cluster into a blob). Right
+      when the tooth barely moves — the symmetric medial.
+
+    - Group re-centre + clamp (regroup=True): the whole dot group is translated
+      as one so its centroid lands under the NEAREST island's new centre, then
+      clamped to stay within [margin, new_width-margin]. When a one-sided
+      approach shortens, the tooth TRAVELS and per-dot shifting carries the
+      dots off the glyph; re-centring the group under the tooth and clamping it
+      into the cell keeps it on the letter with its spacing intact.
     """
     dot_limit = nuqta * 1.35
+    dots = [c for c in glyph.contours if c.points
+            and max(p.x for p in c.points) - min(p.x for p in c.points) <= dot_limit
+            and max(p.y for p in c.points) - min(p.y for p in c.points) <= dot_limit]
 
-    def dot_shift(centre):
+    def island_shift(centre):
         if not islands:
             return remap(centre) - centre
         start, end = min(islands, key=lambda i: abs((i[0] + i[1]) / 2 - centre))
         mid = (start + end) / 2
         return remap(mid) - mid
 
-    for contour in glyph.contours:
-        xs = [p.x for p in contour.points]
-        ys = [p.y for p in contour.points]
-        if not xs:
-            continue
-        width = max(xs) - min(xs)
-        height = max(ys) - min(ys)
+    group_shift = None
+    if regroup and dots and islands:
+        xs = [p.x for c in dots for p in c.points]
+        lo, hi = min(xs), max(xs)
+        group_shift = island_shift((lo + hi) / 2)
+        if new_width is not None:  # clamp the group into the cell
+            margin = nuqta * 0.22
+            if lo + group_shift < margin:
+                group_shift += margin - (lo + group_shift)
+            elif hi + group_shift > new_width - margin:
+                group_shift -= (hi + group_shift) - (new_width - margin)
 
-        if width <= dot_limit and height <= dot_limit:
-            centre = (min(xs) + max(xs)) / 2
-            shift = dot_shift(centre)
+    for contour in glyph.contours:
+        if contour in dots:
+            centre = (min(p.x for p in contour.points) + max(p.x for p in contour.points)) / 2
+            shift = group_shift if group_shift is not None else island_shift(centre)
             for point in contour.points:
                 point.x += shift
-        else:
+        elif contour.points:
             for point in contour.points:
                 point.x = remap(point.x)
 
@@ -329,13 +340,15 @@ def main():
 
         base, form = _flatness.base_and_form(glyph)
 
-        # Hold dots out of the island scan only for MEDIAL forms. A medial
-        # shortens both approaches symmetrically, so its tooth stays put and
-        # its dots ride straight down with it — the ya medial un-folds cleanly.
-        # An initial/final shortens one side, so its tooth travels; letting the
-        # dots follow that travel drags a cluster off the glyph. Those forms
-        # keep the old dots-are-islands behaviour until they get their own fix.
-        exclude_dots = nuqta if form == "medi" else None
+        # Hold dots out of the island scan so a letter's below-dots stop padding
+        # its connector open (the monospace-cramped ya). A medial shortens both
+        # approaches symmetrically, so its tooth stays put and per-dot island
+        # shift keeps its dots under it. An initial shortens one side, so its
+        # tooth TRAVELS — those re-centre the dot group under the tooth and
+        # clamp it into the cell (regroup). Finals keep dots-as-islands (some
+        # seen-family finals put a re-centred cluster off the tail).
+        exclude_dots = nuqta if form in ("medi", "init") else None
+        regroup_dots = form == "init"
         islands = body_islands(font, glyph, join_height, dots_nuqta=exclude_dots)
         if not islands:
             continue
@@ -405,9 +418,23 @@ def main():
             skipped_extreme += 1
             continue
 
+        # A regrouped letter (initial) whose dot cluster is wider than the
+        # shortened cell can hold cannot un-fold — its dots need that width
+        # (beh with three dots below). Leave it at its cell width rather than
+        # push a cluster off the glyph.
+        if regroup_dots:
+            dot_limit = nuqta * 1.35
+            dxs = [p.x for c in glyph.contours if c.points
+                   and max(p.x for p in c.points) - min(p.x for p in c.points) <= dot_limit
+                   and max(p.y for p in c.points) - min(p.y for p in c.points) <= dot_limit
+                   for p in c.points]
+            if dxs and (max(dxs) - min(dxs)) > new_width - nuqta * 0.5:
+                continue
+
         if not args.dry_run:
             remap = make_piecewise_remap(runs, new_lengths)
-            apply_remap_preserving_dots(glyph, remap, nuqta, islands=islands)
+            apply_remap_preserving_dots(glyph, remap, nuqta, islands=islands,
+                                        regroup=regroup_dots, new_width=new_width)
             # The advance follows the geometry, otherwise the letter changes
             # width but still occupies its old slot.
             glyph.width = new_width
