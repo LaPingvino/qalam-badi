@@ -200,6 +200,51 @@ def apply_field(glyph, region, ramp, amplitude, dot_limit, spread=0.0):
         anchor.y -= amplitude * p
 
 
+def bowl_fan(glyph, font, spread, dot_limit, writing_line=225):
+    """Open a round U bowl into a low wide bowl by a symmetric horizontal fan.
+
+    Below the writing line, every point is pushed AWAY from the bowl's
+    horizontal centre in proportion to how far below the line it sits — deepest
+    fans widest, the line itself not at all. Tapering to zero at the writing
+    line leaves the connector (which lives at and above the join height)
+    untouched, so the join is unchanged; the fanned flanks drop below the
+    baseline and sweep under the neighbour like a tail, so the advance need not
+    grow. The amount is a function of (x-side, depth), a translation on both
+    axes — nothing scales, so nothing fattens. Dots ride rigidly at their
+    centre's offset, as everywhere else.
+    """
+    below = [(p.x, p.y) for contour in glyph.contours for p in contour.points
+             if p.y < writing_line]
+    if not below:
+        return False
+    ymin = min(y for _, y in below)
+    span = writing_line - ymin
+    if span < 1:
+        return False
+    centre = (min(x for x, _ in below) + max(x for x, _ in below)) / 2
+
+    def shift(x, depth_frac, side_x):
+        return (1.0 if side_x >= centre else -1.0) * spread * depth_frac
+
+    for contour in glyph.contours:
+        xs = [p.x for p in contour.points]
+        ys = [p.y for p in contour.points]
+        if not xs:
+            continue
+        if max(xs) - min(xs) <= dot_limit and max(ys) - min(ys) <= dot_limit:
+            cy = (min(ys) + max(ys)) / 2
+            if cy < writing_line:
+                cx = (min(xs) + max(xs)) / 2
+                dx = shift(cx, (writing_line - cy) / span, cx)
+                for point in contour.points:
+                    point.x += dx
+        else:
+            for point in contour.points:
+                if point.y < writing_line:
+                    point.x += shift(point.x, (writing_line - point.y) / span, point.x)
+    return True
+
+
 def round_finial(glyph, zone, strength, floor=None):
     """Inflate the tight terminal hook into a rounder curve.
 
@@ -272,6 +317,7 @@ def main():
     tail_dip = settings.get("tail_dip", 0.60) * nuqta
     tail_ramp = settings.get("tail_ramp", 0.60)
     tail_spread = settings.get("tail_spread", 0.0) * nuqta
+    noon_fan = settings.get("noon_fan", 0.0) * nuqta
     hook_round = settings.get("hook_round", 0.0)
     dot_limit = nuqta * 1.35
     # The connector stroke sits at 225..369; the hook and bowl curves live
@@ -281,7 +327,7 @@ def main():
     font = ufoLib2.Font.open(args.src)
     floor = font.info.openTypeOS2TypoDescender or -838
 
-    bowls = tails = finials = 0
+    bowls = tails = finials = fans = 0
     for glyph in font:
         if not is_arabic(glyph) or not glyph.contours or glyph.name in EXCLUDED_NAMES:
             continue
@@ -323,6 +369,17 @@ def main():
         if base in TAH_FAMILY:
             continue
 
+        # The noon family's round U bowl: open it sideways into a low wide
+        # bowl. Not the beh boat (that gets the vertical dip below) — the noon
+        # bowl has no flat bottom run to dip, it is a curve, so it wants the
+        # symmetric fan instead.
+        if base in _flatness.NOON_SKELETON and noon_fan > 0:
+            if bowl_fan(glyph, font, noon_fan, dot_limit):
+                fans += 1
+            if args.verbose:
+                print(f"  fan  {glyph.name:18} noon bowl +/-{noon_fan:.0f}")
+            continue
+
         region = bowl_region(glyph)
         if region is None or region[1] - region[0] < nuqta * 1.5:
             continue
@@ -340,7 +397,8 @@ def main():
     if os.path.abspath(args.out) != os.path.abspath(args.src) and os.path.exists(args.out):
         shutil.rmtree(args.out)
     font.save(args.out, overwrite=True)
-    print(f"bent {bowls} bowls and {tails} tails, rounded finials on {finials} glyphs"
+    print(f"fanned {fans} noon bowls; "
+          f"bent {bowls} bowls and {tails} tails, rounded finials on {finials} glyphs"
           f" -> {args.out}")
 
 

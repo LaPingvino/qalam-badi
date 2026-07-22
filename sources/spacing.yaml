@@ -326,6 +326,14 @@ bends:
   # bowl. Keyed on x like the dip, so it is a translation field too and cannot
   # fatten. In nuqta. 0 restores the pure-vertical bend.
   tail_spread: 0.90
+  # Symmetric bowl fan for the noon family finals/isolated (the round U bowls,
+  # as opposed to the seen tail's one-sided sweep). Below the writing line each
+  # point is pushed AWAY from the bowl centre in proportion to its depth,
+  # tapering to zero at the line so the connector above is untouched — the deep
+  # U opens into a low wide bowl. The fanned sides sit below the baseline and
+  # sweep under the neighbour like a tail, so no advance change is needed. In
+  # nuqta of half-spread at full depth. 0 disables.
+  noon_fan: 0.60
   # The terminal hook rounding. soften-corners already smoothed every corner
   # at radius 48, so there is no sharp corner left to fillet — the hook reads
   # hard because it is drawn TIGHT, a small squarish curve, not because it has
