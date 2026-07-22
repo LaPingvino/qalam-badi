@@ -7,6 +7,57 @@ to be read as the design record.
 
 ---
 
+## Latest session (2026-07-23): workbench + the yeh unification (queued)
+
+No pipeline changes this session — it was investigation + tooling. All on `main`.
+
+**New: `workbench/` (tracked).** The subjective glyph-shape work now has a real,
+tracked home (it used to live in `out/`, which is git-ignored, so scratch scripts
+kept getting lost). Start here:
+
+- `workbench/anatomy.py` — `GlyphAnatomy.of("uniFEF2")` → named landmarks
+  (`trough`, `cup`, `ret`, `west`, `peaks`, `cardinals`) and metrics
+  (`cup.straight_angle`, `ret.straight_angle`, `balance_delta`).
+- `workbench/render.py` + `sheets.py` — annotated glyph → SVG/PNG, and the
+  `balance` / `corner` / `cardinal` / `points` diagnostic sheets as commands.
+- `workbench/GLOSSARY.md` — the **shape vocabulary** we settled on (trough, cup,
+  return, corner, straight lay-down angle, balance delta, N/S/E/W flips).
+- `workbench/TOOLKIT.md` — tooling survey + strategy. Headline: we already own
+  most of the Google stack incl. a measurement toolkit (`statisticsPen`,
+  `beziers`, `kurbopy`) we partly reinvented; the one real gap is **stroke
+  skeleton / medial-axis** (build path in §4). §6 is a brief for a possible new
+  Linux font tool.
+
+**Open design task — unify the yeh finals/isolateds.** Goal: ONE gentle,
+"laid-down" form for the fina/isol yeh family (the A–P grid of 16 variants). We
+built the vocabulary to steer it: the **cup** lays down uniformly (~15–19° on
+every variant, nothing to fix); the **return** is the lever, bimodal at ~9° (the
+wide laid-out sweep — P, I/J/K/L) vs ~29–30° (the compact forms). "Gentle" is the
+9° camp.
+
+**Queued next step — the P-construction (spec is unambiguous):**
+
+- **Base + metrics:** P = `uniFEF2` (the wide laid-out bowl, return ~9°, width ~1433).
+- **Left side:** cap it at the **W height** (~y = −57, the leftmost landmark) —
+  drop the tall left ascender (contour points ~6–15, which climb to y≈367) and
+  round the left off low. This is the main "lay it down" move.
+- **Right side:** rise to a clean **N-peak** (cardinal N) at P's proportions,
+  instead of P's current connector-plus-eye tangle.
+- **Disambiguation (settled):** `uniFE8A` (variant "N" in the grid) and `uniFEF2`
+  ("P") share the **identical body** — same contour points 0–42; only the diacritic
+  differs (N carries a hamza above, P two dots below). So "shape of N" means the
+  **cardinal N peak**, not the variant.
+- **How to build it:** use **`fontMath`** (blend/interpolate variants) rather than
+  hand-editing points, and obey the one rule — translate shapes, remap strokes,
+  never scale a stroke.
+
+**Next workbench investment:** the medial-axis module (TOOLKIT.md §4) — so
+"return lay-down angle" measures the true stroke centreline instead of a
+silhouette wall. And, separately, TOOLKIT.md §6's new-Linux-font-tool brief (may
+be handed to a follow-up agent).
+
+---
+
 ## State as of the latest session (handoff)
 
 Everything is on `main` and `make build` passes the invariant gate. The
