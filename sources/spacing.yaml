@@ -326,6 +326,12 @@ bends:
   # bowl. Keyed on x like the dip, so it is a translation field too and cannot
   # fatten. In nuqta. 0 restores the pure-vertical bend.
   tail_spread: 0.90
+  # Seen/sad family tail terminal (scripts/lower-tail-terminal.py). The cell
+  # sweeps the tail's inner edge back up above the writing line into a tight
+  # hook; a written hand ends it low in the descender. This scales the
+  # terminal's rise toward the descender level — 1.0 leaves it, lower flattens
+  # the up-curl into an open sweep. 0.45 drops it well without over-flattening.
+  tail_terminal: 0.45
   # Symmetric bowl fan for the noon family finals/isolated (the round U bowls,
   # as opposed to the seen tail's one-sided sweep). Below the writing line each
   # point is pushed AWAY from the bowl centre in proportion to its depth,

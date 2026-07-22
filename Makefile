@@ -127,6 +127,11 @@ proportional:
 	# 'Abdu'l-Baha and nastaliq. Position only — see the script for why not size.
 	. venv/bin/activate; python3 scripts/normalize-modifiers.py --src sources/QalamBadi-Meem.ufo --out sources/QalamBadi-Mods.ufo
 	. venv/bin/activate; python3 scripts/make-proportional.py --src sources/QalamBadi-Mods.ufo --out sources/QalamBadi-Regular.ufo
+	# Lower the seen/sad family tail terminal so it ends low in the descender
+	# instead of curling back up (spacing.yaml bends.tail_terminal). Runs on the
+	# finished Regular because the terminal top only settles flat after the
+	# proportional chain — scaling it earlier, while it is still a point, spikes.
+	. venv/bin/activate; python3 scripts/lower-tail-terminal.py --src sources/QalamBadi-Regular.ufo
 	# Class kerning, written LAST — the chain regenerates the Regular every run,
 	# so kerning has to be the final thing added to the finished UFO. Pairs live
 	# in spacing.yaml (kerning:); the builder compiles the UFO groups to GPOS.
